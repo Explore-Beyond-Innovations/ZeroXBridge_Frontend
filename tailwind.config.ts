@@ -13,6 +13,11 @@ export default {
         foreground: "var(--foreground)",
         primary: "var(--primary)",
         purple: "var(--purple)",
+        'howitworks': "linear-gradient(90deg, #26183E 0%, #A26DFF 47.5%, #26183E 100%)",
+      },
+      backgroundImage: {
+        'check-bg' : "url('/check-bg.svg')",
+        'main-bg': "url('/background.svg')",
       },
     },
   },

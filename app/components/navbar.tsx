@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import Image from "next/image";
 
-type Props = {}
 
 type NavLink = {
     name: string;
@@ -28,7 +27,7 @@ const navLinks: NavLink[] = [
     },
 ];
 
-const Navbar = (props: Props) => {
+const Navbar = () => {
   return (
     <div className="w-full py-5">
         <nav className="max-w-screen-2xl px-2 md:px-6 lg:px-10 xl:px-20 flex items-center justify-between mx-auto">

@@ -20,3 +20,34 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.gradient-01 {
+  position: absolute;
+  width: 250px; /* Reduce size */
+  height: 200px;
+  right: -70px;
+  top: 40%;
+  background: #a26dff;
+  backdrop-filter: blur(100px); /* Reduce blur intensity */
+  filter: blur(130px); /* Maintain texture */
+  transform: rotate(-114.2deg);
+  opacity: 1; /* Ensure full visibility */
+  /* Ensures only the circular part is visible */
+  pointer-events: none;
+}
+
+.gradient-02 {
+  position: absolute;
+  width: 250px; /* Reduce size */
+  height: 200px;
+  left: -50px;
+  bottom: -150px;
+
+  background: #a26dff;
+  backdrop-filter: blur(200px); /* Reduce blur intensity */
+  filter: blur(130px);
+  transform: rotate(-114.2deg);
+  opacity: 1; /* Ensure full visibility */
+  /* Ensures only the circular part is visible */
+  pointer-events: none;
+}
