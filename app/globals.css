@@ -6,6 +6,9 @@
   --background: #ffffff;
   --foreground: #171717;
   --purple: #A26DFF;
+  --primary: #a26dff;
+  --white: #f0f0f0;
+  --white-2: #d4d4d4;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,36 +21,34 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
 
+/* Gradient effects */
 .gradient-01 {
   position: absolute;
-  width: 250px; /* Reduce size */
+  width: 250px;
   height: 200px;
   right: -70px;
   top: 40%;
-  background: #a26dff;
-  backdrop-filter: blur(100px); /* Reduce blur intensity */
-  filter: blur(130px); /* Maintain texture */
+  background: var(--purple);
+  backdrop-filter: blur(100px);
+  filter: blur(130px);
   transform: rotate(-114.2deg);
-  opacity: 1; /* Ensure full visibility */
-  /* Ensures only the circular part is visible */
+  opacity: 1;
   pointer-events: none;
 }
 
 .gradient-02 {
   position: absolute;
-  width: 250px; /* Reduce size */
+  width: 250px;
   height: 200px;
   left: -50px;
   bottom: -150px;
-
-  background: #a26dff;
-  backdrop-filter: blur(200px); /* Reduce blur intensity */
+  background: var(--purple);
+  backdrop-filter: blur(200px);
   filter: blur(130px);
   transform: rotate(-114.2deg);
-  opacity: 1; /* Ensure full visibility */
-  /* Ensures only the circular part is visible */
+  opacity: 1;
   pointer-events: none;
 }
