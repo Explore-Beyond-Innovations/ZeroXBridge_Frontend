@@ -10,7 +10,7 @@ const buttonVariants = cva(
         default: "bg-[#4C327A] text-white hover:bg-opacity-90",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         gradientPrimary: [
-          "p-[1px] bg-gradient-to-b from-[#A26DFF] to-transparent transition-all rounded-full hover:bg-none",
+          "p-[2px] bg-gradient-to-b from-[#A26DFF] to-transparent text-white transition-all rounded-full hover:bg-none",
           "border-transparent",
           "before:absolute before:inset-0 before:rounded-full before:p-[1px] rounded-full",
         ].join(" "),
