@@ -27,7 +27,7 @@ const navLinks: NavLink[] = [
     },
 ];
 
-const Navbar = () => {
+const HomeNav = () => {
   return (
     <div className="w-full py-5">
         <nav className="max-w-screen-2xl px-2 md:px-6 lg:px-10 xl:px-20 flex items-center justify-between mx-auto">
@@ -56,4 +56,4 @@ const Navbar = () => {
   )
 }
 
-export default Navbar
+export default HomeNav
