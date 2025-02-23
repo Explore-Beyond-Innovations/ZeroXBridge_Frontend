@@ -83,3 +83,31 @@ body {
   @apply w-8 h-6 bg-white rounded;
   border: none;
 }
+
+.footer-gradient {
+  background: linear-gradient(180deg, rgba(9, 5, 14, 1) 0%, rgba(74, 42, 130, 1) 100%);
+}
+
+body {
+  background-color: black;
+}
+
+.footer-background {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(9, 5, 14, 1) 0%, rgba(74, 42, 130, 1) 100%);
+  pointer-events: none;
+}
+
+.footer-background-text {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(74, 42, 130, 0.3) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  .footer-background-text {
+    -webkit-font-smoothing: antialiased;
+  }
+}
