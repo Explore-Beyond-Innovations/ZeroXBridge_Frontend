@@ -35,6 +35,9 @@ export default {
         manrope: ["var(--font-manrope)"],
         'roboto-serif': ["var(--font-roboto-serif)"],
       },
+      animation: {
+        slowSpin: "spin 3s linear infinite", 
+      },
     },
   },
   plugins: [],

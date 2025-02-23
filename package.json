@@ -12,10 +12,12 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.4.7",
+    "lightweight-charts": "^5.0.2",
     "lucide-react": "^0.475.0",
     "next": "15.1.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "recharts": "^2.15.1",
     "tailwind-merge": "^3.0.1"
   },
   "devDependencies": {

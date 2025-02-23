@@ -61,3 +61,25 @@ body {
   opacity: 1;
   pointer-events: none;
 }
+.custom-range {
+  @apply w-full appearance-none cursor-pointer; /* base styles for the <input> */
+}
+
+.custom-range::-webkit-slider-runnable-track {
+  @apply h-6 bg-[#907DBD];
+}
+
+.custom-range::-webkit-slider-thumb {
+  @apply w-8 h-6 bg-white rounded;
+ /* so the thumb is centered on the track */
+  -webkit-appearance: none;
+}
+
+.custom-range::-moz-range-track {
+  @apply h-6 bg-[#907DBD];
+}
+
+.custom-range::-moz-range-thumb {
+  @apply w-8 h-6 bg-white rounded;
+  border: none;
+}
