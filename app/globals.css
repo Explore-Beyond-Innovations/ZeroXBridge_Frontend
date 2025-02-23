@@ -18,6 +18,15 @@
   }
 }
 
+@keyframes rotate {
+  from {
+    background-position: 0% center;
+  }
+  to {
+    background-position: 400% center;
+  }
+}
+
 body {
   color: var(--foreground);
   background: var(--background);

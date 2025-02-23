@@ -10,9 +10,14 @@ const buttonVariants = cva(
         default: "bg-[#4C327A] text-white hover:bg-opacity-90",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         gradientPrimary: [
-          "p-[2px] bg-gradient-to-b from-[#A26DFF] to-transparent text-white transition-all rounded-full hover:bg-none",
-          "border-transparent",
-          "before:absolute before:inset-0 before:rounded-full before:p-[1px] rounded-full",
+          "relative p-[2px] text-white",
+          "before:absolute before:inset-0 before:rounded-full",
+          "before:bg-[linear-gradient(20deg,#A26DFF,#4C327A,#A26DFF,#A26DFF)]",
+          "before:bg-[length:400%_100%]",
+          "before:content-[''] before:z-[0]",
+          "before:animate-[rotate_6s_linear_infinite]", 
+          "after:absolute after:inset-[2px] after:rounded-full",
+          "after:bg-[#4C327A] after:z-[1]",
         ].join(" "),
       },
       size: {
@@ -41,7 +46,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           ref={ref} 
           {...props}
         >
-          <span className="bg-[#4C327A] rounded-full flex align-center items-center px-10 py-2 h-full w-full">
+          <span className="relative z-[2] flex items-center justify-center px-10 py-2 h-full w-full">
             {children}
           </span>
         </button>
