@@ -13,7 +13,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDarkMode }) => {
     const gradientBorder = "bg-gradient-to-b from-[#A26DFF] to-[#A26DFF] p-[0.7px] rounded-full";
 
     return (
-        <header className={`${isDarkMode ? "bg-[#09050E]" : "bg-white"} border-b-2 ${isDarkMode ? "border-[#1F1333]" : "border-gray-300"} flex h-24`}>
+        <header className={`${isDarkMode ? "bg-[#09050E]" : "bg-white"} border-b-2 ${isDarkMode ? "border-[#1F1333]" : "border-gray-300"} flex h-24 w-full`}>
             {/* Logo section with border */}
             <div className={`w-80 h-24 flex items-center justify-start pl-6 border-r-2 ${isDarkMode ? "border-[#1F1333]" : "border-gray-300"}`}>
                 <Image
@@ -26,7 +26,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDarkMode }) => {
             </div>
             
             {/* Main content */}
-            <div className="flex-1 flex justify-between items-center px-8 h-24 border-r ${isDarkMode ? 'border-gray-800' : 'border-gray-300'}">
+            <div className={`flex-1 flex justify-between items-center px-8 h-24 border-r ${isDarkMode ? 'border-gray-800' : 'border-gray-300'}`}>
                 <div className="flex items-center space-x-6">
                     {/* Search Input with gradient border */}
                     <div className="relative">

@@ -43,7 +43,7 @@ const LiquidityLockTable = () => {
   ];
 
   return (
-    <div className="bg-[#1F1333] text-white px-8 py-6 rounded-xl w-[85%] max-w-7xl my-6  mx-auto">
+    <div className="bg-[#1F1333] text-white px-8 py-6 rounded-xl w-full max-w-7xl my-6  mx-auto">
       <h2 className="text-[16px] font-bold mt-4 mb-8">
         Lock Liquidity by making a deposit
       </h2>

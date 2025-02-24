@@ -57,7 +57,7 @@ export default function Chart({ selectedInterval }: ChartProps) {
                 background: { type: ColorType.Solid, color: '#21192F' },
                 textColor: '#808080'
             },
-            width: chartContainerRef.current.clientWidth,
+            width: chartContainerRef.current.clientWidth - 50,
             height: 440,
             timeScale: {
                 timeVisible: true,
@@ -142,17 +142,17 @@ export default function Chart({ selectedInterval }: ChartProps) {
     }
 
     return (
-        <div className="flex flex-col w-[900px]">
+        <div className="flex flex-col w-full">
             {/* Chart Container */}
             <div 
                 ref={chartContainerRef}
-                className="w-[900px] h-fit py-4"
+                className="w-full h-fit py-4"
             >
             </div>
 
             {/* 'Scroll bar' under the chart */}
-            <div className="flex justify-start gap-6 items-center">
-                <div className="bg-white px-6 flex items-center h-6 rounded -mt-1 w-[820px]">
+            <div className="flex justify-start gap-6 items-center w-full">
+                <div className="bg-white px-6 flex items-center h-6 rounded -mt-1 w-full">
                     <input 
                         type="range" 
                         className="custom-range"
