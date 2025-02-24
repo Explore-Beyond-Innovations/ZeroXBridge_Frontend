@@ -1,6 +1,14 @@
+"use client"
+
 import { Info, X } from "lucide-react";
 
 export default function LockSummary() {
+
+    const handleInputChange = (event: React.FormEvent<HTMLInputElement>) => {
+        const target = event.currentTarget;
+        target.value = target.value.replace(/[^0-9.]/g, ""); 
+      };
+
   return (
     <div className=" w-full h-full fixed inset-0 bg-black bg-opacity-50 z-[999] flex items-center justify-center p-5 ">
       <div className=" min-w-[340px] min-h-[400px] md:w-[563px] relative md:h-[540px] bg-[#21192F] rounded-[20px] flex flex-col items-center justify-center gap-6 px-[30px] py-[35px] ">
@@ -26,6 +34,7 @@ export default function LockSummary() {
             type="text"
             id="amount"
             placeholder="Enter Token Amount"
+            onInput={handleInputChange}
             className="w-full bg-[#1F1333] border-[0.4px] border-[#8B8B8B] py-5 px-[30px] rounded-[8.81px] text-[#8B8B8B] font-normal text-sm  placeholder:text-[#8B8B8B] placeholder:font-normal placeholder:ext-sm  outline-none "
           />
         </label>
