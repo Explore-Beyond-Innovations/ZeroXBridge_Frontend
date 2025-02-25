@@ -85,7 +85,7 @@ export default function Testimonial() {
   return (
     <div className="w-[1200px] min-h-[647px] mx-auto bg-[#09050E] relative overflow-hidden rounded-3xl">
       {/* Header */}
-      <div className="text-center pt-7 space-y-4 w-[550px] mx-auto">
+      <div className="text-center pt-7 space-y-2 w-[550px] mx-auto">
         <h2 className="text-5xl font-bold bg-howitworks text-transparent leading-[65px] font-manrope bg-clip-text">
           Hear what people are saying about us
         </h2>
@@ -94,7 +94,7 @@ export default function Testimonial() {
 
       {/* Floating Profile Images */}
       {mounted && (
-        <div className="absolute w-full top-48">
+        <div className="absolute w-full">
           <div className="relative w-full h-32">
             {profileImages.map((image, index) => {
               const radius = 500 // Arc radius
@@ -128,17 +128,15 @@ export default function Testimonial() {
           </div>
         </div>
       )}
-     
 
       {/* Glowing SVG Lines */}
-
-      <div className="flex justify-center items-center top-[100px] left-72 absolute">
+      <div className="absolute top-[57%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
       <GlowingProtractorSVG />
     </div>
 
       {/* Testimonial Cards */}
-      <div className="absolute bottom-14 w-full px-16">
-        <div className="relative h-64 flex justify-center items-center pt-10">
+      <div className="absolute bottom-11 w-full px-16">
+        <div className="relative h-64 flex justify-center items-center">
           {testimonials.map((testimonial, index) => {
             const offset = (index - currentSlide + testimonials.length) % testimonials.length
             let translateX = "0%"
