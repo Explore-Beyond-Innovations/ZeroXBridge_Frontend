@@ -76,7 +76,7 @@ export default function Testimonial() {
       {mounted && (
           <div className="relative w-[60%] mx-auto h-48 z-10">
             <div className="absolute inset-0">
-                <div className="absolute top-0 left-[134px] w-12 h-12 -translate-x-1/2 -translate-y-1/2">
+                <div className="absolute top-2 left-[134px] w-12 h-12 -translate-x-1/2 -translate-y-1/2">
                     <Image
                     src="/images/testimonial-float-1.png"
                     alt=""
@@ -94,7 +94,7 @@ export default function Testimonial() {
                     className=""
                     />
                 </div>
-                <div className="absolute top-14 left-36 w-12 h-12 -translate-x-1/2 translate-y-1/2">
+                <div className="absolute top-20 left-32 w-12 h-12 -translate-x-1/2 translate-y-1/2">
                     <Image
                     src="/testimonial-float-3.png"
                     alt=""
@@ -103,18 +103,18 @@ export default function Testimonial() {
                     className=""
                     />
                 </div>
-                <div className="absolute top-14 right-16 w-12 h-12 translate-x-1/2 translate-y-1/2">
+                <div className="absolute top-24 right-11 w-12 h-12 translate-x-1/2 translate-y-1/2">
                     <Image
-                    src="/testimonial-float-3.png"
+                    src="/testimonial-float-2.png"
                     alt=""
                     width={25}
                     height={27}
                     className=""
                     />
                 </div>
-                <div className="absolute top-20 left-1/2 w-12 h-12 -translate-x-1/2 -translate-y-1/2">
+                <div className="absolute top-[75px] left-1/2 w-12 h-12 -translate-x-1/2 -translate-y-1/2">
                     <Image
-                    src="/testimonial-float-3.png"
+                    src="/testimonial-float-2.png"
                     alt=""
                     width={31}
                     height={33}
