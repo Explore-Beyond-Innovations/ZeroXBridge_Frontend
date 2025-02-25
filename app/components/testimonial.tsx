@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react"
 import Image from "next/image"
+import GlowingProtractorSVG from "./rippleSVG"; // Adjust path if needed
+
 import { motion } from 'framer-motion';
 
 interface Testimonial {
@@ -81,9 +83,9 @@ export default function Testimonial() {
   }, [])
 
   return (
-    <div className="w-[1200px] h-[647px] mx-auto bg-[#09050E] relative overflow-hidden rounded-2xl">
+    <div className="w-[1200px] min-h-[647px] mx-auto bg-[#09050E] relative overflow-hidden rounded-3xl">
       {/* Header */}
-      <div className="text-center pt-16 space-y-4 w-[550px] mx-auto">
+      <div className="text-center pt-7 space-y-4 w-[550px] mx-auto">
         <h2 className="text-5xl font-bold bg-howitworks text-transparent leading-[65px] font-manrope bg-clip-text">
           Hear what people are saying about us
         </h2>
@@ -117,7 +119,7 @@ export default function Testimonial() {
                       alt=""
                       width={48}
                       height={48}
-                      className="relative rounded-full border-2 border-purple-500/20"
+                      className="relative rounded-full"
                     />
                   </div>
                 </div>
@@ -126,57 +128,16 @@ export default function Testimonial() {
           </div>
         </div>
       )}
+     
 
       {/* Glowing SVG Lines */}
-      <svg
-      width="300"
-      height="150"
-      viewBox="0 0 300 150"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      {/* Outer arc */}
-      <motion.path
-        d="M 20 130 A 110 110 0 0 1 280 130"
-        stroke="white"
-        strokeWidth="2"
-        strokeDasharray="5,5"
-        variants={glowAnimation}
-        initial="initial"
-        animate="animate"
-      />
-      
-      {/* Inner arc */}
-      <motion.path
-        d="M 50 130 A 80 80 0 0 1 250 130"
-        stroke="white"
-        strokeWidth="2"
-        strokeDasharray="5,5"
-        variants={glowAnimation}
-        initial="initial"
-        animate="animate"
-      />
-      
-      {/* Bottom base line */}
-      <motion.line
-        x1="20"
-        y1="130"
-        x2="280"
-        y2="130"
-        stroke="white"
-        strokeWidth="2"
-        strokeDasharray="5,5"
-        variants={glowAnimation}
-        initial="initial"
-        animate="animate"
-      />
-    </svg>
-
-      
+      <div className="flex justify-center items-center top-[100px] left-72 absolute">
+      <GlowingProtractorSVG />
+    </div>
 
       {/* Testimonial Cards */}
       <div className="absolute bottom-14 w-full px-16">
-        <div className="relative h-64 flex justify-center items-center">
+        <div className="relative h-64 flex justify-center items-center pt-10">
           {testimonials.map((testimonial, index) => {
             const offset = (index - currentSlide + testimonials.length) % testimonials.length
             let translateX = "0%"
@@ -224,7 +185,7 @@ export default function Testimonial() {
       </div>
 
       {/* Navigation Lines */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2">
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
         {[0, 1, 2, 3].map((index) => (
           <button
             key={index}

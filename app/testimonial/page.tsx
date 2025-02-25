@@ -5,7 +5,7 @@ import Testimonial from '../components/testimonial'
 
 function page() {
   return (
-    <div className='bg-[#A26DFF]'>
+    <div className='bg-[#25153f] pt-14'>
     <Testimonial />
     </div>
   )
