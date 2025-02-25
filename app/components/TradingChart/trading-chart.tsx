@@ -23,8 +23,8 @@ export default function TradingChartComponent(){
 
 
     return (
-        <div className="flex gap-0 justify-start items-start bg-[#21192F] w-fit h-fit mt-3 mx-auto rounded-2xl">
-            <div className="text-white text-xl py-12">
+        <div className="flex justify-start items-start bg-[#21192F] w-full h-fit mt-3 mx-auto rounded-2xl">
+            <div className="text-white text-xl py-12 w-[75%]">
                 <h1 className="text-white flex items-center pl-11 gap-2">
                     BTC 
                     <span className="text-base text-[#808080]">/IPY</span>
@@ -70,12 +70,12 @@ export default function TradingChartComponent(){
                         ))
                     }
                 </div>
-                <div className="pl-12">
+                <div className="pl-12 w-full">
                     <Chart selectedInterval={selectedInterval} />
                 </div>
             </div>
 
-            <div className="flex flex-col border-l-[0.1px] border-[#8280FF] text-white py-12">
+            <div className="flex flex-col border-l-[0.1px] border-[#8280FF] text-white py-12 w-[25%]">
                 <div className="flex justify-between items-center text-xl px-5">
                     <h2 className="flex gap-2 justify-start items-center">
                         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -92,7 +92,7 @@ export default function TradingChartComponent(){
                     <FilterIcon />
                 </div>
 
-                <div className="flex flex-col text-xl mt-6 w-[400px]">
+                <div className="flex flex-col mt-[22px] w-full">
 
                     {
                         coinData.map((coinObject, index) => {
@@ -101,15 +101,15 @@ export default function TradingChartComponent(){
                                 <div 
                                     key={index} 
                                     className={`flex justify-between 
-                                        gap-20 border-b-[0.4px] border-[#8280FF] py-3 px-5
+                                        gap-4 border-b-[0.4px] border-[#8280FF] py-3 px-4
                                         ${coinObject.name === 'BTC' && 'bg-[#3B2A65]'}
                                         `}
                                 >
-                                    <div className="flex gap-2 items-center">
+                                    <div className="flex gap-2 items-center text-[18px]">
                                         <Icon />
                                         {coinObject.name}
                                     </div>
-                                    <p className="flex justify-start gap-2">
+                                    <p className="flex justify-start gap-2 text-[16px]">
                                         <span className="flex gap-2 items-center">
                                             ¥ {coinObject.price}
                                         </span>
