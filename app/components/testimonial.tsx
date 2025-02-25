@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Image from "next/image"
-import GlowingProtractorSVG from "./rippleSVG"; // Adjust path if needed
+import GlowingProtractorSVG from "./rippleSVG";
 
 import { motion } from 'framer-motion';
 
@@ -131,6 +131,7 @@ export default function Testimonial() {
      
 
       {/* Glowing SVG Lines */}
+
       <div className="flex justify-center items-center top-[100px] left-72 absolute">
       <GlowingProtractorSVG />
     </div>
@@ -153,13 +154,15 @@ export default function Testimonial() {
             } else {
               translateX = offset === 2 ? "210%" : "-210%"
               zIndex = 1
-              opacity = 0.4
+              opacity = 0.4 
             }
 
             return (
               <div
                 key={testimonial.id}
-                className={`absolute w-[488px] h-[233px] border-[0.5px] border-[#8B8B8B] py-4 px-8 bg-grid-pattern rounded-2xl font-roboto-serif bg-[#1A1A1F]/60 backdrop-blur-sm transition-all duration-500 ease-in-out`}
+                className={`absolute w-[488px] h-[233px] border-[0.4px] border-[#8B8B8B] py-4 px-8 bg-grid-pattern rounded-2xl font-roboto-serif ${
+                    offset === 0 ? "bg-[#2F1F4C]" : "bg-[#09050E] bg-opacity-60"
+                  } backdrop-blur-sm transition-all duration-500 ease-in-out`}
                 style={{
                   transform: `translateX(${translateX})`,
                   zIndex,
@@ -168,7 +171,7 @@ export default function Testimonial() {
               >
                 <Image alt="quotes icon" src={"/images/quotes.svg"} width={32} height={32} className="mt-1 top-4 left-1 absolute " />
                 <div className="text-[#D4D4D4] font-normal text-sm mt-[30px] leading-relaxed ">{testimonial.content}</div>
-                <div className="flex items-center bottom-4 absolute gap-3">
+                <div className="flex items-center bottom-4 absolute gap-1">
                   <Image
                     src={testimonial.author.image || "/images/testimonial-card-profile.png"}
                     alt={testimonial.author.name}
