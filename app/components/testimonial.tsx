@@ -188,14 +188,22 @@ export default function Testimonial() {
       </div>
 
       {/* Navigation Lines */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+      <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex gap-2">
         {[0, 1, 2, 3].map((index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentSlide(index)}
-            className={`w-12 h-[1.4px] transition-all duration-300 
-              ${index === currentSlide ? "bg-[#A26DFF]" : "bg-[#505050]"}`}
-          />
+            <motion.button
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                className={`w-12 h-[2px] bg-gray-700`}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                >
+                <motion.div
+                    className="h-full bg-[#A26DFF]"
+                    initial={{ width: index === currentSlide ? "100%" : "0%" }}
+                    animate={{ width: index === currentSlide ? "100%" : "0%" }}
+                    transition={{ duration: 0.3 }}
+                />
+            </motion.button>
         ))}
       </div>
     </div>
