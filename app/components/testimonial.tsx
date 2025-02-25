@@ -94,7 +94,7 @@ export default function Testimonial() {
                     className=""
                     />
                 </div>
-                <div className="absolute top-20 left-32 w-12 h-12 -translate-x-1/2 translate-y-1/2">
+                <div className="absolute top-24 left-[120px] w-12 h-12 -translate-x-1/2 translate-y-1/2">
                     <Image
                     src="/testimonial-float-3.png"
                     alt=""
