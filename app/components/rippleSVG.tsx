@@ -11,41 +11,50 @@ const GlowingSvg: React.FC = () => {
   const controls4 = useAnimation()
 
   useEffect(() => {
-    // Set up ripple animation sequence
+    
     const startRippleSequence = async () => {
-      // Start with the innermost circle (controls4) and ripple outward
+      // Reset all controls to starting opacity before each sequence
+      controls1.set({ opacity: 0.2 }) // Outermost (lowest initial opacity)
+      controls2.set({ opacity: 0.4 })
+      controls3.set({ opacity: 0.6 })
+      controls4.set({ opacity: 1 }) // Innermost (highest initial opacity)
+      
+      // Start with innermost circle (controls4) completely disappearing
       await controls4.start({ 
-        opacity: [1, 0.7, 1], 
-        transition: { duration: 2, ease: "easeInOut" } 
+        opacity: [1, 0, 0], 
+        transition: { duration: 1.5, ease: "easeOut" } 
       })
       
+      // Second ring now pulses dramatically (appearing and fading)
       await controls3.start({ 
-        opacity: [1, 0.6, 1], 
-        transition: { duration: 2, ease: "easeInOut" } 
+        opacity: [0.6, 1, 0.2], 
+        transition: { duration: 1.5, ease: "easeInOut" } 
       })
       
+      // Third ring pulses next
       await controls2.start({ 
-        opacity: [1, 0.4, 1], 
-        transition: { duration: 2, ease: "easeInOut" } 
+        opacity: [0.4, 1, 0.2], 
+        transition: { duration: 1.5, ease: "easeInOut" } 
       })
       
+      // Outermost ring completes the ripple effect
       await controls1.start({ 
-        opacity: [1, 0.2, 1], 
-        transition: { duration: 2, ease: "easeInOut" } 
+        opacity: [0.2, 0.8, 0.2], 
+        transition: { duration: 1.5, ease: "easeInOut" } 
+      })
+      
+      // Reset the innermost ring to prepare for next sequence
+      await controls4.start({ 
+        opacity: 1, 
+        transition: { duration: 0.5, ease: "easeIn" } 
       })
     }
-
-    // Initialize opacity values - innermost ring has highest opacity
-    controls4.start({ opacity: 1 })
-    controls3.start({ opacity: 0.9 })
-    controls2.start({ opacity: 0.7 })
-    controls1.start({ opacity: 0.5 })
 
     // Start the sequence immediately
     startRippleSequence()
     
     // Then repeat it at intervals
-    const interval = setInterval(startRippleSequence, 8500)
+    const interval = setInterval(startRippleSequence, 6500) // Shortened interval for more frequent ripples
     return () => clearInterval(interval)
   }, [controls1, controls2, controls3, controls4])
 
@@ -57,7 +66,7 @@ const GlowingSvg: React.FC = () => {
       <motion.path
         d="M626 313C626 271.896 617.904 231.195 602.174 193.22C586.445 155.245 563.389 120.74 534.324 91.6756C505.26 62.6108 470.755 39.5554 432.78 23.8257C394.805 8.09598 354.104 -1.7967e-06 313 0C271.896 1.7967e-06 231.195 8.09599 193.22 23.8257C155.245 39.5554 120.74 62.6108 91.6756 91.6756C62.6108 120.74 39.5554 155.245 23.8257 193.22C8.09598 231.195 -3.5934e-06 271.896 0 313L313 313H626Z"
         stroke="url(#paint0_linear_55_7861)"
-        strokeOpacity="0.5"  // Base opacity increased
+        strokeOpacity="0.5"
         strokeWidth="3.11185"
         strokeDasharray="7.78 7.78"
         mask="url(#path-1-inside-1_55_7861)"
@@ -75,7 +84,7 @@ const GlowingSvg: React.FC = () => {
       <motion.path
         d="M586.837 352.03C586.837 316.052 579.751 280.426 565.982 247.187C552.214 213.947 532.034 183.745 506.593 158.305C481.153 132.864 450.951 112.684 417.711 98.9157C384.472 85.1475 348.846 78.061 312.868 78.061C276.889 78.061 241.263 85.1475 208.024 98.9157C174.784 112.684 144.582 132.864 119.142 158.305C93.7015 183.745 73.521 213.947 59.7528 247.187C45.9845 280.426 38.8981 316.052 38.8981 352.031L312.868 352.03H586.837Z"
         stroke="url(#paint1_linear_55_7861)"
-        strokeOpacity="0.7"  // Base opacity increased
+        strokeOpacity="0.7"
         strokeWidth="3.11185"
         strokeDasharray="7.78 7.78"
         mask="url(#path-4-inside-2_55_7861)"
@@ -93,7 +102,7 @@ const GlowingSvg: React.FC = () => {
       <motion.path
         d="M538.275 396.279C538.275 366.112 532.333 336.24 520.788 308.369C509.244 280.498 492.323 255.174 470.991 233.842C449.659 212.511 424.335 195.59 396.464 184.045C368.593 172.5 338.721 166.559 308.554 166.559C278.387 166.559 248.515 172.5 220.644 184.045C192.773 195.59 167.449 212.511 146.117 233.842C124.786 255.174 107.864 280.498 96.3199 308.369C84.7754 336.24 78.8335 366.112 78.8335 396.279L308.554 396.279H538.275Z"
         stroke="url(#paint2_linear_55_7861)"
-        strokeOpacity="0.9"  // Base opacity increased
+        strokeOpacity="0.9"
         strokeWidth="3.11185"
         strokeDasharray="7.78 7.78"
         mask="url(#path-7-inside-3_55_7861)"
