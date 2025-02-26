@@ -177,7 +177,7 @@ export default function Testimonial() {
                   opacity,
                 }}
                 transition={{
-                  x: { type: "spring", stiffness: 300, damping: 30 },
+                  x: { type: "spring", stiffness: 100, damping: 20, duration: 0.3 },
                   opacity: { duration: 0.5 },
                 }}
               >
