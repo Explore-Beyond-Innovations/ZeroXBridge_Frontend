@@ -14,15 +14,15 @@ const GlowingSvg: React.FC = () => {
     
     const startRippleSequence = async () => {
       // Reset all controls to starting opacity before each sequence
-      controls1.set({ opacity: 0.2 }) // Outermost (lowest initial opacity)
-      controls2.set({ opacity: 0.4 })
-      controls3.set({ opacity: 0.6 })
-      controls4.set({ opacity: 1 }) // Innermost (highest initial opacity)
+      controls1.set({ opacity: 0.2 }) // Outermost
+      controls2.set({ opacity: 0.2 })
+      controls3.set({ opacity: 0.4 })
+      controls4.set({ opacity: 0.4 }) // Innermost
       
       // Start with innermost circle (controls4) completely disappearing
       await controls4.start({ 
-        opacity: [1, 0, 0], 
-        transition: { duration: 1.5, ease: "easeOut" } 
+        opacity: [0.8, 0.2, 0], 
+        transition: { duration: 1, ease: "easeInOut" } 
       })
       
       // Second ring now pulses dramatically (appearing and fading)
@@ -33,20 +33,20 @@ const GlowingSvg: React.FC = () => {
       
       // Third ring pulses next
       await controls2.start({ 
-        opacity: [0.4, 1, 0.2], 
+        opacity: [0.6, 1, 0.2], 
         transition: { duration: 1.5, ease: "easeInOut" } 
       })
       
       // Outermost ring completes the ripple effect
       await controls1.start({ 
-        opacity: [0.2, 0.8, 0.2], 
+        opacity: [0.4, 1, 0.2], 
         transition: { duration: 1.5, ease: "easeInOut" } 
       })
       
       // Reset the innermost ring to prepare for next sequence
       await controls4.start({ 
-        opacity: 1, 
-        transition: { duration: 0.5, ease: "easeIn" } 
+        opacity: 0.4, 
+        transition: { duration: 0.5, ease: "easeOut" } 
       })
     }
 
@@ -54,7 +54,7 @@ const GlowingSvg: React.FC = () => {
     startRippleSequence()
     
     // Then repeat it at intervals
-    const interval = setInterval(startRippleSequence, 6500) // Shortened interval for more frequent ripples
+    const interval = setInterval(startRippleSequence, 6500)
     return () => clearInterval(interval)
   }, [controls1, controls2, controls3, controls4])
 
@@ -138,7 +138,7 @@ const GlowingSvg: React.FC = () => {
       <motion.path
         d="M499.817 434.698C499.817 409.576 494.869 384.699 485.255 361.49C475.642 338.28 461.55 317.191 443.786 299.427C426.022 281.663 404.933 267.571 381.723 257.958C358.514 248.344 333.637 243.396 308.515 243.396C283.393 243.396 258.517 248.344 235.307 257.958C212.097 267.571 191.008 281.663 173.244 299.427C155.48 317.191 141.389 338.28 131.775 361.49C122.161 384.699 117.213 409.576 117.213 434.698L308.515 434.698H499.817Z"
         stroke="url(#paint5_linear_55_7861)"
-        strokeWidth="2.07456"
+        strokeWidth="3.07456"
         strokeDasharray="7.78 7.78"
         mask="url(#path-12-inside-4_55_7861)"
         animate={controls4}

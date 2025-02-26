@@ -62,6 +62,18 @@ export default function Testimonial() {
     setMounted(true)
   }, [])
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prevSlide) => (prevSlide + 1) % testimonials.length)
+    }, 5000) // Change slide every 5 seconds
+
+    return () => clearInterval(interval)
+  }, [])
+
+  const handleManualNavigation = (index: number) => {
+    setCurrentSlide(index)
+  }
+
   return (
     <div className="w-[1200px] min-h-[647px] mx-auto bg-[#09050E] relative overflow-hidden rounded-3xl">
       {/* Header */}
@@ -153,19 +165,32 @@ export default function Testimonial() {
             }
 
             return (
-              <div
+              <motion.div
                 key={testimonial.id}
                 className={`absolute w-[488px] h-[233px] border-[0.4px] border-[#8B8B8B] py-4 px-8 bg-grid-pattern rounded-2xl font-roboto-serif ${
-                    offset === 0 ? "bg-[#2F1F4C]" : "bg-[#09050E] bg-opacity-60"
-                  } backdrop-blur-sm transition-all duration-500 ease-in-out`}
-                style={{
-                  transform: `translateX(${translateX})`,
+                  offset === 0 ? "bg-[#2F1F4C]" : "bg-[#09050E] bg-opacity-60"
+                } backdrop-blur-sm`}
+                initial={false}
+                animate={{
+                  x: translateX,
                   zIndex,
                   opacity,
                 }}
+                transition={{
+                  x: { type: "spring", stiffness: 300, damping: 30 },
+                  opacity: { duration: 0.5 },
+                }}
               >
-                <Image alt="quotes icon" src={"/images/quotes.svg"} width={32} height={32} className="mt-1 top-4 left-1 absolute " />
-                <div className="text-[#D4D4D4] font-normal text-sm mt-[30px] leading-relaxed ">{testimonial.content}</div>
+                <Image
+                  alt="quotes icon"
+                  src={"/images/quotes.svg"}
+                  width={32}
+                  height={32}
+                  className="mt-1 top-4 left-1 absolute "
+                />
+                <div className="text-[#D4D4D4] font-normal text-sm mt-[30px] leading-relaxed ">
+                  {testimonial.content}
+                </div>
                 <div className="flex items-center bottom-4 absolute gap-1">
                   <Image
                     src={testimonial.author.image || "/images/testimonial-card-profile.png"}
@@ -176,7 +201,7 @@ export default function Testimonial() {
                   />
                   <span className="text-gray-300 text-xs font-normal">{testimonial.author.name}</span>
                 </div>
-              </div>
+              </motion.div>
             )
           })}
         </div>
@@ -187,7 +212,7 @@ export default function Testimonial() {
         {[0, 1, 2, 3].map((index) => (
             <motion.button
                 key={index}
-                onClick={() => setCurrentSlide(index)}
+                onClick={() => handleManualNavigation(index)}
                 className={`w-12 h-[2px] bg-gray-700`}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
