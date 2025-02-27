@@ -12,8 +12,8 @@ const robotoSerif = Roboto_Serif({
 
 const JoinCommunity = () => {
   return (
-    <section className="w-full max-w-6xl mx-auto px-[113px] py-[55px]">
-      <div className="relative grid place-items-center gap-y-16 text-center bg-join-community h-[391px] shadow-[0px_0px_4px_2px_#A26DFF40] rounded-[20px] overflow-hidden">
+    <section className="w-full flex flex-col items-center mx-auto px-[113px] py-[55px]">
+      <div className="relative grid place-items-center gap-y-16 text-center bg-join-community w-[85%] h-[391px] shadow-[0px_0px_4px_2px_#A26DFF40] rounded-[20px] overflow-hidden">
         <Image
           src={ellipse}
           width={310}

@@ -75,7 +75,7 @@ export default function Testimonial() {
   }
 
   return (
-    <div className="w-[1200px] min-h-[647px] mx-auto bg-[#09050E] relative overflow-hidden rounded-3xl">
+    <div className="w-full min-h-[647px] mx-auto bg-[#09050E] relative overflow-hidden rounded-3xl">
       {/* Header */}
       <div className="text-center pt-7 space-y-2 w-[550px] mx-auto">
         <h2 className="text-5xl font-bold bg-howitworks text-transparent leading-[65px] font-manrope bg-clip-text">

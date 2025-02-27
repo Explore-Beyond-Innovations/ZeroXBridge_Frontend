@@ -16,9 +16,9 @@ const robotoSerif = Roboto_Serif({
 
 const AboutUs = () => {
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden w-full flex flex-col items-center">
       {/* Glow Effect Outside Section */}
-      <div className="absolute top-[150px] left-[300px] -translate-x-1/2 -translate-y-1/2 z-0">
+      <div className="absolute top-[150px] left-0 -translate-x-1/2 -translate-y-1/2 z-0">
         <Image
           src="/images/ellipse.png"
           alt="Glow Effect"
@@ -36,7 +36,7 @@ const AboutUs = () => {
       </div>
 
       {/* Main Section Content */}
-      <section className="relative bg-dark-bg text-white rounded-3xl p-10 m-40 shadow-lg max-w-7xl z-10">
+      <section className="relative bg-dark-bg text-white rounded-3xl p-10 shadow-lg w-[85%] m-10  z-10">
         <h1 className="text-5xl font-bold font-manrope mb-3 text-center bg-gradient-to-r from-[#262429] via-[#9B6DFF] to-[#262429] bg-clip-text text-transparent">
           ZeroXBridge is here to <br />
           Redefine Cross-Chain liquidity
