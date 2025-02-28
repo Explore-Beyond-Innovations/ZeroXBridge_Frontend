@@ -9,7 +9,7 @@ type Interval = {
     name: string, secondsValue: number
 }
 
-export default function TradingChartComponent(){
+export default function TradingChartComponent({ isDarkMode }: { isDarkMode: boolean }){
     
     const intervals: Interval[] = [
         { name: '1min', secondsValue: 60},
@@ -23,15 +23,15 @@ export default function TradingChartComponent(){
 
 
     return (
-        <div className="flex justify-start items-start bg-[#21192F] w-full h-fit mt-3 mx-auto rounded-2xl">
+        <div className={`flex justify-start items-start ${isDarkMode ? 'bg-[#21192F] text-white' : 'bg-[#F8F4FF] text-black'} w-full h-fit mt-3 mx-auto rounded-2xl`}>
             <div className="text-white text-xl py-12 w-[75%]">
-                <h1 className="text-white flex items-center pl-11 gap-2">
+                <h1 className={`${isDarkMode ? 'text-white' : 'text-black'} flex items-center pl-11 gap-2`}>
                     BTC 
                     <span className="text-base text-[#808080]">/IPY</span>
                     <span className="text-base text-[#808080]">&#x2228;</span>
                 </h1>
 
-                <div className="py-3 mt-6 bg-[#3B2A65] w-full">
+                <div className={`py-3 mt-6 ${isDarkMode ? 'bg-[#3B2A65] text-white' : 'bg-[#ECE1FF] text-black'} w-full`}>
                     <div className="flex justify-between w-full pl-10 pr-16">
                         <p className="flex items-center gap-2">
                             <span>721,882</span>
@@ -71,12 +71,12 @@ export default function TradingChartComponent(){
                     }
                 </div>
                 <div className="pl-12 w-full">
-                    <Chart selectedInterval={selectedInterval} />
+                    <Chart selectedInterval={selectedInterval} isDarkMode={isDarkMode}/>
                 </div>
             </div>
 
-            <div className="flex flex-col border-l-[0.1px] border-[#8280FF] text-white py-12 w-[25%]">
-                <div className="flex justify-between items-center text-xl px-5">
+            <div className={`flex flex-col border-l-[0.1px] border-[#8280FF] ${isDarkMode ? 'text-white' : 'text-black'} py-12 w-[25%]`}>
+                <div className="flex justify-between items-center  text-xl px-5">
                     <h2 className="flex gap-2 justify-start items-center">
                         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fillRule="evenodd" clipRule="evenodd" d="M12 0V12H0L12 0Z" fill="url(#paint0_linear_127_2178)"/>
@@ -100,9 +100,9 @@ export default function TradingChartComponent(){
                             return (
                                 <div 
                                     key={index} 
-                                    className={`flex justify-between 
-                                        gap-4 border-b-[0.4px] border-[#8280FF] py-3 px-4
-                                        ${coinObject.name === 'BTC' && 'bg-[#3B2A65]'}
+                                    className={`flex justify-between ${isDarkMode ? 'text-white border-[#8280FF]' : 'text-black border-[#C2B0E0]'}
+                                        gap-4 border-b-[0.4px]  py-3 px-4
+                                        ${coinObject.name === 'BTC' ? (isDarkMode ? 'bg-[#3B2A65]' : 'bg-[#ECE1FF]') : ''}
                                         `}
                                 >
                                     <div className="flex gap-2 items-center text-[18px]">

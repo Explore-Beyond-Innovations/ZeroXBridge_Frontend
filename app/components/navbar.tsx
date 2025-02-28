@@ -3,7 +3,7 @@ import { Search, Moon, Sun } from "lucide-react";
 import Notification from "../../public/bell.png";
 import Image from "next/image";
 import Logo from "../../public/zerologo.png";
-
+import LogoWhite from "../../public/zerologo-white.svg";
 interface NavbarProps {
     isDarkMode: boolean;
     toggleDarkMode: () => void;
@@ -17,11 +17,11 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDarkMode }) => {
             {/* Logo section with border */}
             <div className={`w-80 h-24 flex items-center justify-start pl-6 border-r-2 ${isDarkMode ? "border-[#1F1333]" : "border-gray-300"}`}>
                 <Image
-                    src={Logo}
+                    src={isDarkMode ? Logo : LogoWhite}
                     alt="ZeroxBridge Logo"
                     width={140}
                     height={50}
-                    className="object-contain bg-[#09050E]"
+                    className="object-contain "
                 />
             </div>
             

@@ -7,7 +7,8 @@ import { DetailsIcon } from "./Coins"
 type ChartProps = {
     selectedInterval: {
         name: string, secondsValue: number
-    }
+    },
+    isDarkMode: boolean
 }
 
 const toTime = (timestamp: number): Time => timestamp as Time
@@ -32,7 +33,7 @@ const generateMockData = () => {
     return data;
 };
 
-export default function Chart({ selectedInterval }: ChartProps) {
+export default function Chart({ selectedInterval, isDarkMode }: ChartProps) {
     const chartContainerRef = useRef<HTMLDivElement>(null)
 
     const chartRef = useRef<IChartApi | null>(null)
@@ -54,7 +55,7 @@ export default function Chart({ selectedInterval }: ChartProps) {
 
         const chart = createChart(chartContainerRef.current, {
             layout: {
-                background: { type: ColorType.Solid, color: '#21192F' },
+                background: { type: ColorType.Solid, color: 'transparent' },
                 textColor: '#808080'
             },
             width: chartContainerRef.current.clientWidth - 50,
@@ -152,10 +153,10 @@ export default function Chart({ selectedInterval }: ChartProps) {
 
             {/* 'Scroll bar' under the chart */}
             <div className="flex justify-start gap-6 items-center w-full">
-                <div className="bg-white px-6 flex items-center h-6 rounded -mt-1 w-full">
+                <div className={`${isDarkMode ? 'bg-[#FAFBFF]' : 'bg-[#D5BDFF]'} px-6 flex items-center h-6 rounded -mt-1 w-full`}>
                     <input 
                         type="range" 
-                        className="custom-range"
+                        className={`custom-range ${isDarkMode ? 'bg-[#FAFBFF]' : 'bg-[#FAFBFF]'}`}
                         min={-dataLength}
                         max={0}
                         step={1}

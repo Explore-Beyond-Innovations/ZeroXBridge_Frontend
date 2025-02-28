@@ -1,6 +1,7 @@
 "use client";
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { useState } from "react";
+import { FilterIcon } from "lucide-react";
 
 interface DataItem {
   month: string;
@@ -25,7 +26,7 @@ const data: DataItem[] = [
 
 const timeRanges = ["ALL", "6M", "3M", "1M", "1W"];
 
-export default function Analytictable() {
+export default function Analytictable( {isDarkMode}: {isDarkMode: boolean} ) {
   const [selectedRange, setSelectedRange] = useState("ALL");
   const [filteredData, setFilteredData] = useState<DataItem[]>(data);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -44,21 +45,21 @@ export default function Analytictable() {
     <div className="">
         <div className="flex flex-row items-center justify-between">
           <div>
-            <div className="text-2xl font-bold text-white">$0.00</div>
-            <div className="text-sm text-red-500">-100.00% (-29.51) this week</div>
+            <div className={`text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>$0.00</div>
+            <div className={`text-sm ${isDarkMode ? 'text-red-500' : 'text-red-500'}`}>-100.00% (-29.51) this week</div>
           </div>
           <div className="relative">
             <button 
-              className="flex p-2 gap-3 text-white hover:bg-white/10 rounded-full transition-colors"
+              className={`flex items-center justify-center p-2 gap-3 ${isDarkMode ? 'text-white hover:bg-white/10' : 'bg-[#E1D6F2] text-black hover:bg-gray-200'} rounded-full transition-colors`}
               onClick={() => setIsFilterOpen(!isFilterOpen)}
             >
               <span>Filter</span>
-              <img src="/filter.svg" alt="Filter" />
+              <FilterIcon className={`${isDarkMode ? 'text-white' : 'text-black'} w-4 h-4`} />
             </button>
             {isFilterOpen && (
-              <div className="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20">
+              <div className={`absolute right-0 mt-2 py-2 w-48 ${isDarkMode ? 'bg-white' : 'bg-black'} rounded-md shadow-xl z-20`}>
                 <button
-                  className="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white w-full text-left"
+                  className={`block px-4 py-2 text-sm capitalize ${isDarkMode ? 'text-gray-700 hover:bg-blue-500 hover:text-white' : 'text-white hover:bg-gray-700'} w-full text-left`}
                   onClick={() => handleFilterChange("ALL")}
                 >
                   All
@@ -66,7 +67,7 @@ export default function Analytictable() {
                 {data.map((item) => (
                   <button
                     key={item.month}
-                    className="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white w-full text-left"
+                    className={`block px-4 py-2 text-sm capitalize ${isDarkMode ? 'text-gray-700 hover:bg-blue-500 hover:text-white' : 'text-white hover:bg-gray-700'} w-full text-left`}
                     onClick={() => handleFilterChange(item.month)}
                   >
                     {item.month}
@@ -76,7 +77,7 @@ export default function Analytictable() {
             )}
           </div>
         </div>
-      <div className="bg-gradient-to-b from-[#21192F] to-[#3E246B] rounded-2xl shadow-lg overflow-hidden h-full">
+      <div className={`${isDarkMode ? 'bg-gradient-to-b from-[#21192F] to-[#3E246B]' : 'bg-[#ECE1FF]'} rounded-2xl shadow-lg overflow-hidden h-full`}>
 
         <div className="p-6 pt-0">
           <div className="flex flex-col min-h-[300px] md:h-[400px]">
@@ -85,7 +86,7 @@ export default function Analytictable() {
                 {["Total Users", "Total Projects", "Operating Status"].map((label) => (
                   <button
                     key={label}
-                    className="px-3 py-2 text-white hover:bg-white/10 rounded-md transition-colors focus:ring-2 focus:ring-purple-500"
+                    className={`px-3 py-2 hover:bg-white/10 rounded-md transition-colors focus:ring-2 focus:ring-purple-500 ${isDarkMode ? 'text-white' : 'text-black'}`}
                   >
                     {label}
                   </button>
@@ -94,12 +95,12 @@ export default function Analytictable() {
 
               <div className="flex items-center gap-8 ml-auto">
                 <div className="flex items-center gap-1">
-                  <div className="h-2 w-2 rounded-full bg-white" />
-                  <span className="text-sm text-white">This year</span>
+                  <div className={`h-2 w-2 rounded-full ${isDarkMode ? 'bg-white' : 'bg-black'}`} />
+                  <span className={`text-sm ${isDarkMode ? 'text-white' : 'text-black'}`}>This year</span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <div className="h-2 w-2 rounded-full bg-purple-400" />
-                  <span className="text-sm text-white">Last year</span>
+                  <div className={`h-2 w-2 rounded-full ${isDarkMode ? 'bg-white' : 'bg-black'}`} />
+                  <span className={`text-sm ${isDarkMode ? 'text-white' : 'text-black'}`}>Last year</span>
                 </div>
               </div>
             </div>
@@ -110,8 +111,8 @@ export default function Analytictable() {
                   <button
                     key={range}
                     onClick={() => setSelectedRange(range)}
-                    className={`px-3 py-1 text-sm rounded-md transition-colors ${
-                      selectedRange === range ? "bg-purple-600 text-white" : "text-white hover:bg-white/10"
+                    className={`px-3 py-1 text-sm rounded-md transition-colors ${isDarkMode ? 'text-white ' : ' text-black'} ${
+                      selectedRange === range ? "bg-purple-600 " : " hover:bg-white/10"
                     }`}
                   >
                     {range}
@@ -123,24 +124,24 @@ export default function Analytictable() {
                   <AreaChart data={filteredData} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
                     <defs>
                       <linearGradient id="thisYear" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#fff" stopOpacity={0.2} />
-                        <stop offset="95%" stopColor="#fff" stopOpacity={0} />
+                        <stop offset="5%" stopColor={isDarkMode ? "#fff" : "#8056E1"} stopOpacity={0.2} />
+                        <stop offset="95%" stopColor={isDarkMode ? "#fff" : "#8056E10"} stopOpacity={0} />
                       </linearGradient>
                       <linearGradient id="lastYear" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#a78bfa" stopOpacity={0.2} />
-                        <stop offset="95%" stopColor="#a78bfa" stopOpacity={0} />
+                        <stop offset="5%" stopColor={isDarkMode ? "#a78bfa" : "#8056E1"} stopOpacity={0.2} />
+                        <stop offset="95%" stopColor={isDarkMode ? "#a78bfa" : "#8056E1"} stopOpacity={0} />
                       </linearGradient>
                     </defs>
                     <XAxis
                       dataKey="month"
-                      stroke="#fff"
+                      stroke={isDarkMode ? "#fff" : "#000"}
                       strokeOpacity={0.4}
                       style={{ fontSize: "12px" }}
                       axisLine={false}
                       tickLine={false}
                     />
                     <YAxis
-                      stroke="#fff"
+                      stroke={isDarkMode ? "#fff" : "#000"}
                       strokeOpacity={0.4}
                       style={{ fontSize: "12px" }}
                       axisLine={false}
@@ -151,15 +152,15 @@ export default function Analytictable() {
                       content={({ active, payload }) => {
                         if (active && payload && payload.length) {
                           return (
-                            <div className="rounded-lg border border-gray-700 bg-gray-800 bg-opacity-90 p-2 shadow-md">
+                            <div className={`rounded-lg border ${isDarkMode ? 'border-gray-700 bg-gray-800 bg-opacity-90' : 'border-gray-300 bg-white bg-opacity-90'} p-2 shadow-md`}>
                               <div className="grid grid-cols-2 gap-2">
                                 <div className="flex flex-col">
-                                  <span className="text-[0.70rem] uppercase text-gray-400">This Year</span>
-                                  <span className="font-bold text-white">{payload[0].value}</span>
+                                  <span className={`text-[0.70rem] uppercase ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>This Year</span>
+                                  <span className={`font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>{payload[0].value}</span>
                                 </div>
                                 <div className="flex flex-col">
-                                  <span className="text-[0.70rem] uppercase text-gray-400">Last Year</span>
-                                  <span className="font-bold text-white">{payload[1].value}</span>
+                                  <span className={`text-[0.70rem] uppercase ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Last Year</span>
+                                  <span className={`font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>{payload[1].value}</span>
                                 </div>
                               </div>
                             </div>
@@ -171,7 +172,7 @@ export default function Analytictable() {
                     <Area
                       type="monotone"
                       dataKey="thisYear"
-                      stroke="#fff"
+                      stroke={isDarkMode ? "#fff" : "#8056E1"}
                       strokeWidth={2}
                       fillOpacity={1}
                       fill="url(#thisYear)"
@@ -179,7 +180,7 @@ export default function Analytictable() {
                     <Area
                       type="monotone"
                       dataKey="lastYear"
-                      stroke="#a78bfa"
+                      stroke={isDarkMode ? "#a78bfa" : "#E25876"}
                       strokeWidth={2}
                       strokeDasharray="4 4"
                       fillOpacity={1}

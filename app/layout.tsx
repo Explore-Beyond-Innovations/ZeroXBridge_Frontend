@@ -3,6 +3,7 @@ import { usePathname } from 'next/navigation';
 import { Geist, Geist_Mono, Manrope, Roboto_Serif } from "next/font/google";
 import "./globals.css";
 import Sidebar from "./components/Sidebar";
+import { ThemeProvider } from './context/ThemeContext';
 
 
 const geistSans = Geist({
@@ -45,12 +46,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable} ${robotoSerif.variable} antialiased`}
       >
-        <div className="flex">
-          {showSidebar && <Sidebar isDarkMode={true} />}
-          <div className={`min-h-screen flex flex-col w-full ${showSidebar ? 'ml-[320px]' : ''}`}>
-            <main className="flex-1">{children}</main>
+        <ThemeProvider>
+          <div className="flex">
+            {showSidebar && <Sidebar />}
+            <div className={`min-h-screen flex w-full ${showSidebar ? 'ml-[320px]' : ''}`}>
+              <main className="flex-1">{children}</main>
+            </div>
           </div>
-        </div>
+        </ThemeProvider>
       </body>
     </html>
   );

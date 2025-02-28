@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 
-const LiquidityLockTable = () => {
+const LiquidityLockTable = ({ isDarkMode }: { isDarkMode: boolean }) => {
   const liquidityRows = [
     {
       token: "SOL",
@@ -43,13 +43,13 @@ const LiquidityLockTable = () => {
   ];
 
   return (
-    <div className="bg-[#1F1333] text-white px-8 py-6 rounded-xl w-full max-w-7xl my-6  mx-auto">
-      <h2 className="text-[16px] font-bold mt-4 mb-8">
+    <div className={`${isDarkMode ? 'bg-[#1F1333] text-white' : 'bg-[#F8F4FF] text-black'}] px-8 py-6 rounded-xl w-full max-w-7xl my-6  mx-auto`}>
+      <h2 className={`text-[16px] font-bold mt-4 mb-8 ${isDarkMode ? 'text-white' : 'text-black'}`}>
         Lock Liquidity by making a deposit
       </h2>
       <div className="overflow-x-auto">
         <table className="w-full border-none ">
-          <thead className="bg-[#3B2A65]">
+          <thead className={`${isDarkMode ? 'bg-[#3B2A65] text-white' : 'bg-[#ECE1FF] text-black'}`}>
             <tr className="text-center rounded-3xl  p-4">
               <th className="p-3 text-left rounded-tl-2xl">Token</th>
               <th className="p-3 ">Current Liquidity</th>
@@ -61,7 +61,7 @@ const LiquidityLockTable = () => {
             {liquidityRows.map((row, index) => (
               <tr
                 key={index}
-                className="border-b border-[#8280FF] transition-colors text-center"
+                className={`border-b ${isDarkMode ? 'border-[#8280FF] text-gray-400' : 'border-[#ECE1FF] text-black bg-transparent'} transition-colors text-center`}
               >
                 <td className="p-3 flex items-center">
                   <Image
@@ -75,7 +75,7 @@ const LiquidityLockTable = () => {
                 </td>
                 <td className="p-3">
                   {row.currentLiquidity}
-                  <div className="text-gray-400 text-sm">
+                  <div className=" text-sm">
                     {row.currentPrice}
                   </div>
                 </td>
