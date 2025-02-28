@@ -167,7 +167,7 @@ export default function Testimonial() {
             return (
               <motion.div
                 key={testimonial.id}
-                className={`absolute w-[488px] h-[233px] border-[0.4px] border-[#8B8B8B] py-4 px-8 bg-grid-pattern rounded-2xl font-roboto-serif ${
+                className={`absolute w-[33%] h-[233px] border-[0.4px] border-[#8B8B8B] py-4 px-8 bg-grid-pattern rounded-2xl font-roboto-serif ${
                   offset === 0 ? "bg-[#2F1F4C]" : "bg-[#09050E] bg-opacity-60"
                 } backdrop-blur-sm`}
                 initial={false}

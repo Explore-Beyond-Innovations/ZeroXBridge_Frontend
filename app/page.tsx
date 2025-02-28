@@ -11,7 +11,7 @@ import Testimonial from "./components/testimonial";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-black flex flex-col items-center w-full">
+    <div className="min-h-screen bg-black flex flex-col items-center w-full max-w-[1800px] mx-auto">
       <HomeNav />
       <Header />
       <HowItWorks />
