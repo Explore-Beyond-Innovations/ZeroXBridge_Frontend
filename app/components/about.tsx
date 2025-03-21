@@ -26,14 +26,14 @@ const AboutUs = () => {
           height={500}
         />
       </div>
-      <div className="absolute top-[1100px] left-[700px] -translate-x-1/2 -translate-y-1/2 z-0">
+      {/* <div className="absolute top-[1100px] left-[700px] -translate-x-1/2 -translate-y-1/2 z-0">
         <Image
           src="/images/ellipse-1.png"
           alt="Glow Effect"
           width={500}
           height={500}
         />
-      </div>
+      </div> */}
 
       {/* Main Section Content */}
       <section className="relative bg-dark-bg text-white rounded-3xl p-10 shadow-lg w-[85%] m-10  z-10">
