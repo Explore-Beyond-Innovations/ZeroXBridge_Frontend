@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { ChevronDown, Settings, ArrowUpDown, Wallet2 } from "lucide-react";
 import Image from "next/image";
+import { useTheme } from "../context/ThemeContext";
 
 const tokens = ["ETH", "SOL"];
 
@@ -13,6 +14,7 @@ const Swap = () => {
   const [showFromDropdown, setShowFromDropdown] = useState(false);
   const [showToDropdown, setShowToDropdown] = useState(false);
   const [isWalletConnected, setIsWalletConnected] = useState(false);
+  const { isDarkMode } = useTheme();
 
   const handleSwap = () => {
     setFromToken(toToken);
@@ -26,7 +28,11 @@ const Swap = () => {
   };
 
   return (
-    <div className="font-[family-name:var(--font-manrope)] max-w-[31.25rem] mx-auto relative p-6 rounded-[1.25rem] shadow-lg text-white bg-[#21192F] border-[0.4px] border-transparent before:absolute before:inset-0 before:bg-gradient-to-b before:from-[#1F1333] before:to-[#614199] before:rounded-[1.25rem] before:-z-10 before:w-full before:h-full before:border-[0.4px] before:border-transparent">
+    <div
+      className={`${
+        isDarkMode ? "bg-[#332646]" : "bg-[#f8f4fe]"
+      } font-[family-name:var(--font-manrope)] mt-20 max-w-[31.25rem] mx-auto relative p-6 rounded-[1.25rem] shadow-lg text-white border-[0.4px] border-transparent before:absolute before:inset-0 before:bg-gradient-to-b before:from-[#1F1333] before:to-[#614199] before:rounded-[1.25rem] before:-z-10 before:w-full before:h-full before:border-[0.4px] before:border-transparent`}
+    >
       {isWalletConnected ? (
         <>
           <div className="flex justify-between items-center mb-4">
@@ -182,8 +188,12 @@ const Swap = () => {
           </button>
         </>
       ) : (
-        <>
-          <div className="border-[0.4px] border-[#8B8B8B] bg-[#1F1333] p-4 rounded-lg mb-2 relative">
+        <div>
+          <div
+            className={`border-[0.4px] border-[#8B8B8B] ${
+              isDarkMode ? "bg-[#1F1333]" : "bg-[#ede2fe]"
+            } p-4 rounded-lg mb-2 relative`}
+          >
             <div className="flex justify-between items-center">
               <p className="text-[#8B8B8B] text-[0.75rem] font-normal">From</p>
               <div className="relative">
@@ -198,10 +208,19 @@ const Swap = () => {
                     height={24}
                     className="w-[24px] h-[24px] object-contain mr-2"
                   />
-                  <span className="font-medium text-[1.125rem] w-12 text-center">
+                  <span
+                    className={`font-medium text-[1.125rem] ${
+                      isDarkMode ? "text-[#D4D4D4]" : "text-black"
+                    } w-12 text-center`}
+                  >
                     {fromToken}
                   </span>
-                  <ChevronDown size={16} className="ml-1 flex-shrink-0" />
+                  <ChevronDown
+                    size={16}
+                    className={`${
+                      isDarkMode ? "" : "text-[#1F1333]"
+                    } ml-1 flex-shrink-0`}
+                  />
                 </button>
 
                 {showFromDropdown && (
@@ -222,7 +241,13 @@ const Swap = () => {
                 )}
               </div>
             </div>
-            <p className="text-[1rem] text-[#D4D4D4] font-semibold">$10</p>
+            <p
+              className={`${
+                isDarkMode ? "text-[#D4D4D4]" : "text-black"
+              } text-[1rem] font-semibold`}
+            >
+              $10
+            </p>
           </div>
 
           <div className="flex justify-center my-2">
@@ -231,7 +256,11 @@ const Swap = () => {
             </button>
           </div>
 
-          <div className="border-[0.4px] border-[#8B8B8B] bg-[#1F1333] p-4 rounded-lg mb-2 relative">
+          <div
+            className={`border-[0.4px] border-[#8B8B8B] ${
+              isDarkMode ? "bg-[#1F1333]" : "bg-[#ede2fe]"
+            } p-4 rounded-lg mb-2 relative`}
+          >
             <div className="flex justify-between items-center">
               <p className="text-[#8B8B8B] text-[0.75rem] font-normal">To</p>
 
@@ -247,11 +276,20 @@ const Swap = () => {
                     height={24}
                     className="w-[24px] h-[24px] object-contain mr-2"
                   />
-                  <span className="font-medium text-[1.125rem] w-12 text-center">
+                  <span
+                    className={`font-medium text-[1.125rem] w-12 text-center ${
+                      isDarkMode ? "text-[#D4D4D4]" : "text-black"
+                    }`}
+                  >
                     {toToken}
                   </span>{" "}
                   {/* Fixed width */}
-                  <ChevronDown size={16} className="ml-1 flex-shrink-0" />
+                  <ChevronDown
+                    size={16}
+                    className={`ml-1 flex-shrink-0 ${
+                      isDarkMode ? "" : "text-[#1F1333]"
+                    }`}
+                  />
                 </button>
 
                 {showToDropdown && (
@@ -272,7 +310,13 @@ const Swap = () => {
                 )}
               </div>
             </div>
-            <p className="text-[1rem] text-[#D4D4D4] font-semibold">$70</p>
+            <p
+              className={`text-[1rem] ${
+                isDarkMode ? "text-[#D4D4D4]" : "text-black"
+              } font-semibold`}
+            >
+              $70
+            </p>
           </div>
 
           <button
@@ -294,7 +338,7 @@ const Swap = () => {
             />
             <span className="relative z-10">Connect Wallet</span>
           </button>
-        </>
+        </div>
       )}
     </div>
   );

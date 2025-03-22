@@ -1,12 +1,21 @@
-import React from 'react'
-import Swap from '../components/swap'
+"use client";
+import React from "react";
+import Swap from "../components/swap";
+import Navbar from "../components/navbar";
+import Sidebar from "../components/Sidebar";
+import { useTheme } from "../context/ThemeContext";
 
-function page() {
+function Page() {
+  const { isDarkMode, toggleDarkMode } = useTheme();
   return (
     <>
-    <Swap />
+      <Navbar isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
+      <Sidebar />
+      <div className={`${isDarkMode ? "bg-black" : "bg-white"} `}>
+        <Swap />
+      </div>
     </>
-  )
+  );
 }
 
-export default page
+export default Page;

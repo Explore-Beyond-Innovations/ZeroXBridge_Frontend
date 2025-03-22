@@ -1,10 +1,9 @@
-'use client'
-import { usePathname } from 'next/navigation';
+"use client";
+import { usePathname } from "next/navigation";
 import { Geist, Geist_Mono, Manrope, Roboto_Serif } from "next/font/google";
 import "./globals.css";
 import Sidebar from "./components/Sidebar";
-import { ThemeProvider } from './context/ThemeContext';
-
+import { ThemeProvider } from "./context/ThemeContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,8 +38,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const pathname = usePathname();
-  const showSidebar = pathname === '/dashboard' || pathname === '/claim' || pathname.startsWith('/dashboard/') || pathname.startsWith('/claim/');
-  
+  const showSidebar =
+    pathname === "/dashboard" ||
+    pathname === "/claim" ||
+    pathname.startsWith("/dashboard/") ||
+    pathname.startsWith("/claim/");
+
   return (
     <html lang="en">
       <body
@@ -49,8 +52,12 @@ export default function RootLayout({
         <ThemeProvider>
           <div className="flex">
             {showSidebar && <Sidebar />}
-            <div className={`min-h-screen flex w-full ${showSidebar ? 'ml-[320px]' : ''}`}>
-              <main className="flex-1">{children}</main>
+            <div
+              className={`min-h-screen flex w-full ${
+                showSidebar ? "ml-[320px]" : ""
+              }`}
+            >
+              <main className="bg-white dark:bg-black flex-1">{children}</main>
             </div>
           </div>
         </ThemeProvider>
