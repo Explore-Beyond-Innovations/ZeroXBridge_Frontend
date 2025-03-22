@@ -39,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const pathname = usePathname();
-  const showSidebar = pathname === '/dashboard' || pathname === '/claim' || pathname.startsWith('/dashboard/') || pathname.startsWith('/claim/');
+  const showSidebar = pathname === '/dashboard' || pathname === '/claim' || pathname === "/claim-burn" || pathname.startsWith('/dashboard/') || pathname.startsWith('/claim/');
   
   return (
     <html lang="en">

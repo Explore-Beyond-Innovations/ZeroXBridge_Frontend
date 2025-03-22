@@ -34,7 +34,6 @@
     "typescript": "^5"
   },
   "eslintConfig": {
-    "extends": [
-    ]
+    "extends": []
   }
 }

@@ -15,7 +15,7 @@ const Sidebar = () => {
     const [activeTab, setActiveTab] = useState("Dashboard");
 
     return (
-        <aside className={`w-80 ${isDarkMode ? "bg-[#09050E] border-[#1F1333]" : "bg-white border-none"} border-r-2  h-screen flex flex-col fixed`}>
+        <aside className={`mt-24 w-80 ${isDarkMode ? "bg-[#09050E] border-[#1F1333]" : "bg-white border-none"} border-r-2  h-screen flex flex-col fixed`}>
             <div className="flex-1 mt-6 flex flex-col items-start gap-2 pl-6">
                 {[
                     { name: "Dashboard", icon: Dashboard },
