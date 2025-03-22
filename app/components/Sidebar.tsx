@@ -10,12 +10,17 @@ import { cn } from "@/utils/cn";
 import { useTheme } from '../context/ThemeContext';
 import { Settings } from "lucide-react";
 
-const Sidebar = () => {
+// Either define an interface for props or don't accept any props
+interface SidebarProps {
+  // This interface can be empty if you're only using context
+}
+
+const Sidebar: React.FC<SidebarProps> = () => {
     const { isDarkMode } = useTheme();
     const [activeTab, setActiveTab] = useState("Dashboard");
 
     return (
-        <aside className={`w-80 ${isDarkMode ? "bg-[#09050E] border-[#1F1333]" : "bg-white border-none"} border-r-2  h-screen flex flex-col fixed`}>
+        <aside className={`w-80 ${isDarkMode ? "bg-[#09050E] border-[#1F1333]" : "bg-white border-none"} border-r-2 h-screen flex flex-col fixed`}>
             <div className="flex-1 mt-6 flex flex-col items-start gap-2 pl-6">
                 {[
                     { name: "Dashboard", icon: Dashboard },
@@ -37,13 +42,10 @@ const Sidebar = () => {
                         <Image src={tab.icon} alt={tab.name} height={24} width={24} />
                         <p className={` font-light ${isDarkMode ? 'text-white' : 'text-black'}`}>{tab.name}</p>
                     </div>
-
-
                 ))}
             </div>
-            <div className="pl-6 pb-[70%] flex items-center gap-3">
+            <div className="mt-auto pl-6 pb-6 flex items-center gap-3">
                 <Settings size={24} className={`${isDarkMode ? 'text-white' : 'text-black'}`} />
-                {/* <Image src={cog} alt="settings" height={24} width={24} /> */}
                 <p className={`font-light ${isDarkMode ? 'text-white' : 'text-black'}`}>Settings</p>
             </div>
         </aside>

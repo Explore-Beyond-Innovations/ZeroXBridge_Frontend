@@ -2,22 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Theme Variables */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --purple: #A26DFF;
-  --primary: #a26dff;
-  --white: #f0f0f0;
-  --white-2: #d4d4d4;
+  --background-light: #ffffff;
+  --foreground-light: #171717;
+  --primary-light: #a26dff;
+  --purple-light: #a26dff;
+  --white-light: #f0f0f0;
+  --white-2-light: #d4d4d4;
+
+  --background-dark: #09050e;
+  --foreground-dark: #d4d4d4;
+  --primary-dark: #a26dff;
+  --purple-dark: #a26dff;
+  --white-dark: #1e1e1e;
+  --white-2-dark: #2d2d2d;
+
+  /* Default (Light Mode) */
+  --background: var(--background-light);
+  --foreground: var(--foreground-light);
+  --primary: var(--primary-light);
+  --purple: var(--purple-light);
+  --white: var(--white-light);
+  --white-2: var(--white-2-light);
 }
 
+/* Dark Mode Handling */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #09050E;
-    --foreground: #D4D4D4;
+    --background: var(--background-dark);
+    --foreground: var(--foreground-dark);
+    --primary: var(--primary-dark);
+    --purple: var(--purple-dark);
+    --white: var(--white-dark);
+    --white-2: var(--white-2-dark);
   }
 }
 
+/* Smooth Animation */
 @keyframes rotate {
   from {
     background-position: 0% center;
@@ -27,69 +49,57 @@
   }
 }
 
+/* Base Styles */
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
 
-/* Gradient effects */
-.gradient-01 {
-  position: absolute;
-  width: 250px;
-  height: 200px;
-  right: -70px;
-  top: 40%;
-  background: var(--purple);
-  backdrop-filter: blur(100px);
-  filter: blur(130px);
-  transform: rotate(-114.2deg);
-  opacity: 1;
-  pointer-events: none;
-}
-
+/* Gradient Effects */
+.gradient-01,
 .gradient-02 {
   position: absolute;
   width: 250px;
   height: 200px;
-  left: -50px;
-  bottom: -150px;
   background: var(--purple);
-  backdrop-filter: blur(200px);
+  backdrop-filter: blur(150px);
   filter: blur(130px);
   transform: rotate(-114.2deg);
   opacity: 1;
   pointer-events: none;
 }
+
+.gradient-01 {
+  right: -70px;
+  top: 40%;
+}
+
+.gradient-02 {
+  left: -50px;
+  bottom: -150px;
+}
+
+/* Custom Range Slider */
 .custom-range {
-  @apply w-full appearance-none cursor-pointer; /* base styles for the <input> */
+  @apply w-full appearance-none cursor-pointer;
 }
 
-.custom-range::-webkit-slider-runnable-track {
-  @apply h-6 bg-[#907DBD];
-}
-
-.custom-range::-webkit-slider-thumb {
-  @apply w-8 h-6 bg-white rounded;
- /* so the thumb is centered on the track */
-  -webkit-appearance: none;
-}
-
+.custom-range::-webkit-slider-runnable-track,
 .custom-range::-moz-range-track {
   @apply h-6 bg-[#907DBD];
 }
 
+.custom-range::-webkit-slider-thumb,
 .custom-range::-moz-range-thumb {
   @apply w-8 h-6 bg-white rounded;
+  -webkit-appearance: none;
   border: none;
 }
 
+/* Footer Styling */
 .footer-gradient {
   background: linear-gradient(180deg, rgba(9, 5, 14, 1) 0%, rgba(74, 42, 130, 1) 100%);
-}
-
-body {
-  background-color: black;
 }
 
 .footer-background {
@@ -106,6 +116,7 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
+/* Ensure Smooth Rendering on Webkit Browsers */
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   .footer-background-text {
     -webkit-font-smoothing: antialiased;

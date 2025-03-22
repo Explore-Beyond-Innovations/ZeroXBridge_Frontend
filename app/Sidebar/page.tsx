@@ -10,7 +10,7 @@ export default function Home() {
         <div className={`${isDarkMode ? "bg-[#09050e]" : "bg-white"} h-screen flex flex-col`}>
             <Navbar isDarkMode={isDarkMode} toggleDarkMode={() => setIsDarkMode(!isDarkMode)} />
             <div className="flex flex-1">
-                <Sidebar isDarkMode={isDarkMode} />
+                <Sidebar />
                 <main className="flex-1">
                     {/* Main content goes here */}
                 </main>
