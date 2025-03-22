@@ -18,6 +18,7 @@ export default {
         "white-2": "var(--white-2)",
         'dark-bg': 'rgba(9, 5, 14, 1)',
         'white-style': 'rgba(139, 139, 139, 1)',
+        'custom-purple': 'rgba(162, 109, 255, 1)',
       },
       backgroundImage: {
         'check-bg': "url('/check-bg.svg')",

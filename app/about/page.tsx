@@ -1,10 +1,12 @@
 'use client'
 import React, { useState } from 'react';
+import AboutTech from '../components/about-technology';
 import AboutUs from '../components/about';
 import Navbar from '../components/navbar';
 import AboutTeam from '../components/about-team';
 import Image from 'next/image';
 import blur3 from "@/public/outerBlur.svg";
+
 
 const AboutPage = () => {
   const [toggleDark, setToggleDark] = useState(false)
@@ -24,6 +26,7 @@ const AboutPage = () => {
           height={500}
         />
       </div>
+           <AboutTech />
     </main>
   );
 };
