@@ -67,7 +67,7 @@ export default function Testimonial() {
   }
 
   return (
-    <div className="w-full bg-black relative py-[4rem] px-6">
+    <div className="w-full bg-black relative py-[8rem] px-6">
       <div className="absolute -top-[280px] bg-blend-normal left-0 z-0">
         <Image
           src="/images/ellipse.png"

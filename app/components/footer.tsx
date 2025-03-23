@@ -32,7 +32,7 @@ const Footer = () => {
   }
 
   return (
-    <footer className="relative w-full bg-black">
+    <footer className="relative w-full bg-black bg-blend-normal">
 
       <div 
         className="absolute inset-0" 
