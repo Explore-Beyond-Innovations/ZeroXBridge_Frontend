@@ -60,7 +60,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDarkMode }) => {
                       ? "bg-black/30 text-white"
                       : "bg-gray-100 text-black"
                   }
-                  pl-6 pr-12 py-3 rounded-full w-[400px] focus:outline-none`}
+                  pl-6 pr-12 py-3 rounded-full w-[220px] focus:outline-none`}
                 />
               </div>
             </div>
