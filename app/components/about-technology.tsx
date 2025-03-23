@@ -1,9 +1,20 @@
 import Image from "next/image";
 import pointer from "../../public/up-pointer.png"
 import pointerdown from "../../public/down-pointer.png"
+import blur3 from "@/public/outerBlur.svg";
 
 const AboutTech = () => {
     return (
+        <div className="relative w-full py-[8rem]">
+             <div className="absolute -top-[140px] bg-blend-normal left-0 z-0">
+        <Image
+          src={blur3}
+          alt="Glow Effect"
+          width={500}
+          height={500}
+        />
+
+        </div>
         <div className="bg-dark-bg rounded-3xl py-8 mx-28 z-10 relative">
             <div>
                 <h1 className="text-[48px] text-center bg-gradient-to-r from-black from-30% via-[#A26DFF] via-50% to-black to-70% bg-clip-text text-transparent">
@@ -14,21 +25,21 @@ const AboutTech = () => {
 
             <div className="text-white-style flex justify-center py-20">
                 <div className="leading-[3rem]">
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-[4rem]">
                         <p className="text-custom-purple text-[12px]">How ZeroXBridge differs</p>
                         <Image src={pointer} width={14} height={14} alt="up-pointer" />
                     </div>
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-[6.2rem]">
                         <p className="text-[12px]">What is ZK Proofs</p>
                         <Image src={pointerdown} width={14} height={14} alt="up-pointer" />
                     </div>
-                    <div className="flex items-center gap-4 leading-snug">
+                    <div className="flex items-center gap-[2.6rem] leading-snug">
                         <p className="w-[40%] text-[12px]">Key differences between
                             ZeroXBridge and
                             Traditional Bridges</p>
                         <Image src={pointerdown} width={14} height={14} alt="up-pointer" />
                     </div>
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-[6.3rem]">
                         <p className="text-[12px]">Security Benefits</p>
                         <Image src={pointerdown} width={14} height={14} alt="up-pointer" />
                     </div>
@@ -48,6 +59,7 @@ const AboutTech = () => {
                     </ul>
                 </div>
             </div>
+        </div>
         </div>
     );
 };

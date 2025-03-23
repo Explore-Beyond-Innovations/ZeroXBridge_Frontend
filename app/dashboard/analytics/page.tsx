@@ -1,5 +1,5 @@
 'use client'
-import AnalyticsDashboard from "../components/analytics";
+import AnalyticsDashboard from "@/app/components/analytics";
 
 
 export default function AnalyticsPage() {

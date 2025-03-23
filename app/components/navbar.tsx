@@ -4,6 +4,7 @@ import Notification from "../../public/bell.png";
 import Image from "next/image";
 import Logo from "../../public/zerologo.png";
 import LogoWhite from "../../public/zerologo-white.svg";
+import Link from "next/link";
 interface NavbarProps {
   isDarkMode: boolean;
   toggleDarkMode: () => void;
@@ -17,9 +18,10 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDarkMode }) => {
     <header
       className={`${isDarkMode ? "bg-[#09050E]" : "bg-white"} border-b-2 ${
         isDarkMode ? "border-[#1F1333]" : "border-gray-300"
-      } flex h-24 w-screen -ml-80`}
+      } flex h-24 w-full  fixed z-50`}
     >
       {/* Logo section with border */}
+      <Link href='/'>
       <div
         className={`w-80 h-24 flex items-center justify-start pl-6 border-r-2 ${
           isDarkMode ? "border-[#1F1333]" : "border-gray-300"
@@ -33,6 +35,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDarkMode }) => {
           className="object-contain "
         />
       </div>
+      </Link>
 
       {/* Main content */}
       <div

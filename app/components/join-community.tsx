@@ -4,16 +4,18 @@ import ellipse from "@/public/join-community/ellipse.svg";
 
 const manrope = Manrope({
   weight: ["700"],
+  subsets: ["latin"],
 });
 
 const robotoSerif = Roboto_Serif({
   weight: ["400"],
+  subsets: ["latin"],
 });
 
 const JoinCommunity = () => {
   return (
-    <section className="w-full flex flex-col items-center mx-auto px-[113px] py-[55px]">
-      <div className="relative grid place-items-center gap-y-16 text-center bg-join-community w-[85%] h-[391px] shadow-[0px_0px_4px_2px_#A26DFF40] rounded-[20px] overflow-hidden">
+    <section className="w-[75%] flex flex-col items-center mx-auto border-[#A26DFF] rounded-[20px] border-[5px]">
+      <div className="relative grid place-items-center gap-y-16 text-center bg-join-community w-full h-[391px] shadow-[0px_0px_4px_2px_#A26DFF40] rounded-[20px] overflow-hidden">
         <Image
           src={ellipse}
           width={310}

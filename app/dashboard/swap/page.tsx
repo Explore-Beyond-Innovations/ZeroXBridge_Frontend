@@ -1,11 +1,11 @@
+import Swap from '@/app/components/swap'
 import React from 'react'
-import Swap from '../components/swap'
 
 function page() {
   return (
-    <>
+    <div className='mt-[12rem]'>
     <Swap />
-    </>
+    </div>
   )
 }
 

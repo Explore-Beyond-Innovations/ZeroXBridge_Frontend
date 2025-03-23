@@ -35,7 +35,7 @@ const FaqItem = ({ item, onToggle, isOpen }: FaqItem) => {
         </h4>
 
         <Image
-          src="/arrowdownfaq.png"
+          src="/arrowdownfaq.svg"
           alt="arrowdown"
           height={18}
           width={19}
@@ -98,7 +98,6 @@ const FAQ = () => {
           <div className="gradient-01 z-0 rounded-full  "></div>
         
       </div>
-      <div className="gradient-02 z-0 rounded-full  "></div>
     </div>
   );
 };

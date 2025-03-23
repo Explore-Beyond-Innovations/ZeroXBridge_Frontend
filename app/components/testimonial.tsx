@@ -43,15 +43,7 @@ const testimonials: Testimonial[] = [
       image: "/images/testimonial-card-profile.png",
     },
   },
-  {
-    id: 4,
-    content:
-    "Traditional bridges require moving assets between chains, exposing them to security risks like hacks and exploits. ZeroXBridge eliminates this by keeping your collateral securely locked on Ethereum while unlocking liquidity on Starknet.",
-    author: {
-      name: "Elon White",
-      image: "/images/testimonial-card-profile.png",
-    },
-  },
+ 
 ]
 
 export default function Testimonial() {
@@ -75,7 +67,18 @@ export default function Testimonial() {
   }
 
   return (
-    <div className="w-full min-h-[647px] mx-auto bg-[#09050E] relative overflow-hidden rounded-3xl">
+    <div className="w-full bg-black relative py-[4rem] px-6">
+      <div className="absolute -top-[280px] bg-blend-normal left-0 z-0">
+        <Image
+          src="/images/ellipse.png"
+          alt="Glow Effect"
+          width={500}
+          height={500}
+          className="w-[800px] h-[800px] z-30"
+        />
+      </div>
+    <div className="w-[90%] min-h-[647px] py-8 mx-auto bg-[#09050E] overflow-hidden rounded-3xl z-80 relative">
+      
       {/* Header */}
       <div className="text-center pt-7 space-y-2 w-[550px] mx-auto">
         <h2 className="text-5xl font-bold bg-howitworks text-transparent leading-[65px] font-manrope bg-clip-text">
@@ -124,15 +127,6 @@ export default function Testimonial() {
                     className=""
                     />
                 </div>
-                <div className="absolute top-[75px] left-1/2 w-12 h-12 -translate-x-1/2 -translate-y-1/2">
-                    <Image
-                    src="/testimonial-float-2.png"
-                    alt=""
-                    width={31}
-                    height={33}
-                    className=""
-                    />
-                </div>
             </div>
           </div>
     
@@ -144,7 +138,7 @@ export default function Testimonial() {
       </div>
 
       {/* Testimonial Cards */}
-      <div className="absolute bottom-11 w-full px-16">
+      <div className="absolute bottom-[4rem] w-full mx-auto px-16">
         <div className="relative h-64 flex justify-center items-center">
           {testimonials.map((testimonial, index) => {
             const offset = (index - currentSlide + testimonials.length) % testimonials.length
@@ -167,7 +161,7 @@ export default function Testimonial() {
             return (
               <motion.div
                 key={testimonial.id}
-                className={`absolute w-[33%] h-[233px] border-[0.4px] border-[#8B8B8B] py-4 px-8 bg-grid-pattern rounded-2xl font-roboto-serif ${
+                className={`absolute w-[35%] h-[243px] border-[0.4px] border-[#8B8B8B] py-4 px-8 bg-grid-pattern rounded-2xl font-roboto-serif ${
                   offset === 0 ? "bg-[#2F1F4C]" : "bg-[#09050E] bg-opacity-60"
                 } backdrop-blur-sm`}
                 initial={false}
@@ -191,7 +185,7 @@ export default function Testimonial() {
                 <div className="text-[#D4D4D4] font-normal text-sm mt-[30px] leading-relaxed ">
                   {testimonial.content}
                 </div>
-                <div className="flex items-center bottom-4 absolute gap-1">
+                <div className="flex items-center bottom-2 absolute gap-1">
                   <Image
                     src={testimonial.author.image || "/images/testimonial-card-profile.png"}
                     alt={testimonial.author.name}
@@ -226,6 +220,7 @@ export default function Testimonial() {
             </motion.button>
         ))}
       </div>
+    </div>
     </div>
   )
 }

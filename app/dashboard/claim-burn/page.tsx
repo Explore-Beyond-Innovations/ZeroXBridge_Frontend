@@ -1,12 +1,12 @@
 "use client";
 import { useState } from "react";
-import Navbar from "../components/navbar";
-import XZBInterface from "../components/claim-burn";
-import { useTheme } from "../context/ThemeContext";
+import XZBInterface from "@/app/components/claim-burn";
+import { useTheme } from "@/app/ThemeContext";
+
 
 const Index = () => {
   const [isConnected, setIsConnected] = useState(false);
-  const { isDarkMode, toggleDarkMode } = useTheme();
+  const { isDarkMode } = useTheme();
 
   const tokenData = {
     available: 2468,
@@ -28,11 +28,10 @@ const Index = () => {
 
   return (
     <div
-      className={`flex flex-col items-center w-full h-full relative ${
+      className={`flex flex-col items-center w-full h-full py-[4rem] relative ${
         isDarkMode ? "bg-black" : "bg-white"
       }`}
     >
-      <Navbar isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
       <div className={`${isDarkMode ? 'bg-black' : 'bg-white'} flex items-center justify-center h-full`}>
         <XZBInterface
           tokenData={tokenData}

@@ -3,7 +3,8 @@ import { usePathname } from 'next/navigation';
 import { Geist, Geist_Mono, Manrope, Roboto_Serif } from "next/font/google";
 import "./globals.css";
 import Sidebar from "./components/Sidebar";
-import { ThemeProvider } from './context/ThemeContext';
+import { ThemeProvider, useTheme } from './ThemeContext';
+import Navbar from './components/navbar';
 
 
 const geistSans = Geist({
@@ -47,14 +48,20 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable} ${robotoSerif.variable} antialiased`}
       >
         <ThemeProvider>
+        {showSidebar && <NavbarWithTheme />}
           <div className="flex">
             {showSidebar && <Sidebar />}
             <div className={`min-h-screen flex w-full ${showSidebar ? 'ml-[320px]' : ''}`}>
-              <main className="flex-1">{children}</main>
+              <main className={`flex-1 ${showSidebar ? 'mt-[4rem]' : ''} `}>{children}</main>
             </div>
           </div>
         </ThemeProvider>
       </body>
     </html>
   );
+}
+
+function NavbarWithTheme() {
+  const { isDarkMode, toggleDarkMode } = useTheme();
+  return <Navbar isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />;
 }
