@@ -28,7 +28,7 @@ const navLinks: NavLink[] = [
 
 const HomeNav = () => {
   return (
-    <div className="w-full py-5">
+    <div className="w-full py-5 bg-[#09050E]">
       <nav className="max-w-screen-2xl px-2 md:px-6 lg:px-10 xl:px-20 flex items-center justify-between mx-auto">
         <Link href="/">
           <div className="logo">
@@ -37,7 +37,7 @@ const HomeNav = () => {
               alt="Logo"
               width={137}
               height={55}
-              className="w-auto h-full"
+              className="w-auto h-full cursor-pointer"
             />
           </div>
         </Link>
@@ -55,7 +55,7 @@ const HomeNav = () => {
           ))}
         </div>
 
-        <Link href="/dashboard">
+        <Link href="/dashboard" className="cursor-pointer">
           <Button variant="gradientPrimary" size="default">
             Launch App
           </Button>

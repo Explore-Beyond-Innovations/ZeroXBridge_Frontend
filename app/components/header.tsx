@@ -58,7 +58,7 @@ const Header = () => {
   }, [isVisible]);
 
   const renderStatItem = (stat: StatItem, index: number) => (
-    <div key={index} className="flex gap-2 z-20">
+    <div key={index} className="flex gap-2 z-20 w-fit">
       <Image
         src={RightArrow}
         alt="Right Arrow"
@@ -78,7 +78,9 @@ const Header = () => {
   );
 
   return (
-    <div className="flex flex-col gap-[10em] bg-[url(/hero-bg.svg)] bg-cover bg-center h-[47.6875em] justify-center w-full">
+    <div className="w-full bg-[#09050E]">
+    <div className="flex flex-col gap-[10em] bg-[url(/hero-bg.png)]  bg-cover bg-no-repeat bg-center h-screen justify-center w-full">
+    {/* <div className="w-full h-full backdrop-blur-[2px] flex flex-col gap-[10em] justify-center "> */}
       <div className="flex relative items-center">
         <div className="flex flex-col pl-[1em] justify-center h-full lg:pl-[7em] mt-[3em] gap-[1em]">
           <h1 className="lg:text-[48px] font-manrope xl:text-5xl text-2xl text-wrap w-[449px] lg:w-[679px] font-bold bg-gradient-to-r from-[#262429] via-[#9B6DFF] to-[#262429]  bg-clip-text text-transparent pb-[7px] ">
@@ -104,12 +106,15 @@ const Header = () => {
             </button>
             </Link>
         </div>
+
       </div>
       <div>
-        <div className="flex flex-wrap justify-between items-center pt-12 w-[70%] ml-[12em] ">
+        <div className="flex flex-wrap justify-between items-start pt-12 w-[70%] xl:w-[40%] ml-[7rem] ">
           {STATS_DATA.map(renderStatItem)}
         </div>
       </div>
+    </div>
+    {/* </div> */}
     </div>
   );
 };

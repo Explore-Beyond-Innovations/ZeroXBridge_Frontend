@@ -32,12 +32,12 @@ const Footer = () => {
   }
 
   return (
-    <footer className="relative w-full bg-black bg-blend-normal">
+    <footer className="relative w-full  bg-[#09050E]  bg-blend-normal">
 
       <div 
         className="absolute inset-0" 
         style={{
-          background: 'linear-gradient(180deg, rgba(9, 5, 14, 1) 0%, rgba(74, 42, 130, 1) 100%)',
+          background: 'linear-gradient(180deg, rgba(9, 5, 14, 0) 0%, rgba(74, 42, 130, 1) 100%)',
           position: 'absolute',
           bottom: '-20%',
         }}

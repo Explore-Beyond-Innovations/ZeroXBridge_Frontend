@@ -67,7 +67,7 @@ export default function Testimonial() {
   }
 
   return (
-    <div className="w-full bg-black relative py-[8rem] px-6">
+    <div className="w-full bg-[#09050E] relative py-[8rem] px-6">
       <div className="absolute -top-[280px] bg-blend-normal left-0 z-0">
         <Image
           src="/images/ellipse.png"
@@ -89,7 +89,7 @@ export default function Testimonial() {
 
       {/* Floating Profile Images */}
       {mounted && (
-          <div className="relative w-[60%] mx-auto h-48 z-10">
+          <div className="relative w-[60%] 2xl:w-[56%] mx-auto h-48 z-10">
             <div className="absolute inset-0">
                 <div className="absolute top-2 left-[134px] w-12 h-12 -translate-x-1/2 -translate-y-1/2">
                     <Image
@@ -109,7 +109,7 @@ export default function Testimonial() {
                     className=""
                     />
                 </div>
-                <div className="absolute top-24 left-[120px] w-12 h-12 -translate-x-1/2 translate-y-1/2">
+                <div className="absolute top-24 left-[140px] w-12 h-12 -translate-x-1/2 translate-y-1/2">
                     <Image
                     src="/testimonial-float-3.png"
                     alt=""
@@ -118,7 +118,7 @@ export default function Testimonial() {
                     className=""
                     />
                 </div>
-                <div className="absolute top-24 right-11 w-12 h-12 translate-x-1/2 translate-y-1/2">
+                <div className="absolute top-24 right-[70px] w-12 h-12 translate-x-1/2 translate-y-1/2">
                     <Image
                     src="/testimonial-float-2.png"
                     alt=""
@@ -138,7 +138,7 @@ export default function Testimonial() {
       </div>
 
       {/* Testimonial Cards */}
-      <div className="absolute bottom-[4rem] w-full mx-auto px-16">
+      <div className="absolute bottom-[4rem] w-full mx-auto px-16 2xl:px-20 z-50">
         <div className="relative h-64 flex justify-center items-center">
           {testimonials.map((testimonial, index) => {
             const offset = (index - currentSlide + testimonials.length) % testimonials.length
@@ -185,7 +185,7 @@ export default function Testimonial() {
                 <div className="text-[#D4D4D4] font-normal text-sm mt-[30px] leading-relaxed ">
                   {testimonial.content}
                 </div>
-                <div className="flex items-center bottom-2 absolute gap-1">
+                <div className="flex items-center bottom-2 absolute gap-2">
                   <Image
                     src={testimonial.author.image || "/images/testimonial-card-profile.png"}
                     alt={testimonial.author.name}
