@@ -18,7 +18,7 @@ const DashboardPage = () => {
   };
 
   return (
-    <div className={`flex flex-col items-center w-full h-full mt-4 relative ${isDarkMode ? 'bg-black' : 'bg-white'}`}>
+    <div className={`flex flex-col items-center w-full h-full mt-4 relative ${isDarkMode ? 'bg-black' : 'bg-white'}  mx-auto`}>
       <div className="flex flex-col h-full w-full px-6">
         <div className={`w-full grid grid-cols-1 lg:grid-cols-5 gap-6 mt-12 mb-8 pb-12 border-b ${isDarkMode ? 'border-[#A26DFF]' : 'border-purple-300'}`}>
           <div className="lg:col-span-2 flex flex-col gap-4">

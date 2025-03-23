@@ -70,7 +70,7 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
 
   return (
     <div
-      className={`w-[500px] rounded-3xl p-6 ${
+      className={`w-[500px] 2xl:scale-150 rounded-3xl p-6 ${
         isDarkMode ? "text-white" : "text-black"
       }`}
     >
