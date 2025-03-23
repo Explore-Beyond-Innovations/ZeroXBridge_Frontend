@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import RightArrow from "@/public/right-arrow.svg";
+import Link from "next/link";
 
 interface StatItem {
   value: string;
@@ -92,6 +93,7 @@ const Header = () => {
               no wrapping, no centralized bridges.
             </p>
           </div>
+          <Link href="/dashboard">
           <button className="relative mt-[39px] w-[12.5em] overflow-hidden py-[15px] px-[54px] text-white bg-[#4C327A] rounded-full transition-all hover:bg-opacity-90 shadow-[0_4px_8px_rgba(194,151,255,0.25),0_-4px_4px_rgba(162,109,255,0.5)]">
               <span className="relative font-bold text-base font-manrope z-10">Launch App</span>
               <span
@@ -100,6 +102,7 @@ const Header = () => {
               />
              <span className="absolute inset-[2px] bg-[#4C327A] rounded-full" />
             </button>
+            </Link>
         </div>
       </div>
       <div>
