@@ -12,7 +12,7 @@ export default function AnalyticsPage() {
       }`}
     >
       {/* to test out the connect state, please change isconnected to true */}
-      <AnalyticsDashboard isDarkMode={isDarkMode} isConnected={true} />
+      <AnalyticsDashboard isDarkMode={isDarkMode} isConnected={false} />
     </div>
   );
 }

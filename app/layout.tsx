@@ -5,6 +5,7 @@ import "./globals.css";
 import Sidebar from "./components/Sidebar";
 import { ThemeProvider, useTheme } from './ThemeContext';
 import Navbar from './components/navbar';
+import NavigationBar from "./components/mobile-navigator";
 
 
 const geistSans = Geist({
@@ -49,10 +50,11 @@ export default function RootLayout({
       >
         <ThemeProvider>
         {showSidebar && <NavbarWithTheme />}
-          <div className="flex">
+          <div className="flex ">
             {showSidebar && <Sidebar />}
-            <div className={`min-h-screen flex w-full ${showSidebar ? 'lg:ml-[320px]' : ''}`}>
-              <main className={`flex-1  ${showSidebar ? 'mt-[4rem]' : ''} `}>{children}</main>
+            <div className={`min-h-screen relative flex flex-col w-full ${showSidebar ? 'lg:ml-[320px]' : ''}`}>
+              <main className={`flex-1  ${showSidebar ? 'mt-[4rem] mb-[4rem]' : ''} `}>{children}</main>
+              {showSidebar && <NavigationBar />}
             </div>
           </div>
         </ThemeProvider>

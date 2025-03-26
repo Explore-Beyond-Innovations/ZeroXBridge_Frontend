@@ -22,8 +22,8 @@ const NavigationBar = () => {
   ];
 
   return (
-    <div className="w-full bg-[#21192F] rounded-b rounded-3xl px-6 py-4 border-t border-[#A26DFF]">
-      <div className="flex justify-between items-center">
+    <div className="fixed bottom-0 w-full flex md:hidden bg-[#21192F] rounded-b rounded-3xl px-6 py-3 border-t border-[#A26DFF] h-[99px]">
+      <div className="flex justify-between items-center w-full h-full">
         {navItems.map((item) => {
           const isActive = currentPath === item.path;
 
