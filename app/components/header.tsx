@@ -80,8 +80,8 @@ const Header = () => {
   return (
     <div className="w-full bg-[#09050E]">
     <div className="flex flex-col gap-[10em] bg-[url(/hero-bg.png)]  bg-cover bg-no-repeat bg-center h-screen justify-center w-full">
-      <div className="flex relative items-center">
-        <div className="flex flex-col pl-[1em] justify-center h-full lg:pl-[7em] mt-[3em] gap-[1em]">
+      <div className="flex flex-row justify-between relative items-center px-[7rem]">
+        <div className="flex flex-col justify-center h-full gap-[1em]">
           <h1 className="lg:text-[48px] font-manrope xl:text-5xl text-2xl text-wrap w-[449px] lg:w-[679px] font-bold bg-gradient-to-r from-[#262429] via-[#9B6DFF] to-[#262429]  bg-clip-text text-transparent pb-[7px] ">
             Secure Cross-Chain Liquidity with Zero-Knowledge Proofs
           </h1>
@@ -106,9 +106,20 @@ const Header = () => {
             </Link>
         </div>
 
+        <div className="h-[457px] w-[450px]">
+        <Image
+        src='/globe-icon.svg'
+        alt="Globe Bridge"
+        width={500}
+        height={500}
+        className="w-full h-full"
+      />
+
+        </div>
+
       </div>
       <div>
-        <div className="flex flex-wrap justify-between items-start pt-12 w-[70%] xl:w-[40%] ml-[7rem] ">
+        <div className="flex flex-wrap justify-between items-start w-[70%] xl:w-[40%] ml-[7rem] ">
           {STATS_DATA.map(renderStatItem)}
         </div>
       </div>
