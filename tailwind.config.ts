@@ -47,6 +47,7 @@ const config: Config = {
       },
       animation: {
         slowSpin: "spin 3s linear infinite",
+        spinSlow: 'spin 20s linear infinite',
       },
       scale: {
         150: "1.5", 

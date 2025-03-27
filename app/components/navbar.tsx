@@ -6,7 +6,6 @@ import Logo from "../../public/zerologo.png";
 import LogoWhite from "../../public/zerologo-white.svg";
 import Link from "next/link";
 import { useState } from "react";
-import NavigationBar from "./mobile-navigator";
 
 interface NavbarProps {
   isDarkMode: boolean;
@@ -175,7 +174,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDarkMode }) => {
           mobileMenuOpen ? 'translate-y-0' : '-translate-y-full'
         } ${isDarkMode ? 'bg-[#09050E]' : 'bg-white'}`}
       >
-        <div className="flex flex-col h-full py-12 px-8 bg-[#21192F]">
+        <div className="flex flex-col h-full py-6 px-4 bg-[#21192F]">
           {/* Mobile Menu Header */}
           <div className={`flex justify-between items-center p-6 border-b ${isDarkMode ? "border-[#1F1333]" : "border-gray-300"}`}>
             {/* Logo for mobile */}
@@ -196,10 +195,10 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDarkMode }) => {
           </div>
           
           {/* Menu Content */}
-          <div className="flex flex-col p-6 space-y-6 flex-1">
+          <div className="flex flex-col px-4 py-3 space-y-2 flex-1">
             
             {/* Navigation Links */}
-            <nav className="flex flex-col gap-6 ">
+            <nav className="flex flex-col gap-3 ">
               <Link href="" className={`block py-3 px-4  border-b border-[#A26DFF] ${isDarkMode ? 'text-white hover:bg-[#1F1333]' : 'text-black hover:bg-gray-100'}`}>
               <span className="flex items-center w-full justify-between px-2 py-4">
                 <p>Search</p>
@@ -220,9 +219,6 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDarkMode }) => {
               </span>
               </Link>
             </nav>
-            
-
-            <NavigationBar />
           </div>
         </div>
       </div>

@@ -127,7 +127,7 @@ export default function AnalyticsDashboard({
   );
 
   return (
-    <div className="space-y-6 p-6 w-full lg:max-w-[1800px] 2xl:scale-150 mx-auto">
+    <div className="space-y-6 p-6 lg:max-w-[1800px] 2xl:scale-150 mx-auto">
       <div
         className={`flex flex-col lg:flex-row justify-evenly md:px-4 gap-6 border-b ${borderColor} py-6`}
       >

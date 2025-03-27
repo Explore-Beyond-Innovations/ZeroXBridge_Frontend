@@ -118,3 +118,22 @@ body {
     -webkit-font-smoothing: antialiased;
   }
 }
+
+/* Add this to your global CSS file */
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+    box-shadow: 0 0 15px rgba(166, 114, 255, 0.7), 0 0 30px rgba(162, 109, 255, 0.3);
+  }
+}
+
+.shadow-glow {
+  box-shadow: 0 0 15px rgba(162, 109, 255, 0.2), 0 0 30px rgba(162, 109, 255, 0.3);
+}

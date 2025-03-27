@@ -30,7 +30,7 @@ const DashboardPage = () => {
           </div>
         </div>
 
-        <div className={`border-b ${isDarkMode ? 'border-[#A26DFF]' : 'border-purple-300'} pb-6`}>
+        <div className={`border-b ${isDarkMode ? 'border-[#A26DFF]' : 'border-purple-300'} overflow-scroll pb-6`}>
           <LiquidityLockTable isDarkMode={isDarkMode} />
         </div>
 

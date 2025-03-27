@@ -331,10 +331,10 @@ const Swap = () => {
       ) : (
         <div className={`${
           isDarkMode ? "bg-[#332646]" : "bg-[#f8f4fe]"
-        } 2xl:scale-150  w-[500px] mx-auto relative p-6 rounded-[1.25rem] shadow-lg text-white border-[0.4px] border-transparent before:absolute before:inset-0 before:bg-gradient-to-b before:from-[#1F1333] before:to-[#614199] before:rounded-[1.25rem] before:-z-10 before:w-full before:h-full before:border-[0.4px] before:border-transparent`}>
+        } 2xl:scale-150  w-[500px] mx-auto relative p-6 rounded-[1.25rem] shadow-lg text-white border-[0.4px] border-transparent before:absolute before:inset-0  before:rounded-[1.25rem] before:-z-10 before:w-full before:h-full before:border-[0.4px] before:border-transparent`}>
           <div
             className={`border-[0.4px] border-[#8B8B8B] ${
-              isDarkMode ? "bg-[#1F1333]" : "bg-[#ede2fe]"
+              isDarkMode ? "bg-[#332646]" : "bg-[#f8f4fe]"
             } p-4 rounded-lg mb-2 relative`}
           >
             <div className="flex justify-between items-center">
