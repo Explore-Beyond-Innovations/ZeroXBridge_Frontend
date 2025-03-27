@@ -6,6 +6,7 @@ import Sidebar from "./components/Sidebar";
 import { ThemeProvider, useTheme } from "./ThemeContext";
 import Navbar from "./components/navbar";
 import NavigationBar from "./components/mobile-navigator";
+import { StarknetProvider } from "./components/Starknet-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -52,26 +53,28 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable} ${robotoSerif.variable} antialiased bg-[#09050E]`}
       >
-        <ThemeProvider>
-          {showSidebar && <NavbarWithTheme />}
-          <div className="flex ">
-            {showSidebar && <Sidebar />}
-            <div
-              className={`min-h-screen relative flex flex-col w-full ${
-                showSidebar ? "lg:ml-[320px]" : ""
-              }`}
-            >
-              <main
-                className={`flex-1  ${
-                  showSidebar ? "mt-[4rem] mb-[4rem]" : ""
-                } `}
+        <StarknetProvider>
+          <ThemeProvider>
+            {showSidebar && <NavbarWithTheme />}
+            <div className="flex ">
+              {showSidebar && <Sidebar />}
+              <div
+                className={`min-h-screen relative flex flex-col w-full ${
+                  showSidebar ? "lg:ml-[320px]" : ""
+                }`}
               >
-                {children}
-              </main>
-              {showSidebar && <NavigationBar />}
+                <main
+                  className={`flex-1  ${
+                    showSidebar ? "mt-[4rem] mb-[4rem]" : ""
+                  } `}
+                >
+                  {children}
+                </main>
+                {showSidebar && <NavigationBar />}
+              </div>
             </div>
-          </div>
-        </ThemeProvider>
+          </ThemeProvider>
+        </StarknetProvider>
       </body>
     </html>
   );
