@@ -48,6 +48,7 @@ const config: Config = {
       animation: {
         slowSpin: "spin 3s linear infinite",
         spinSlow: 'spin 20s linear infinite',
+       glowSlow: 'glow 4s cubic-bezier(0.6, 0.8, 0.6, 1) infinite',
       },
       scale: {
         150: "1.5", 

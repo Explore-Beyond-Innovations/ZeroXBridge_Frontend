@@ -18,99 +18,6 @@ const STATS_DATA: StatItem[] = [
   { value: "10M+", label: "Investments", endValue: 10 },
 ];
 
-const NETWORK_NODES = [
-  { top: "5.5%", left: "31%", translateX: "0", translateY: "0", delay: "0s" },
-  { top: "6%", left: "64%", translateX: "0", translateY: "0", delay: "1.5s" },
-  {
-    top: "38%",
-    left: "77%",
-    translateX: "0",
-    translateY: "-50%",
-    delay: "0.7s",
-  },
-  {
-    top: "71.5%",
-    left: "81.5%",
-    translateX: "0",
-    translateY: "0",
-    delay: "2.2s",
-  },
-  {
-    top: "48%",
-    left: "48.5%",
-    translateX: "-50%",
-    translateY: "0",
-    delay: "1.2s",
-  },
-  {
-    top: "84.5%",
-    left: "25.3%",
-    translateX: "0",
-    translateY: "0",
-    delay: "2.8s",
-  },
-  {
-    top: "56.5%",
-    left: "14%",
-    translateX: "0",
-    translateY: "-50%",
-    delay: "0.4s",
-  },
-  {
-    top: "46.5%",
-    left: "17.2%",
-    translateX: "0",
-    translateY: "0",
-    delay: "3.3s",
-  },
-  {
-    top: "45.5%",
-    left: "35%",
-    translateX: "0",
-    translateY: "0",
-    delay: "1.8s",
-  },
-  { top: "67%", left: "46.5%", translateX: "0", translateY: "0", delay: "2.5s" },
-  {
-    top: "36.5%",
-    left: "55%",
-    translateX: "0",
-    translateY: "0",
-    delay: "0.9s",
-  },
-  { top: "52%", left: "72%", translateX: "0", translateY: "0", delay: "0.9s" },
-  { top: "54%", left: "85%", translateX: "0", translateY: "0", delay: "3.1s" },
-  {
-    top: "92.7%",
-    left: "66%",
-    translateX: "0",
-    translateY: "0",
-    delay: "3.1s",
-  },
-  { top: "93%", left: "43%", translateX: "0", translateY: "0", delay: "3.1s" },
-  {
-    top: "87%",
-    left: "33%",
-    translateX: "0",
-    translateY: "0",
-    delay: "3.1s",
-  },
-  {
-    top: "78.4%",
-    left: "58.5%",
-    translateX: "0",
-    translateY: "0",
-    delay: "3.1s",
-  },
-  {
-    top: "66.5%",
-    left: "31%",
-    translateX: "0",
-    translateY: "0",
-    delay: "3.1s",
-  },
-];
-
 const Header = () => {
   const [counts, setCounts] = useState<number[]>(STATS_DATA.map(() => 0));
   const [isVisible, setIsVisible] = useState(false);
@@ -213,34 +120,21 @@ const Header = () => {
               />
             </div>
 
-            {/* Static network overlay (outer element) */}
-            <div className="absolute inset-0 pointer-events-none">
+            {/* Network grid overlay with glow animation */}
+            <div className="absolute inset-0 pointer-events-none bg-transparent">
               <Image
-                src="/globe-bridge.svg"
+                src="/globe-grid.png"
                 alt="Network Overlay"
                 width={500}
                 height={500}
-                className="w-full h-full"
+                className="w-full h-full animate-glowSlow globe-grid-image"
+                style={{
+                  objectFit: "contain",
+                  border: "none",
+                  outline: "none",
+                }}
+                unoptimized={true}
               />
-            </div>
-
-            {/* Flashing nodes */}
-            <div className="absolute inset-0 pointer-events-none">
-              {NETWORK_NODES.map((node, index) => (
-                <div
-                  key={index}
-                  className="absolute"
-                  style={{
-                    top: node.top,
-                    left: node.left,
-                    transform: `translate(${node.translateX}, ${node.translateY})`,
-                    animation: `pulse 3s infinite ${node.delay}`,
-                    opacity: 0,
-                  }}
-                >
-                  <div className="w-2 h-2  bg-gradient-to-b from-[#FFFFFF] to-[#A26DFF] rounded-full shadow-glow"></div>
-                </div>
-              ))}
             </div>
           </div>
         </div>

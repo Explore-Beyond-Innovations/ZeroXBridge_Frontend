@@ -121,19 +121,34 @@ body {
 
 /* Add this to your global CSS file */
 
-@keyframes pulse {
+@keyframes glow {
   0%, 100% {
-    opacity: 0.2;
-    transform: scale(1);
-    box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+    filter: brightness(1) drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
+  }
+  20% {
+    filter: brightness(0.8) drop-shadow(0 0 0px rgba(255, 255, 255, 0.8));
   }
   50% {
-    opacity: 1;
-    transform: scale(1.2);
-    box-shadow: 0 0 15px rgba(166, 114, 255, 0.7), 0 0 30px rgba(162, 109, 255, 0.3);
+    filter: brightness(1.2) drop-shadow(0 0 4px rgba(255, 255, 255, 0.3));
+  }
+  70% {
+    filter: brightness(1.4) drop-shadow(0 0 0px rgba(255, 255, 255, 0.7));
   }
 }
 
-.shadow-glow {
-  box-shadow: 0 0 15px rgba(162, 109, 255, 0.2), 0 0 30px rgba(162, 109, 255, 0.3);
+.animate-glowSlow {
+  animation: glow 4s cubic-bezier(0.6, 0.8, 0.6, 1) infinite;
+}
+
+/* Remove default borders from all images */
+img {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.globe-grid-image {
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
 }
