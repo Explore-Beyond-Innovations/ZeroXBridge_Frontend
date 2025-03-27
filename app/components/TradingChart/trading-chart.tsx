@@ -23,8 +23,9 @@ export default function TradingChartComponent({ isDarkMode }: { isDarkMode: bool
 
 
     return (
-        <div className={`flex justify-start items-start ${isDarkMode ? 'bg-[#21192F] text-white' : 'bg-[#F8F4FF] text-black'} w-full h-fit mt-3 mx-auto rounded-2xl`}>
-            <div className="text-white text-xl py-12 w-[75%]">
+        <div className={`flex flex-col gap-4 lg:flex-row justify-start items-start  w-full h-fit mt-3 mx-auto mb-[4rem] rounded-2xl ${isDarkMode ? 'bg-[#21192F] text-white' : 'bg-[#F8F4FF] text-black'}`}>
+            <div className="overflow-scroll md:overscroll-none w-full">
+            <div className={` text-white text-xl py-12 w-[720px] lg:w-[75%] `}>
                 <h1 className={`${isDarkMode ? 'text-white' : 'text-black'} flex items-center pl-11 gap-2`}>
                     BTC 
                     <span className="text-base text-[#808080]">/IPY</span>
@@ -74,8 +75,9 @@ export default function TradingChartComponent({ isDarkMode }: { isDarkMode: bool
                     <Chart selectedInterval={selectedInterval} isDarkMode={isDarkMode}/>
                 </div>
             </div>
+            </div>
 
-            <div className={`flex flex-col border-l-[0.1px] border-[#8280FF] ${isDarkMode ? 'text-white' : 'text-black'} py-12 w-[25%]`}>
+            <div className={`flex flex-col md:border-l-[0.1px] border-[#8280FF] ${isDarkMode ? 'text-white' : 'text-black'} py-12 w-full lg:w-[25%]`}>
                 <div className="flex justify-between items-center  text-xl px-5">
                     <h2 className="flex gap-2 justify-start items-center">
                         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">

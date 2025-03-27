@@ -43,7 +43,7 @@ export default function Analytictable( {isDarkMode}: {isDarkMode: boolean} ) {
 
   return (
     <div className="">
-        <div className="flex flex-row items-center justify-between">
+        <div className="flex flex-row mb-4 items-center justify-between">
           <div>
             <div className={`text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>$0.00</div>
             <div className={`text-sm ${isDarkMode ? 'text-red-500' : 'text-red-500'}`}>-100.00% (-29.51) this week</div>
@@ -77,7 +77,8 @@ export default function Analytictable( {isDarkMode}: {isDarkMode: boolean} ) {
             )}
           </div>
         </div>
-      <div className={`${isDarkMode ? 'bg-gradient-to-b from-[#21192F] to-[#3E246B]' : 'bg-[#ECE1FF]'} rounded-2xl shadow-lg overflow-hidden h-full`}>
+        <div className="overflow-x-scroll w-full">
+      <div className={`${isDarkMode ? 'bg-gradient-to-b from-[#21192F] to-[#3E246B]' : 'bg-[#ECE1FF]'} rounded-2xl shadow-lg overflow-hidden h-full w-[720px] md:w-auto`}>
 
         <div className="p-6 pt-0">
           <div className="flex flex-col min-h-[300px] md:h-[400px]">
@@ -192,6 +193,7 @@ export default function Analytictable( {isDarkMode}: {isDarkMode: boolean} ) {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

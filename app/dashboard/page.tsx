@@ -25,12 +25,12 @@ const DashboardPage = () => {
             <WalletCard isConnected={isConnected} balance={balance} isDarkMode={isDarkMode} />
             <TokenClaim isConnected={isConnected} onConnect={handleConnect} isDarkMode={isDarkMode} />
           </div>
-          <div className="lg:col-span-3 overflow-auto">
+          <div className="lg:col-span-3">
             <Analytictable isDarkMode={isDarkMode} />
           </div>
         </div>
 
-        <div className={`border-b ${isDarkMode ? 'border-[#A26DFF]' : 'border-purple-300'} pb-6`}>
+        <div className={`border-b ${isDarkMode ? 'border-[#A26DFF]' : 'border-purple-300'} overflow-scroll pb-6`}>
           <LiquidityLockTable isDarkMode={isDarkMode} />
         </div>
 
