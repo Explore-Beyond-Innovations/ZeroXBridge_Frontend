@@ -24,9 +24,7 @@ const AboutHeader = () => {
       <div className="flex flex-col items-center justify-center">
         <SectionTitle>{aboutUs.title}</SectionTitle>
       </div>
-{/*       <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold font-manrope mb-3 text-center bg-gradient-to-r from-[#262429] via-[#9B6DFF] to-[#262429] bg-clip-text text-transparent">
-        
-      </h1> */}
+
       <p className="text-lg sm:text-xl text-white-2 text-center font-roboto-serif mb-10 sm:mb-15 md:mb-20 px-4">
         {aboutUs.description}
       </p>
@@ -37,7 +35,7 @@ const AboutHeader = () => {
             {
               aboutUs.activities.map((item) => {
                 return (
-                  <div className="flex flex-col text-white-2 gap-3">
+                  <div key={item.title} className="flex flex-col text-white-2 gap-3">
                     <p className="font-bold text-lg sm:text-xl">{item.title}</p>
                     <p className="text-sm sm:text-base font-normal">{item.description}</p>
                   </div>

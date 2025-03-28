@@ -139,6 +139,8 @@ const AboutTech = () => {
                 <button
                   key={index}
                   onClick={() => item.content.length > 0 && setOpenIndex(index)}
+                  aria-expanded={openIndex === index}
+                  aria-controls={`content-${index}`}
                   className={` w-[60%] flex items-start justify-between text-left text-sm transition-colors ${
                     openIndex === index ? 'text-[#A26DFF]' : 'text-white/80'
                   } ${item.content.length === 0 ? 'cursor-not-allowed' : 'cursor-pointer'}`}
@@ -158,7 +160,7 @@ const AboutTech = () => {
             {/* Right Column - Content */}
             <div className="w-2/3 pl-6">
               {accordionItems.map((item, index) => (
-                <div key={index} className="mb-8">
+                <div key={index} id={`content-${index}`} className="mb-8" role="region" aria-labelledby={`accordion-button-${index}`}>
                   <p className="text-base text-white/80 font-normal">
                     {item.description}
                   </p>  
