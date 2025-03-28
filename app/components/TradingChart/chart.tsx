@@ -58,7 +58,7 @@ export default function Chart({ selectedInterval, isDarkMode }: ChartProps) {
                 background: { type: ColorType.Solid, color: 'transparent' },
                 textColor: '#808080'
             },
-            width: chartContainerRef.current.clientWidth - 50,
+            width: chartContainerRef.current.clientWidth - 10,
             height: 440,
             timeScale: {
                 timeVisible: true,

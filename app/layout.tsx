@@ -3,10 +3,10 @@ import { usePathname } from "next/navigation";
 import { Geist, Geist_Mono, Manrope, Roboto_Serif } from "next/font/google";
 import "./globals.css";
 import Sidebar from "./components/Sidebar";
-import { ThemeProvider, useTheme } from './ThemeContext';
-import Navbar from './components/navbar';
+import { ThemeProvider, useTheme } from "./ThemeContext";
+import Navbar from "./components/navbar";
 import NavigationBar from "./components/mobile-navigator";
-
+import { StarknetProvider } from "./components/Starknet-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,29 +41,57 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const pathname = usePathname();
-  const showSidebar = pathname === '/dashboard' || pathname === '/claim' || pathname === "/claim-burn" || pathname.startsWith('/dashboard/') || pathname.startsWith('/claim/');
-  
+  const showSidebar =
+    pathname === "/dashboard" ||
+    pathname.startsWith("/dashboard/");
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable} ${robotoSerif.variable} antialiased bg-[#09050E]`}
       >
-        <ThemeProvider>
-        {showSidebar && <NavbarWithTheme />}
-          <div className="flex ">
-            {showSidebar && <Sidebar />}
-            <div className={`min-h-screen relative flex flex-col w-full ${showSidebar ? 'lg:ml-[320px]' : ''}`}>
-              <main className={`flex-1  ${showSidebar ? 'mt-[4rem] mb-[4rem]' : ''} `}>{children}</main>
-              {showSidebar && <NavigationBar />}
-            </div>
-          </div>
-        </ThemeProvider>
+        <StarknetProvider>
+          <ThemeProvider>
+            <LayoutContent showSidebar={showSidebar}>
+              {children}
+            </LayoutContent>
+          </ThemeProvider>
+        </StarknetProvider>
       </body>
     </html>
   );
 }
 
-function NavbarWithTheme() {
+// Extract the inner content to a new component where hooks can be used
+function LayoutContent({ 
+  children, 
+  showSidebar 
+}: { 
+  children: React.ReactNode;
+  showSidebar: boolean;
+}) {
   const { isDarkMode, toggleDarkMode } = useTheme();
-  return <Navbar isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />;
+  
+  return (
+    <>
+      {showSidebar && <Navbar isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />}
+      <div className="flex">
+        {showSidebar && <Sidebar />}
+        <div
+          className={`${isDarkMode ? 'bg-black' : 'bg-white'} min-h-screen relative flex flex-col w-full ${
+            showSidebar ? "lg:ml-[320px]" : ""
+          }`}
+        >
+          <main
+            className={`flex-1 ${
+              showSidebar ? "mt-[4rem] mb-[4rem]" : ""
+            }`}
+          >
+            {children}
+          </main>
+          {showSidebar && <NavigationBar />}
+        </div>
+      </div>
+    </>
+  );
 }

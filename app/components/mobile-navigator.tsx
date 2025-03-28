@@ -1,56 +1,48 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Chart from "../../public/Chart.png";
-import Swap from "../../public/Swap.png";
-import Claim from "../../public/Claim.png";
-import Coins from "../../public/Coins.png";
-import Dashboard from "../../public/dashboard.png";
-import Image from "next/image";
+import { Landmark, LayoutGrid } from "lucide-react";
+import { PiChartPieSlice, PiCoins, PiSwap } from "react-icons/pi";
+import { useTheme } from "../ThemeContext";
 
 const NavigationBar = () => {
   const router = usePathname();
+  const {isDarkMode} = useTheme()
   const currentPath = router;
 
-  // Navigation items with their respective paths and icons
   const navItems = [
-    { name: "Dashboard", path: "/dashboard", icon: Dashboard },
-    { name: "Swap", path: "/dashboard/swap", icon: Swap },
-    { name: "Claim", path: "/dashboard/claim-burn", icon: Claim },
-    { name: "Lock", path: "/dashboard/lock-liquidity", icon: Coins },
-    { name: "Analytics", path: "/dashboard/analytics", icon: Chart },
+    { name: "Dashboard", path: "/dashboard", icon: LayoutGrid },
+    { name: "Swap", path: "/dashboard/swap", icon: PiSwap },
+    { name: "Claim", path: "/dashboard/claim-burn", icon: Landmark },
+    { name: "Lock", path: "/dashboard/lock-liquidity", icon: PiCoins },
+    { name: "Analytics", path: "/dashboard/analytics", icon: PiChartPieSlice },
   ];
 
   return (
-    <div className="fixed bottom-0 w-full flex md:hidden bg-[#21192F] rounded-b rounded-3xl px-6 py-3 border-t border-[#A26DFF] h-[99px]">
-      <div className="flex justify-between items-center w-full h-full">
+    <div className={`fixed bottom-0 z-10 flex flex-col md:hidden w-full ${isDarkMode ? "bg-[#21192F]" : "bg-[#FBF9FF]"}  rounded-b rounded-3xl px-6 py-4 border-t border-[#A26DFF]`}>
+      <div className="flex justify-between items-center">
         {navItems.map((item) => {
           const isActive = currentPath === item.path;
+          const activeColor = "#A26DFF";
+          const inactiveColor = isDarkMode ? "#D4D4D4" : "#53436D";
+          
+          const IconComponent = item.icon;
 
           return (
             <Link href={item.path} key={item.name}>
-              <div className="flex flex-col items-center justify-center">
+              <div className="flex flex-col items-center justify-center relative">
                 {isActive && (
-                  <div className="h-1 w-16 bg-[#A26DFF] mt-2 rounded-t-lg" />
+                  <div className="h-0.5 w-16 bg-[#A26DFF] absolute -top-4" />
                 )}
-                <div
-                  className={`p-2 rounded-lg mb-1 ${
-                    isActive ? "text-[#A26DFF]" : ""
-                  }`}
-                >
-                  <Image
-                    src={item.icon}
-                    alt="navigator"
-                    width={500}
-                    height={500}
-                    className={`${
-                      isActive ? "text-[#A26DFF]" : "text-gray-400"
-                    } w-[24px] h-[24px]`}
+                <div className="p-2 rounded-lg mb-1">
+                  <IconComponent 
+                    className={`w-[24px] h-[24px]`}
+                    color={isActive ? activeColor : inactiveColor}
                   />
                 </div>
                 <span
                   className={`text-[14px] ${
-                    isActive ? "text-[#A26DFF]" : "text-gray-400"
+                    isActive ? "text-[#A26DFF]" : `text-[${inactiveColor}]`
                   }`}
                 >
                   {item.name}

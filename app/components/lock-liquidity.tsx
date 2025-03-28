@@ -49,7 +49,7 @@ const LiquidityLockTable = ({ isDarkMode, className }: LiquidityLockTableProps) 
 
   return (
     <div
-      className={`${className} ${isDarkMode ? "bg-[#1F1333] text-white" : "bg-[#F8F4FF] text-black"} px-8 py-6 rounded-xl w-full my-6`}
+      className={`${className} ${isDarkMode ? "bg-[#1F1333] text-white" : "bg-[#F8F4FF] text-black"} px-8 py-6 rounded-xl w-[702px] md:w-full my-6 `}
     >
       <h2 className={`text-[16px] font-bold mt-4 mb-8 ${isDarkMode ? "text-white" : "text-black"}`}>
         Lock Liquidity by making a deposit
