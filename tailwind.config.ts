@@ -96,6 +96,7 @@ const config: Config = {
       scale: {
         150: "1.5", 
       },
+      transform: ["responsive", "hover", "focus"],
     },
   },
   plugins: [],

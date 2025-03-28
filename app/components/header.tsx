@@ -159,11 +159,11 @@ const Header = () => {
         priority={false}
       />
       <div className="flex flex-col space-y-2">
-        <div className="text-2xl font-[500] text-[#D4D4D4] font-manrope">
+        <div className="text-xl lg:text-2xl font-[500] text-[#D4D4D4] font-manrope">
           {counts[index]}
           {stat.value.slice(-2)}
         </div>
-        <div className="text-sm text-[#8B8B8B] font-roboto-serif">
+        <div className="text-xs lg:text-sm text-[#8B8B8B] font-roboto-serif">
           {stat.label}
         </div>
       </div>
@@ -171,37 +171,36 @@ const Header = () => {
   );
 
   return (
-    <div className="w-full bg-[#09050E] h-fit">
-      <div className="flex flex-col gap-[10em] bg-[url(/hero-bg.png)]  bg-cover bg-no-repeat bg-center h-screen justify-center w-full 2xl:px-[2rem]">
-        <div className="flex flex-row justify-between relative items-center px-[4rem] w-full">
-          <div className="flex flex-col justify-center h-full gap-[1rem] lg:w-[70%]">
-            <h1 className="lg:text-[48px] font-manrope xl:text-[54px] py-2 text-2xl text-wrap w-full font-bold bg-gradient-to-r from-[#262429] via-[#9B6DFF] to-[#262429]  bg-clip-text text-transparent leading-[4rem] ">
+    <div className="w-full bg-[#09050E] h-fit pt-24">
+      <div className="flex flex-col gap-10 md:gap-[10em] bg-[url(/hero-bg.png)] bg-cover bg-no-repeat bg-center min-h-screen justify-center w-full px-4 sm:px-6 lg:px-[4rem]">
+        <div className="flex flex-col lg:flex-row justify-between relative items-center w-full">
+          <div className="flex flex-col justify-center h-full gap-4 lg:gap-[1rem] w-full px-[1px] lg:w-[70%] text-center lg:text-left">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[48px] xl:text-[54px] font-manrope py-2 text-wrap w-full font-bold bg-gradient-to-r from-[#262429] via-[#9B6DFF] to-[#262429] bg-clip-text text-transparent leading-tight lg:leading-[4rem]">
               Secure Cross-Chain Liquidity with Zero-Knowledge Proofs
             </h1>
-            <div className="font-roboto-serif text-[17px] 2xl:text-[24px] font-[400] relative mt-4">
-              <p className="text-gray-400">
+            <div className="font-roboto-serif text-sm md:text-base lg:text-[17px] 2xl:text-[24px] font-[400] relative mt-4 w-full max-w-sm mx-auto lg:mx-0">
+              <p className="md:text-gray-400 text-white">
                 Unlock liquidity on Starknet using Ethereum collateral—no asset
                 transfers,
               </p>
-              <p className="text-gray-400">
-                no wrapping, no centralized bridges.
-              </p>
+              <p className="md:text-gray-400 text-white">no wrapping, no centralized bridges.</p>
             </div>
-            <Link href="/dashboard">
-              <button className="relative mt-[39px] w-[12.5em] overflow-hidden py-[15px] px-[54px] text-white bg-[#4C327A] rounded-full transition-all hover:bg-opacity-90 shadow-[0_4px_8px_rgba(194,151,255,0.25),0_-4px_4px_rgba(162,109,255,0.5)]">
-                <span className="relative font-bold text-base font-manrope z-10">
-                  Launch App
-                </span>
-                <span
-                  aria-hidden
-                  className="absolute inset-[-75px] animate-slowSpin rounded-lg bg-gradient-to-r from-[#A26DFFE5] via-[#e3e1e5d6] to-[#4C327A]"
-                />
-                <span className="absolute inset-[2px] bg-[#4C327A] rounded-full" />
-              </button>
-            </Link>
+            <div className="flex justify-center lg:justify-start mt-6 lg:mt-[39px]">
+              <Link href="/dashboard" className="w-full max-w-sm mx-auto lg:mx-0">
+                <button className="relative w-full overflow-hidden py-[15px] px-[54px] text-white bg-[#4C327A] rounded-full transition-all hover:bg-opacity-90 shadow-[0_4px_8px_rgba(194,151,255,0.25),0_-4px_4px_rgba(162,109,255,0.5)]">
+                  <span className="relative font-bold text-base font-manrope z-10">Launch App</span>
+                  <span
+                    aria-hidden
+                    className="absolute inset-[-75px] animate-slowSpin rounded-lg bg-gradient-to-r from-[#A26DFFE5] via-[#e3e1e5d6] to-[#4C327A]"
+                  />
+                  <span className="absolute inset-[2px] bg-[#4C327A] rounded-full" />
+                </button>
+              </Link>
+            </div>
           </div>
 
-          <div className="h-[457px] w-[520px] max-w-[520px] relative ">
+
+          <div className="mt-10 lg:mt-0 w-full lg:w-[520px] max-w-[520px] relative h-[300px] sm:h-[400px] lg:h-[457px]">
             {/* Spinning globe (inner element) */}
             <div className="absolute inset-0 flex flex-col items-center justify-center">
               <Image
@@ -209,7 +208,7 @@ const Header = () => {
                 alt="Spinning Globe"
                 width={500}
                 height={500}
-                className="w-[85%] h-[85%] animate-spinSlow"
+                className="w-[70%] sm:w-[85%] h-auto animate-spinSlow"
               />
             </div>
 
@@ -247,8 +246,8 @@ const Header = () => {
             </div>
           </div>
         </div>
-        <div>
-          <div className="flex flex-wrap justify-between items-start w-[70%] xl:w-[60%] ml-[4rem] ">
+        <div className="mt-10  lg:mt-0">
+          <div className="grid grid-cols-2 sm:grid-cols-4 pl-10 md:pl-0 gap-4 sm:gap-6 justify-center items-center w-full lg:w-[70%] xl:w-[60%] mx-auto lg:ml-[4rem]">
             {STATS_DATA.map(renderStatItem)}
           </div>
         </div>

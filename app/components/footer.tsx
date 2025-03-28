@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import Image from 'next/image'
 import Link from 'next/link'
@@ -32,45 +32,16 @@ const Footer = () => {
   }
 
   return (
-    <footer className="relative w-full  bg-[#09050E]  bg-blend-normal">
-
+    <footer className="relative w-full bg-[#09050E] bg-blend-normal">
       <div 
         className="absolute inset-0" 
         style={{
-          background: 'linear-gradient(180deg, rgba(9, 5, 14, 1) 0%, rgba(74, 42, 130, 1) 100%)',
-          position: 'absolute',
-          bottom: '-20%',
+          background: 'linear-gradient(180deg, #09050E 21.97%, #48287E 63.69%)'
         }}
       />
-
-      <div className="absolute inset-0 overflow-hidden bottom-[-20%] w-full z-0 style={{ height: '100%'}}">
-        <div 
-          className="absolute bottom-[-20px] w-full mx-auto"
-          style={{
-            overflow: 'hidden',
-            padding: 'auto',
-            textAlign: 'center',
-            textWrap: 'nowrap',
-            fontSize: '225px',
-            lineHeight: '1',
-            fontWeight: '700',  
-            background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.95) 0%, rgba(74, 42, 130, 1) 80%, rgba(74, 42, 130, 0.9) 40%, transparent 100%)',
-            WebkitBackgroundClip: 'text',
-            backgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            color: 'transparent',
-            width: '100%',
-            letterSpacing: '-0.02em',
-            transform: 'scale(1.02)',
-            position: 'absolute',
-          }}
-        >
-          ZEROXBRIDGE
-        </div>
-      </div> 
-
+      
       <div className="relative z-10 max-w-[1440px] mx-auto px-6 lg:px-20 py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 pt-24 pb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 pt-24 pb-0">
           <div className="lg:col-span-4">
             <div className="flex items-center space-x-3 mb-10">
               <div className="relative h-9 bg-white/10 flex items-center justify-center rounded-sm">
@@ -82,7 +53,7 @@ const Footer = () => {
                 />
               </div>
             </div>
-            <p className={`${manrope.className} text-[#D4D4D4] text-sm leading-[1.8] max-w-md mb-16 `}> 
+            <p className={`${manrope.className} text-[#D4D4D4] text-sm leading-[1.8] max-w-md mb-16`}> 
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
               Nunc vulputate libero et velit interdum, ac aliquet odio 
               mattis. Class aptent taciti sociosqu ad litora torquent per
@@ -91,11 +62,9 @@ const Footer = () => {
           </div>
 
           <div className="lg:col-span-8">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-12 sm:ml-32 md:ml-40 lg:ml-52">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-12 sm:ml-32 md:ml-40 lg:ml-52">
               <div>
-                <h3 className={`${manrope.className} text-white font-semibold text-sm mb-3`}>
-                  PRODUCT
-                </h3>
+                <h3 className={`${manrope.className} text-white font-semibold text-sm mb-3`}>PRODUCT</h3>
                 <ul className="space-y-2">
                   {footerLinks.product.map((link) => (
                     <li key={link.name}>
@@ -111,9 +80,7 @@ const Footer = () => {
               </div>
 
               <div>
-                <h3 className={`${manrope.className} text-white font-semibold text-sm mb-3`}>
-                  COMPANY
-                </h3>
+                <h3 className={`${manrope.className} text-white font-semibold text-sm mb-3`}>COMPANY</h3>
                 <ul className="space-y-2">
                   {footerLinks.company.map((link) => (
                     <li key={link.name}>
@@ -129,9 +96,7 @@ const Footer = () => {
               </div>
 
               <div>
-                <h3 className={`${manrope.className} text-white font-semibold text-sm mb-3`}>
-                  SOCIALS
-                </h3>
+                <h3 className={`${manrope.className} text-white font-semibold text-sm mb-3`}>SOCIALS</h3>
                 <ul className="space-y-2">
                   {footerLinks.socials.map((link) => (
                     <li key={link.name}>
@@ -148,6 +113,12 @@ const Footer = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="relative text-center">
+        <h1 className="text-[12vw] lg:text-[12.5vw] font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#09050E] to-[#48287E] opacity-100 uppercase tracking-widest">
+          ZEROXBRIDGE
+        </h1>
       </div>
     </footer>
   )
