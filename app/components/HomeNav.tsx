@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "./ui/button";
 import Image from "next/image";
+import menumobile from "../../public/menu-mobile.png"
 
 type NavLink = {
   name: string;
@@ -29,7 +30,7 @@ const navLinks: NavLink[] = [
 const HomeNav = () => {
   return (
     <div className="w-full py-5 bg-[#09050E]">
-      <nav className="max-w-screen-2xl px-2 md:px-6 lg:px-10 xl:px-20 flex items-center justify-between mx-auto">
+      <nav className="max-w-screen-2xl px-6 md:px-6 lg:px-10 xl:px-20 flex items-center justify-between mx-auto">
         <Link href="/">
           <div className="logo">
             <Image
@@ -55,7 +56,13 @@ const HomeNav = () => {
           ))}
         </div>
 
-        <Link href="/dashboard" className="cursor-pointer">
+        {/* Mobile Menu Button */}
+        <button className="lg:hidden text-[#A26DFF]">
+          <Image src={menumobile} alt="menu" width={24} height={24} />
+        </button>
+
+        {/* Launch App Button - Hidden on Mobile */}
+        <Link href="/dashboard" className="hidden lg:block cursor-pointer">
           <Button variant="gradientPrimary" size="default">
             Launch App
           </Button>
