@@ -6,14 +6,14 @@ import Analytictable from "../components/analyticgraph";
 import LiquidityLockTable from "../components/lock-liquidity";
 import TradingChartComponent from "../components/TradingChart/trading-chart";
 import { useTheme } from '../ThemeContext';
+import { useAccount } from "@starknet-react/core";
 
 const DashboardPage = () => {
-  const [isConnected, setIsConnected] = useState(false);
+  const {isConnected } = useAccount();
   const [balance, setBalance] = useState("-,--");
   const { isDarkMode } = useTheme();
 
   const handleConnect = () => {
-    setIsConnected(true);
     setBalance("1,234.56");
   };
 

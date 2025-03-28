@@ -18,6 +18,99 @@ const STATS_DATA: StatItem[] = [
   { value: "10M+", label: "Investments", endValue: 10 },
 ];
 
+const NETWORK_NODES = [
+  { top: "5.5%", left: "27%", translateX: "0", translateY: "0", delay: "0s" },
+  { top: "6%", left: "67.4%", translateX: "0", translateY: "0", delay: "1.5s" },
+  {
+    top: "38.5%",
+    left: "83.5%",
+    translateX: "0",
+    translateY: "-50%",
+    delay: "0.7s",
+  },
+  {
+    top: "71.5%",
+    left: "89.5%",
+    translateX: "0",
+    translateY: "0",
+    delay: "2.2s",
+  },
+  {
+    top: "48%",
+    left: "51%",
+    translateX: "-50%",
+    translateY: "0",
+    delay: "1.2s",
+  },
+  {
+    top: "85%",
+    left: "20%",
+    translateX: "0",
+    translateY: "0",
+    delay: "2.8s",
+  },
+  {
+    top: "58%",
+    left: "5%",
+    translateX: "0",
+    translateY: "-50%",
+    delay: "0.4s",
+  },
+  {
+    top: "47%",
+    left: "10%",
+    translateX: "0",
+    translateY: "0",
+    delay: "3.3s",
+  },
+  {
+    top: "32%",
+    left: "6.5%",
+    translateX: "0",
+    translateY: "0",
+    delay: "1.8s",
+  },
+  { top: "67%", left: "46%", translateX: "0", translateY: "0", delay: "2.5s" },
+  {
+    top: "37.5%",
+    left: "55.4%",
+    translateX: "0",
+    translateY: "0",
+    delay: "0.9s",
+  },
+  { top: "52%", left: "77%", translateX: "0", translateY: "0", delay: "0.9s" },
+  { top: "54%", left: "90%", translateX: "0", translateY: "0", delay: "3.1s" },
+  {
+    top: "92.7%",
+    left: "70%",
+    translateX: "0",
+    translateY: "0",
+    delay: "3.1s",
+  },
+  { top: "93%", left: "42%", translateX: "0", translateY: "0", delay: "3.1s" },
+  {
+    top: "87%",
+    left: "30.5%",
+    translateX: "0",
+    translateY: "0",
+    delay: "3.1s",
+  },
+  {
+    top: "78.4%",
+    left: "59.5%",
+    translateX: "0",
+    translateY: "0",
+    delay: "3.1s",
+  },
+  {
+    top: "66.5%",
+    left: "28%",
+    translateX: "0",
+    translateY: "0",
+    delay: "3.1s",
+  },
+];
+
 const Header = () => {
   const [counts, setCounts] = useState<number[]>(STATS_DATA.map(() => 0));
   const [isVisible, setIsVisible] = useState(false);
@@ -78,15 +171,15 @@ const Header = () => {
   );
 
   return (
-    <div className="w-full bg-[#09050E]">
-      <div className="flex flex-col gap-[10em] bg-[url(/hero-bg.png)]  bg-cover bg-no-repeat bg-center h-screen justify-center w-full">
-        <div className="flex flex-row justify-between relative items-center px-[7rem] w-full">
-          <div className="flex flex-col justify-center h-full gap-[1rem] lg:w-[65%]">
-            <h1 className="lg:text-[48px] font-manrope xl:text-5xl text-2xl text-wrap w-[449px] lg:w-[80%] font-bold bg-gradient-to-r from-[#262429] via-[#9B6DFF] to-[#262429]  bg-clip-text text-transparent pb-[7px] ">
+    <div className="w-full bg-[#09050E] h-fit">
+      <div className="flex flex-col gap-[10em] bg-[url(/hero-bg.png)]  bg-cover bg-no-repeat bg-center h-screen justify-center w-full 2xl:px-[2rem]">
+        <div className="flex flex-row justify-between relative items-center px-[4rem] w-full">
+          <div className="flex flex-col justify-center h-full gap-[1rem] lg:w-[70%]">
+            <h1 className="lg:text-[48px] font-manrope xl:text-[54px] py-2 text-2xl text-wrap w-full font-bold bg-gradient-to-r from-[#262429] via-[#9B6DFF] to-[#262429]  bg-clip-text text-transparent leading-[4rem] ">
               Secure Cross-Chain Liquidity with Zero-Knowledge Proofs
             </h1>
-            <div className="font-roboto-serif text-[17px] font-[400] relative mt-4">
-              <p className="text-gray-400 z-20">
+            <div className="font-roboto-serif text-[17px] 2xl:text-[24px] font-[400] relative mt-4">
+              <p className="text-gray-400">
                 Unlock liquidity on Starknet using Ethereum collateral—no asset
                 transfers,
               </p>
@@ -108,9 +201,9 @@ const Header = () => {
             </Link>
           </div>
 
-          <div className="h-[457px] w-[450px] lg:w-[37%] relative">
+          <div className="h-[457px] w-[520px] max-w-[520px] relative ">
             {/* Spinning globe (inner element) */}
-            <div className="absolute top-14 left-14 inset-0">
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
               <Image
                 src="/globe-icon.svg"
                 alt="Spinning Globe"
@@ -120,26 +213,42 @@ const Header = () => {
               />
             </div>
 
-            {/* Network grid overlay with glow animation */}
-            <div className="absolute inset-0 pointer-events-none bg-transparent">
+            {/* Static network overlay (outer element) */}
+            <div className="absolute inset-0 pointer-events-none">
               <Image
-                src="/globe-grid.png"
+                src="/globe-grid.svg"
                 alt="Network Overlay"
                 width={500}
                 height={500}
-                className="w-full h-full animate-glowSlow globe-grid-image"
-                style={{
-                  objectFit: "contain",
-                  border: "none",
-                  outline: "none",
-                }}
-                unoptimized={true}
+                className="w-full h-full animate-glowSlow"
               />
+            </div>
+
+            {/* Flashing nodes */}
+            <div className="absolute inset-0 pointer-events-none">
+              {NETWORK_NODES.map((node, index) => (
+                <div
+                  key={index}
+                  className="absolute"
+                  style={{
+                    top: node.top,
+                    left: node.left,
+                    transform: `translate(${node.translateX}, ${node.translateY})`,
+                  }}
+                >
+                  <div
+                    className="w-2 h-2 bg-gradient-to-b from-[#FFFFFF] to-[#A26DFF] rounded-full shadow-glow"
+                    style={{
+                      animation: `pulse 3s infinite ${node.delay}`,
+                    }}
+                  ></div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
         <div>
-          <div className="flex flex-wrap justify-between items-start w-[70%] xl:w-[40%] ml-[7rem] ">
+          <div className="flex flex-wrap justify-between items-start w-[70%] xl:w-[60%] ml-[4rem] ">
             {STATS_DATA.map(renderStatItem)}
           </div>
         </div>

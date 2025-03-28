@@ -3,6 +3,7 @@ import { useState } from "react";
 import { ChevronDown, Settings, ArrowUpDown, Wallet2, AlarmClock, FuelIcon } from "lucide-react";
 import Image from "next/image";
 import { useTheme } from "../ThemeContext";
+import { useAccount } from "@starknet-react/core";
 
 const tokens = ["ETH", "SOL"];
 
@@ -13,8 +14,8 @@ const Swap = () => {
   const [toToken, setToToken] = useState("SOL");
   const [showFromDropdown, setShowFromDropdown] = useState(false);
   const [showToDropdown, setShowToDropdown] = useState(false);
-  const [isWalletConnected, setIsWalletConnected] = useState(false);
   const { isDarkMode } = useTheme();
+  const {isConnected} = useAccount();
 
   const handleSwap = () => {
     setFromToken(toToken);
@@ -24,14 +25,15 @@ const Swap = () => {
   };
 
   const handleConnectWallet = () => {
-    setIsWalletConnected(true);
-  };
+    return;
+  }
+
 
   return (
     <div
       className={`font-[family-name:var(--font-manrope)] flex flex-col items-center justify-center w-full min-h-screen h-fit mx-auto relative `}
     >
-      {isWalletConnected ? (
+      {isConnected ? (
         <div className="flex items-start gap-4 w-fit mx-auto 2xl:scale-150">
           <div
             className={`${

@@ -62,7 +62,6 @@ export default function RootLayout({
   );
 }
 
-// Extract the inner content to a new component where hooks can be used
 function LayoutContent({ 
   children, 
   showSidebar 

@@ -4,7 +4,7 @@ import Image from "next/image";
 
 interface LiquidityLockTableProps {
   isDarkMode: boolean;
-  className?: string; // Add className to the props
+  className?: string;
 }
 
 const LiquidityLockTable = ({ isDarkMode, className }: LiquidityLockTableProps) => {

@@ -1,7 +1,7 @@
 import { InfoIcon } from "lucide-react"
 
 interface WalletCardProps {
-  isConnected: boolean
+  isConnected: boolean | undefined
   balance: string
   isDarkMode: boolean
 }

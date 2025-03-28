@@ -127,7 +127,7 @@ export default function AnalyticsDashboard({
   );
 
   return (
-    <div className="space-y-6 p-6 lg:max-w-[1800px] 2xl:scale-150 mx-auto">
+    <div className="space-y-6 p-6 w-full lg:max-w-[1800px] mx-auto">
       <div
         className={`flex flex-col lg:flex-row justify-evenly md:px-4 gap-6 border-b ${borderColor} py-6`}
       >
@@ -145,7 +145,7 @@ export default function AnalyticsDashboard({
       </div>
 
       <div className="flex flex-col gap-4 lg:flex-row justify-evenly w-full ">
-        <div className="w-[375px] md:w-[720px] overflow-x-scroll md:overflow-none">
+        <div className="w-full   md:w-[720px] overflow-x-scroll md:overflow-none">
           <div
             className="col-span-3 rounded-2xl p-6 w-[720px] h-full lg:w-full"
             style={{ backgroundColor: cardBg }}
