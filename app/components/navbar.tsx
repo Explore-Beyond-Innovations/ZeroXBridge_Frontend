@@ -128,6 +128,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDarkMode }) => {
 
           {/* Right side controls */}
           <div className="flex items-center space-x-6">
+            <div className="flex md:hidden">
             {/* Dark mode toggle with gradient border */}
             {isDarkMode ? (
               <button
@@ -144,6 +145,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDarkMode }) => {
                 <Moon size={18} color={`${isDarkMode ? "white" : "black"}`} />
               </button>
             )}
+            </div>
             <div className={` ${gradientBorder} hidden lg:flex`}>
               <div
                 className={`flex items-center justify-between ${

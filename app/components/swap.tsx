@@ -1,6 +1,13 @@
 "use client";
 import { useState } from "react";
-import { ChevronDown, Settings, ArrowUpDown, Wallet2, AlarmClock, FuelIcon } from "lucide-react";
+import {
+  ChevronDown,
+  Settings,
+  ArrowUpDown,
+  Wallet2,
+  AlarmClock,
+  FuelIcon,
+} from "lucide-react";
 import Image from "next/image";
 import { useTheme } from "../ThemeContext";
 import { useAccount } from "@starknet-react/core";
@@ -25,9 +32,8 @@ const Swap = () => {
   };
 
   const handleConnectWallet = () => {
-    return;
-  }
-
+    setIsWalletConnected(!isWalletConnected);
+  };
 
   return (
     <div
@@ -38,7 +44,7 @@ const Swap = () => {
           <div
             className={`${
               isDarkMode ? "bg-[#332646]" : "bg-[#f8f4fe]"
-            } w-[500px] relative p-6 rounded-[1.25rem] shadow-lg text-white border-[0.4px] border-transparent before:absolute before:inset-0 before:bg-gradient-to-b before:from-[#1F1333] before:to-[#614199] before:rounded-[1.25rem] before:-z-10 before:w-full before:h-full before:border-[0.4px] before:border-transparent`}
+            } w-[90vw] md:w-[92vw] lg:w-[500px] relative p-6 rounded-[1.25rem] shadow-lg text-white border-[0.4px] border-transparent before:absolute before:inset-0 before:bg-gradient-to-b before:from-[#1F1333] before:to-[#614199] before:rounded-[1.25rem] before:-z-10 before:w-full before:h-full before:border-[0.4px] before:border-transparent`}
           >
             <div className="flex justify-between items-center mb-4">
               <h2
@@ -63,14 +69,45 @@ const Swap = () => {
               }  p-4 rounded-lg mb-2 relative"`}
             >
               <div className="flex justify-between items-center">
-                <input
-                  type="text"
-                  value={fromValue}
-                  onChange={(e) => setFromValue(e.target.value)}
-                  className={`bg-transparent text-xl font-semibold w-full focus:outline-none ${
-                    isDarkMode ? "text-white" : "text-[#1F1333]"
-                  }`}
-                />
+                <div>
+                  <input
+                    type="text"
+                    value={fromValue}
+                    onChange={(e) => setFromValue(e.target.value)}
+                    className={`bg-transparent text-xl font-semibold w-full focus:outline-none ${
+                      isDarkMode ? "text-white" : "text-[#1F1333]"
+                    }`}
+                  />
+                  <p
+                    className={`text-sm ${
+                      isDarkMode ? "text-gray-400" : "text-gray-800"
+                    }`}
+                  >
+                    - $3.85 USD
+                  </p>
+                  <div className="flex items-center gap-x-1">
+                    <Wallet2
+                      className={`${
+                        isDarkMode ? "text-[#8B8B8B]" : "text-[#1F1333]"
+                      } w-[10.94px] h-[9.63px]`}
+                    />
+                    <p
+                      className={`text-[0.75rem] ${
+                        isDarkMode ? "text-[#8B8B8B]" : "text-[#1F1333]"
+                      }`}
+                    >
+                      7.04{" "}
+                      <span
+                        className={`${
+                          isDarkMode ? "text-white" : "text-[#1F1333]"
+                        } font-bold`}
+                      >
+                        MAX
+                      </span>
+                    </p>
+                  </div>
+                </div>
+
                 <div className="relative">
                   <button
                     className="flex items-center pr-2 min-w-[90px] justify-between"
@@ -124,40 +161,12 @@ const Swap = () => {
                   )}
                 </div>
               </div>
-              <p
-                className={`text-sm ${
-                  isDarkMode ? "text-gray-400" : "text-gray-800"
-                }`}
-              >
-                - $3.85 USD
-              </p>
-              <div className="flex items-center gap-x-1">
-                <Wallet2
-                  className={`${
-                    isDarkMode ? "text-[#8B8B8B]" : "text-[#1F1333]"
-                  } w-[10.94px] h-[9.63px]`}
-                />
-                <p
-                  className={`text-[0.75rem] ${
-                    isDarkMode ? "text-[#8B8B8B]" : "text-[#1F1333]"
-                  }`}
-                >
-                  7.04{" "}
-                  <span
-                    className={`${
-                      isDarkMode ? "text-white" : "text-[#1F1333]"
-                    } font-bold`}
-                  >
-                    MAX
-                  </span>
-                </p>
-              </div>
             </div>
 
             <div className="flex justify-center my-2">
               <button onClick={handleSwap} className="p-2 ">
                 <ArrowUpDown
-                  size={20}
+                  size={30}
                   className={`${
                     isDarkMode ? "text-[#D2B9FF]" : "text-[#1F1333]"
                   }`}
@@ -171,6 +180,7 @@ const Swap = () => {
               } p-4 rounded-lg mb-2 relative`}
             >
               <div className="flex justify-between items-center">
+                <div>
                 <input
                   type="text"
                   value={toValue}
@@ -178,6 +188,30 @@ const Swap = () => {
                   className={`${isDarkMode ? "text-white" : "text-[#1F1333]"}
                  bg-transparent text-xl font-semibold w-full focus:outline-none`}
                 />
+                 <p
+                className={`text-sm ${
+                  isDarkMode ? "text-gray-400" : "text-gray-800"
+                }`}
+              >
+                - $3.9 USD (-1.24%)
+              </p>
+
+              <div className="flex items-center gap-x-1">
+                <Wallet2
+                  className={`${
+                    isDarkMode ? "text-[#8B8B8B]" : "text-[#1F1333]"
+                  } w-[10.94px] h-[9.63px]`}
+                />
+                <p
+                  className={`text-[0.75rem] ${
+                    isDarkMode ? "text-[#8B8B8B]" : "text-[#1F1333]"
+                  }`}
+                >
+                  0.00{" "}
+                </p>
+              </div>
+                </div>
+               
                 <div className="relative">
                   <button
                     className="flex items-center pr-2 min-w-[90px] justify-between"
@@ -228,28 +262,7 @@ const Swap = () => {
                   )}
                 </div>
               </div>
-              <p
-                className={`text-sm ${
-                  isDarkMode ? "text-gray-400" : "text-gray-800"
-                }`}
-              >
-                - $3.9 USD (-1.24%)
-              </p>
-
-              <div className="flex items-center gap-x-1">
-                <Wallet2
-                  className={`${
-                    isDarkMode ? "text-[#8B8B8B]" : "text-[#1F1333]"
-                  } w-[10.94px] h-[9.63px]`}
-                />
-                <p
-                  className={`text-[0.75rem] ${
-                    isDarkMode ? "text-[#8B8B8B]" : "text-[#1F1333]"
-                  }`}
-                >
-                  0.00{" "}
-                </p>
-              </div>
+             
             </div>
 
             <div
@@ -257,13 +270,50 @@ const Swap = () => {
                 isDarkMode
                   ? "bg-[#1F1333] text-[#888888]"
                   : "bg-[#e6d9ff] text-[#1F1333]"
-              } p-2 rounded-lg mb-[3rem] relative  text-[12px]`}
+              } p-2 rounded-lg mb-2 relative  text-[12px]`}
             >
               <div className="w-ful flex justify-between items-center">
                 <p>Price:</p> <p> -0.7785 USDT per Eth</p>
               </div>
               <div className="w-ful flex justify-between items-center">
                 <p>Frontend Fee:</p> <p> $0</p>
+              </div>
+            </div>
+
+            <div
+              className={`${
+                isDarkMode ? "bg-[#1F1333]" : "bg-[#e6d9ff]"
+              } lg:hidden w-full mb-[3rem] h-[58.76px] flex items-center justify-between p-2 rounded-xl`}
+            >
+              <div className="flex gap-2 items-center">
+                <Image
+                  src={`/${toToken.toLowerCase()}-icon.png`}
+                  alt={toToken}
+                  width={28}
+                  height={24}
+                  className="w-[27.91px] h-[24px] object-contain"
+                />
+                <span
+                  className={`font-medium text-[1.125rem] ${
+                    isDarkMode ? "text-[#D4D4D4]" : "text-black"
+                  }`}
+                >
+                  $70
+                </span>
+              </div>
+
+              <div className="flex items-center gap-1">
+                <AlarmClock className={`text-[#3ECD96] w-[16px] h-[16px]`} />
+                <FuelIcon
+                  className={`${
+                    isDarkMode ? "text-[#8B8B8B]" : "text-black"
+                  } w-[16px] h-[16px]`}
+                />
+                <p
+                  className={`${isDarkMode ? "text-[#8B8B8B]" : "text-black"}`}
+                >
+                  ~$0.01
+                </p>
               </div>
             </div>
 
@@ -285,7 +335,7 @@ const Swap = () => {
               }}
             >
               <span
-                className="absolute inset-0 rounded-full p-[2px]"
+                className="absolute inset-0 rounded-[16px] p-[2px]"
                 style={{
                   background:
                     "linear-gradient(180deg, #A26DFF 0%, #12081D 100%)",
@@ -300,10 +350,20 @@ const Swap = () => {
           <div
             className={`${
               isDarkMode ? "bg-[#332646]" : "bg-[#f8f4fe]"
-            } flex flex-col gap-4 w-[450px] h-[157px] relative p-6 rounded-[1.25rem] shadow-lg text-white border-[0.4px] border-transparent before:absolute before:inset-0 before:bg-gradient-to-b before:from-[#1F1333] before:to-[#614199] before:rounded-[1.25rem] before:-z-10 before:w-full before:h-full before:border-[0.4px] before:border-transparent`}
+            } hidden lg:flex flex-col gap-4 w-[450px] h-[157px] relative p-6 rounded-[1.25rem] shadow-lg text-white border-[0.4px] border-transparent before:absolute before:inset-0 before:bg-gradient-to-b before:from-[#1F1333] before:to-[#614199] before:rounded-[1.25rem] before:-z-10 before:w-full before:h-full before:border-[0.4px] before:border-transparent`}
           >
-            <p className={`${isDarkMode ? 'text-white' : "text-black" } font-medium`}>Routes</p>
-            <div className={`${isDarkMode ? 'bg-[#3B285B]' : 'bg-[#C9B4FF]'} w-full h-[58.76px] flex items-center justify-between p-2 rounded-xl`}>
+            <p
+              className={`${
+                isDarkMode ? "text-white" : "text-black"
+              } font-medium`}
+            >
+              Routes
+            </p>
+            <div
+              className={`${
+                isDarkMode ? "bg-[#3B285B]" : "bg-[#C9B4FF]"
+              } w-full h-[58.76px] flex items-center justify-between p-2 rounded-xl`}
+            >
               <div className="flex gap-2 items-center">
                 <Image
                   src={`/${toToken.toLowerCase()}-icon.png`}
@@ -323,24 +383,45 @@ const Swap = () => {
 
               <div className="flex items-center gap-1">
                 <AlarmClock className={`text-[#3ECD96] w-[16px] h-[16px]`} />
-                <FuelIcon className={`${isDarkMode ? 'text-[#8B8B8B]' : 'text-black'} w-[16px] h-[16px]`} />
-                <p className={`${isDarkMode ? 'text-[#8B8B8B]' : 'text-black'}`}>~$0.01</p>
-
+                <FuelIcon
+                  className={`${
+                    isDarkMode ? "text-[#8B8B8B]" : "text-black"
+                  } w-[16px] h-[16px]`}
+                />
+                <p
+                  className={`${isDarkMode ? "text-[#8B8B8B]" : "text-black"}`}
+                >
+                  ~$0.01
+                </p>
               </div>
             </div>
           </div>
         </div>
       ) : (
-        <div className={`${
-          isDarkMode ? "bg-[#332646]" : "bg-[#f8f4fe]"
-        } 2xl:scale-150  w-[500px] mx-auto relative p-6 rounded-[1.25rem] shadow-lg text-white border-[0.4px] border-transparent before:absolute before:inset-0  before:rounded-[1.25rem] before:-z-10 before:w-full before:h-full before:border-[0.4px] before:border-transparent`}>
+        <div
+          className={`${
+            isDarkMode ? "bg-[#332646]" : "bg-[#f8f4fe]"
+          } 2xl:scale-150 w-[85vw] md:w-[93vw] lg:w-[500px] mx-auto relative p-6 rounded-[1.25rem] shadow-lg text-white border-[0.4px] border-transparent before:absolute before:inset-0 before:bg-gradient-to-b before:from-[#1F1333] before:to-[#614199] before:rounded-[1.25rem] before:-z-10 before:w-full before:h-full before:border-[0.4px] before:border-transparent`}
+        >
           <div
             className={`border-[0.4px] border-[#8B8B8B] ${
-              isDarkMode ? "bg-[#332646]" : "bg-[#f8f4fe]"
-            } p-4 rounded-lg mb-2 relative`}
+              isDarkMode ? "bg-[#1F1333]" : "bg-[#ede2fe]"
+            }  py-4 px-3 rounded-lg mb-2 relative`}
           >
             <div className="flex justify-between items-center">
-              <p className="text-[#8B8B8B] text-[0.75rem] font-normal">From</p>
+              <div>
+                <p className="text-[#8B8B8B] text-[0.75rem] font-normal">
+                  From
+                </p>
+                <p
+                  className={`${
+                    isDarkMode ? "text-[#D4D4D4]" : "text-black"
+                  } text-[1rem] font-semibold`}
+                >
+                  $10
+                </p>
+              </div>
+
               <div className="relative">
                 <button
                   className="flex items-center pr-2 min-w-[90px] justify-between"
@@ -386,28 +467,30 @@ const Swap = () => {
                 )}
               </div>
             </div>
-            <p
-              className={`${
-                isDarkMode ? "text-[#D4D4D4]" : "text-black"
-              } text-[1rem] font-semibold`}
-            >
-              $10
-            </p>
           </div>
 
           <div className="flex justify-center my-2">
             <button onClick={handleSwap} className="p-2 ">
-              <ArrowUpDown size={20} className="text-[#D2B9FF]" />
+              <ArrowUpDown size={30} className="text-[#D2B9FF]" />
             </button>
           </div>
 
           <div
             className={`border-[0.4px] border-[#8B8B8B] ${
               isDarkMode ? "bg-[#1F1333]" : "bg-[#ede2fe]"
-            } p-4 rounded-lg mb-2 relative`}
+            } py-4 px-3 rounded-lg mb-2 relative`}
           >
             <div className="flex justify-between items-center">
-              <p className="text-[#8B8B8B] text-[0.75rem] font-normal">To</p>
+              <div>
+                <p className="text-[#8B8B8B] text-[0.75rem] font-normal">To</p>
+                <p
+                  className={`text-[1rem] ${
+                    isDarkMode ? "text-[#D4D4D4]" : "text-black"
+                  } font-semibold`}
+                >
+                  $70
+                </p>
+              </div>
 
               <div className="relative">
                 <button
@@ -455,17 +538,10 @@ const Swap = () => {
                 )}
               </div>
             </div>
-            <p
-              className={`text-[1rem] ${
-                isDarkMode ? "text-[#D4D4D4]" : "text-black"
-              } font-semibold`}
-            >
-              $70
-            </p>
           </div>
 
           <button
-            className="w-full py-3 rounded-full text-lg font-semibold text-white bg-gradient-to-t from-[#12081D] to-[#A26DFF] relative mb-4"
+            className="w-full py-3 mt-7 rounded-full text-lg font-semibold text-white bg-gradient-to-t from-[#12081D] to-[#A26DFF] relative mb-4"
             style={{
               border: "0.7px solid transparent",
               backgroundClip: "padding-box",
@@ -474,7 +550,7 @@ const Swap = () => {
             onClick={handleConnectWallet}
           >
             <span
-              className="absolute inset-0 rounded-full p-[2px]"
+              className="absolute inset-0 rounded-[16px] p-[2px]"
               style={{
                 background: "linear-gradient(180deg, #A26DFF 0%, #12081D 100%)",
                 maskImage: "linear-gradient(white, white)",
