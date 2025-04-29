@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation"; // Import Next.js router
 
 interface TokenClaimProps {
-  isConnected: boolean;
+  isConnected: boolean | undefined;
   onConnect: () => void;
   isDarkMode: boolean;
 }

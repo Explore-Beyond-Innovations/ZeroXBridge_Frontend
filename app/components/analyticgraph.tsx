@@ -1,6 +1,6 @@
 "use client";
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FilterIcon } from "lucide-react";
 
 interface DataItem {
@@ -30,6 +30,12 @@ export default function Analytictable( {isDarkMode}: {isDarkMode: boolean} ) {
   const [selectedRange, setSelectedRange] = useState("ALL");
   const [filteredData, setFilteredData] = useState<DataItem[]>(data);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Add effect to handle client-side rendering
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleFilterChange = (selectedMonth: string) => {
     if (selectedMonth === "ALL") {
@@ -78,11 +84,11 @@ export default function Analytictable( {isDarkMode}: {isDarkMode: boolean} ) {
           </div>
         </div>
         <div className="overflow-x-scroll w-full">
-      <div className={`${isDarkMode ? 'bg-gradient-to-b from-[#21192F] to-[#3E246B]' : 'bg-[#ECE1FF]'} rounded-2xl shadow-lg overflow-hidden h-full w-[720px] md:w-auto`}>
+      <div className={`${isDarkMode ? 'bg-gradient-to-b from-[#21192F] to-[#3E246B]' : 'bg-[#ECE1FF]'} rounded-2xl shadow-lg h-[400px] w-[720px] md:w-auto`}>
 
-        <div className="p-6 pt-0">
-          <div className="flex flex-col min-h-[300px] md:h-[400px]">
-            <div className="flex items-center justify-between gap-4 mb-4">
+        <div className="p-6 pt-0 h-full">
+          <div className="flex flex-col h-full">
+            <div className="flex items-center justify-between gap-4 mb-4 pt-4">
               <div className="flex gap-4">
                 {["Total Users", "Total Projects", "Operating Status"].map((label) => (
                   <button
@@ -106,7 +112,8 @@ export default function Analytictable( {isDarkMode}: {isDarkMode: boolean} ) {
               </div>
             </div>
 
-            <div className="flex h-full">
+            {/* Add explicit height to this flex container */}
+            <div className="flex h-[300px] flex-1">
               <div className="flex flex-col justify-between py-6 pr-2">
                 {timeRanges.map((range) => (
                   <button
@@ -120,75 +127,79 @@ export default function Analytictable( {isDarkMode}: {isDarkMode: boolean} ) {
                   </button>
                 ))}
               </div>
-              <div className="flex-1 h-full">
-                <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart data={filteredData} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
-                    <defs>
-                      <linearGradient id="thisYear" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor={isDarkMode ? "#fff" : "#8056E1"} stopOpacity={0.2} />
-                        <stop offset="95%" stopColor={isDarkMode ? "#fff" : "#8056E10"} stopOpacity={0} />
-                      </linearGradient>
-                      <linearGradient id="lastYear" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor={isDarkMode ? "#a78bfa" : "#8056E1"} stopOpacity={0.2} />
-                        <stop offset="95%" stopColor={isDarkMode ? "#a78bfa" : "#8056E1"} stopOpacity={0} />
-                      </linearGradient>
-                    </defs>
-                    <XAxis
-                      dataKey="month"
-                      stroke={isDarkMode ? "#fff" : "#000"}
-                      strokeOpacity={0.4}
-                      style={{ fontSize: "12px" }}
-                      axisLine={false}
-                      tickLine={false}
-                    />
-                    <YAxis
-                      stroke={isDarkMode ? "#fff" : "#000"}
-                      strokeOpacity={0.4}
-                      style={{ fontSize: "12px" }}
-                      axisLine={false}
-                      tickLine={false}
-                      tick={false}
-                    />
-                    <Tooltip
-                      content={({ active, payload }) => {
-                        if (active && payload && payload.length) {
-                          return (
-                            <div className={`rounded-lg border ${isDarkMode ? 'border-gray-700 bg-gray-800 bg-opacity-90' : 'border-gray-300 bg-white bg-opacity-90'} p-2 shadow-md`}>
-                              <div className="grid grid-cols-2 gap-2">
-                                <div className="flex flex-col">
-                                  <span className={`text-[0.70rem] uppercase ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>This Year</span>
-                                  <span className={`font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>{payload[0].value}</span>
-                                </div>
-                                <div className="flex flex-col">
-                                  <span className={`text-[0.70rem] uppercase ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Last Year</span>
-                                  <span className={`font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>{payload[1].value}</span>
+              
+              {/* Only render chart when mounted & with explicit height */}
+              <div className="flex-1 h-[300px]">
+                {isMounted && (
+                  <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart data={filteredData} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
+                      <defs>
+                        <linearGradient id="thisYear" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor={isDarkMode ? "#fff" : "#8056E1"} stopOpacity={0.2} />
+                          <stop offset="95%" stopColor={isDarkMode ? "#fff" : "#8056E10"} stopOpacity={0} />
+                        </linearGradient>
+                        <linearGradient id="lastYear" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor={isDarkMode ? "#a78bfa" : "#8056E1"} stopOpacity={0.2} />
+                          <stop offset="95%" stopColor={isDarkMode ? "#a78bfa" : "#8056E1"} stopOpacity={0} />
+                        </linearGradient>
+                      </defs>
+                      <XAxis
+                        dataKey="month"
+                        stroke={isDarkMode ? "#fff" : "#000"}
+                        strokeOpacity={0.4}
+                        style={{ fontSize: "12px" }}
+                        axisLine={false}
+                        tickLine={false}
+                      />
+                      <YAxis
+                        stroke={isDarkMode ? "#fff" : "#000"}
+                        strokeOpacity={0.4}
+                        style={{ fontSize: "12px" }}
+                        axisLine={false}
+                        tickLine={false}
+                        tick={false}
+                      />
+                      <Tooltip
+                        content={({ active, payload }) => {
+                          if (active && payload && payload.length) {
+                            return (
+                              <div className={`rounded-lg border ${isDarkMode ? 'border-gray-700 bg-gray-800 bg-opacity-90' : 'border-gray-300 bg-white bg-opacity-90'} p-2 shadow-md`}>
+                                <div className="grid grid-cols-2 gap-2">
+                                  <div className="flex flex-col">
+                                    <span className={`text-[0.70rem] uppercase ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>This Year</span>
+                                    <span className={`font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>{payload[0].value}</span>
+                                  </div>
+                                  <div className="flex flex-col">
+                                    <span className={`text-[0.70rem] uppercase ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Last Year</span>
+                                    <span className={`font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>{payload[1].value}</span>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                          );
-                        }
-                        return null;
-                      }}
-                    />
-                    <Area
-                      type="monotone"
-                      dataKey="thisYear"
-                      stroke={isDarkMode ? "#fff" : "#8056E1"}
-                      strokeWidth={2}
-                      fillOpacity={1}
-                      fill="url(#thisYear)"
-                    />
-                    <Area
-                      type="monotone"
-                      dataKey="lastYear"
-                      stroke={isDarkMode ? "#a78bfa" : "#E25876"}
-                      strokeWidth={2}
-                      strokeDasharray="4 4"
-                      fillOpacity={1}
-                      fill="url(#lastYear)"
-                    />
-                  </AreaChart>
-                </ResponsiveContainer>
+                            );
+                          }
+                          return null;
+                        }}
+                      />
+                      <Area
+                        type="monotone"
+                        dataKey="thisYear"
+                        stroke={isDarkMode ? "#fff" : "#8056E1"}
+                        strokeWidth={2}
+                        fillOpacity={1}
+                        fill="url(#thisYear)"
+                      />
+                      <Area
+                        type="monotone"
+                        dataKey="lastYear"
+                        stroke={isDarkMode ? "#a78bfa" : "#E25876"}
+                        strokeWidth={2}
+                        strokeDasharray="4 4"
+                        fillOpacity={1}
+                        fill="url(#lastYear)"
+                      />
+                    </AreaChart>
+                  </ResponsiveContainer>
+                )}
               </div>
             </div>
           </div>

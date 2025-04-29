@@ -4,7 +4,7 @@
 
 /* Theme Variables */
 :root {
-  --background-light: #09050E;
+  --background-light: #09050e;
   --foreground-light: #171717;
   --primary-light: #a26dff;
   --purple-light: #a26dff;
@@ -12,7 +12,7 @@
   --white-2-light: #d4d4d4;
 
   --background-dark: #09050e;
-  --foreground-dark: #09050E;
+  --foreground-dark: #09050e;
   --primary-dark: #a26dff;
   --purple-dark: #a26dff;
   --white-dark: #1e1e1e;
@@ -31,7 +31,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #edebf0;
-    --foreground: #D4D4D4;
+    --foreground: #d4d4d4;
   }
 }
 
@@ -76,6 +76,10 @@ body {
   bottom: -150px;
 }
 
+.gradient-border {
+  @apply bg-gradient-to-b from-[#A26DFF] to-[#A26DFF] p-[0.7px] rounded-full;
+}
+
 /* Custom Range Slider */
 .custom-range {
   @apply w-full appearance-none cursor-pointer;
@@ -95,21 +99,62 @@ body {
 
 /* Footer Styling */
 .footer-gradient {
-  background: linear-gradient(180deg, rgba(9, 5, 14, 1) 0%, rgba(74, 42, 130, 1) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(9, 5, 14, 1) 0%,
+    rgba(74, 42, 130, 1) 100%
+  );
 }
 
 .footer-background {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(9, 5, 14, 1) 0%, rgba(74, 42, 130, 1) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(9, 5, 14, 1) 0%,
+    rgba(74, 42, 130, 1) 100%
+  );
   pointer-events: none;
 }
 
 .footer-background-text {
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(74, 42, 130, 0.3) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(74, 42, 130, 0.3) 100%
+  );
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+/* Custom Scrollbar - Combined and Simplified */
+.custom-scrollbar::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 0 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background: #d4c2f3;
+  transition: background 0.2s ease;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #b69fe6;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #3b2a65;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #5c4a85;
 }
 
 /* Ensure Smooth Rendering on Webkit Browsers */
@@ -117,4 +162,60 @@ body {
   .footer-background-text {
     -webkit-font-smoothing: antialiased;
   }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+    box-shadow: 0 0 0 0 rgba(162, 109, 255, 0.7);
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(162, 109, 255, 0.6);
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0;
+    box-shadow: 0 0 0 0 rgba(162, 109, 255, 0);
+  }
+}
+
+.shadow-glow {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(162, 109, 255, 0.6);
+}
+
+/* Add this to your global CSS file */
+
+@keyframes glow {
+  0%, 100% {
+    filter: brightness(1) drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
+  }
+  20% {
+    filter: brightness(0.8) drop-shadow(0 0 0px rgba(255, 255, 255, 0.2));
+  }
+  50% {
+    filter: brightness(1.2) drop-shadow(0 0 4px rgba(255, 255, 255, 0.3));
+  }
+  70% {
+    filter: brightness(1.4) drop-shadow(0 0 0px rgba(255, 255, 255, 0.7));
+  }
+}
+
+.animate-glowSlow {
+  animation: glow 4s cubic-bezier(0.6, 0.8, 0.6, 1) infinite;
+}
+
+/* Remove default borders from all images */
+img {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.globe-grid-image {
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
 }

@@ -28,7 +28,7 @@ interface SolutionItem {
   subItems: string[];
 }
 
-const SectionTitle: React.FC<SectionTitleProps> = ({ children }) => (
+export const SectionTitle: React.FC<SectionTitleProps> = ({ children }) => (
   <h1 className="text-[24px] md:text-[28px] font-bold bg-gradient-to-r from-[#26183E] to-[#A26DFF] text-transparent bg-clip-text font-manrope mb-4">
     {children}
   </h1>
@@ -93,7 +93,7 @@ const AboutCoreProblems: React.FC = () => {
   ];
 
   return (
-    <div className="relative py-16 px-4 md:px-10 xl:max-w-[1086px] mx-auto">
+    <div className="relative md:m-0 pt-12 pb-4 md:py-16 mx-8 px-6 md:px-10 w-[85%] mx-auto">
       <div className="absolute -top-[250px] left-1/2 -translate-x-1/2 z-10">
         <Image
           src={blur3}

@@ -6,19 +6,39 @@ import Logo from "../../public/zerologo.png";
 import LogoWhite from "../../public/zerologo-white.svg";
 import Link from "next/link";
 import { useState } from "react";
-import NavigationBar from "./mobile-navigator";
+import { useEffect } from "react";
+import ConnectModal from "./connectWallet";
+import { useAccount, useDisconnect } from "@starknet-react/core";
 
 interface NavbarProps {
   isDarkMode: boolean;
   toggleDarkMode: () => void;
+  onConnectWallet?: () => void;
 }
 
 const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDarkMode }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { address, isConnected } = useAccount();
+  const { disconnect } = useDisconnect();
   
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
+
+  const handleConnectWallet = () => {
+    if (isConnected) {
+      disconnect(); // Disconnect if already connected
+    } else {
+      setIsModalOpen(true); // Open modal to connect
+    }
+  };
+
+  useEffect(() => {
+    if (isConnected) {
+      setIsModalOpen(false);
+    }
+  }, [isConnected]);
   
   const gradientBorder =
     "bg-gradient-to-b from-[#A26DFF] to-[#A26DFF] p-[0.7px] rounded-full";
@@ -108,6 +128,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDarkMode }) => {
 
           {/* Right side controls */}
           <div className="flex items-center space-x-6">
+            <div className="flex md:hidden">
             {/* Dark mode toggle with gradient border */}
             {isDarkMode ? (
               <button
@@ -124,6 +145,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDarkMode }) => {
                 <Moon size={18} color={`${isDarkMode ? "white" : "black"}`} />
               </button>
             )}
+            </div>
             <div className={` ${gradientBorder} hidden lg:flex`}>
               <div
                 className={`flex items-center justify-between ${
@@ -156,18 +178,30 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDarkMode }) => {
             {/* Connect Wallet button with gradient border */}
             <div className={gradientBorder}>
               <button
+               onClick={handleConnectWallet}
                 className={`${
                   isDarkMode ? "bg-[#09050E]" : "bg-white"
                 } py-3 px-8 rounded-full text-sm ${
                   isDarkMode ? "text-white" : "text-black"
                 }`}
               >
-                Connect Wallet
+                {isConnected && address ? `${address.substring(0, 6)}...${address.slice(-4)}` : "Connect Wallet"}
               </button>
             </div>
           </div>
         </div>
       </header>
+
+      {isModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center">
+            {/* Backdrop */}
+            <div className="absolute inset-0 bg-black opacity-50" onClick={() => setIsModalOpen(false)} />
+            {/* Modal Content */}
+            <div className="bg-[#09050E] p-6 rounded-md z-10">
+              <ConnectModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+            </div>
+          </div>
+        )}
 
       {/* Mobile Menu Overlay */}
       <div 
@@ -175,13 +209,13 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDarkMode }) => {
           mobileMenuOpen ? 'translate-y-0' : '-translate-y-full'
         } ${isDarkMode ? 'bg-[#09050E]' : 'bg-white'}`}
       >
-        <div className="flex flex-col h-full py-12 px-8 bg-[#21192F]">
+        <div className="flex flex-col h-full py-6 px-4 bg-[#21192F]">
           {/* Mobile Menu Header */}
-          <div className={`flex justify-between items-center p-6 border-b ${isDarkMode ? "border-[#1F1333]" : "border-gray-300"}`}>
+          <div className={`flex justify-between items-center p-6 border-b ${isDarkMode ? "border-[#1F1333]" : "border-[#1F1333]"}`}>
             {/* Logo for mobile */}
             <Link href='/'>
               <Image
-                src={isDarkMode ? Logo : LogoWhite}
+                src={isDarkMode ? Logo : Logo}
                 alt="ZeroxBridge Logo"
                 width={120}
                 height={40}
@@ -196,33 +230,30 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDarkMode }) => {
           </div>
           
           {/* Menu Content */}
-          <div className="flex flex-col p-6 space-y-6 flex-1">
+          <div className="flex flex-col px-4 py-3 space-y-2 flex-1">
             
             {/* Navigation Links */}
-            <nav className="flex flex-col gap-6 ">
-              <Link href="" className={`block py-3 px-4  border-b border-[#A26DFF] ${isDarkMode ? 'text-white hover:bg-[#1F1333]' : 'text-black hover:bg-gray-100'}`}>
+            <nav className="flex flex-col gap-3 ">
+              <Link href="" className={`block py-3 px-4  border-b border-[#A26DFF] ${isDarkMode ? 'text-white hover:bg-[#1F1333]' : 'text-white'}`}>
               <span className="flex items-center w-full justify-between px-2 py-4">
                 <p>Search</p>
                 <SearchIcon className="text-white" size={24} />
               </span>
             
               </Link>
-              <Link href="" className={`block py-3 px-4  border-b border-[#A26DFF]  ${isDarkMode ? 'text-white hover:bg-[#1F1333]' : 'text-black hover:bg-gray-100'}`}>
+              <Link href="" className={`block py-3 px-4  border-b border-[#A26DFF]  ${isDarkMode ? 'text-white hover:bg-[#1F1333]' : 'text-white '}`}>
               <span className="flex items-center w-full justify-between px-2 py-4">
                 <p>Notifications</p>
                 <Bell className="text-white" size={24} />
               </span>
               </Link>
-              <Link href="" className={`block py-3 px-4  ${isDarkMode ? 'text-white hover:bg-[#1F1333]' : 'text-black hover:bg-gray-100'}`}>
+              <Link href="" className={`block py-3 px-4  ${isDarkMode ? 'text-white hover:bg-[#1F1333]' : 'text-white'}`}>
               <span className="flex items-center w-full justify-between px-2 py-4">
                 <p>Settings</p>
                 <Settings className="text-white" size={24} />
               </span>
               </Link>
             </nav>
-            
-
-            <NavigationBar />
           </div>
         </div>
       </div>

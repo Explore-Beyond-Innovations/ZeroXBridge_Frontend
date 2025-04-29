@@ -9,14 +9,14 @@ import Testimonial from "./components/testimonial";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#09050E] flex flex-col items-center w-full ">
+    <div className=" h-full bg-[#09050E] flex flex-col items-center w-full overflow-x-hidden">
       <HomeNav />
       <Header />
-      <div className="w-full max-w-[1600px] mx-auto">
-      <HowItWorks />
-      <AboutUs />
-      <FAQ />
-      <Testimonial />
+      <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12 max-w-[1600px] mx-auto">
+        <HowItWorks />
+        <AboutUs />
+        <FAQ />
+        <Testimonial />
       </div>
       <Footer />
     </div>

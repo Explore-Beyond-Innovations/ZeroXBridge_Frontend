@@ -1,13 +1,17 @@
 "use client";
-import React from "react";
+import { useAccount } from "@starknet-react/core";
 import Image from "next/image";
 
 interface LiquidityLockTableProps {
   isDarkMode: boolean;
-  className?: string; // Add className to the props
+  className?: string;
 }
 
-const LiquidityLockTable = ({ isDarkMode, className }: LiquidityLockTableProps) => {
+const LiquidityLockTable = ({
+  isDarkMode,
+  className,
+}: LiquidityLockTableProps) => {
+  const { isConnected } = useAccount()
   const liquidityRows = [
     {
       token: "SOL",
@@ -49,48 +53,66 @@ const LiquidityLockTable = ({ isDarkMode, className }: LiquidityLockTableProps) 
 
   return (
     <div
-      className={`${className} ${isDarkMode ? "bg-[#1F1333] text-white" : "bg-[#F8F4FF] text-black"} px-8 py-6 rounded-xl w-[702px] md:w-full my-6 `}
+      className={`${className} ${
+        isDarkMode ? "bg-[#1F1333] text-white" : "bg-[#F8F4FF] text-black"
+      } px-8 py-6 rounded-xl w-[702px] md:w-full my-6 `}
     >
-      <h2 className={`text-[16px] font-bold mt-4 mb-8 ${isDarkMode ? "text-white" : "text-black"}`}>
+      <h2
+        className={`text-[16px] font-bold mt-4 mb-8 ${
+          isDarkMode ? "text-white" : "text-black"
+        }`}
+      >
         Lock Liquidity by making a deposit
       </h2>
-      <div className="overflow-x-auto">
-        <table className="w-full border-none">
-          <thead className={`${isDarkMode ? "bg-[#3B2A65] text-white" : "bg-[#ECE1FF] text-black"}`}>
+      {/* This div handles the overflow internally */}
+      <div className="overflow-x-auto max-w-full custom-scrollbar">
+        <table className="w-full min-w-[400px] border-none">
+          <thead
+            className={`${
+              isDarkMode ? "bg-[#3B2A65] text-white" : "bg-[#ECE1FF] text-black"
+            }`}
+          >
             <tr className="text-center rounded-3xl p-4">
-              <th className="p-3 text-left rounded-tl-2xl">Token</th>
-              <th className="p-3">Current Liquidity</th>
-              <th className="p-3">xZB Token Rate</th>
-              <th className="p-3 text-right rounded-tr-2xl">Lock Amount</th>
+              <th className="p-3 text-left rounded-tl-2xl whitespace-nowrap">
+                Token
+              </th>
+              <th className="p-3 whitespace-nowrap">Current Liquidity</th>
+              <th className="p-3 whitespace-nowrap">xZB Token Rate</th>
+              <th className="p-3 text-right rounded-tr-2xl whitespace-nowrap">
+                Lock Amount
+              </th>
             </tr>
           </thead>
           <tbody>
             {liquidityRows.map((row, index) => (
               <tr
                 key={index}
-                className={`border-b ${isDarkMode ? "border-[#8280FF] text-gray-400" : "border-[#ECE1FF] text-black bg-transparent"} transition-colors text-center`}
+                className={`border-b ${
+                  isDarkMode
+                    ? "border-[#8280FF] text-gray-400"
+                    : "border-[#ECE1FF] text-black bg-transparent"
+                } transition-colors text-center`}
               >
-                <td className="p-3 flex items-center">
+                <td className="p-3 flex items-center whitespace-nowrap">
                   <Image
                     src="/solana.svg"
                     alt="Token icon"
-                    width={500}
-                    height={500}
+                    width={24}
+                    height={24}
                     className="w-6 h-6 mr-2 rounded-full"
                   />
                   {row.token}
                 </td>
-                <td className="p-3">
+                <td className="p-3 whitespace-nowrap">
                   {row.currentLiquidity}
                   <div className="text-sm">{row.currentPrice}</div>
                 </td>
-                <td className="p-3">{row.xzTokenRate}</td>
-                <td className="p-3 text-right">
+                <td className="p-3 whitespace-nowrap">{row.xzTokenRate}</td>
+                <td className="p-3 text-right whitespace-nowrap">
                   <button
                     className="bg-[#09050E] text-white px-4 py-2 rounded-full flex items-center justify-center ml-auto"
-                    onClick={() => alert("Connect Wallet clicked")}
                   >
-                    Connect Wallet
+                    {isConnected ?  "Select" : "Connect Wallet" }
                   </button>
                 </td>
               </tr>

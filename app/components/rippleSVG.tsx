@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { motion, useAnimation } from "framer-motion"
 
 const GlowingSvg: React.FC = () => {
@@ -9,54 +9,86 @@ const GlowingSvg: React.FC = () => {
   const controls2 = useAnimation()
   const controls3 = useAnimation()
   const controls4 = useAnimation()
+  const isMounted = useRef(false)
 
   useEffect(() => {
+    // Set the component as mounted
+    isMounted.current = true
+    
+    // Set initial opacity states
+    controls1.set({ opacity: 0.2 })
+    controls2.set({ opacity: 0.2 })
+    controls3.set({ opacity: 0.4 })
+    controls4.set({ opacity: 0.4 })
     
     const startRippleSequence = async () => {
-      // Reset all controls to starting opacity before each sequence
-      controls1.set({ opacity: 0.2 }) // Outermost
-      controls2.set({ opacity: 0.2 })
-      controls3.set({ opacity: 0.4 })
-      controls4.set({ opacity: 0.4 }) // Innermost
+      // Check if still mounted before starting each animation sequence
+      if (!isMounted.current) return
       
-      // Start with innermost circle (controls4) completely disappearing
-      await controls4.start({ 
-        opacity: [0.8, 0.2, 0], 
-        transition: { duration: 1, ease: "easeInOut" } 
-      })
-      
-      // Second ring now pulses dramatically (appearing and fading)
-      await controls3.start({ 
-        opacity: [0.6, 1, 0.2], 
-        transition: { duration: 1.5, ease: "easeInOut" } 
-      })
-      
-      // Third ring pulses next
-      await controls2.start({ 
-        opacity: [0.6, 1, 0.2], 
-        transition: { duration: 1.5, ease: "easeInOut" } 
-      })
-      
-      // Outermost ring completes the ripple effect
-      await controls1.start({ 
-        opacity: [0.4, 1, 0.2], 
-        transition: { duration: 1.5, ease: "easeInOut" } 
-      })
-      
-      // Reset the innermost ring to prepare for next sequence
-      await controls4.start({ 
-        opacity: 0.4, 
-        transition: { duration: 0.5, ease: "easeOut" } 
-      })
+      try {
+        // Start with innermost circle (controls4) completely disappearing
+        await controls4.start({ 
+          opacity: [0.8, 0.2, 0], 
+          transition: { duration: 1, ease: "easeInOut" } 
+        })
+        
+        if (!isMounted.current) return
+        
+        // Second ring now pulses dramatically (appearing and fading)
+        await controls3.start({ 
+          opacity: [0.6, 1, 0.2], 
+          transition: { duration: 1.5, ease: "easeInOut" } 
+        })
+        
+        if (!isMounted.current) return
+        
+        // Third ring pulses next
+        await controls2.start({ 
+          opacity: [0.6, 1, 0.2], 
+          transition: { duration: 1.5, ease: "easeInOut" } 
+        })
+        
+        if (!isMounted.current) return
+        
+        // Outermost ring completes the ripple effect
+        await controls1.start({ 
+          opacity: [0.4, 1, 0.2], 
+          transition: { duration: 1.5, ease: "easeInOut" } 
+        })
+        
+        if (!isMounted.current) return
+        
+        // Reset the innermost ring to prepare for next sequence
+        await controls4.start({ 
+          opacity: 0.4, 
+          transition: { duration: 0.5, ease: "easeOut" } 
+        })
+      } catch (error) {
+        // Handle potential errors if component unmounts during animation
+        console.error("Animation error:", error)
+      }
     }
 
-    // Start the sequence immediately
-    startRippleSequence()
+    // Wait a bit longer to ensure DOM is fully ready
+    const initialTimeout = setTimeout(() => {
+      if (isMounted.current) {
+        startRippleSequence()
+      }
+    }, 500) // Increased from 100ms to 500ms
     
     // Then repeat it at intervals
-    const interval = setInterval(startRippleSequence, 6500)
-    return () => clearInterval(interval)
-  }, [controls1, controls2, controls3, controls4])
+    const interval = setInterval(() => {
+      if (isMounted.current) {
+        startRippleSequence()
+      }
+    }, 6500)
+    
+    return () => {
+      isMounted.current = false
+      clearTimeout(initialTimeout)
+      clearInterval(interval)
+    }
+  }, []) // Removed the dependencies that might cause unnecessary re-renders
 
   return (
     <svg width="626" height="547" viewBox="0 0 626 547" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -71,6 +103,7 @@ const GlowingSvg: React.FC = () => {
         strokeDasharray="7.78 7.78"
         mask="url(#path-1-inside-1_55_7861)"
         animate={controls1}
+        initial={{ opacity: 0.2 }}
       />
       <g filter="url(#filter0_d_55_7861)">
         <circle cx="46.1684" cy="151.592" r="2.54472" fill="white" />
@@ -89,6 +122,7 @@ const GlowingSvg: React.FC = () => {
         strokeDasharray="7.78 7.78"
         mask="url(#path-4-inside-2_55_7861)"
         animate={controls2}
+        initial={{ opacity: 0.2 }}
       />
       <g filter="url(#filter2_d_55_7861)">
         <circle cx="79.3465" cy="210.75" r="2.22739" fill="white" />
@@ -107,6 +141,7 @@ const GlowingSvg: React.FC = () => {
         strokeDasharray="7.78 7.78"
         mask="url(#path-7-inside-3_55_7861)"
         animate={controls3}
+        initial={{ opacity: 0.4 }}
       />
       <g filter="url(#filter4_d_55_7861)">
         <circle cx="112.915" cy="277.817" r="1.86765" fill="white" />
@@ -142,6 +177,7 @@ const GlowingSvg: React.FC = () => {
         strokeDasharray="7.78 7.78"
         mask="url(#path-12-inside-4_55_7861)"
         animate={controls4}
+        initial={{ opacity: 0.4 }}
       />
       <g filter="url(#filter6_d_55_7861)">
         <circle cx="145.569" cy="336.047" r="1.5553" fill="white" />

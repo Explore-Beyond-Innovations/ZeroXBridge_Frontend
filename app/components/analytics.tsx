@@ -78,7 +78,7 @@ export default function AnalyticsDashboard({
     change?: number | null;
   }) => (
     <div
-      className={`rounded-2xl p-6 w-[350px] h-[150px]`}
+      className={`rounded-2xl p-6 w-full lg:w-[350px] h-[150px]`}
       style={{ backgroundColor: cardBg }}
     >
       <p className={`${textSecondary} mb-2`}>{title}</p>
@@ -127,8 +127,10 @@ export default function AnalyticsDashboard({
   );
 
   return (
-    <div className="space-y-6 p-6 max-w-[1800px] 2xl:scale-150 mx-auto">
-      <div className={`grid grid-cols-3 gap-6 border-b ${borderColor} py-6`}>
+    <div className="space-y-6 p-6 w-full lg:max-w-[1800px] mac-16:w-fit mx-auto mac-16:scale-125 mac-16:pb-[4rem] mac-16:pt-[8rem]">
+      <div
+        className={`flex flex-col lg:flex-row justify-evenly md:px-4 gap-6 border-b ${borderColor} py-6`}
+      >
         <MetricCard
           title="Total Value Locked"
           value={isConnected ? "1,500" : "0.00"}
@@ -142,103 +144,111 @@ export default function AnalyticsDashboard({
         <MetricCard title="xZB Price" value="1.02" change={-0.5} />
       </div>
 
-      <div className="grid grid-cols-4">
-        <div
-          className="col-span-3 rounded-2xl p-6 w-[720px]"
-          style={{ backgroundColor: cardBg }}
-        >
-          <div className="flex justify-between items-center mb-6">
-            <h2 className={`text-[16px] font-semibold ${textPrimary}`}>
-              Protocol Metrics
-            </h2>
-            <div className="flex border-b-0 text-sm font-medium">
-              {["TVL", "Volume", "Price"].map((metric) => (
-                <button
-                  key={metric}
-                  className={cn(
-                    "px-4 py-2 transition-all border-r last:border-r-0 first:rounded-l-full last:rounded-r-full",
-                    activeMetric === metric
-                      ? "bg-[#E8DFFC] text-black font-medium"
-                      : "bg-transparent text-black hover:bg-gray-100"
-                  )}
-                  style={{
-                    borderColor: isDarkMode ? "#E8DFFC" : "#A26DFF",
-                    backgroundColor:
+      <div className="flex flex-col gap-4 lg:flex-row justify-evenly w-full ">
+        <div className="w-full   md:w-[720px] overflow-x-scroll md:overflow-none">
+          <div
+            className="col-span-3 rounded-2xl p-6 w-[720px] h-full lg:w-full"
+            style={{ backgroundColor: cardBg }}
+          >
+            <div className="flex justify-between items-center mb-6">
+              <h2 className={`text-[16px] font-semibold ${textPrimary}`}>
+                Protocol Metrics
+              </h2>
+              <div className="flex border-b-0 text-sm font-medium">
+                {["TVL", "Volume", "Price"].map((metric) => (
+                  <button
+                    key={metric}
+                    className={cn(
+                      "px-4 py-2 transition-all border-r last:border-r-0 first:rounded-l-full last:rounded-r-full",
                       activeMetric === metric
-                        ? tabActiveBg
-                        : isDarkMode
-                        ? "#282433"
-                        : "#FBF9FF",
-                    color:
-                      activeMetric === metric
-                        ? isDarkMode
+                        ? "bg-[#E8DFFC] text-black font-medium"
+                        : "bg-transparent text-black hover:bg-gray-100"
+                    )}
+                    style={{
+                      borderColor: isDarkMode ? "#E8DFFC" : "#A26DFF",
+                      backgroundColor:
+                        activeMetric === metric
+                          ? tabActiveBg
+                          : isDarkMode
+                          ? "#282433"
+                          : "#FBF9FF",
+                      color:
+                        activeMetric === metric
+                          ? isDarkMode
+                            ? "white"
+                            : "black"
+                          : isDarkMode
                           ? "white"
-                          : "black"
-                        : isDarkMode
-                        ? "white"
-                        : "black",
-                  }}
-                  onClick={() => setActiveMetric(metric)}
-                >
-                  {metric}
-                </button>
-              ))}
+                          : "black",
+                    }}
+                    onClick={() => setActiveMetric(metric)}
+                  >
+                    {metric}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
 
-          <ResponsiveContainer width="100%" height={400}>
-            <LineChart data={isConnected ? DUMMY_DATA : []}>
-              <XAxis
-                dataKey="hour"
-                stroke={chartGridColor}
-                tick={{ fill: chartGridColor }}
-                tickLine={false}
-                fontSize={"12px"}
-                axisLine={false}
-              />
-              <YAxis
-                stroke={chartGridColor}
-                tick={{ fill: chartGridColor }}
-                fontSize={"14px"}
-                tickLine={false}
-                axisLine={false}
-              />
-              <CartesianGrid
-                stroke={chartGridColor}
-                horizontal={true}
-                vertical={false}
-              />
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: tooltipBg,
-                  border: "none",
-                  borderRadius: "8px",
-                  color: isDarkMode ? "#FFFFFF" : "#000000",
-                }}
-              />
-              <Line
-                type="monotone"
-                dataKey="value"
-                stroke="url(#gradientStroke)"
-                strokeWidth={4}
-                dot={{
-                  fill: "#7D53C4",
-                  stroke: "#7D53C4",
-                  r: 4,
-                }}
-              />
-              <defs>
-                <linearGradient id="gradientStroke" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%" stopColor="#5BC4FF" />
-                  <stop offset="100%" stopColor="#FF5BEF" />
-                </linearGradient>
-              </defs>
-            </LineChart>
-          </ResponsiveContainer>
+            <ResponsiveContainer width="100%" height={400}>
+              <LineChart data={isConnected ? DUMMY_DATA : []}>
+                <XAxis
+                  dataKey="hour"
+                  stroke={chartGridColor}
+                  tick={{ fill: chartGridColor }}
+                  tickLine={false}
+                  fontSize={"12px"}
+                  axisLine={false}
+                />
+                <YAxis
+                  stroke={chartGridColor}
+                  tick={{ fill: chartGridColor }}
+                  fontSize={"14px"}
+                  tickLine={false}
+                  axisLine={false}
+                />
+                <CartesianGrid
+                  stroke={chartGridColor}
+                  horizontal={true}
+                  vertical={false}
+                />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: tooltipBg,
+                    border: "none",
+                    borderRadius: "8px",
+                    color: isDarkMode ? "#FFFFFF" : "#000000",
+                  }}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="value"
+                  stroke="url(#gradientStroke)"
+                  strokeWidth={4}
+                  dot={{
+                    fill: "#7D53C4",
+                    stroke: "#7D53C4",
+                    r: 4,
+                  }}
+                />
+                <defs>
+                  <linearGradient
+                    id="gradientStroke"
+                    x1="0"
+                    y1="0"
+                    x2="1"
+                    y2="0"
+                  >
+                    <stop offset="0%" stopColor="#5BC4FF" />
+                    <stop offset="100%" stopColor="#FF5BEF" />
+                  </linearGradient>
+                </defs>
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
         </div>
 
         {/* Right Column - Donut Charts */}
-        <div className="space-y-6 w-[350px] -ml-[76px]">
+        <div className="space-y-6 w-full lg:w-[350px] ">
           {/* Locked Assets */}
           <div
             className="rounded-2xl py-6 px-4 h-[261px]"

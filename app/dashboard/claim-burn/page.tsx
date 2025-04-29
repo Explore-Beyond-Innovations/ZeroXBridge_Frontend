@@ -1,11 +1,11 @@
 "use client";
-import { useState } from "react";
 import XZBInterface from "@/app/components/claim-burn";
 import { useTheme } from "@/app/ThemeContext";
+import { useAccount } from "@starknet-react/core";
 
 
 const Index = () => {
-  const [isConnected, setIsConnected] = useState(false);
+  const {isConnected} = useAccount()
   const { isDarkMode } = useTheme();
 
   const tokenData = {
@@ -22,9 +22,7 @@ const Index = () => {
     console.log("Burning amount:", amount, "for asset:", asset);
   };
 
-  const handleConnect = () => {
-    setIsConnected(true);
-  };
+
 
   return (
     <div
@@ -37,7 +35,6 @@ const Index = () => {
           tokenData={tokenData}
           onClaim={handleClaim}
           onBurn={handleBurn}
-          onConnect={handleConnect}
           isConnected={isConnected}
           isDarkMode={isDarkMode}
         />

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { ChevronDown, Info } from 'lucide-react';
-import Image from 'next/image';
+import React, { useState } from "react";
+import { ChevronDown, Info } from "lucide-react";
+import Image from "next/image";
 
 interface TokenData {
   available: number;
@@ -19,45 +19,43 @@ interface XZBInterfaceProps {
   tokenData: TokenData;
   onClaim: (asset: string) => void;
   onBurn: (amount: string, asset: string) => void;
-  onConnect: () => void;
-  isConnected: boolean;
+  isConnected: boolean | undefined;
   isDarkMode: boolean;
 }
 
 const SAMPLE_ASSETS: Asset[] = [
   {
-    id: '1',
-    name: 'Ethereum',
-    symbol: 'ETH',
-    icon: '/token.svg'
+    id: "1",
+    name: "Ethereum",
+    symbol: "ETH",
+    icon: "/token.svg",
   },
   {
-    id: '2',
-    name: 'USD Coin',
-    symbol: 'USDC',
-    icon: '/token.svg'
+    id: "2",
+    name: "USD Coin",
+    symbol: "USDC",
+    icon: "/token.svg",
   },
   {
-    id: '3',
-    name: 'Tether',
-    symbol: 'USDT',
-    icon: '/token.svg'
-  }
+    id: "3",
+    name: "Tether",
+    symbol: "USDT",
+    icon: "/token.svg",
+  },
 ];
 
 const XZBInterface: React.FC<XZBInterfaceProps> = ({
   tokenData,
   onClaim,
   onBurn,
-  onConnect,
   isConnected,
-  isDarkMode
+  isDarkMode,
 }) => {
-  const [activeTab, setActiveTab] = useState<'claim' | 'burn'>('claim');
+  const [activeTab, setActiveTab] = useState<"claim" | "burn">("claim");
   const [selectedAsset, setSelectedAsset] = useState<Asset | null>(null);
-  const [burnAmount, setBurnAmount] = useState<string>('');
+  const [burnAmount, setBurnAmount] = useState<string>("");
   const [isAssetSelectorOpen, setIsAssetSelectorOpen] = useState(false);
-  
+
   const calculateRedemptionAmount = (amount: string) => {
     const value = parseFloat(amount) || 0;
     return (value * 0.97).toFixed(2); // 3% fee
@@ -70,26 +68,24 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
 
   return (
     <div
-      className={`w-[500px] 2xl:scale-150 rounded-3xl p-6 ${
+      className={` w-full lg:w-[500px] 2xl:scale-150 rounded-3xl p-6 ${
         isDarkMode ? "text-white" : "text-black"
       }`}
     >
       {/* Tab Buttons */}
       <div
-        className={`flex rounded-xl ${
+        className={`flex rounded-xl font-bold ${
           isDarkMode ? "bg-[#21192F]" : "bg-[#ECE1FF]"
-        } p-1 mb-6`}
+        } p-1 mb-3 lg:mb-6`}
       >
         <button
-          className={`flex-1 py-3 px-6 rounded-xl transition-all ${
+          className={`flex-1 py-[6.5px] lg:py-3 px-6 rounded-xl transition-all ${
             activeTab === "claim"
-              ? `bg-[#7D53C4] font-bold ${
-                  isDarkMode ? "text-white" : "text-[#09050E]"
-                }`
+              ? "bg-[#7D53C4] text-white"
               : `${
                   isDarkMode
-                    ? "text-gray-400 hover:text-white"
-                    : "text-[#09050E]"
+                    ? "text-[#8B8B8B] hover:text-white"
+                    : "text-[#53436D]"
                 }`
           }`}
           onClick={() => setActiveTab("claim")}
@@ -97,15 +93,13 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
           Claim xZB
         </button>
         <button
-          className={`flex-1 py-3 px-6 rounded-xl transition-all ${
+          className={`flex-1 py-[6.5px] lg:py-3 px-6 rounded-xl transition-all ${
             activeTab === "burn"
-              ? `bg-[#7D53C4] font-bold ${
-                  isDarkMode ? "text-white" : "text-[#09050E]"
-                }`
+              ? "bg-[#7D53C4] font-bold text-white"
               : `${
                   isDarkMode
-                    ? "text-gray-400 hover:text-white"
-                    : "text-[#09050E]"
+                    ? "text-[#8B8B8B] hover:text-white"
+                    : "text-[#53436D]"
                 }`
           }`}
           onClick={() => setActiveTab("burn")}
@@ -115,12 +109,12 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
       </div>
 
       <div
-        className={`space-y-6 ${
+        className={`space-y-5 lg:space-y-6 ${
           isDarkMode ? "bg-[#21192F]" : "bg-[#F8F4FF]"
-        } rounded-3xl p-6 w-full`}
+        } rounded-3xl lg:px-[37px] lg:pt-5 pb-[30px] pt-[30px] px-6 w-full`}
       >
         {/* Title */}
-        <h2 className="text-xl font-medium">
+        <h2 className="text-sm lg:text-lg font-medium">
           {activeTab === "claim"
             ? "Claim Your xZB Tokens Now"
             : "Burn Your xZB Tokens Now"}
@@ -131,57 +125,52 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
           <p
             className={`${
               isDarkMode ? "text-gray-400" : "text-[#09050E]"
-            } text-sm`}
+            } text-xs md:text-sm`}
           >
             {activeTab === "claim" ? "Available to claim" : "xZB Balance"}
           </p>
-          <div className="flex items-baseline gap-2">
-            <p className="text-4xl font-medium">
-              {activeTab === "claim"
-                ? tokenData.available.toLocaleString()
-                : tokenData.balance.toLocaleString()}{" "}
-              xZB
-            </p>
-          </div>
+          <p className="text-2xl font-bold lg:text-3xl lg:font-medium lg:mt-[3px] mt-[6px]">
+            {activeTab === "claim"
+              ? tokenData.available.toLocaleString()
+              : tokenData.balance.toLocaleString()}{" "}
+            xZB
+          </p>
           <p
             className={`${
               isDarkMode ? "text-gray-400" : "text-[#09050E]"
-            } text-sm`}
+            } text-[10px] md:text-sm`}
           >
-            ~${tokenData.usdValue.toLocaleString()}
+            -${tokenData.usdValue.toLocaleString()}
           </p>
         </div>
 
         {activeTab === "burn" && (
-          <div className="space-y-4">
-            {/* Amount Input */}
-            <div>
-              <p
-                className={`${
-                  isDarkMode ? "text-gray-400" : "text-[#53436D]"
-                } text-sm mb-2`}
+          <div>
+            <p
+              className={`${
+                isDarkMode ? "text-gray-400" : "text-[#53436D]"
+              } text-xs mb:text-sm mb-2 lg:mb-1`}
+            >
+              Enter amount to Burn
+            </p>
+            <div className="relative">
+              <input
+                type="text"
+                value={burnAmount}
+                onChange={(e) => setBurnAmount(e.target.value)}
+                className={`w-full font-semibold ${
+                  isDarkMode
+                    ? "bg-[#1F1333] text-[#8B8B8B] placeholder:text-[#8B8B8B]"
+                    : "bg-[#ECE1FF] text-[#09050E] placeholder:text-[#09050E]"
+                } border border-[#8B8B8B] rounded-xl p-4 pr-16`}
+                placeholder="Enter Amount"
+              />
+              <button
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-[#6c5dd3] text-xs lg:text-sm"
+                onClick={() => setBurnAmount(tokenData.balance.toString())}
               >
-                Enter amount to Burn
-              </p>
-              <div className="relative">
-                <input
-                  type="text"
-                  value={burnAmount}
-                  onChange={(e) => setBurnAmount(e.target.value)}
-                  className={`w-full ${
-                    isDarkMode ? "bg-[#1F1333]" : "bg-[#ECE1FF]"
-                  } border border-[#8B8B8B] rounded-xl p-4 pr-16 ${
-                    isDarkMode ? "text-white" : "text-black"
-                  }`}
-                  placeholder="Enter Amount"
-                />
-                <button
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-[#6c5dd3] text-sm"
-                  onClick={() => setBurnAmount(tokenData.balance.toString())}
-                >
-                  MAX
-                </button>
-              </div>
+                MAX
+              </button>
             </div>
           </div>
         )}
@@ -191,14 +180,14 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
           <p
             className={`${
               isDarkMode ? "text-gray-400" : "text-[#53436D]"
-            } text-sm mb-2`}
+            } text-xs mb:text-sm mb-2 lg:mb-1`}
           >
             {activeTab === "burn" ? "Receive Asset" : "Select Asset"}
           </p>
           <button
             className={`w-full ${
               isDarkMode ? "bg-[#1F1333]" : "bg-[#ECE1FF]"
-            } rounded-xl p-4 flex justify-between items-center border border-[#8B8B8B]`}
+            } rounded-lg lg:rounded-xl p-4 lg:p-4 flex justify-between items-center border-[.2px] lg:border border-[#8B8B8B]`}
             onClick={() => setIsAssetSelectorOpen(!isAssetSelectorOpen)}
           >
             {selectedAsset ? (
@@ -216,7 +205,13 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
                 </span>
               </div>
             ) : (
-              <span className="text-gray-400">Select Asset</span>
+              <span
+                className={`font-semibold ${
+                  isDarkMode ? "text-[#8B8B8B]" : "text-[#09050E]"
+                }`}
+              >
+                Select Asset
+              </span>
             )}
             <ChevronDown
               className={`text-gray-400 transition-transform ${
@@ -253,17 +248,19 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
         </div>
 
         {/* Info Box */}
-        <div className="rounded-xl space-y-2">
+        <div className="rounded-xl lg:space-y-[10px] space-y-3">
           {activeTab === "claim" ? (
             <div
               className={`flex items-center gap-2 ${
-                isDarkMode ? "bg-[#53436D]" : "bg-[#9584B0]"
-              } border border-dashed border-white rounded-xl py-4 px-3 text-[12px] w-full`}
+                isDarkMode
+                  ? "bg-[#53436D] border border-dashed border-white"
+                  : "bg-[#9584B0]"
+              } rounded-xl py-[9px] lg:py-4 px-6 w-full`}
             >
               <p
                 className={`${
-                  isDarkMode ? "text-gray-400" : "text-[#53436D]"
-                } text-sm`}
+                  isDarkMode ? "text-[#D4D4D4]" : "text-[#53436D]"
+                } text-xs md:text-sm text-center lg:font-semibold font-light`}
               >
                 You will receive xZB Tokens on Starknet after claiming
               </p>
@@ -272,23 +269,25 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
             <>
               <div
                 className={`${
-                  isDarkMode ? "bg-[#53436D]" : "bg-[#9584B0]"
-                } rounded-xl px-4 py-2 border border-dashed border-white text-[14px]`}
+                  isDarkMode
+                    ? "bg-[#53436D] border border-dashed border-white"
+                    : "bg-[#9584B0]"
+                } rounded-xl px-5 lg:py-3 py-2 text-[13px] mb:text-sm`}
               >
-                <div className="flex justify-between text-sm mb-2">
+                <div className="flex justify-between mb-2">
                   <span
                     className={`${
-                      isDarkMode ? "text-gray-400" : "text-[#53436D]"
+                      isDarkMode ? "text-[#B9B9B9]" : "text-[#53436D]"
                     }`}
                   >
                     Redemption Fee
                   </span>
                   <span>3%</span>
                 </div>
-                <div className="flex justify-between text-sm">
+                <div className="flex justify-between">
                   <span
                     className={`${
-                      isDarkMode ? "text-gray-400" : "text-[#53436D]"
+                      isDarkMode ? "text-[#B9B9B9]" : "text-[#53436D]"
                     }`}
                   >
                     You will receive
@@ -296,17 +295,32 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
                   <span>{calculateRedemptionAmount(burnAmount)} ETH</span>
                 </div>
               </div>
-              <div className="mt-4 bg-[#E25876] text-[#B9B9B9] rounded-xl py-4 px-3 text-[12px] border border-dashed border-white">
+              <div
+                className={`mt-4 bg-[#E25876] ${
+                  isDarkMode
+                    ? "text-[#B9B9B9] border border-dashed border-white"
+                    : "text-[#D4D4D4]"
+                } rounded-xl  py-[9px] lg:py-6 px-4 text-center text-[12px] `}
+              >
                 Burning xZB is irreversible and subject to a 3% redemption fee
               </div>
             </>
           )}
+          {/* Learn More */}
+          <button
+            className={`flex items-center gap-1 ${
+              isDarkMode ? "text-[#8B8B8B]" : "text-[#53436D]"
+            } text-sm`}
+          >
+            <Info size={16} />
+            Learn More
+          </button>
         </div>
 
         {/* Action Button */}
         {isConnected ? (
           <button
-            className={`w-full bg-gradient-to-b from-[#A26DFF] to-[#09050E] hover:bg-[#5a4eb8] rounded-full p-4 font-medium transition-colors ${
+            className={`w-full bg-gradient-to-b from-[#A26DFF] to-[#09050E] hover:bg-[#5a4eb8] rounded-2xl p-[14px] lg:p-4 font-bold lg:font-medium transition-colors ${
               !isDarkMode && "text-white"
             }`}
             onClick={() =>
@@ -319,24 +333,14 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
           </button>
         ) : (
           <button
-            className={`w-full bg-gradient-to-b from-[#A26DFF] to-[#09050E] hover:bg-[#5a4eb8] rounded-full p-4 font-medium transition-colors ${
+            className={`w-full bg-gradient-to-b from-[#A26DFF] to-[#09050E] hover:bg-[#5a4eb8] rounded-2xl p-[14px] lg:p-4 font-bold lg:font-medium transition-colors ${
               !isDarkMode && "text-white"
             }`}
-            onClick={onConnect}
+            onClick={()=>{return}}
           >
             Connect Wallet
           </button>
         )}
-
-        {/* Learn More */}
-        <button
-          className={`flex items-center gap-1 ${
-            isDarkMode ? "text-gray-400" : "text-[#09050E]"
-          } text-sm`}
-        >
-          <Info size={16} />
-          Learn More
-        </button>
       </div>
     </div>
   );

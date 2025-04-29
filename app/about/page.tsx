@@ -11,7 +11,7 @@ const AboutPage = () => {
   return (
     <main className="min-h-screen bg-[#09050E] relative items-center justify-center">
      <HomeNav />
-     <div className='max-w-[1800px] mx-auto'>
+     <div className='max-w-[1800px] mx-auto pt-12'>
      <AboutHeader />
       <AboutCoreProblems />
       <AboutTeam />
