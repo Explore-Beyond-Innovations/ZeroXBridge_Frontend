@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { ChevronDown, Info } from "lucide-react";
+import { ChevronDown, Info, Loader2 } from "lucide-react";
 import Image from "next/image";
+import { useZeroXBridge } from "@/lib/contracts";
+import { toast } from "react-hot-toast";
 
 interface TokenData {
   available: number;
@@ -17,8 +19,6 @@ interface Asset {
 
 interface XZBInterfaceProps {
   tokenData: TokenData;
-  onClaim: (asset: string) => void;
-  onBurn: (amount: string, asset: string) => void;
   isConnected: boolean | undefined;
   isDarkMode: boolean;
 }
@@ -46,8 +46,6 @@ const SAMPLE_ASSETS: Asset[] = [
 
 const XZBInterface: React.FC<XZBInterfaceProps> = ({
   tokenData,
-  onClaim,
-  onBurn,
   isConnected,
   isDarkMode,
 }) => {
@@ -55,6 +53,10 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
   const [selectedAsset, setSelectedAsset] = useState<Asset | null>(null);
   const [burnAmount, setBurnAmount] = useState<string>("");
   const [isAssetSelectorOpen, setIsAssetSelectorOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [burnStatus, setBurnStatus] = useState<"idle" | "burning" | "burned">("idle");
+
+  const { burnTokens, claimTokens } = useZeroXBridge();
 
   const calculateRedemptionAmount = (amount: string) => {
     const value = parseFloat(amount) || 0;
@@ -66,9 +68,51 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
     setIsAssetSelectorOpen(false);
   };
 
+  const handleBurn = async () => {
+    if (!selectedAsset || !burnAmount) {
+      toast.error("Please select an asset and enter an amount");
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      await burnTokens(burnAmount, selectedAsset.id);
+      setBurnStatus("burned");
+      toast.success("Successfully burned xZB tokens");
+    } catch (error) {
+      console.error("Error burning tokens:", error);
+      toast.error("Failed to burn tokens. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleClaim = async () => {
+    if (!selectedAsset) {
+      toast.error("Please select an asset");
+      return;
+    }
+
+    if (burnStatus !== "burned") {
+      toast.error("Please burn your tokens first");
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      await claimTokens(tokenData.available.toString(), selectedAsset.id);
+      toast.success("Successfully claimed tokens");
+    } catch (error) {
+      console.error("Error claiming tokens:", error);
+      toast.error("Failed to claim tokens. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div
-      className={` w-full lg:w-[500px] 2xl:scale-150 rounded-3xl p-6 ${
+      className={`w-full lg:w-[500px] 2xl:scale-150 rounded-3xl p-6 ${
         isDarkMode ? "text-white" : "text-black"
       }`}
     >
@@ -262,7 +306,9 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
                   isDarkMode ? "text-[#D4D4D4]" : "text-[#53436D]"
                 } text-xs md:text-sm text-center lg:font-semibold font-light`}
               >
-                You will receive xZB Tokens on Starknet after claiming
+                {burnStatus === "burned"
+                  ? "You can now claim your tokens on L1"
+                  : "Please burn your tokens first before claiming"}
               </p>
             </div>
           ) : (
@@ -322,21 +368,25 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
           <button
             className={`w-full bg-gradient-to-b from-[#A26DFF] to-[#09050E] hover:bg-[#5a4eb8] rounded-2xl p-[14px] lg:p-4 font-bold lg:font-medium transition-colors ${
               !isDarkMode && "text-white"
-            }`}
-            onClick={() =>
-              activeTab === "claim"
-                ? onClaim(selectedAsset?.id || "")
-                : onBurn(burnAmount, selectedAsset?.id || "")
-            }
+            } disabled:opacity-50 disabled:cursor-not-allowed`}
+            onClick={activeTab === "claim" ? handleClaim : handleBurn}
+            disabled={isLoading || (activeTab === "claim" && burnStatus !== "burned")}
           >
-            {activeTab === "claim" ? "Claim xZB" : "Burn xZB"}
+            {isLoading ? (
+              <div className="flex items-center justify-center gap-2">
+                <Loader2 className="w-5 h-5 animate-spin" />
+                {activeTab === "claim" ? "Claiming..." : "Burning..."}
+              </div>
+            ) : (
+              activeTab === "claim" ? "Claim xZB" : "Burn xZB"
+            )}
           </button>
         ) : (
           <button
             className={`w-full bg-gradient-to-b from-[#A26DFF] to-[#09050E] hover:bg-[#5a4eb8] rounded-2xl p-[14px] lg:p-4 font-bold lg:font-medium transition-colors ${
               !isDarkMode && "text-white"
             }`}
-            onClick={()=>{return}}
+            onClick={() => {}}
           >
             Connect Wallet
           </button>

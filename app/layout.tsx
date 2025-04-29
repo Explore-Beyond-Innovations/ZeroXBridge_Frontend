@@ -7,6 +7,7 @@ import { ThemeProvider, useTheme } from "./ThemeContext";
 import Navbar from "./components/navbar";
 import NavigationBar from "./components/mobile-navigator";
 import { StarknetProvider } from "./components/Starknet-provider";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -52,6 +53,7 @@ export default function RootLayout({
         <StarknetProvider>
           <ThemeProvider>
             <LayoutContent showSidebar={showSidebar}>{children}</LayoutContent>
+            <Toaster position="top-right" />
           </ThemeProvider>
         </StarknetProvider>
       </body>
