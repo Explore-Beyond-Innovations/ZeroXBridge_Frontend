@@ -21,6 +21,7 @@ interface XZBInterfaceProps {
   onBurn: (amount: string, asset: string) => void;
   isConnected: boolean | undefined;
   isDarkMode: boolean;
+  isLoading?: boolean;
 }
 
 const SAMPLE_ASSETS: Asset[] = [
@@ -50,20 +51,28 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
   onBurn,
   isConnected,
   isDarkMode,
+  isLoading,
 }) => {
   const [activeTab, setActiveTab] = useState<"claim" | "burn">("claim");
   const [selectedAsset, setSelectedAsset] = useState<Asset | null>(null);
   const [burnAmount, setBurnAmount] = useState<string>("");
   const [isAssetSelectorOpen, setIsAssetSelectorOpen] = useState(false);
+  const [hasBurned, setHasBurned] = useState(false);
 
   const calculateRedemptionAmount = (amount: string) => {
     const value = parseFloat(amount) || 0;
+    const amountInWei = BigInt(Math.floor(value * 1e18)).toString();
     return (value * 0.97).toFixed(2); // 3% fee
   };
 
   const handleAssetSelect = (asset: Asset) => {
     setSelectedAsset(asset);
     setIsAssetSelectorOpen(false);
+  };
+
+  const handleBurn = (amount: string, asset: string) => {
+    onBurn(amount, asset);
+    setHasBurned(true);
   };
 
   return (
@@ -119,6 +128,21 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
             ? "Claim Your xZB Tokens Now"
             : "Burn Your xZB Tokens Now"}
         </h2>
+
+        {/* Burn First Warning */}
+        {activeTab === "claim" && !hasBurned && (
+          <div
+            className={`${
+              isDarkMode
+                ? "bg-[#E25876] border border-dashed border-white"
+                : "bg-[#FFE5EA]"
+            } rounded-xl py-4 px-6 text-center`}
+          >
+            <p className={`${isDarkMode ? "text-white" : "text-[#E25876]"}`}>
+              Please burn your tokens first before claiming. This ensures proper token redemption.
+            </p>
+          </div>
+        )}
 
         {/* Balance Display */}
         <div>
@@ -322,14 +346,15 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
           <button
             className={`w-full bg-gradient-to-b from-[#A26DFF] to-[#09050E] hover:bg-[#5a4eb8] rounded-2xl p-[14px] lg:p-4 font-bold lg:font-medium transition-colors ${
               !isDarkMode && "text-white"
-            }`}
+            } ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
             onClick={() =>
               activeTab === "claim"
                 ? onClaim(selectedAsset?.id || "")
-                : onBurn(burnAmount, selectedAsset?.id || "")
+                : handleBurn(burnAmount, selectedAsset?.id || "")
             }
+            disabled={activeTab === "claim" && !hasBurned || isLoading}
           >
-            {activeTab === "claim" ? "Claim xZB" : "Burn xZB"}
+            {isLoading ? "Processing..." : activeTab === "claim" ? "Claim xZB" : "Burn xZB"}
           </button>
         ) : (
           <button
