@@ -1,41 +1,33 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 "use client";
 
-import Image from "next/image";
-import { useState } from "react";
-import { useConnect } from "@starknet-react/core";
-import { X } from "lucide-react";
+import React, { useState } from 'react';
+import { useAccount as useStarknetAccount } from '@starknet-react/core';
+import { useAccount as useEthereumAccount } from 'wagmi';
+import { X } from 'lucide-react';
+import StarknetWalletModal from './starknetWallet';
+import EthereumWalletModal from './ethereumWallet';
 
 interface ConnectModalProps {
   isModalOpen: boolean;
   setIsModalOpen: (isModalOpen: boolean) => void;
 }
 
-export default function ConnectModal({
-  isModalOpen,
-  setIsModalOpen,
-}: ConnectModalProps) {
-  // StarkNet React hooks
-  const { connect, connectors } = useConnect();
-
-  // Local state for tracking selected wallet
-  const [selectedWallet, setSelectedWallet] = useState(connectors?.[0] || null);
-  const [activeWallet, setActiveWallet] = useState("argent-mobile");
+const ConnectModal: React.FC<ConnectModalProps> = ({ isModalOpen, setIsModalOpen }) => {
+  const [activeChain, setActiveChain] = useState<'ethereum' | 'starknet' | null>(null);
+  
+  const { address: starknetAddress } = useStarknetAccount();
+  const { address: ethereumAddress } = useEthereumAccount();
 
   const handleOverlayClick = () => {
     setIsModalOpen(false);
   };
 
   const handleModalClick = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent closing modal when clicking inside
+    e.stopPropagation();
   };
 
-  const handleWalletClick = (wallet: typeof connectors[0]) => {
-    setActiveWallet(wallet.id);
-    setSelectedWallet(wallet);
-    // You can optionally trigger connect immediately, if desired:
-    connect({ connector: wallet });
+  const handleBack = () => {
+    setActiveChain(null);
   };
 
   return (
@@ -45,9 +37,8 @@ export default function ConnectModal({
       }`}
       onClick={handleOverlayClick}
     >
-      {/* Modal Container */}
-      <div
-        className="relative w-full max-w-md bg-[#0F0F0F] rounded-[10px] p-6 h-[380px]"
+      <div 
+        className="relative w-full max-w-md bg-[#0F0F0F] rounded-[10px] p-6"
         onClick={handleModalClick}
       >
         {/* Close Button */}
@@ -60,47 +51,79 @@ export default function ConnectModal({
 
         {/* Title */}
         <h2 className="text-white text-xl font-semibold my-3 text-center">
-          Select a wallet
+          {activeChain === null 
+            ? 'Select a Network'
+            : activeChain === 'ethereum'
+            ? 'Connect Ethereum Wallet'
+            : 'Connect Starknet Wallet'
+          }
         </h2>
 
-        {/* Subtitle */}
-        <p className="font-[400] text-[12px] text-white my-6 text-center justify-center">
-          Securely authenticate &amp; start streaming with full ownership over
-          your earnings.
-        </p>
-
-        {/* Wallet List */}
-        <div className="flex flex-col space-y-2">
-          {connectors.map((wallet, idx) => (
-            <div key={wallet.id}
-            onClick={() => {
-              handleWalletClick(wallet)
-            }}
-            >
+        {/* Content */}
+        <div className="mt-6">
+          {activeChain === null ? (
+            <div className="space-y-4">
+              {/* Ethereum Option */}
               <button
-                className="w-full flex items-center gap-3 p-3 text-white mb-3 hover:bg-[#393B3D] transition-colors"
+                onClick={() => setActiveChain('ethereum')}
+                className="w-full flex items-center justify-between p-4 rounded-lg bg-[#291A43] hover:bg-[#342251] transition-colors"
               >
-                <Image
-                  src={
-                    typeof wallet.icon === "object"
-                      ? wallet.icon.dark
-                      : wallet.icon
-                  }
-                  alt={wallet.name || "Unknown Wallet"}
-                  height={24}
-                  width={24}
-                />
-                <span className="text-sm font-medium">{wallet.name}</span>
+                <div className="flex items-center gap-3">
+                  <img 
+                    src="/eth-icon.png" 
+                    alt="Ethereum" 
+                    className="w-8 h-8"
+                  />
+                  <div className="text-left">
+                    <p className="font-medium text-white">Ethereum</p>
+                    <p className="text-sm text-gray-400">
+                      {ethereumAddress 
+                        ? `${ethereumAddress.slice(0, 6)}...${ethereumAddress.slice(-4)}`
+                        : 'Not connected'
+                      }
+                    </p>
+                  </div>
+                </div>
+                <div className={`w-3 h-3 rounded-full ${
+                  ethereumAddress ? 'bg-green-500' : 'bg-red-500'
+                }`} />
               </button>
 
-              {/* Divider between wallet items, except after last one */}
-              {idx < connectors.length - 1 && (
-                <hr className="border-t  border-[#D9D9D957]" />
-              )}
+              {/* Starknet Option */}
+              <button
+                onClick={() => setActiveChain('starknet')}
+                className="w-full flex items-center justify-between p-4 rounded-lg bg-[#291A43] hover:bg-[#342251] transition-colors"
+              >
+                <div className="flex items-center gap-3">
+                  <img 
+                    src="/wallet.svg" 
+                    alt="Starknet" 
+                    className="w-8 h-8"
+                  />
+                  <div className="text-left">
+                    <p className="font-medium text-white">Starknet</p>
+                    <p className="text-sm text-gray-400">
+                      {starknetAddress 
+                        ? `${starknetAddress.slice(0, 6)}...${starknetAddress.slice(-4)}`
+                        : 'Not connected'
+                      }
+                    </p>
+                  </div>
+                </div>
+                <div className={`w-3 h-3 rounded-full ${
+                  starknetAddress ? 'bg-green-500' : 'bg-red-500'
+                }`} />
+              </button>
             </div>
-          ))}
+          ) : activeChain === 'ethereum' ? (
+            <EthereumWalletModal onBack={handleBack} />
+          ) : (
+            <StarknetWalletModal onBack={handleBack} />
+          )}
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default ConnectModal;

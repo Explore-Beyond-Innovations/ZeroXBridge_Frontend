@@ -8,7 +8,10 @@ import Link from "next/link";
 import { useState } from "react";
 import { useEffect } from "react";
 import ConnectModal from "./connectWallet";
-import { useAccount, useDisconnect } from "@starknet-react/core";
+import { useAccount } from "@starknet-react/core";
+import { useWalletState } from '../hooks/useWalletState';
+// import { useRegistration } from '../hooks/useRegistration';
+
 
 interface NavbarProps {
   isDarkMode: boolean;
@@ -19,18 +22,42 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDarkMode }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { address, isConnected } = useAccount();
-  const { disconnect } = useDisconnect();
+  const { isConnected } = useAccount();
   
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  const { 
+    // isAnyWalletConnected,
+    isAllConnected,
+    getDisplayAddress,
+    disconnectAll 
+  } = useWalletState();
+  
+  // const { registerUser, isRegistering } = useRegistration();
+
+  // useEffect(() => {
+  //   const handleRegistration = async () => {
+  //     if (isAllConnected) {
+  //       try {
+  //         await registerUser();
+  //         // You could add a success notification here
+  //       } catch (err) {
+  //         console.error("Registration failed:", err);
+  //         // You could add an error notification here
+  //       }
+  //     }
+  //   };
+
+  //   handleRegistration();
+  // }, [isAllConnected, registerUser]);
+
   const handleConnectWallet = () => {
-    if (isConnected) {
-      disconnect(); // Disconnect if already connected
+    if (isAllConnected) {
+      disconnectAll();
     } else {
-      setIsModalOpen(true); // Open modal to connect
+      setIsModalOpen(true);
     }
   };
 
@@ -185,7 +212,11 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDarkMode }) => {
                   isDarkMode ? "text-white" : "text-black"
                 }`}
               >
-                {isConnected && address ? `${address.substring(0, 6)}...${address.slice(-4)}` : "Connect Wallet"}
+                 {/* {isRegistering 
+      ? "Registering..." 
+      : getDisplayAddress()
+    } */}
+    {getDisplayAddress()}
               </button>
             </div>
           </div>
