@@ -1,6 +1,8 @@
 "use client";
 import { useAccount } from "@starknet-react/core";
 import Image from "next/image";
+import { useState } from "react";
+import Deposit from "./deposit";
 
 interface LiquidityLockTableProps {
   isDarkMode: boolean;
@@ -12,6 +14,8 @@ const LiquidityLockTable = ({
   className,
 }: LiquidityLockTableProps) => {
   const { isConnected } = useAccount()
+  const [depositToken, setDepositToken] = useState('SOL');
+  const [DepositModal, setDepositModal] = useState(false);
   const liquidityRows = [
     {
       token: "SOL",
@@ -51,11 +55,20 @@ const LiquidityLockTable = ({
     },
   ];
 
+  const showDepositModal = (token: string) => {
+    setDepositToken(token);
+    setDepositModal(true);
+  };
+
+  const handleClose = () => {
+    setDepositModal(false);
+  }
+
   return (
     <div
       className={`${className} ${
         isDarkMode ? "bg-[#1F1333] text-white" : "bg-[#F8F4FF] text-black"
-      } px-8 py-6 rounded-xl w-[702px] md:w-full my-6 `}
+      } px-8 py-6 rounded-xl w-[702px] md:w-full my-6 relative`}
     >
       <h2
         className={`text-[16px] font-bold mt-4 mb-8 ${
@@ -111,6 +124,7 @@ const LiquidityLockTable = ({
                 <td className="p-3 text-right whitespace-nowrap">
                   <button
                     className="bg-[#09050E] text-white px-4 py-2 rounded-full flex items-center justify-center ml-auto"
+                    onClick={() => {showDepositModal(row.token)}}
                   >
                     {isConnected ?  "Select" : "Connect Wallet" }
                   </button>
@@ -118,7 +132,12 @@ const LiquidityLockTable = ({
               </tr>
             ))}
           </tbody>
+        
         </table>
+
+        {DepositModal && (
+            <Deposit token={depositToken} onClose={handleClose} />
+          )}
       </div>
     </div>
   );
