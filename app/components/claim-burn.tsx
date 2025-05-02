@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ChevronDown, Info } from "lucide-react";
 import Image from "next/image";
+import { useEthereum } from "./Ethereum-provider";
+import { ethers } from "ethers";
 
 interface TokenData {
   available: number;
@@ -13,6 +15,7 @@ interface Asset {
   name: string;
   symbol: string;
   icon: string;
+  address?: string;
 }
 
 interface XZBInterfaceProps {
@@ -30,18 +33,21 @@ const SAMPLE_ASSETS: Asset[] = [
     name: "Ethereum",
     symbol: "ETH",
     icon: "/token.svg",
+    address: "0x0000000000000000000000000000000000000000" // ETH address
   },
   {
     id: "2",
     name: "USD Coin",
     symbol: "USDC",
     icon: "/token.svg",
+    address: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48" // USDC address
   },
   {
     id: "3",
     name: "Tether",
     symbol: "USDT",
     icon: "/token.svg",
+    address: "0xdAC17F958D2ee523a2206206994597C13D831ec7" // USDT address
   },
 ];
 
@@ -58,21 +64,220 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
   const [burnAmount, setBurnAmount] = useState<string>("");
   const [isAssetSelectorOpen, setIsAssetSelectorOpen] = useState(false);
   const [hasBurned, setHasBurned] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [userEthBalance, setUserEthBalance] = useState<string | null>(null);
+  const [maxAmount, setMaxAmount] = useState<string>("");
+  
+  const { 
+    isConnected: isEthereumConnected, 
+    connect: connectEthereum,
+    depositAsset,
+    claimTokens,
+    address: ethereumAddress,
+    provider
+  } = useEthereum();
+
+  // Reset error when tab changes
+  useEffect(() => {
+    setError(null);
+  }, [activeTab]);
+
+  // Add effect to fetch ETH balance when connected
+  useEffect(() => {
+    const fetchBalance = async () => {
+      if (isEthereumConnected && ethereumAddress && provider) {
+        try {
+          const balance = await provider.getBalance(ethereumAddress);
+          const balanceInEth = ethers.formatEther(balance);
+          setUserEthBalance(balanceInEth);
+          // Set max amount slightly less than balance to account for gas
+          const maxForGas = Number(balanceInEth) * 0.95; // Leave 5% for gas
+          setMaxAmount(maxForGas.toString());
+        } catch (error) {
+          console.error("Error fetching balance:", error);
+          setUserEthBalance(null);
+        }
+      } else {
+        setUserEthBalance(null);
+        setMaxAmount("");
+      }
+    };
+
+    fetchBalance();
+  }, [isEthereumConnected, ethereumAddress, provider]);
 
   const calculateRedemptionAmount = (amount: string) => {
     const value = parseFloat(amount) || 0;
-    const amountInWei = BigInt(Math.floor(value * 1e18)).toString();
     return (value * 0.97).toFixed(2); // 3% fee
   };
 
   const handleAssetSelect = (asset: Asset) => {
     setSelectedAsset(asset);
     setIsAssetSelectorOpen(false);
+    setError(null);
   };
 
-  const handleBurn = (amount: string, asset: string) => {
-    onBurn(amount, asset);
-    setHasBurned(true);
+  // Update input validation
+  const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (value === "" || /^\d*\.?\d*$/.test(value)) { // Allow empty or decimal numbers
+      setBurnAmount(value);
+      
+      // Clear error if amount is valid
+      if (selectedAsset?.symbol === "ETH" && userEthBalance) {
+        const inputAmount = Number(value);
+        const maxAllowed = Number(maxAmount);
+        
+        if (inputAmount > maxAllowed) {
+          setError(`Amount exceeds available balance (${Number(userEthBalance).toFixed(5)} ETH). Please enter a smaller amount.`);
+        } else {
+          setError(null);
+        }
+      }
+    }
+  };
+
+  // Update MAX button handler
+  const handleMaxClick = () => {
+    if (selectedAsset?.symbol === "ETH" && maxAmount) {
+      setBurnAmount(maxAmount);
+      setError(null);
+    } else {
+      setBurnAmount(tokenData.balance.toString());
+    }
+  };
+
+  const handleBurn = async (amount: string, assetId: string) => {
+    try {
+      setError(null);
+      setIsProcessing(true);
+
+      // Check if wallet is connected
+      if (!isConnected) {
+        throw new Error("Please connect your wallet first");
+      }
+
+      // Check if Ethereum wallet is connected for L1
+      if (!isEthereumConnected || !ethereumAddress) {
+        try {
+          await connectEthereum();
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          
+          if (!isEthereumConnected || !ethereumAddress) {
+            throw new Error("Failed to connect Ethereum wallet");
+          }
+        } catch (_) {
+          throw new Error("Please connect your Ethereum wallet first");
+        }
+      }
+
+      if (!selectedAsset) {
+        throw new Error("Please select an asset first");
+      }
+
+      if (!amount || parseFloat(amount) <= 0) {
+        throw new Error("Please enter a valid amount");
+      }
+
+      // Determine asset type (0 for ETH, 1 for ERC20)
+      const assetType = selectedAsset.symbol === "ETH" ? 0 : 1;
+      
+      // Get asset address
+      const tokenAddress = selectedAsset.address || "0x0000000000000000000000000000000000000000";
+
+      // For ETH transfers, validate balance before proceeding
+      if (assetType === 0) {
+        const balance = await provider?.getBalance(ethereumAddress);
+        if (!balance) {
+          throw new Error("Could not get your ETH balance");
+        }
+
+        const amountInWei = ethers.parseEther(amount);
+        if (balance < amountInWei) {
+          const balanceInEth = ethers.formatEther(balance);
+          throw new Error(
+            `Insufficient ETH balance. You have ${Number(balanceInEth).toFixed(5)} ETH but trying to send ${amount} ETH. Please reduce the amount or add more ETH to your wallet.`
+          );
+        }
+      }
+
+      console.log("Initiating burn transaction:", {
+        assetType,
+        tokenAddress,
+        amount,
+        userAddress: ethereumAddress,
+        isEthereumConnected,
+        hasAddress: !!ethereumAddress
+      });
+
+      // Call depositAsset function
+      const txHash = await depositAsset(
+        assetType,
+        tokenAddress,
+        amount
+      );
+      
+      console.log("Transaction hash:", txHash);
+      setHasBurned(true);
+      onBurn(amount, assetId);
+    } catch (error) {
+      console.error("Error in handleBurn:", error);
+      const errorMessage = error instanceof Error ? error.message : "An error occurred while burning tokens";
+      setError(errorMessage);
+      
+      // If it's an insufficient funds error, add a suggestion
+      if (errorMessage.includes("Insufficient")) {
+        setTimeout(() => {
+          setError(errorMessage + "\n\nTip: Try reducing the amount or adding more funds to your wallet.");
+        }, 100);
+      }
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const handleClaim = async () => {
+    try {
+      setError(null);
+      setIsProcessing(true);
+
+      if (!isEthereumConnected || !ethereumAddress) {
+        await connectEthereum();
+        return;
+      }
+
+      await claimTokens();
+      onClaim(selectedAsset?.id || "");
+    } catch (error) {
+      console.error("Error in handleClaim:", error);
+      setError(error instanceof Error ? error.message : "An error occurred while claiming tokens");
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const handleConnect = async () => {
+    try {
+      setError(null);
+      setIsProcessing(true);
+
+      if (activeTab === "claim" && !isEthereumConnected) {
+        await connectEthereum();
+        // Wait a bit for the connection to be established
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        // Check if connection was successful
+        if (!isEthereumConnected || !ethereumAddress) {
+          throw new Error("Failed to connect Ethereum wallet");
+        }
+      }
+    } catch (error) {
+      console.error("Error connecting:", error);
+      setError(error instanceof Error ? error.message : "An error occurred while connecting");
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   return (
@@ -122,6 +327,12 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
           isDarkMode ? "bg-[#21192F]" : "bg-[#F8F4FF]"
         } rounded-3xl lg:px-[37px] lg:pt-5 pb-[30px] pt-[30px] px-6 w-full`}
       >
+        {error && (
+          <div className={`${isDarkMode ? "bg-[#E25876] text-white" : "bg-[#FFE5EA] text-[#E25876]"} rounded-xl py-4 px-6 text-center`}>
+            <p>{error}</p>
+          </div>
+        )}
+
         {/* Title */}
         <h2 className="text-sm lg:text-lg font-medium">
           {activeTab === "claim"
@@ -170,18 +381,19 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
 
         {activeTab === "burn" && (
           <div>
-            <p
-              className={`${
-                isDarkMode ? "text-gray-400" : "text-[#53436D]"
-              } text-xs mb:text-sm mb-2 lg:mb-1`}
-            >
+            <p className={`${isDarkMode ? "text-gray-400" : "text-[#53436D]"} text-xs mb:text-sm mb-2 lg:mb-1`}>
               Enter amount to Burn
+              {selectedAsset?.symbol === "ETH" && userEthBalance && (
+                <span className="ml-2 text-xs">
+                  (Available: {Number(userEthBalance).toFixed(5)} ETH)
+                </span>
+              )}
             </p>
             <div className="relative">
               <input
                 type="text"
                 value={burnAmount}
-                onChange={(e) => setBurnAmount(e.target.value)}
+                onChange={handleAmountChange}
                 className={`w-full font-semibold ${
                   isDarkMode
                     ? "bg-[#1F1333] text-[#8B8B8B] placeholder:text-[#8B8B8B]"
@@ -190,8 +402,11 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
                 placeholder="Enter Amount"
               />
               <button
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-[#6c5dd3] text-xs lg:text-sm"
-                onClick={() => setBurnAmount(tokenData.balance.toString())}
+                className={`absolute right-4 top-1/2 -translate-y-1/2 text-[#6c5dd3] text-xs lg:text-sm ${
+                  (!selectedAsset || (selectedAsset.symbol === "ETH" && !userEthBalance)) ? "opacity-50 cursor-not-allowed" : ""
+                }`}
+                onClick={handleMaxClick}
+                disabled={!selectedAsset || (selectedAsset.symbol === "ETH" && !userEthBalance)}
               >
                 MAX
               </button>
@@ -346,24 +561,41 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
           <button
             className={`w-full bg-gradient-to-b from-[#A26DFF] to-[#09050E] hover:bg-[#5a4eb8] rounded-2xl p-[14px] lg:p-4 font-bold lg:font-medium transition-colors ${
               !isDarkMode && "text-white"
-            } ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
-            onClick={() =>
-              activeTab === "claim"
-                ? onClaim(selectedAsset?.id || "")
-                : handleBurn(burnAmount, selectedAsset?.id || "")
+            } ${(isLoading || isProcessing) ? "opacity-50 cursor-not-allowed" : ""}`}
+            onClick={async () => {
+              if (activeTab === "claim") {
+                if (!isEthereumConnected) {
+                  await handleConnect();
+                } else {
+                  await handleClaim();
+                }
+              } else {
+                await handleBurn(burnAmount, selectedAsset?.id || "");
+              }
+            }}
+            disabled={
+              isLoading || 
+              isProcessing ||
+              (activeTab === "claim" && !hasBurned) || 
+              (activeTab === "burn" && (!burnAmount || !selectedAsset || parseFloat(burnAmount) <= 0))
             }
-            disabled={activeTab === "claim" && !hasBurned || isLoading}
           >
-            {isLoading ? "Processing..." : activeTab === "claim" ? "Claim xZB" : "Burn xZB"}
+            {isLoading || isProcessing
+              ? "Processing..." 
+              : activeTab === "claim" 
+                ? (isEthereumConnected ? "Claim xZB" : "Connect Ethereum Wallet") 
+                : "Burn xZB"
+            }
           </button>
         ) : (
           <button
             className={`w-full bg-gradient-to-b from-[#A26DFF] to-[#09050E] hover:bg-[#5a4eb8] rounded-2xl p-[14px] lg:p-4 font-bold lg:font-medium transition-colors ${
               !isDarkMode && "text-white"
             }`}
-            onClick={()=>{return}}
+            onClick={handleConnect}
+            disabled={isProcessing}
           >
-            Connect Wallet
+            {isProcessing ? "Connecting..." : "Connect Wallet"}
           </button>
         )}
       </div>
