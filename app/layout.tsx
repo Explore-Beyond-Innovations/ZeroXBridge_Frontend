@@ -7,6 +7,13 @@ import { ThemeProvider, useTheme } from "./ThemeContext";
 import Navbar from "./components/navbar";
 import NavigationBar from "./components/mobile-navigator";
 import { StarknetProvider } from "./components/Starknet-provider";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { WagmiProvider } from 'wagmi'
+import { config } from './config'
+
+// 2. Set up a React Query client.
+const queryClient = new QueryClient()
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -49,11 +56,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable} ${robotoSerif.variable} antialiased bg-[#09050E]`}
       >
+           <WagmiProvider config={config}>
+           <QueryClientProvider client={queryClient}> 
         <StarknetProvider>
           <ThemeProvider>
             <LayoutContent showSidebar={showSidebar}>{children}</LayoutContent>
           </ThemeProvider>
         </StarknetProvider>
+        </QueryClientProvider> 
+        </WagmiProvider>
       </body>
     </html>
   );

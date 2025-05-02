@@ -10,6 +10,7 @@ import {
   useInjectedConnectors,
   voyager
 } from "@starknet-react/core";
+
  
 export function StarknetProvider({ children }: { children: React.ReactNode }) {
   const { connectors } = useInjectedConnectors({
