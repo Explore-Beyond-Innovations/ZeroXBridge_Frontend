@@ -123,10 +123,10 @@ const Header = () => {
     const check4K = () => {
       setIs4K(window.innerWidth >= 3000);
     };
-    
+
     check4K();
-    window.addEventListener('resize', check4K);
-    return () => window.removeEventListener('resize', check4K);
+    window.addEventListener("resize", check4K);
+    return () => window.removeEventListener("resize", check4K);
   }, []);
 
   // Then in your node mapping:
@@ -136,12 +136,11 @@ const Header = () => {
       // Adjust position for 4K screens - fine-tune these values
       return {
         top: `calc(${node.top} + 0.4%)`,
-        left: `calc(${node.left} - 2.2%)`
+        left: `calc(${node.left} - 2.2%)`,
       };
     }
     return { top: node.top, left: node.left };
   };
-
 
   useEffect(() => {
     setIsVisible(true);
@@ -199,8 +198,8 @@ const Header = () => {
   );
 
   return (
-    <div className="w-full bg-[#09050E] h-fit pt-[8rem] 4k-large:pt-[12rem] 4k-large:w-[85%] mx-auto px-[1.5rem]">
-      <div className="flex flex-col gap-10 md:gap-[10em] bg-[url(/hero-bg.png)] bg-cover bg-no-repeat bg-center h-fit justify-center w-full px-4 sm:px-6 lg:px-[4rem]">
+    <div className="w-full bg-[#09050E] lg:min-h-screen overflow-x-hidden relative pt-[8rem] 4k-large:pt-[12rem] 4k-large:w-[85%] mx-auto px-[1.5rem]">
+      <div className="flex flex-col gap-10 md:gap-[10em] bg-[url(/hero-bg.png)] bg-cover bg-no-repeat bg-center min-h-[calc(100vh-8rem)] justify-center w-full px-4 sm:px-6 lg:px-[4rem]">
         <div className="flex flex-col lg:flex-row justify-between relative items-center w-full h-full">
           <div className="flex flex-col justify-center h-full gap-4 lg:gap-[1rem] w-full px-[1px] lg:w-[70%] text-center lg:text-left">
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[48px] xl:text-[54px] 4k:text-[78px] font-manrope py-2 text-wrap w-full font-bold bg-gradient-to-r from-[#262429] via-[#9B6DFF] to-[#262429] bg-clip-text text-transparent leading-tight lg:leading-[4rem] 4k:leading-[6rem]">
@@ -211,19 +210,20 @@ const Header = () => {
                 Unlock liquidity on Starknet using Ethereum collateral—no asset
                 transfers,
               </p>
-              <p className="md:text-gray-400 text-white">no wrapping, no centralized bridges.</p>
+              <p className="md:text-gray-400 text-white">
+                no wrapping, no centralized bridges.
+              </p>
             </div>
             <div className="flex justify-center lg:justify-start mt-6 lg:mt-[39px]">
-               <Link href="/dashboard" className="hidden lg:block cursor-pointer">
-          <Button variant="gradientPrimary" size="default">
-            Launch App
-          </Button>
-        </Link>
+              <Link href="/dashboard" className=" cursor-pointer">
+                <Button variant="gradientPrimary" size="default">
+                  Launch App
+                </Button>
+              </Link>
             </div>
           </div>
 
-
-          <div className="mt-10 lg:mt-0 w-full lg:w-[520px] max-w-[520px] 4k:max-w-full 4k:w-[720px] 4k-large:scale-110 relative h-[300px] sm:h-[400px] lg:h-[457px] 4k:h-[720px] ">
+          <div className="mt-10 lg:mt-0 w-full lg:w-[520px] max-w-[520px] 4k:max-w-full 4k:w-[720px] 4k-large:scale-110 relative h-[290px] sm:h-[400px] lg:h-[457px] 4k:h-[720px] ">
             {/* Spinning globe (inner element) */}
             <div className="absolute inset-0 flex flex-col items-center justify-center">
               <Image
@@ -249,31 +249,32 @@ const Header = () => {
             {/* Flashing nodes */}
             <div className="absolute inset-0 pointer-events-none">
               {NETWORK_NODES.map((node, index) => {
-      const position = getNodePosition(node);
-      return (
-                <div
-                  key={index}
-                  className={``}
-                   style={{
-                    position: 'absolute',
-                    top: position.top,
-                    left: position.left,
-                     transform: `translate(${node.translateX}, ${node.translateY})`,
-                   }}
-                >
+                const position = getNodePosition(node);
+                return (
                   <div
-                    className="w-2 h-2 4k-large:w-4 4k-large:h-4 bg-gradient-to-b from-[#FFFFFF] to-[#A26DFF] rounded-full shadow-glow"
+                    key={index}
+                    className={``}
                     style={{
-                      animation: `pulse 3s infinite ${node.delay}`,
+                      position: "absolute",
+                      top: position.top,
+                      left: position.left,
+                      transform: `translate(${node.translateX}, ${node.translateY})`,
                     }}
-                  ></div>
-                </div>
-              )})}
+                  >
+                    <div
+                      className="w-2 h-2 4k-large:w-4 4k-large:h-4 bg-gradient-to-b from-[#FFFFFF] to-[#A26DFF] rounded-full shadow-glow"
+                      style={{
+                        animation: `pulse 3s infinite ${node.delay}`,
+                      }}
+                    ></div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
         <div className="mt-10  lg:-mt-0 4k-large:mt-[2rem] w-full flex items-center">
-          <div className="w-full flex items-center justify-center gap-4 ml-[12%]">
+          <div className="w-full flex items-center justify-center gap-4 lg:ml-[12%]">
             {STATS_DATA.map(renderStatItem)}
           </div>
         </div>
