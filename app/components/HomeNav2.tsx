@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { Button } from "./ui/button";
 
 
 type NavLink = {
@@ -22,9 +24,20 @@ const HomeNav2 = () => {
   };
 
   return (
-    <div className="w-full lg:w-[60%] mx-auto bg-[#09050E] rounded-full">
-      <nav className="flex items-center w-full  lg:mx-auto border-[#C29EFF1A] lg:border lg:rounded-full px-4 py-3  justify-between">
-      <h2 className="italic font-[family-name:var(--font-bad-script)] text-[18px] lg:text-[36px]">ZeroXbridge</h2>
+    <div className="w-full px-6 bg-[#09050E] lg:bg-transparent rounded-xl">
+      <nav className="flex items-center w-full  lg:mx-auto  px-4 py-3  justify-between">
+      {/* Logo */}
+      <Link href="/" className="flex-shrink-0">
+          <div className="logo">
+            <Image
+              src="/icons/logo.svg"
+              alt="Logo"
+              width={137}
+              height={55}
+              className="w-auto h-10 sm:h-12 cursor-pointer"
+            />
+          </div>
+        </Link>
 
         {/* Mobile Menu Toggle */}
         <div className="lg:hidden">
@@ -50,7 +63,7 @@ const HomeNav2 = () => {
         </div>
 
         {/* Desktop Links */}
-        <div className="lg:flex items-center hidden w-full gap-8 justify-evenly">
+        <div className="lg:flex items-center hidden w-[40%] gap-8 justify-evenly">
           {navLinks.map((link, index) => (
             <a
               key={index}
@@ -62,9 +75,16 @@ const HomeNav2 = () => {
           ))}
         </div>
 
+          {/* Launch App Button - Hidden on Mobile */}
+          <Link href="/dashboard" className="hidden lg:block cursor-pointer">
+          <Button variant="gradientPrimary" size="default">
+            Launch App
+          </Button>
+        </Link>
+
         {/* Mobile Menu - Slide from Right */}
         <div
-          className={`fixed inset-0 right-0 w-full bg-[#21192F] pt-5 z-50 flex flex-col items-center justify-start transform transition-transform duration-300 ease-in-out ${isMenuOpen ? "translate-x-0" : "translate-x-full"
+          className={`fixed lg:hidden inset-0 right-0 w-full rounded-xl bg-[#21192F] pt-5 z-50 flex flex-col items-center justify-start transform transition-transform duration-300 ease-in-out ${isMenuOpen ? "translate-x-0" : "translate-x-full"
             }`}
         >
           {/* Header with Logo & Close Button */}

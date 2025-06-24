@@ -41,11 +41,11 @@ const AboutUs = () => {
           With ZeroXBridge eliminating the vulnerabilities of traditional cross-chain solutions:
         </p>
 
-        <div className="flex flex-col md:flex-row gap-8 md:gap-8 py-2 md:py-5 px-2 md:px-10">
+        <div className="flex flex-col lg:flex-row gap-8 md:gap-8 py-2 md:py-5 px-2 md:px-10">
           {/* No Asset Transfers */}
           <div className="flex flex-col gap-8 md:gap-6 md:flex-1">
             <div className="relative bg-grid-pattern bg-cover bg-center rounded-2xl p-4 md:pb-5 md:px-5 shadow-[0px_0px_4px_2px_#A26DFF26] sm:shadow-custom-purple border border-transparent flex flex-col justify-center h-[413px] md:h-[300px] w-full">
-              <div className="flex justify-center md:absolute md:top-2 md:left-96 mb-4 md:mb-0">
+              <div className="flex justify-center md:absolute md:top-2 md:right-8 mb-4 lg:mb-0">
                 <Image
                   src="/images/assets-transfer.png"
                   alt="No Asset Transfers"
@@ -70,7 +70,7 @@ const AboutUs = () => {
 
             {/* No Centralized Intermediaries */}
             <div className="relative bg-grid-pattern bg-cover bg-center rounded-2xl p-4 md:pb-5 md:px-5 shadow-[0px_0px_4px_2px_#A26DFF26] sm:shadow-custom-purple border border-transparent flex flex-col justify-center h-[413px] md:h-[300px] w-full">
-              <div className="flex justify-center md:absolute md:top-2 md:left-96 mb-4 md:mb-0">
+              <div className="flex justify-center md:absolute md:top-2 md:right-8 mb-4 md:mb-0">
                 <Image
                   src="/images/centralized-icon.png"
                   alt="No Centralized Intermediaries"

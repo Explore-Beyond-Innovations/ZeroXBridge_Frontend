@@ -60,7 +60,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable} ${robotoSerif.variable} ${badScript.variable} antialiased bg-[#09050E]`}
+        className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable} ${robotoSerif.variable} ${badScript.variable} antialiased bg-[#09050E] h-full`}
       >
            <WagmiProvider config={config}>
            <QueryClientProvider client={queryClient}> 
@@ -100,7 +100,7 @@ function LayoutContent({
           }`}
         >
           <main
-            className={`flex-1 ${showSidebar ? "mt-[4rem] mb-[4rem]" : ""}`}
+            className={`flex-1 ${showSidebar ? "mt-[4rem] mb-[4rem]" : "h-full w-full"}`}
           >
             {children}
           </main>
