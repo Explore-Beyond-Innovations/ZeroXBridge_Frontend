@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Button } from "./ui/button";
-import Link from "next/link";
+// import Link from "next/link";
 import { SectionTitle } from "./about-core-problems";
 
 const aboutUs = {
@@ -43,15 +43,16 @@ const AboutHeader = () => {
               })
             }
           </div>
-          <Link href='/dashboard' className="w-full sm:w-auto">
-            <Button
-              variant="gradientPrimary"
-              size="default"
-              className="w-full sm:max-w-[200px]"
-            >
-              Launch App
-            </Button>
-          </Link>
+          {/* <Link href='/dashboard' className="w-full sm:w-auto"> */}
+          <Button
+            variant="gradientPrimary"
+            size="default"
+            className="w-full sm:max-w-[200px] "
+            disabled={true}
+          >
+            Coming Soon
+          </Button>
+          {/* </Link> */}
         </div>
         <div className="bg-[url(/about-header.png)] hidden md:flex bg-cover w-[250px] h-[270px] sm:w-[320px] sm:h-[347px] md:w-[396px] md:h-[427px] flex-col items-center justify-center">
           <Image
@@ -64,7 +65,7 @@ const AboutHeader = () => {
         </div>
       </div>
       <div className="flex flex-col justify-center items-center md:hidden">
-      <div className="bg-[url(/about-header.png)] flex md:hidden bg-cover w-[300px] h-[300px] sm:w-[320px] sm:h-[347px] md:w-[396px] md:h-[427px] flex-col items-center justify-center">
+        <div className="bg-[url(/about-header.png)] flex md:hidden bg-cover w-[300px] h-[300px] sm:w-[320px] sm:h-[347px] md:w-[396px] md:h-[427px] flex-col items-center justify-center">
           <Image
             src="/about-header-icon.png"
             alt="Glow Effect"

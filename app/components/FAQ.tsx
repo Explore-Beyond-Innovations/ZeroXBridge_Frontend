@@ -3,6 +3,30 @@ import { Manrope, Roboto_Serif } from "next/font/google";
 import Image from "next/image";
 import React, { useState } from "react";
 
+export const faqs = [
+  {
+    question: "What is ZeroXBridge built on?",
+    answer: "ZeroXBridge is built on a combination of Ethereum and Starknet, leveraging the strengths of both platforms to provide a secure and efficient cross-chain solution."
+  },
+  {
+    question: "How does ZeroXBridge differ from traditional bridges?",
+    answer: "Unlike traditional bridges that rely on validators or relayers, ZeroXBridge uses zk-STARK proofs to verify deposits and burns on-chain, removing centralized trust assumptions."
+  },
+  {
+    question: "What is xZB?",
+    answer: "xZB is the single native token of ZeroXBridge. It's minted on Starknet when a valid deposit proof is submitted and burned to generate a withdrawal proof for asset recovery on Ethereum."
+  },
+  {
+    question: "Do users have to trust any intermediaries?",
+    answer: "No. ZeroXBridge is fully trustless. All cross-chain actions are verified by zk-STARK proofs that are publicly verifiable and processed on-chain."
+  },
+  {
+    question: "Can I recover my Ethereum assets after using them on Starknet?",
+    answer: "Yes, as long as you burn your xZB tokens on Starknet and submit the zk-proof on Ethereum, your locked assets can be unlocked."
+  }
+];
+
+
 interface FaqItem {
   item: {
     question: string;
@@ -27,9 +51,8 @@ const FaqItem = ({ item, onToggle, isOpen }: FaqItem) => {
         onClick={onToggle}
       >
         <h4
-          className={` transition-all duration-500 ease-in-out mt-3 ${
-            manrope.className
-          } ${isOpen ? "text-[#A26DFF]  font-medium text-lg" : "text-white"}`}
+          className={` transition-all duration-500 ease-in-out mt-3 ${manrope.className
+            } ${isOpen ? "text-[#A26DFF]  font-medium text-lg" : "text-white"}`}
         >
           {item.question}
         </h4>
@@ -39,16 +62,14 @@ const FaqItem = ({ item, onToggle, isOpen }: FaqItem) => {
           alt="arrowdown"
           height={18}
           width={19}
-          className={`transition-transform duration-500 ease-in-out ${
-            isOpen ? "rotate-180 " : ""
-          }`}
+          className={`transition-transform duration-500 ease-in-out ${isOpen ? "rotate-180 " : ""
+            }`}
         />
       </div>
 
       <div
-        className={`overflow-hidden transition-all duration-500 flex justify-center items-center ease-in-out ${
-          isOpen ? "max-h-[200px] opacity-100 mt-4" : "max-h-0 opacity-0"
-        }`}
+        className={`overflow-hidden transition-all duration-500 flex justify-center items-center ease-in-out ${isOpen ? "max-h-[200px] opacity-100 mt-4" : "max-h-0 opacity-0"
+          }`}
       >
         <p
           className={`lg:text-[16px] text-[13px] px-6  font-400  text-white/85 max-w-[609px] ${roboto.className}`}
@@ -79,24 +100,18 @@ const FAQ = () => {
           ZeroXBridge is here to answer all your questions and keep you updated.
         </p>
 
-        {Array(7)
-          .fill(null)
-          .map((_, index) => {
-            return (
-              <FaqItem
-                item={{
-                  question: `What is ZeroXBridge built on?`,
-                  answer: `Morem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque.`,
-                }} // Sample data
-                key={index}
-                onToggle={() => onToggle(index)}
-                isOpen={index === isOpenIndex}
-              />
-            );
-          })}
-    
-          <div className="gradient-01 z-0 rounded-full  "></div>
-        
+        {/* FAQ Items */}
+        {faqs.map((faq, index) => (
+          <FaqItem
+            item={faq}
+            key={index}
+            onToggle={() => onToggle(index)}
+            isOpen={index === isOpenIndex}
+          />
+        ))}
+
+        <div className="gradient-01 z-0 rounded-full  "></div>
+
       </div>
     </div>
   );

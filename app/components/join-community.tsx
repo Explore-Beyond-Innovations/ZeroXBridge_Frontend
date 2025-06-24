@@ -1,6 +1,7 @@
 import { Manrope, Roboto_Serif } from "next/font/google";
 import Image from "next/image";
 import ellipse from "@/public/join-community/ellipse.svg";
+import Link from "next/link";
 
 const manrope = Manrope({
   weight: ["700"],
@@ -34,18 +35,24 @@ const JoinCommunity = () => {
             </p>
           </div>
           <div className="flex justify-center">
-            <button
-              type="button"
-              className={`${manrope.className} text-black rounded-full text-base md:text-xl bg-community-cta p-[2px]`}
-              style={{
-                boxShadow:
-                  "0px 4px 8px 0px #C29EFF1A, 0px -4px 4px 0px #A26DFF0D",
-              }}
+            <Link
+              href="https://t.me/+bY04VgJ2MhphMDk0"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <span className="grid place-items-center bg-[#D2B9FF] w-[200px] md:w-[250px] h-[50px] md:h-[68px] rounded-full">
-                Join Community
-              </span>
-            </button>
+              <button
+                type="button"
+                className={`${manrope.className} text-black rounded-full text-base md:text-xl bg-community-cta p-[2px]`}
+                style={{
+                  boxShadow:
+                    "0px 4px 8px 0px #C29EFF1A, 0px -4px 4px 0px #A26DFF0D",
+                }}
+              >
+                <span className="grid place-items-center bg-[#D2B9FF] w-[200px] md:w-[250px] h-[50px] md:h-[68px] rounded-full">
+                  Join Community
+                </span>
+              </button>
+            </Link>
           </div>
         </div>
       </div>

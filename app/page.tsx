@@ -5,7 +5,7 @@ import Footer from "./components/footer";
 import Header from "./components/header";
 import HomeNav from "./components/HomeNav";
 import HowItWorks from "./components/how-it-works";
-import Testimonial from "./components/testimonial";
+// import Testimonial from "./components/testimonial";
 
 export default function Home() {
   return (
@@ -16,7 +16,7 @@ export default function Home() {
         <HowItWorks />
         <AboutUs />
         <FAQ />
-        <Testimonial />
+        {/* <Testimonial /> */}
       </div>
       <Footer />
     </div>

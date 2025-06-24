@@ -11,10 +11,10 @@ type NavLink = {
 };
 
 const navLinks: NavLink[] = [
-  { name: "About Us", href: "/about" },
-  { name: "Pricing", href: "#" },
-  { name: "Features", href: "#" },
-  { name: "Contact Us", href: "#" },
+  // { name: "About Us", href: "/about" },
+  // { name: "Pricing", href: "#" },
+  // { name: "Features", href: "#" },
+  // { name: "Contact Us", href: "#" },
 ];
 
 const HomeNav = () => {
@@ -25,8 +25,8 @@ const HomeNav = () => {
   };
 
   return (
-    <div className="w-full  bg-[#09050E] fixed top-0 z-[1000]">
-      <nav className="max-w-screen-2xl px-4 pt-8 pb-2 sm:px-6 lg:px-10 xl:px-20 flex items-center justify-between mx-auto">
+    <div className="w-full bg-[#09050E] fixed top-0 z-[1000]">
+      <nav className="px-4 pt-8 pb-2 sm:px-6 lg:px-10 xl:px-20 flex items-center justify-between mx-auto">
         {/* Logo */}
         <Link href="/" className="flex-shrink-0">
           <div className="logo">
@@ -41,7 +41,7 @@ const HomeNav = () => {
         </Link>
 
         {/* Mobile Menu Toggle */}
-        <div className="lg:hidden">
+        <div className="lg:hidden hidden">
           <button
             onClick={toggleMenu}
             className="text-white focus:outline-none"
@@ -53,7 +53,7 @@ const HomeNav = () => {
               width={137}
               height={55}
               className="w-auto h-10 sm:h-12 cursor-pointer"
-            /> :  <Image
+            /> : <Image
               src="/icons/hammenu.svg"
               alt="Logo"
               width={137}
@@ -78,11 +78,11 @@ const HomeNav = () => {
 
 
         {/* Launch App Button - Hidden on Mobile */}
-        <Link href="/dashboard" className="hidden lg:block cursor-pointer">
-          <Button variant="gradientPrimary" size="default">
-            Launch App
-          </Button>
-        </Link>
+        {/* <Link href="/dashboard" className="hidden lg:block cursor-pointer"> */}
+        <Button variant="gradientPrimary" size="default" disabled={true}>
+          Coming Soon
+        </Button>
+        {/* </Link> */}
 
         {/* Mobile Menu - Slide from Right */}
         <div
@@ -104,12 +104,12 @@ const HomeNav = () => {
               aria-label="Close menu"
             >
               <Image
-              src="/icons/cross.svg"
-              alt="Logo"
-              width={137}
-              height={55}
-              className="w-auto h-10 sm:h-12 cursor-pointer"
-            />
+                src="/icons/cross.svg"
+                alt="Logo"
+                width={137}
+                height={55}
+                className="w-auto h-10 sm:h-12 cursor-pointer"
+              />
             </button>
           </div>
 

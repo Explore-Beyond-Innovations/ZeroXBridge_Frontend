@@ -4,7 +4,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import RightArrow from "@/public/right-arrow.svg";
-import Link from "next/link";
+// import Link from "next/link";
 import { Button } from "./ui/button";
 
 interface StatItem {
@@ -14,10 +14,10 @@ interface StatItem {
 }
 
 const STATS_DATA: StatItem[] = [
-  { value: "70M+", label: "Total Transactions", endValue: 70 },
-  { value: "7K+", label: "Active Users", endValue: 7 },
-  { value: "20M+", label: "Total earned", endValue: 20 },
-  { value: "10M+", label: "Investments", endValue: 10 },
+  // { value: "70M+", label: "Total Transactions", endValue: 70 },
+  // { value: "7K+", label: "Active Users", endValue: 7 },
+  // { value: "20M+", label: "Total earned", endValue: 20 },
+  // { value: "10M+", label: "Investments", endValue: 10 },
 ];
 
 const NETWORK_NODES = [
@@ -198,7 +198,7 @@ const Header = () => {
   );
 
   return (
-    <div className="w-full bg-[#09050E] lg:min-h-screen overflow-x-hidden relative pt-[8rem] 4k-large:pt-[12rem] 4k-large:w-[85%] mx-auto px-[1.5rem]">
+    <div className="w-full bg-[#09050E] lg:min-h-screen overflow-x-hidden relative pt-[8rem] 4k-large:pt-[12rem] 4k-large:w-[85%] mx-auto px-[3.5rem]">
       <div className="flex flex-col gap-10 md:gap-[10em] bg-[url(/hero-bg.png)] bg-cover bg-no-repeat bg-center min-h-[calc(100vh-8rem)] justify-center w-full px-4 sm:px-6 lg:px-[4rem]">
         <div className="flex flex-col lg:flex-row justify-between relative items-center w-full h-full">
           <div className="flex flex-col justify-center h-full gap-4 lg:gap-[1rem] w-full px-[1px] lg:w-[70%] text-center lg:text-left">
@@ -207,19 +207,18 @@ const Header = () => {
             </h1>
             <div className="font-roboto-serif text-sm md:text-base lg:text-[17px] 2xl:text-[24px] 4k:text-[32px] font-[400] relative mt-4 w-full max-w-sm mac-14:max-w-full 4k:max-w-full mx-auto lg:mx-0 flex flex-col gap-4">
               <p className="md:text-gray-400 text-white">
-                Unlock liquidity on Starknet using Ethereum collateral—no asset
-                transfers,
+                Unlock liquidity on Starknet using ZK,
               </p>
               <p className="md:text-gray-400 text-white">
                 no wrapping, no centralized bridges.
               </p>
             </div>
             <div className="flex justify-center lg:justify-start mt-6 lg:mt-[39px]">
-              <Link href="/dashboard" className=" cursor-pointer">
-                <Button variant="gradientPrimary" size="default">
-                  Launch App
-                </Button>
-              </Link>
+              {/* <Link href="/dashboard" className=" cursor-pointer"> */}
+              <Button variant="gradientPrimary" size="default" disabled={true}>
+                Coming Soon
+              </Button>
+              {/* </Link> */}
             </div>
           </div>
 
