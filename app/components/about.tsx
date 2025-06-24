@@ -71,6 +71,7 @@ const AboutUs = () => {
 
             {/* Immutable, Verifiable Cross-Chain State */}
             <div className="relative bg-grid-pattern bg-cover bg-center rounded-2xl p-4 md:pb-5 md:px-5 shadow-[0px_0px_4px_2px_#A26DFF26] sm:shadow-custom-purple border border-transparent flex flex-col justify-center h-[413px] md:h-[300px] w-full">
+
               <div className="flex justify-center md:absolute md:top-2 md:right-4 lg:right-8 mb-4 md:mb-0">
                 <Image
                   src="/images/liquidity-chain.png"
