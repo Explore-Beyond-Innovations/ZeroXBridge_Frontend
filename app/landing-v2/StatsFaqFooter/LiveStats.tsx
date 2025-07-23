@@ -1,139 +1,125 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
 
-interface Stat {
-  label: string;
+interface Transaction {
+  id: string;
+  type: string;
+  from: string;
+  amount: string;
   value: string;
-  change?: string;
-  trend?: "up" | "down";
 }
 
 const LiveStats = () => {
-  const [stats, setStats] = useState<Stat[]>([
+  const mockTransactions: Transaction[] = [
     {
-      label: "Total Volume",
-      value: "$0",
-      change: "+0%",
-      trend: "up",
+      id: "1",
+      type: "Swapped to STRK",
+      from: "0x07296...cfede",
+      amount: "+400 USDT",
+      value: "$399.6",
     },
     {
-      label: "24h Transactions",
-      value: "0",
-      change: "+0%",
-      trend: "up",
+      id: "2",
+      type: "Swapped to STRK",
+      from: "0x07296...cfede",
+      amount: "+400 USDT",
+      value: "$399.6",
     },
-    {
-      label: "Active Users",
-      value: "0",
-      change: "+0%",
-      trend: "up",
-    },
-    {
-      label: "TVL",
-      value: "$0",
-      change: "+0%",
-      trend: "up",
-    },
-  ]);
-
-  // Mock data animation
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setStats((prevStats) =>
-        prevStats.map((stat) => {
-          const randomChange = Math.random() * 10 - 5;
-          const newValue = parseFloat(stat.value.replace(/[$,]/g, "")) || 0;
-          const updatedValue = Math.max(0, newValue + randomChange * 1000);
-          
-          return {
-            ...stat,
-            value: stat.label.includes("Volume") || stat.label.includes("TVL") 
-              ? `$${updatedValue.toLocaleString("en-US", { maximumFractionDigits: 0 })}`
-              : updatedValue.toFixed(0),
-            change: `${randomChange > 0 ? "+" : ""}${randomChange.toFixed(2)}%`,
-            trend: randomChange > 0 ? "up" : "down",
-          };
-        })
-      );
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, []);
+  ];
 
   return (
-    <section className="w-full py-16 md:py-24 bg-gradient-to-b from-[#09050E] to-[#0F0A1A]">
+    <section className="w-full py-16 md:py-24 bg-[#09050E]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="mb-12"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-            Live Protocol Stats
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-400 uppercase tracking-wider">
+            Live Stats
           </h2>
-          <div className="flex items-center justify-center gap-2">
-            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-            <p className="text-gray-400 text-lg">Real-time data (Coming Soon)</p>
-          </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {stats.map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="relative bg-gradient-to-br from-[#1A1525] to-[#0F0A1A] rounded-2xl p-6 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-transparent rounded-2xl opacity-0 hover:opacity-100 transition-opacity duration-300" />
-              
-              <div className="relative z-10">
-                <p className="text-gray-400 text-sm mb-2">{stat.label}</p>
-                <div className="flex items-end justify-between">
-                  <h3 className="text-2xl md:text-3xl font-bold text-white">
-                    {stat.value}
-                  </h3>
-                  {stat.change && (
-                    <div className={`flex items-center gap-1 text-sm ${
-                      stat.trend === "up" ? "text-green-500" : "text-red-500"
-                    }`}>
-                      <span>{stat.change}</span>
-                      <svg
-                        className={`w-4 h-4 ${stat.trend === "down" ? "rotate-180" : ""}`}
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path d="M5 15l7-7 7 7" />
-                      </svg>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Total Value Locked Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+            className="bg-[#1a1a1a] rounded-xl p-6"
+          >
+            <h3 className="text-lg font-semibold text-white mb-4">Total Value Locked</h3>
+            <button className="w-full bg-[#2a2a2a] hover:bg-[#3a3a3a] transition-colors duration-300 rounded-lg p-4 flex items-center gap-3 text-white">
+              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <circle cx="12" cy="16" r="1"></circle>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+              <span>Coming Soon</span>
+            </button>
+          </motion.div>
+
+          {/* XZB Supply Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="bg-[#1a1a1a] rounded-xl p-6"
+          >
+            <h3 className="text-lg font-semibold text-white mb-4">XZB Supply</h3>
+            <button className="w-full bg-[#2a2a2a] hover:bg-[#3a3a3a] transition-colors duration-300 rounded-lg p-4 flex items-center gap-3 text-white">
+              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <circle cx="12" cy="16" r="1"></circle>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+              <span>Coming Soon</span>
+            </button>
+          </motion.div>
+
+          {/* Latest Transactions Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="bg-[#1a1a1a] rounded-xl p-6"
+          >
+            <h3 className="text-lg font-semibold text-white mb-4">Latest Transactions</h3>
+            <div className="space-y-4">
+              {mockTransactions.map((tx, index) => (
+                <div key={tx.id} className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-[#2a2a2a] rounded-lg flex items-center justify-center">
+                      {index === 0 ? (
+                        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                        </svg>
+                      ) : (
+                        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
+                        </svg>
+                      )}
                     </div>
-                  )}
+                    <div>
+                      <div className="text-white text-sm font-medium">{tx.type}</div>
+                      <div className="text-gray-400 text-xs">From {tx.from}</div>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-white text-sm font-medium">{tx.amount}</div>
+                    <div className="text-gray-400 text-xs">{tx.value}</div>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              ))}
+            </div>
+          </motion.div>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          viewport={{ once: true }}
-          className="mt-8 text-center"
-        >
-          <p className="text-gray-500 text-sm">
-            Stats update every 3 seconds • Powered by ZeroX Protocol
-          </p>
-        </motion.div>
       </div>
     </section>
   );
