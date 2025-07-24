@@ -148,7 +148,7 @@ const FeaturesList = () => {
       <h2 className="font-mono font-[500] text-[14px] 2xl:text-[32px] text-[#A6A6A7] self-start px-2 uppercase lg:pl-[40px] ">
         Inside ZeroXBridge{" "}
         <span className="bg-[url('/border.svg')] bg-cover bg-no-repeat rounded-full px-0.5 py-1 inline-block">
-          <span className="uppercase bg-black w-full h-full rounded-full px-[6.5px] py-[4.5px] ">
+          <span className="uppercase bg-[#131314] w-full h-full rounded-full px-[6.5px] py-[4.5px] ">
             Coming Soon
           </span>
         </span>
