@@ -154,7 +154,7 @@ function AnimatedCard({ card, index }: { card: typeof cardData[number]; index: n
     >
       <div
         className={`${card.styling} bg-[#161616] rounded-[16px] 2xl:rounded-[24px] py-[30px] overflow-hidden group transition-all duration-300 ease-in-out ${
-          isActive ? 'grayscale-0 brightness-100' : 'grayscale brightness-[65%]'
+          isActive ? 'grayscale-0 brightness-100' : 'grayscale brightness-[80%]'
         } hover:grayscale-0 hover:brightness-100`}
       >
 
@@ -168,7 +168,7 @@ function AnimatedCard({ card, index }: { card: typeof cardData[number]; index: n
             {card.description}
           </p>
         </div>
-        <motion.div className="w-full h-full relative" animate={controls}>
+        <motion.div className={`w-full h-full relative opacity-40 group-hover:opacity-100 ${isActive && 'opacity-100'}`} animate={controls}>
           <Image
             src={card.image}
             alt="card"
@@ -176,8 +176,8 @@ function AnimatedCard({ card, index }: { card: typeof cardData[number]; index: n
             height={1000}
             priority
             quality={100} 
-            className={`${card.imagestyle} opacity-20 group-hover:opacity-100 bg-cover transition-all duration-300 ease-linear ${
-              isActive ? getActiveImageStyle(card.title) : ''
+            className={`${card.imagestyle}   bg-cover transition-all duration-300 ease-linear ${
+              isActive ? getActiveImageStyle(card.title)  : ''
             }`}
           />
         </motion.div>
@@ -188,7 +188,7 @@ function AnimatedCard({ card, index }: { card: typeof cardData[number]; index: n
 
 const InsideZeroX = () => {
   return (
-    <div className="w-fit px-2 2xl:px-[40px] h-fit py-4 flex flex-col gap-4 items-center mx-auto lg:scale-90 xl:scale-100">
+    <div className="w-fit px-2 2xl:px-[40px] h-fit py-4 flex flex-col gap-4 items-center mx-auto">
         <h2 className="font-mono font-[500] text-[14px] text-[#A6A6A7] self-start px-2 uppercase">Inside ZeroXBridge</h2>
       <div className="flex flex-col md:flex-row md:flex-wrap lg:flex-row lg:flex-wrap 2xl:flex-row h-full gap-[16px] 2xl:gap-[24px] w-full  relative">
         {cardData.map((card, idx) => (

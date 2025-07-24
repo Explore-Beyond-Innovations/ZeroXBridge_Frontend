@@ -144,10 +144,10 @@ const FeatureCard = ({ feature }: { feature: typeof features[number] }) => {
 
 const FeaturesList = () => {
   return (
-    <div className="w-full px-2 2xl:w-full h-fit py-4 flex flex-col gap-6 2xl:gap-12 items-center mx-auto my-[10rem]">
+    <div className="w-full px-2 md:px-[40px] lg:px-4 xl:w-full h-fit py-4 flex flex-col gap-6 2xl:gap-12 items-center mx-auto my-[10rem]">
       <h2 className="font-mono font-[500] text-[14px] 2xl:text-[32px] text-[#A6A6A7] self-start px-2 uppercase lg:pl-[40px] ">
         Inside ZeroXBridge{" "}
-        <span className="bg-[url('/border.svg')] bg-cover bg-no-repeat rounded-full px-0.5 py-1 inline-block">
+        <span className="bg-[url('/border.svg')] bg-cover bg-no-repeat rounded-full px-0.5 py-1.5 inline-block">
           <span className="uppercase bg-[#131314] w-full h-full rounded-full px-[6.5px] py-[4.5px] ">
             Coming Soon
           </span>
