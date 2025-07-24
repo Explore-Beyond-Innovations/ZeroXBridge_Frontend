@@ -65,7 +65,7 @@ const FeatureCard = ({ feature }: { feature: typeof features[number] }) => {
         transition: {
           type: "spring",
           stiffness: 800,
-          damping: 10,
+          damping: 20,
         },
       });
       bgControls.start({
@@ -83,7 +83,7 @@ const FeatureCard = ({ feature }: { feature: typeof features[number] }) => {
         transition: {
           type: "spring",
           stiffness: 800,
-          damping: 10,
+          damping: 40,
         },
       });
       bgControls.start({
