@@ -154,9 +154,10 @@ function AnimatedCard({ card, index }: { card: typeof cardData[number]; index: n
     >
       <div
         className={`${card.styling} bg-[#161616] rounded-[16px] 2xl:rounded-[24px] py-[30px] overflow-hidden group transition-all duration-300 ease-in-out ${
-          isActive ? 'grayscale-0 brightness-100' : 'grayscale brightness-75'
+          isActive ? 'grayscale-0 brightness-100' : 'grayscale brightness-[65%]'
         } hover:grayscale-0 hover:brightness-100`}
       >
+
         <div className={`mx-[40px] flex flex-col gap-2 2xl:gap-[23.16px] 2xl:max-w-[75%] transition-colors duration-300 ${
           isActive ? 'text-white' : 'text-[#9E9E9E]'
         } group-hover:text-white ${card.title == "Trustless Architecture" ? " lg:w-[407px] 2xl:w-full" : ""}`}>
@@ -167,7 +168,7 @@ function AnimatedCard({ card, index }: { card: typeof cardData[number]; index: n
             {card.description}
           </p>
         </div>
-        <motion.div className="w-full h-full" animate={controls}>
+        <motion.div className="w-full h-full relative" animate={controls}>
           <Image
             src={card.image}
             alt="card"
@@ -175,7 +176,7 @@ function AnimatedCard({ card, index }: { card: typeof cardData[number]; index: n
             height={1000}
             priority
             quality={100} 
-            className={`${card.imagestyle} bg-cover transition-all duration-300 ease-linear ${
+            className={`${card.imagestyle} opacity-20 group-hover:opacity-100 bg-cover transition-all duration-300 ease-linear ${
               isActive ? getActiveImageStyle(card.title) : ''
             }`}
           />
