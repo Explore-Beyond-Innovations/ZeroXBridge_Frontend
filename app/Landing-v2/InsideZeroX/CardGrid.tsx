@@ -157,6 +157,11 @@ function AnimatedCard({ card, index }: { card: typeof cardData[number]; index: n
           isActive ? 'grayscale-0 brightness-100' : 'grayscale brightness-50'
         } hover:grayscale-0 hover:brightness-100`}
       >
+        <div
+    className={`absolute inset-0 bg-[#9e9e9e] mix-blend-overlay pointer-events-none transition-opacity duration-300 ease-in-out ${
+      isActive ? 'opacity-0' : 'opacity-100 group-hover:opacity-0'
+    }`}
+  />
         <div className={`mx-[40px] flex flex-col gap-2 2xl:gap-[23.16px] 2xl:max-w-[75%] transition-colors duration-300 ${
           isActive ? 'text-white' : 'text-[#9E9E9E]'
         } group-hover:text-white ${card.title == "Trustless Architecture" ? " lg:w-[407px] 2xl:w-full" : ""}`}>
