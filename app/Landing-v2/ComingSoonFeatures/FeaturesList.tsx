@@ -115,7 +115,7 @@ const FeatureCard = ({ feature }: { feature: typeof features[number] }) => {
       className="flex flex-row gap-4 justify-between items-start border-b border-[#131314] text-[#B2B2B2] pb-[40px] px-1 text-start relative group"
     >
       <div className="flex flex-col lg:flex-row w-full items-center justify-between gap-4 lg:px-[30px] lg:py-2">
-        <p className="w-full md:w-[400px] font-[400] text-[20px] 2xl:w-[800px] 2xl:text-[40px] ">
+        <p className="w-full md:w-[400px] font-[400] text-[20px] 2xl:w-[800px] 2xl:text-[37px] tracking-[-2px] ">
           {feature.title}
         </p>
         <p className="w-full lg:max-w-[50%] 2xl:w-[1200px] font-[300] text-[14px] md:text-[16px] 2xl:text-[24px]">
@@ -147,8 +147,8 @@ const FeaturesList = () => {
     <div className="w-full px-2 2xl:w-full h-fit py-4 flex flex-col gap-6 2xl:gap-12 items-center mx-auto my-[10rem]">
       <h2 className="font-mono font-[500] text-[14px] 2xl:text-[32px] text-[#A6A6A7] self-start px-2 uppercase lg:pl-[40px] ">
         Inside ZeroXBridge{" "}
-        <span className="bg-[url('/border.svg')] bg-cover bg-no-repeat rounded-full px-0.5 py-0.5 inline-block">
-          <span className="uppercase bg-black w-full h-full rounded-full px-2 py-[2px]">
+        <span className="bg-[url('/border.svg')] bg-cover bg-no-repeat rounded-full px-0.5 py-1 inline-block">
+          <span className="uppercase bg-black w-full h-full rounded-full px-2 py-[3px]">
             Coming Soon
           </span>
         </span>
