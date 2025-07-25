@@ -58,7 +58,7 @@ const Footer = () => {
             >
               We are building<br />
               open-source, join<br />
-              at <span className="font-mono tracking-wide">ONLYDUST</span>
+              at <span className="font-['Caveat',_cursive] tracking-wide">ONLYDUST</span>
             </motion.h2>
             
             <motion.div
