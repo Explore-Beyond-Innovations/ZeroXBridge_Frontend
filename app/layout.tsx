@@ -45,7 +45,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable} ${robotoSerif.variable} ${badScript.variable} antialiased bg-[#09050E] h-full`}
+        className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable} ${robotoSerif.variable} ${badScript.variable} antialiased bg-background h-full`}
       >
        {children}
    
