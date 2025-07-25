@@ -8,7 +8,7 @@ export default function LandingV2() {
       {/*<HomeNav />
       <Header />*/}
 
-      <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12 max-w-[1600px] mx-auto py-20">
+      <div className="w-full max-w-[1600px] mx-auto py-20">
         <div className="text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
             ZeroX Bridge V2
@@ -21,7 +21,7 @@ export default function LandingV2() {
       </div>
 
       {/* Stats, FAQ, and Footer Section */}
-      <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12 max-w-[1600px] mx-auto">
+      <div className="w-full max-w-[1600px] mx-auto">
         {/*<HowItWorks />
         <AboutUs />
         <Testimonial />*/}

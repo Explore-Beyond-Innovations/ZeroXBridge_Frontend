@@ -36,6 +36,7 @@ const config: Config = {
         'card-bg': '#141414',
         'card-border': '#1f1f1f',
         'dark-bg': '#0A0A0A',
+        'faq-bg': '#0E0E0E',
         'white-style': 'rgba(139, 139, 139, 1)',
         'custom-purple': 'rgba(162, 109, 255, 1)',
       },
