@@ -4,34 +4,43 @@
 
 /* Theme Variables */
 :root {
-  --background-light: #09050e;
-  --foreground-light: #171717;
+  /* Updated color scheme to match the reference image */
+  --background-light: #0A0A0A; /* Changed from #09050e to lighter background */
+  --foreground-light: #1a1a1a; /* Slightly lighter for cards */
+  --card-background: #141414; /* For card backgrounds */
+  --card-border: #1f1f1f; /* For card borders */
   --primary-light: #a26dff;
   --purple-light: #a26dff;
-  --white-light: #f0f0f0;
+  --white-light: #ffffff; /* Pure white for text */
   --white-2-light: #d4d4d4;
+  --gray-text: #6b7280; /* For secondary text */
+  --gray-light: #9ca3af; /* For lighter gray text */
 
-  --background-dark: #09050e;
-  --foreground-dark: #09050e;
+  --background-dark: #0A0A0A;
+  --foreground-dark: #1a1a1a;
   --primary-dark: #a26dff;
   --purple-dark: #a26dff;
-  --white-dark: #1e1e1e;
-  --white-2-dark: #2d2d2d;
+  --white-dark: #ffffff;
+  --white-2-dark: #d4d4d4;
 
   /* Default (Light Mode) */
   --background: var(--background-light);
   --foreground: var(--foreground-light);
+  --card-bg: var(--card-background);
+  --card-border-color: var(--card-border);
   --primary: var(--primary-light);
   --purple: var(--purple-light);
   --white: var(--white-light);
   --white-2: var(--white-2-light);
+  --text-gray: var(--gray-text);
+  --text-gray-light: var(--gray-light);
 }
 
-/* Dark Mode Handling */
+/* Dark Mode Handling - keeping consistent colors */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #edebf0;
-    --foreground: #d4d4d4;
+    --background: #0A0A0A;
+    --foreground: #1a1a1a;
   }
 }
 
@@ -60,9 +69,10 @@
 
 /* Base Styles */
 body {
-  color: var(--foreground);
-  background: var(--background);
+  @apply bg-background text-white;
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Gradient Effects */
@@ -75,7 +85,7 @@ body {
   backdrop-filter: blur(150px);
   filter: blur(130px);
   transform: rotate(-114.2deg);
-  opacity: 1;
+  opacity: 0.8; /* Reduced opacity for subtler effect */
   pointer-events: none;
 }
 
@@ -116,36 +126,6 @@ body {
   background-size: 200% 200%;
 }
 
-/* Footer Styling */
-.footer-gradient {
-  background: linear-gradient(
-    180deg,
-    rgba(9, 5, 14, 1) 0%,
-    rgba(74, 42, 130, 1) 100%
-  );
-}
-
-.footer-background {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(9, 5, 14, 1) 0%,
-    rgba(74, 42, 130, 1) 100%
-  );
-  pointer-events: none;
-}
-
-.footer-background-text {
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.8) 0%,
-    rgba(74, 42, 130, 0.3) 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
 
 /* Custom Scrollbar - Combined and Simplified */
 .custom-scrollbar::-webkit-scrollbar {
@@ -154,26 +134,26 @@ body {
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: transparent;
+  background: var(--card-background);
   margin: 0 4px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
   border-radius: 20px;
-  background: #d4c2f3;
+  background: #4a4a4a;
   transition: background 0.2s ease;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #b69fe6;
+  background: #5a5a5a;
 }
 
 .dark .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #3b2a65;
+  background: #4a4a4a;
 }
 
 .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #5c4a85;
+  background: #5a5a5a;
 }
 
 /* Ensure Smooth Rendering on Webkit Browsers */
@@ -237,4 +217,21 @@ img {
   border: none !important;
   outline: none !important;
   background: transparent !important;
+}
+
+/* Utility classes for the new color scheme */
+.bg-card {
+  background-color: var(--card-bg);
+}
+
+.border-card {
+  border-color: var(--card-border-color);
+}
+
+.text-gray-primary {
+  color: var(--text-gray);
+}
+
+.text-gray-secondary {
+  color: var(--text-gray-light);
 }

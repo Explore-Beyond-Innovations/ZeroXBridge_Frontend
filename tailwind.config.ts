@@ -12,7 +12,7 @@ const config: Config = {
       // Default breakpoints
       'sm': '640px',
       'md': '768px',
-      'lg': '1024px',
+      'lg': '1172px',
       'xl': '1280px',
       '2xl': '1536px',
       
@@ -27,13 +27,15 @@ const config: Config = {
     },
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        primary: "var(--primary)",
-        purple: "var(--purple)",
-        white: "var(--white)",
-        "white-2": "var(--white-2)",
-        'dark-bg': 'rgba(9, 5, 14, 1)',
+        background: "#0A0A0A",
+        foreground: "#1a1a1a",
+        primary: "#a26dff",
+        purple: "#a26dff",
+        white: "#ffffff",
+        "white-2": "#d4d4d4",
+        'card-bg': '#141414',
+        'card-border': '#1f1f1f',
+        'dark-bg': '#0A0A0A',
         'white-style': 'rgba(139, 139, 139, 1)',
         'custom-purple': 'rgba(162, 109, 255, 1)',
       },
@@ -42,8 +44,6 @@ const config: Config = {
         "main-bg": "url('/background.svg')",
         howitworks:
           "linear-gradient(90deg, #26183E 0%, #A26DFF 47.5%, #26183E 100%)",
-        "join-community":
-          "url('/join-community/grid.svg'), linear-gradient(102.75deg, #09050E 64.15%, #462B74 129.88%)",
         "community-cta":
           "linear-gradient(180deg, rgba(162, 109, 255, 0.9) 0%, rgba(162, 109, 255, 0) 90%)",
         "gradient-purple":

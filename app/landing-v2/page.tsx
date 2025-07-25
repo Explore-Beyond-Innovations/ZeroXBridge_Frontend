@@ -3,7 +3,7 @@ import StatsFaqFooter from "./StatsFaqFooter";
 
 export default function LandingV2() {
   return (
-    <div className="min-h-screen bg-[#09050E] flex flex-col items-center w-full overflow-x-hidden">
+    <div className="min-h-screen flex flex-col items-center w-full overflow-x-hidden">
       {/* Hero Section Placeholder */}
       {/*<HomeNav />
       <Header />*/}

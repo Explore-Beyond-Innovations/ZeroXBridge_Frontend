@@ -39,7 +39,7 @@ const Faq = () => {
   };
 
   return (
-    <section className="w-full py-16 md:py-24 bg-[#09050E]">
+    <section className="w-full py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
