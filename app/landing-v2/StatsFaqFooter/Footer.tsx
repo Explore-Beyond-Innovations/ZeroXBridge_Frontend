@@ -25,79 +25,96 @@ const Footer = () => {
   };
 
   return (
-    <footer className="w-full bg-[#09050E] pt-16 pb-8">
+    <footer className="w-full pb-8 relative">
       {/* OnlyDust Promotional Banner */}
-      <section className="mb-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="relative bg-gradient-to-r from-slate-900 to-black rounded-3xl p-8 md:p-12 overflow-hidden"
-          >
-            <div className="relative z-10 text-center">
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                viewport={{ once: true }}
-                className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-8"
-              >
-                We are building open-source, join at <span className="font-black">ONLYDUST</span>
-              </motion.h2>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                viewport={{ once: true }}
-                className="flex justify-center"
-              >
+      <section className="mb-16 relative py-16">
+        <Image
+          src="/border.svg"
+          alt=""
+          fill
+          className="absolute inset-0 z-0 object-cover"
+        />
+        
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+      className="relative overflow-hidden rounded-3xl"
+    >
+
+      {/* Content container with dark background */}
+      <div className="relative z-10 bg-[#161616] m-[2px] rounded-3xl p-12 md:p-18 overflow-hidden">
+        <div className="relative z-20 flex items-center justify-between">
+          {/* Text content */}
+          <div className="flex-1 max-w-xl">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="text-xl md:text-2xl lg:text-3xl font-normal text-white leading-tight"
+            >
+              We are building<br />
+              open-source, join<br />
+              at <span className="font-mono tracking-wide">ONLYDUST</span>
+            </motion.h2>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+                className="flex mt-8 md:mt-12"
+            >
                 <motion.a
-                  href="https://www.onlydust.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                href="https://www.onlydust.com"
+                target="_blank"
+                rel="noopener noreferrer"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center gap-3 px-8 py-4 bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-semibold rounded-lg transition-all duration-300 shadow-lg border border-white/20"
+                  className="inline-flex items-center gap-3 px-8 py-4 bg-[#202020] hover:bg-[#252525] text-xs text-white rounded-full transition-all duration-300 shadow-lg "
                 >
-                  <svg
-                    className="w-6 h-6 text-white"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                  </svg>
+               
                   OnlyDust / ZeroXBridge
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
+                <svg
+                  className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-200"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path d="M5 12h14m0 0l-7-7m7 7l-7 7" />
+                </svg>
                 </motion.a>
-              </motion.div>
-            </div>
-            {/* OnlyDust logo background design */}
-            <div className="absolute right-0 top-0 bottom-0 w-1/3 overflow-hidden">
-              <div className="absolute -right-20 -bottom-[150px] transform -rotate-45 opacity-20">
-                <Image
-                  src="/logo_white_only.png"
-                  alt="OnlyDust Logo"
-                  width={360}
-                  height={360}
-                  className="w-[360px] h-[360px]"
-                />
-              </div>
+            </motion.div>
+          </div>
+
+          {/* Logo on the right */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="hidden md:block absolute -right-12 -top-1"
+          >
+            <div className="relative w-96 h-96 lg:w-[20rem] lg:h-[20rem] opacity-40">
+              <Image
+                src="/Onlydust.png"
+                alt="OnlyDust Logo"
+                fill
+                className="object-contain"
+              />
             </div>
           </motion.div>
         </div>
-      </section>
+      </div>
+    </motion.div>
+  </div>
+</section>
 
       {/* Newsletter Section */}
       <section className="mb-16">
@@ -124,7 +141,7 @@ const Footer = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter e-mail address"
-                className="flex-1 px-4 py-3 bg-[#2a2a2a] border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-gray-600 transition-colors"
+                className="flex-1 px-2 py-3 bg-[#2a2a2a] border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-gray-600 transition-colors"
                 required
               />
               <motion.button
