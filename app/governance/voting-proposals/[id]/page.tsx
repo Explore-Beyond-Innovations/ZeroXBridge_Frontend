@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React from "react";
 import {
   ArrowLeft,
@@ -29,7 +29,6 @@ interface Comment {
 }
 
 export default function VotingProposalPage() {
-
   // Mock data for the proposal
   const proposal = {
     id: "8",
@@ -41,19 +40,19 @@ export default function VotingProposalPage() {
     votingResults: {
       for: {
         percentage: 89.18,
-        amount: "578.6M STRK"
+        amount: "578.6M STRK",
       },
       against: {
         percentage: 10.82,
-        amount: "70.2M STRK"
+        amount: "70.2M STRK",
       },
       abstain: {
         percentage: 0.01,
-        amount: "35.3K STRK"
+        amount: "35.3K STRK",
       },
       totalVotingPower: "102.93%",
-      totalVoters: "6.17%"
-    }
+      totalVoters: "6.17%",
+    },
   };
 
   // Mock data for votes
@@ -72,7 +71,7 @@ export default function VotingProposalPage() {
     { address: "0x06fe...ff2c", votes: "1.2869 votes" },
     { address: "0x0277...5418", votes: "25.0000 votes" },
     { address: "0x02c1...2198", votes: "406.0000 votes" },
-    { address: "0x008c...6308", votes: "3.5200 votes" }
+    { address: "0x008c...6308", votes: "3.5200 votes" },
   ];
 
   // Mock data for comments
@@ -82,22 +81,22 @@ export default function VotingProposalPage() {
       address: "0x04af...ef7b",
       time: "4w",
       content: "i vote For",
-      likes: 0
+      likes: 0,
     },
     {
       id: "2",
       address: "0x04af...ef7b",
       time: "4w",
       content: "go go",
-      likes: 0
+      likes: 0,
     },
     {
       id: "3",
       address: "0xc71f...5bc6",
       time: "4w",
       content: "Go-go)",
-      likes: 0
-    }
+      likes: 0,
+    },
   ];
 
   return (
@@ -110,7 +109,7 @@ export default function VotingProposalPage() {
               <span className="text-white text-xs">⚡</span>
             </div>
             <div>
-              <div className="font-medium text-[18px] text-gray-800">
+              <div className="font-medium text-lg text-gray-800">
                 Governance Hub
               </div>
               <div className="text-xs text-purple-600">ALPHA</div>
@@ -120,8 +119,16 @@ export default function VotingProposalPage() {
 
         <div className="mt-4">
           <SidebarItem icon={<Home size={20} />} text="Home" active={false} />
-          <SidebarItem icon={<Coins size={20} />} text="Manage vSTRK" active={false} />
-          <SidebarItem icon={<CheckSquare size={20} />} text="Voting proposals" active={true} />
+          <SidebarItem
+            icon={<Coins size={20} />}
+            text="Manage vSTRK"
+            active={false}
+          />
+          <SidebarItem
+            icon={<CheckSquare size={20} />}
+            text="Voting proposals"
+            active={true}
+          />
         </div>
       </div>
 
@@ -130,7 +137,10 @@ export default function VotingProposalPage() {
         {/* Header */}
         <div className="bg-[#fff] h-[70px] py-2 px-4 border-b border-gray-200 flex justify-between items-center">
           <div className="flex items-center">
-            <Link href="/voting-proposals" className="flex items-center text-gray-600 hover:text-gray-900">
+            <Link
+              href="/voting-proposals"
+              className="flex items-center text-gray-600 hover:text-gray-900"
+            >
               <ArrowLeft size={20} className="mr-2" />
               <span>Voting proposals</span>
             </Link>
@@ -140,7 +150,7 @@ export default function VotingProposalPage() {
               <Share2 size={20} className="mr-2" />
               <span>Share</span>
             </button>
-            
+
             <div className="relative mr-3">
               <input
                 type="text"
@@ -149,7 +159,7 @@ export default function VotingProposalPage() {
               />
               <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
             </div>
-            
+
             <button className="bg-gray-100 text-black px-4 py-1 text-sm rounded-md border border-gray-300">
               Connect
             </button>
@@ -178,106 +188,156 @@ export default function VotingProposalPage() {
                     <span>{proposal.comments} comments</span>
                   </div>
                 </div>
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">{proposal.title}</h1>
-                <button className="text-gray-500 hover:text-gray-700">
-                  <span className="text-sm">View Snapshot info</span>
-                </button>
+                <h1 className="font-bold text-gray-900 mb-2">
+                  {proposal.title}
+                </h1>
+                <button className="">View Snapshot info</button>
               </div>
 
               {/* Introduction */}
               <div className="mb-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">Introduction</h2>
+                <h2 className="font-bold text-gray-900 mb-4">Introduction</h2>
                 <p className="text-gray-700 mb-4">
-                  This proposal outlines the planned upgrade to Starknet Staking v2 as can be seen in SNIP 28. 
-                  The upgrade is aimed at enhancing network security and decentralization by adding to the 
-                  current requirement that stakers run full nodes or delegate, and introducing validator block 
-                  attestation and allowing for increased validator commission. These changes are crucial steps 
-                  toward achieving a fully decentralized Starknet.
+                  This proposal outlines the planned upgrade to Starknet Staking
+                  v2 as can be seen in SNIP 28. The upgrade is aimed at
+                  enhancing network security and decentralization by adding to
+                  the current requirement that stakers run full nodes or
+                  delegate, and introducing validator block attestation and
+                  allowing for increased validator commission. These changes are
+                  crucial steps toward achieving a fully decentralized Starknet.
                 </p>
                 <p className="text-gray-700 mb-4">
                   Staking v2 addresses two primary needs:
                 </p>
                 <ol className="list-decimal pl-6 space-y-4 mb-4">
                   <li className="text-gray-700">
-                    <strong className="text-gray-900">Verifying Validator Reliability:</strong> Before entrusting validators with consensus responsibilities, it&apos;s 
-                    essential to ensure they can maintain high liveness and actively participate in the network.
+                    <strong className="text-gray-900">
+                      Verifying Validator Reliability:
+                    </strong>{" "}
+                    Before entrusting validators with consensus
+                    responsibilities, it&apos;s essential to ensure they can
+                    maintain high liveness and actively participate in the
+                    network.
                   </li>
                   <li className="text-gray-700">
-                    <strong className="text-gray-900">Improving Economic Incentives:</strong> The current commission structure needs adjustments to 
-                    ensure long-term validator participation and network stability, especially as the demands on 
-                    validators increase with network growth and decentralization.
+                    <strong className="text-gray-900">
+                      Improving Economic Incentives:
+                    </strong>{" "}
+                    The current commission structure needs adjustments to ensure
+                    long-term validator participation and network stability,
+                    especially as the demands on validators increase with
+                    network growth and decentralization.
                   </li>
                 </ol>
               </div>
 
               {/* Vote Details */}
               <div className="mb-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">Vote Details</h2>
+                <h2 className="font-bold text-gray-900 mb-4">Vote Details</h2>
                 <p className="text-gray-700 mb-4">
-                  A vote will be conducted to determine the approval or rejection of the following:
+                  A vote will be conducted to determine the approval or
+                  rejection of the following:
                 </p>
                 <ol className="list-decimal pl-6 space-y-4">
                   <li className="text-gray-700">
-                    <strong className="text-gray-900">Validator Block Attestation:</strong> Validators will be required to attest to randomly selected blocks 
-                    within each epoch. For more details, see the &quot;Validator block attestation&quot;.
+                    <strong className="text-gray-900">
+                      Validator Block Attestation:
+                    </strong>{" "}
+                    Validators will be required to attest to randomly selected
+                    blocks within each epoch. For more details, see the
+                    &quot;Validator block attestation&quot;.
                   </li>
                   <li className="text-gray-700">
-                    <strong className="text-gray-900">Validator Commission Increase:</strong> Validators will be able to commit to a maximum commission 
-                    rate. For more details, see the &quot;Validator Commission Increase&quot;.
+                    <strong className="text-gray-900">
+                      Validator Commission Increase:
+                    </strong>{" "}
+                    Validators will be able to commit to a maximum commission
+                    rate. For more details, see the &quot;Validator Commission
+                    Increase&quot;.
                   </li>
                 </ol>
               </div>
 
               {/* Validator Block Attestation */}
               <div className="mb-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">Validator block attestation:</h2>
+                <h2 className="font-bold text-gray-900 mb-4">
+                  Validator block attestation:
+                </h2>
                 <ul className="list-disc pl-6 space-y-4">
                   <li className="text-gray-700">
-                    <strong className="text-gray-900">Epochs:</strong> Introduce the concept of epochs, fixed time periods where validator staking power is 
-                    determined. This ensures predictable input for the consensus algorithm.
+                    <strong className="text-gray-900">Epochs:</strong> Introduce
+                    the concept of epochs, fixed time periods where validator
+                    staking power is determined. This ensures predictable input
+                    for the consensus algorithm.
                   </li>
                   <li className="text-gray-700">
-                    <strong className="text-gray-900">Attestation Mechanism:</strong> Validators will be required to attest to randomly selected blocks within 
-                    each epoch. This proves their active participation and allows delegators to assess validator 
+                    <strong className="text-gray-900">
+                      Attestation Mechanism:
+                    </strong>{" "}
+                    Validators will be required to attest to randomly selected
+                    blocks within each epoch. This proves their active
+                    participation and allows delegators to assess validator
                     reliability.
                   </li>
                   <li className="text-gray-700">
-                    <strong className="text-gray-900">Rewards:</strong> Validators who successfully attest to blocks will receive staking rewards proportional 
-                    to their stake. Those who fail to attest will receive no rewards for that epoch.
+                    <strong className="text-gray-900">Rewards:</strong>{" "}
+                    Validators who successfully attest to blocks will receive
+                    staking rewards proportional to their stake. Those who fail
+                    to attest will receive no rewards for that epoch.
                   </li>
                 </ul>
                 <div className="my-4">
-                  <img src="/placeholder-diagram.png" alt="Block Attestation Diagram" className="rounded-md border border-gray-200" />
+                  <img
+                    src="/placeholder-diagram.png"
+                    alt="Block Attestation Diagram"
+                    className="rounded-md border border-gray-200"
+                  />
                 </div>
               </div>
 
               {/* Validator Commission Increase */}
               <div className="mb-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">Validator Commission Increase</h2>
+                <h2 className="font-bold text-gray-900 mb-4">
+                  Validator Commission Increase
+                </h2>
                 <ul className="list-disc pl-6 space-y-4">
                   <li className="text-gray-700">
-                    <strong className="text-gray-900">Commission Commitments and increase:</strong> Validators will be able to commit to a certain 
-                    maximum commission M, and the last date (in Epochs) that this commitment is relevant for. 
-                    Until this last date arrives, validators will not be able to increase their commission beyond M, 
-                    but can freely change their commission in the range [0,M]
+                    <strong className="text-gray-900">
+                      Commission Commitments and increase:
+                    </strong>{" "}
+                    Validators will be able to commit to a certain maximum
+                    commission M, and the last date (in Epochs) that this
+                    commitment is relevant for. Until this last date arrives,
+                    validators will not be able to increase their commission
+                    beyond M, but can freely change their commission in the
+                    range [0,M]
                   </li>
                 </ul>
               </div>
 
               {/* Benefits */}
               <div className="mb-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">Benefits</h2>
+                <h2 className="font-bold text-gray-900 mb-4">Benefits</h2>
                 <ul className="list-disc pl-6 space-y-4">
                   <li className="text-gray-700">
-                    <strong className="text-gray-900">Improved Validator Accountability:</strong> Attestation provides a clear metric for evaluating validator 
+                    <strong className="text-gray-900">
+                      Improved Validator Accountability:
+                    </strong>{" "}
+                    Attestation provides a clear metric for evaluating validator
                     performance.
                   </li>
                   <li className="text-gray-700">
-                    <strong className="text-gray-900">Sustainable Validator Incentives:</strong> The potential for increased commission ensures continued 
+                    <strong className="text-gray-900">
+                      Sustainable Validator Incentives:
+                    </strong>{" "}
+                    The potential for increased commission ensures continued
                     validator participation as network demands grow.
                   </li>
                   <li className="text-gray-700">
-                    <strong className="text-gray-900">Increased Transparency:</strong> Commission commitments provide delegators with clear 
+                    <strong className="text-gray-900">
+                      Increased Transparency:
+                    </strong>{" "}
+                    Commission commitments provide delegators with clear
                     expectations regarding future fees.
                   </li>
                 </ul>
@@ -285,50 +345,60 @@ export default function VotingProposalPage() {
 
               {/* Timeline */}
               <div className="mb-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">Timeline</h2>
+                <h2 className="font-bold text-gray-900 mb-4">Timeline</h2>
                 <ul className="list-disc pl-6 space-y-4">
                   <li className="text-gray-700">
-                    <strong className="text-gray-900">Q1 2025:</strong> Staking v2 deployment on testnet.
+                    <strong className="text-gray-900">Q1 2025:</strong> Staking
+                    v2 deployment on testnet.
                   </li>
                   <li className="text-gray-700">
-                    <strong className="text-gray-900">Q2 2025:</strong> Staking v2 deployment on Starknet mainnet.
+                    <strong className="text-gray-900">Q2 2025:</strong> Staking
+                    v2 deployment on Starknet mainnet.
                   </li>
                 </ul>
               </div>
 
               {/* Conclusion */}
               <div className="mb-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">Conclusion</h2>
+                <h2 className="font-bold text-gray-900 mb-4">Conclusion</h2>
                 <p className="text-gray-700 mb-4">
-                  Staking v2 represents a significant step towards a decentralized Starknet. We encourage all 
-                  community members to participate in the vote. Please vote For, Aginst or Abstain.
+                  Staking v2 represents a significant step towards a
+                  decentralized Starknet. We encourage all community members to
+                  participate in the vote. Please vote For, Aginst or Abstain.
                 </p>
               </div>
 
               {/* Discussion */}
               <div className="mb-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">Discussion</h2>
+                <h2 className="font-bold text-gray-900 mb-4">Discussion</h2>
                 <div className="bg-blue-50 border border-blue-100 rounded-md p-4 mb-4">
                   <div className="flex items-center">
                     <MessageCircle size={20} className="text-blue-500 mr-2" />
-                    <span className="text-blue-700">Comments are now closed.</span>
+                    <span className="text-blue-700">
+                      Comments are now closed.
+                    </span>
                   </div>
                 </div>
 
                 {/* Comments */}
                 <div className="space-y-6 text-gray-700">
-                  {comments.map(comment => (
-                    <div key={comment.id} className="border-l-2 border-gray-200 pl-4">
+                  {comments.map((comment) => (
+                    <div
+                      key={comment.id}
+                      className="border-l-2 border-gray-200 pl-4"
+                    >
                       <div className="flex items-start">
                         <div className="rounded-full bg-gray-300 w-8 h-8 mr-3 flex-shrink-0"></div>
                         <div className="flex-1">
                           <div className="flex items-center">
                             <div className="font-medium">{comment.address}</div>
-                            <div className="ml-2 text-sm text-gray-500">{comment.time}</div>
+                            <div className="ml-2 text-gray-500">
+                              {comment.time}
+                            </div>
                           </div>
                           <div className="mt-1">{comment.content}</div>
 
-                          <div className="flex items-center mt-2 text-gray-500 text-sm">
+                          <div className="flex items-center mt-2 text-gray-500">
                             <button className="flex items-center mr-4">
                               <ThumbsUp size={14} className="mr-1" />
                               <span>{comment.likes}</span>
@@ -348,81 +418,98 @@ export default function VotingProposalPage() {
             {/* Sidebar - Voting Results */}
             <div className="w-full md:w-1/3 text-gray-700">
               <div className="sticky top-4 bg-[#fff] border-l border-gray-200 p-6">
-                <h2 className="text-xl font-bold mb-4">Final Results</h2>
-                
+                <h2 className="font-bold mb-4">Final Results</h2>
+
                 {/* For Votes */}
                 <div className="mb-4">
-                  <div className="flex justify-between text-sm mb-1">
+                  <div className="flex justify-between mb-1">
                     <span>{proposal.votingResults.for.percentage}% FOR</span>
                     <span>{proposal.votingResults.for.amount}</span>
                   </div>
                   <div className="w-full h-1.5 bg-gray-100 rounded-full">
-                    <div 
-                      className="h-full bg-green-500 rounded-full" 
-                      style={{ width: `${proposal.votingResults.for.percentage}%` }}
+                    <div
+                      className="h-full bg-green-500 rounded-full"
+                      style={{
+                        width: `${proposal.votingResults.for.percentage}%`,
+                      }}
                     ></div>
                   </div>
                 </div>
-                
+
                 {/* Against Votes */}
                 <div className="mb-4">
-                  <div className="flex justify-between text-sm mb-1">
-                    <span>{proposal.votingResults.against.percentage}% AGAINST</span>
+                  <div className="flex justify-between mb-1">
+                    <span>
+                      {proposal.votingResults.against.percentage}% AGAINST
+                    </span>
                     <span>{proposal.votingResults.against.amount}</span>
                   </div>
                   <div className="w-full h-1.5 bg-gray-100 rounded-full">
-                    <div 
-                      className="h-full bg-red-500 rounded-full" 
-                      style={{ width: `${proposal.votingResults.against.percentage}%` }}
+                    <div
+                      className="h-full bg-red-500 rounded-full"
+                      style={{
+                        width: `${proposal.votingResults.against.percentage}%`,
+                      }}
                     ></div>
                   </div>
                 </div>
-                
+
                 {/* Abstain Votes */}
                 <div className="mb-6">
-                  <div className="flex justify-between text-sm mb-1">
-                    <span>{proposal.votingResults.abstain.percentage}% ABSTAIN</span>
+                  <div className="flex justify-between mb-1">
+                    <span>
+                      {proposal.votingResults.abstain.percentage}% ABSTAIN
+                    </span>
                     <span>{proposal.votingResults.abstain.amount}</span>
                   </div>
                   <div className="w-full h-1.5 bg-gray-100 rounded-full">
-                    <div 
-                      className="h-full bg-gray-400 rounded-full" 
-                      style={{ width: `${proposal.votingResults.abstain.percentage}%` }}
+                    <div
+                      className="h-full bg-gray-400 rounded-full"
+                      style={{
+                        width: `${proposal.votingResults.abstain.percentage}%`,
+                      }}
                     ></div>
                   </div>
                 </div>
-                
+
                 {/* Total stats */}
                 <div className="flex mb-2">
                   <div className="w-1/2">
-                    <div className="text-3xl font-bold">{proposal.votingResults.totalVotingPower}</div>
-                    <div className="text-sm text-gray-500">% of total voting power</div>
+                    <div className="font-bold">
+                      {proposal.votingResults.totalVotingPower}
+                    </div>
+                    <div className="text-gray-500">% of total voting power</div>
                   </div>
                   <div className="w-1/2">
-                    <div className="text-3xl font-bold">{proposal.votingResults.totalVoters}</div>
-                    <div className="text-sm text-gray-500">% of total voters</div>
+                    <div className="font-bold">
+                      {proposal.votingResults.totalVoters}
+                    </div>
+                    <div className="text-gray-500">% of total voters</div>
                   </div>
                 </div>
-                
+
                 <div className="mb-8">
-                  <button className="text-blue-600 text-sm hover:underline">
+                  <button className="text-blue-600 hover:underline">
                     Download CSV
                   </button>
                 </div>
-                
+
                 {/* Votes List */}
                 <h3 className="font-bold mb-3">Votes</h3>
                 <div className="space-y-3 max-h-[400px] overflow-y-auto">
                   {votes.map((vote, index) => (
-                    <div key={index} className="flex items-center justify-between">
+                    <div
+                      key={index}
+                      className="flex items-center justify-between"
+                    >
                       <div className="flex items-center">
                         <ThumbsUp size={16} className="text-green-500 mr-2" />
                         <div className="flex items-center">
-                          <span className="text-sm">{vote.address}</span>
+                          <span className="">{vote.address}</span>
                           <Copy size={14} className="ml-1 text-gray-400" />
                         </div>
                       </div>
-                      <div className="text-sm text-gray-500 flex items-center">
+                      <div className="text-gray-500 flex items-center">
                         <span>{vote.votes}</span>
                         <ChevronDown size={16} className="ml-1" />
                       </div>
@@ -445,10 +532,22 @@ const SidebarItem: React.FC<{
   active: boolean;
 }> = ({ icon, text, active }) => {
   return (
-    <div className={`px-6 py-3 cursor-pointer ${active ? 'bg-gray-100' : 'hover:bg-gray-50'}`}>
+    <div
+      className={`px-6 py-3 cursor-pointer ${
+        active ? "bg-gray-100" : "hover:bg-gray-50"
+      }`}
+    >
       <div className="flex items-center">
-        <span className={`mr-3 ${active ? 'text-black' : 'text-gray-600'}`}>{icon}</span>
-        <span className={`text-sm ${active ? 'font-medium text-black' : 'font-normal text-gray-600'}`}>{text}</span>
+        <span className={`mr-3 ${active ? "text-black" : "text-gray-600"}`}>
+          {icon}
+        </span>
+        <span
+          className={`text-sm ${
+            active ? "font-medium text-black" : "font-normal text-gray-600"
+          }`}
+        >
+          {text}
+        </span>
       </div>
     </div>
   );

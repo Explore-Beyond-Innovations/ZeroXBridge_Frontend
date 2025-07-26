@@ -1,7 +1,13 @@
-import { Geist, Geist_Mono, Manrope, Roboto_Serif, Bad_Script } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+  Manrope,
+  Roboto_Serif,
+  Bad_Script,
+} from "next/font/google";
 import "./globals.css";
 import { Metadata } from "next";
-
+import ScrollProvider from "@/providers/ScrollProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,16 +47,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable} ${robotoSerif.variable} ${badScript.variable} antialiased bg-[#09050E] h-full`}
+        className={`${geistSans.variable}  ${geistMono.variable} ${manrope.variable} ${robotoSerif.variable} ${badScript.variable} antialiased bg-[#09050E] h-full`}
       >
-       {children}
-   
+        <ScrollProvider>{children}</ScrollProvider>
       </body>
     </html>
   );
 }
-
