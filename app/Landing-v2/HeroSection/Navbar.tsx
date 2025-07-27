@@ -16,7 +16,9 @@ const Navbar = () => {
             <Link href='#'>Docs</Link>
           </li>
           <li>
-            <Link href='#'>Community</Link>
+            <Link target='_blank' href='https://t.me/ZeroXBridge1'>
+              Community
+            </Link>
           </li>
           <li>
             <Link href='#'>Blog</Link>
