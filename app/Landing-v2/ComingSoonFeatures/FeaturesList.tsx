@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
+import GradientWrapper from "@/app/components/ui/GradientWrapper";
+import { AutoFadeTextWrapper } from "@/app/components/AutoFadeTextWrapper";
 
 const features = [
   {
@@ -37,8 +39,7 @@ const features = [
   },
 ];
 
-
-const FeatureCard = ({ feature }: { feature: typeof features[number] }) => {
+const FeatureCard = ({ feature }: { feature: (typeof features)[number] }) => {
   const controls = useAnimation();
   const bgControls = useAnimation();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -52,7 +53,6 @@ const FeatureCard = ({ feature }: { feature: typeof features[number] }) => {
     mediaQuery.addEventListener("change", updateScreenSize);
     return () => mediaQuery.removeEventListener("change", updateScreenSize);
   }, []);
-
 
   useEffect(() => {
     if (!isLargeScreen) return;
@@ -115,16 +115,19 @@ const FeatureCard = ({ feature }: { feature: typeof features[number] }) => {
       className="flex flex-row gap-4 justify-between items-start border-b border-[#131314] text-[#B2B2B2] pb-[40px] px-1 text-start relative group"
     >
       <div className="flex flex-col lg:flex-row w-full items-center justify-between gap-4 lg:px-[30px] lg:py-2">
-        <p className="w-full md:w-[400px] font-[400] text-[20px] 2xl:w-[800px] 2xl:text-[37px] tracking-[-2px] ">
+        <AutoFadeTextWrapper className="w-full md:w-[400px] font-[400] 2xl:w-[800px]">
           {feature.title}
-        </p>
-        <p className="w-full lg:max-w-[50%] 2xl:w-[1200px] font-[300] text-[14px] md:text-[16px] 2xl:text-[24px]">
+        </AutoFadeTextWrapper>
+        <AutoFadeTextWrapper className="w-full lg:max-w-[50%] 2xl:w-[1200px] font-[300]">
           {feature.description}
-        </p>
+        </AutoFadeTextWrapper>
       </div>
 
       <motion.div
-        initial={{ y: isLargeScreen ? -100 : 0, opacity: isLargeScreen ? 0 : 1 }}
+        initial={{
+          y: isLargeScreen ? -100 : 0,
+          opacity: isLargeScreen ? 0 : 1,
+        }}
         animate={controls}
         className="bg-[#131313] h-[60px] w-[60px] lg:w-[165.17px] lg:h-[165.17px] rounded-[5.2px] flex lg:hidden  lg:group-hover:flex lg:absolute lg:left-[33%] lg:-top-[20%] lg:rotate-2"
       >
@@ -144,15 +147,18 @@ const FeatureCard = ({ feature }: { feature: typeof features[number] }) => {
 
 const FeaturesList = () => {
   return (
-    <div className="w-full px-2 md:px-[40px] lg:px-4 xl:w-full h-fit py-4 flex flex-col gap-6 2xl:gap-12 items-center mx-auto my-[10rem]">
-      <h2 className="font-mono font-[500] text-[14px] 2xl:text-[32px] text-[#A6A6A7] self-start px-2 uppercase lg:pl-[40px] ">
+    <div className="w-full mx-auto px-2 md:px-[40px] lg:px-4 xl:w-full h-fit py-4 flex flex-col gap-6 2xl:gap-12 items-center  my-[10rem]">
+      <AutoFadeTextWrapper
+        as="h2"
+        className="font-mono font-[500] text-sm  self-start px-2 uppercase lg:pl-[40px] "
+      >
         Inside ZeroXBridge{" "}
-        <span className="bg-[url('/border.svg')] bg-cover bg-no-repeat rounded-full px-0.5 py-1.5 inline-block">
-          <span className="uppercase bg-[#131314] w-full h-full rounded-full px-[6.5px] py-[4.5px] ">
+        <GradientWrapper className="w-fit h-fit rounded-full">
+          <span className="uppercase inline-block py-1 px-2 rounded-full w-fit bg-[#19191A] ">
             Coming Soon
           </span>
-        </span>
-      </h2>
+        </GradientWrapper>
+      </AutoFadeTextWrapper>
 
       <div className="flex flex-col h-full gap-[16px] 2xl:gap-[24px] w-full px-4 2xl:px-0 relative">
         {features.map((feature, idx) => (

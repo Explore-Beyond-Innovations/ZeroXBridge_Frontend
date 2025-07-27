@@ -1,15 +1,14 @@
+"use client";
+
+import Link from "next/link";
 import {
-  ArrowRight,
-  CheckSquare,
-  Coins,
   Home,
-  Info,
+  Coins,
+  CheckSquare,
+  ArrowRight,
   MessageSquare,
 } from "lucide-react";
-import Link from "next/link";
-import React from "react";
 
-// Types for our data
 interface Proposal {
   id: string;
   title: string;
@@ -24,39 +23,23 @@ export default function GovernancePage() {
   const proposals: Proposal[] = [
     {
       id: "1",
-      title: "Staking on Starknet V2",
+      title: "Increase validator commission from 5% to 8%",
       status: "CLOSED",
-      endedTime: "3 weeks ago",
-      commentCount: 43,
-      progressPercentage: 75,
+      endedTime: "2 months ago",
+      commentCount: 89,
+      progressPercentage: 92,
     },
     {
       id: "2",
-      title: "Test Vote",
+      title: "Add new validator to the network",
       status: "CLOSED",
-      endedTime: "1 month ago",
-      commentCount: 30,
-      progressPercentage: 90,
+      endedTime: "4 months ago",
+      commentCount: 156,
+      progressPercentage: 78,
     },
     {
       id: "3",
-      title: "Termination of Transaction Versions 0,1,2.",
-      status: "CLOSED",
-      endedTime: "5 months ago",
-      commentCount: 181,
-      progressPercentage: 80,
-    },
-    {
-      id: "4",
-      title: "Staking on Starknet",
-      status: "CLOSED",
-      endedTime: "7 months ago",
-      commentCount: 306,
-      progressPercentage: 85,
-    },
-    {
-      id: "5",
-      title: "[TEST] Staking on Starknet test vote",
+      title: "Update protocol parameters for better performance",
       status: "CLOSED",
       endedTime: "7 months ago",
       commentCount: 154,
@@ -74,7 +57,7 @@ export default function GovernancePage() {
               <span className="text-white text-xs">⚡</span>
             </div>
             <div>
-              <div className="font-medium text-[18px] text-gray-800">
+              <div className="font-medium text-lg text-gray-800">
                 Governance Hub
               </div>
             </div>
@@ -91,10 +74,10 @@ export default function GovernancePage() {
             <p className="text-black">Manage vSTRK</p>
           </div>
           <Link href="/governance/voting-proposals">
-          <div className="flex gap-2 items-center">
-            <CheckSquare className="text-black w-6 h-6" />
-            <p className="text-black">Voting Proposals</p>
-          </div>
+            <div className="flex gap-2 items-center">
+              <CheckSquare className="text-black w-6 h-6" />
+              <p className="text-black">Voting Proposals</p>
+            </div>
           </Link>
         </div>
       </div>
@@ -123,15 +106,13 @@ export default function GovernancePage() {
           <div className="text-center mb-10 relative">
             <div className="relative z-10 py-6">
               <div className="flex justify-center items-center">
-                <span className="text-[22px] text-indigo-900 mr-1">✧</span>
-                <h1 className="text-[35px] font-bold text-indigo-900">
-                  Starknet
-                </h1>
+                <span className="text-indigo-900 mr-1">✧</span>
+                <h1 className="font-bold text-indigo-900">Starknet</h1>
               </div>
-              <h2 className="text-[35px] font-bold -mt-3 mb-1">
+              <h2 className="font-bold -mt-3 mb-1">
                 <span className="text-black">Governance Hub</span>
               </h2>
-              <p className="text-gray-700 text-[16px] font-semibold">
+              <p className="text-gray-700 font-semibold">
                 Where the community propose, debate and vote on
                 <br />
                 the direction of Starknet
@@ -146,28 +127,24 @@ export default function GovernancePage() {
                 <Coins className="text-gray-700" />
                 <p className="text-gray-700 font-thin">STRK</p>
               </div>
-              <div className="flex flex-col  items-start">
-                <div className="font-bold text-gray-800 text-lg ">
-                  8,805,421
-                </div>
+              <div className="flex flex-col items-start">
+                <div className="font-bold text-gray-800 text-lg">8,805,421</div>
                 <div className="text-xs text-gray-500 uppercase tracking-wide flex gap-2 font-semibold">
-                  STRK <Info className="text-gray-700 w-4 h-4" />
+                  STRK
                 </div>
               </div>
-
-              <div className="flex flex-col  items-start">
-                <div className="font-bold text-gray-800 text-lg ">
+              <div className="flex flex-col items-start">
+                <div className="font-bold text-gray-800 text-lg">
                   1,418,367,970
                 </div>
                 <div className="text-xs text-gray-500 uppercase tracking-wide flex gap-2 font-semibold">
-                  STRK L2 <Info className="text-gray-700 w-4 h-4" />
+                  STRK L2
                 </div>
               </div>
-
-              <div className="flex flex-col  items-start">
-                <div className="font-bold text-gray-800 text-lg ">1%</div>
+              <div className="flex flex-col items-start">
+                <div className="font-bold text-gray-800 text-lg">1%</div>
                 <div className="text-xs text-gray-500 uppercase tracking-wide flex gap-2 font-semibold">
-                  vSTRK of total STRK <Info className="text-gray-700 w-4 h-4" />
+                  vSTRK of total STRK
                 </div>
               </div>
             </div>
@@ -177,15 +154,13 @@ export default function GovernancePage() {
           <div className="mt-12">
             <div className="flex justify-between items-center mb-4">
               <div>
-                <h2 className="text-[32px] text-black font-bold">
-                  Starknet voting proposals
-                </h2>
-                <p className="text-sm text-gray-600 mt-0.5">
-                  Review, discuss and vote on the future of Starknet&apos;s core
-                  protocol
+                <h2 className="text-black font-bold">Voting proposals</h2>
+                <p className="text-gray-600 mt-0.5">
+                  Starknet delegates vote to approve protocol upgrades on behalf
+                  of token holders, influencing the direction of the protocol.
                 </p>
               </div>
-              <button className="text-[14px] text-gray-700 flex gap-2 items-center border border-gray-300 rounded-md px-4 py-3">
+              <button className="text-gray-700 flex gap-2 items-center border border-gray-300 rounded-md px-4 py-3">
                 All voting proposals
                 <ArrowRight className="text-gray-800 h-4 w-4" />
               </button>
@@ -198,7 +173,7 @@ export default function GovernancePage() {
                   className="border-b border-gray-300  p-4 flex items-center justify-between w-full"
                 >
                   <div>
-                    <h3 className="font-semibold text-[16px] text-black">
+                    <h3 className="font-semibold text-black">
                       {proposal.title}
                     </h3>
                   </div>

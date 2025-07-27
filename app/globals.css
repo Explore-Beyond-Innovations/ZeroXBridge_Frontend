@@ -45,6 +45,12 @@
   }
 }
 
+html,
+body {
+  overscroll-behavior-y: none;
+  letter-spacing: -0.5px;
+}
+
 /* Base Styles */
 body {
   color: var(--foreground);
@@ -173,7 +179,8 @@ body {
   50% {
     transform: scale(1.2);
     opacity: 1;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(162, 109, 255, 0.6);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.7),
+      0 0 20px rgba(162, 109, 255, 0.6);
   }
   100% {
     transform: scale(0.8);
@@ -183,13 +190,15 @@ body {
 }
 
 .shadow-glow {
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(162, 109, 255, 0.6);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7),
+    0 0 20px rgba(162, 109, 255, 0.6);
 }
 
 /* Add this to your global CSS file */
 
 @keyframes glow {
-  0%, 100% {
+  0%,
+  100% {
     filter: brightness(1) drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
   }
   20% {
@@ -220,3 +229,34 @@ img {
   background: transparent !important;
 }
 
+p {
+  font-size: 0.875rem /* 14px */;
+  line-height: 1.25rem;
+}
+
+@media (min-width: 1172px) {
+  p,
+  body {
+    font-size: 1rem /* 16px */;
+    line-height: 1.5rem /* 18px */;
+  }
+
+  h1 {
+    font-size: 3rem /* 48px */;
+    line-height: 106% /* 50.88px */;
+  }
+}
+
+@media (min-width: 1920px) {
+  body,
+  p {
+    font-size: 1.5rem; /* 24px */
+    line-height: 112%; /* 26.88px */
+    letter-spacing: -0.25px;
+  }
+
+  h1 {
+    font-size: 4rem; /* 64px */
+    line-height: 106%; /* 57.6px */
+  }
+}

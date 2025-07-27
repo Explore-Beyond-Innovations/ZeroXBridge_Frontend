@@ -1,9 +1,4 @@
-import {
-  CheckSquare,
-  Coins,
-  Home,
-  MessageSquare,
-} from "lucide-react";
+import { CheckSquare, Coins, Home, MessageSquare } from "lucide-react";
 import React from "react";
 
 // Types for our data
@@ -111,8 +106,15 @@ export default function GovernancePage() {
               <span className="text-white text-xs">⚡</span>
             </div>
             <div>
-              <div className="font-medium text-[18px] text-gray-800">
-                Governance Hub
+              <div className="font-medium text-lg text-gray-800">
+                <div className="text-xs text-gray-500 uppercase tracking-wide flex gap-2 font-semibold">
+                  <span>⚡</span>
+                  <span>Active</span>
+                </div>
+                <div className="font-bold text-gray-800 text-lg ">
+                  <span className="text-white text-xs">⚡</span>
+                  <span>Active</span>
+                </div>
               </div>
             </div>
           </div>
@@ -158,11 +160,10 @@ export default function GovernancePage() {
           <div className="mt-12">
             <div className="flex justify-between items-center mb-4 ml-4">
               <div>
-                <h2 className="text-[32px] text-black font-bold">
-                  Voting proposals
-                </h2>
-                <p className="text-[16px] text-gray-600 mt-0.5">
-                Starknet delegates vote to approve protocol upgrades on behalf of token holders, influencing the direction of the protocol.
+                <h2 className="text-black font-bold">Voting proposals</h2>
+                <p className="text-gray-600 mt-0.5">
+                  Starknet delegates vote to approve protocol upgrades on behalf
+                  of token holders, influencing the direction of the protocol.
                 </p>
                 <p className="text-black font-semibold">Learn more</p>
               </div>
@@ -175,7 +176,7 @@ export default function GovernancePage() {
                   className="border-b border-gray-300  p-4 flex items-center justify-between"
                 >
                   <div>
-                    <h3 className="font-semibold text-[16px] text-black">
+                    <h3 className="font-semibold text-black">
                       {proposal.title}
                     </h3>
                   </div>
