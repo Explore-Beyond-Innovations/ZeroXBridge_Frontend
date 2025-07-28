@@ -4,6 +4,7 @@ import {
   Manrope,
   Roboto_Serif,
   Bad_Script,
+  Permanent_Marker
 } from "next/font/google";
 import "./globals.css";
 import { Metadata } from "next";
@@ -14,6 +15,12 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
+const permanentMarker = Permanent_Marker({
+  variable: "--font-permanent-marker", 
+  weight: ["400"],
+  subsets: ["latin"]
+
+})
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
@@ -50,7 +57,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable}  ${geistMono.variable} ${manrope.variable} ${robotoSerif.variable} ${badScript.variable} antialiased bg-[#09050E] h-full`}
+        className={`${geistSans.variable}  ${geistMono.variable} ${manrope.variable} ${robotoSerif.variable} ${badScript.variable} ${permanentMarker.variable} antialiased bg-[#09050E] h-full`}
       >
         <ScrollProvider>{children}</ScrollProvider>
       </body>
