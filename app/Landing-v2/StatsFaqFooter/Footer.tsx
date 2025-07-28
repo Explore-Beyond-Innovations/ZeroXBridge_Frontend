@@ -28,13 +28,7 @@ const Footer = () => {
   return (
     <footer className="w-full pb-8 relative">
       {/* OnlyDust Promotional Banner */}
-      <section className=" relative py-8">
-        <Image
-          src="/border1.svg"
-          alt=""
-          fill
-          className="absolute inset-0 z-0 object-cover"
-        />
+      <section className=" relative py-8 bg-[url('/border1.svg')] bg-cover">
 
         <div className="max-w-[3359px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
@@ -45,24 +39,22 @@ const Footer = () => {
             className="relative overflow-hidden rounded-3xl"
           >
             {/* Content container with dark background */}
-            <div className="relative w-full h-[462px] md:h-[410.08px] z-10 bg-[#161616] rounded-3xl p-6 md:p-18 overflow-hidden group">
+            <div className="relative w-full md:w-[90%] mx-auto h-[462px] md:h-[410.08px] z-10 bg-[#161616] rounded-3xl p-6 md:p-[40px] overflow-hidden group">
               <div className="relative z-20 flex flex-col gap-4 md:flex-row items-start justify-between h-full">
                 {/* Text content */}
-                <div className="flex-1 max-w-2/3 md:max-w-xl">
-                  <motion.h2
+                <div className="flex-1 max-w-2/3 md:max-w-[400px]">
+                  <motion.p
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.1 }}
                     viewport={{ once: true }}
-                    className="text-[26.8px] md:text-2xl lg:text-3xl font-normal text-[#eeeeee] leading-tight relative"
+                    className="text-[26.8px] md:text-2xl lg:text-[40.7px] font-[500] text-[#eeeeee] leading-[2rem] relative "
                   >
-                    We are building
-                    <br />
+                    We are building {" "}
                     open-source, join
-                    <br />
                     at{" "}
                     <span
-                      className={`font-parmanent_marker tracking-wide relative text-[#eeeeee] group-hover:text-white`}
+                      className={`font-parmanent_marker tracking-wide leading-normal relative text-[#eeeeee] group-hover:text-white`}
                     >
                       ONLYDUST{" "}
                       <svg
@@ -94,7 +86,7 @@ const Footer = () => {
                         </defs>
                       </svg>
                     </span>
-                  </motion.h2>
+                  </motion.p>
 
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -135,7 +127,7 @@ const Footer = () => {
                   viewport={{ once: true }}
                   className="flex md:absolute group-hover:-right-0 group-hover:-top-[3rem] md:-right-[4rem] md:top-[3rem] mx-auto"
                 >
-                  <div className="relative w-[303.31px] h-96 lg:w-[449.92px] lg:h-[430px] group-hover:lg:w-[314px] group-hover:opacity-100 opacity-40 mx-auto">
+                  <div className="relative w-[303.31px] h-96 lg:w-[449.92px] lg:h-[430px] group-hover:lg:w-[314px] group-hover:opacity-100 opacity-20 mx-auto">
                     <Image
                       src="/onlydust.svg"
                       alt="OnlyDust Logo"
@@ -158,7 +150,7 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center mb-8 flex flex-col gap-2"
+            className="text-center mb-8 flex flex-col gap-4"
           >
             <h3 className="text-[32px] md:text-[48px] font-[400] text-white">
               Stay in the loop!

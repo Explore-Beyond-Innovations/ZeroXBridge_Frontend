@@ -2,6 +2,7 @@
 
 import { AutoFadeTextWrapper } from "@/app/components/AutoFadeTextWrapper";
 import { motion, useAnimation } from "framer-motion";
+import { useState } from "react";
 
 interface Transaction {
   id: string;
@@ -14,6 +15,7 @@ interface Transaction {
 
 const LiveStats = () => {
   const controls = useAnimation();
+  const [isHovered, setIsHovered] = useState(false);
   const mockTransactions: Transaction[] = [
     {
       id: "1",
@@ -176,8 +178,9 @@ const LiveStats = () => {
           <motion.div className='hover:bg-[url("/border1.svg")] bg-cover bg-no-repeat w-full overflow-hidden h-[180px] md:w-[546px] 2xl:w-[1426.41px]   px[6px] py-[4px] rounded-[16px] flex items-center justify-center'
           animate={controls}
           onHoverStart={() => {
+            setIsHovered(true);
             controls.start({
-              scale: 0.99,
+              scale: 1.01,
               transition: {
                 type: "spring",
                 stiffness: 1000,
@@ -186,8 +189,9 @@ const LiveStats = () => {
             });
           }}
           onHoverEnd={() => {
+            setIsHovered(false);
             controls.start({
-              scale: 1.01,
+              scale: 0.99,
               transition: {
                 type: "spring",
                 stiffness: 500,
@@ -214,6 +218,15 @@ const LiveStats = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
                     viewport={{ once: true }}
+                    animate={
+                      tx.icon === "arrow"
+                        ? {
+                            width: isHovered ? "68%" : "88%",
+                            left: isHovered ? "5rem": "", // Animate width shrink
+                            transition: { duration: 0.4, ease: "easeInOut" },
+                          }
+                        : {}
+                    }
                     className={`absolute  bg-[#1a1a1a] border border-[#252525] rounded-xl p-3 flex items-center justify-between ${
                       tx.icon === "swap"
                         ? "w-[456px] md:w-full z-30 top-0"
