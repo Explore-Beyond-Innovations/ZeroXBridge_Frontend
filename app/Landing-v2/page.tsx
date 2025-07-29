@@ -5,6 +5,7 @@ import { FeaturesList } from "./ComingSoonFeatures";
 import { HowItWorks } from "./HowItWorks";
 import { ZeroXPosition } from "./Position";
 import { Hero } from "./HeroSection";
+import { Faq, Footer, LiveStats } from "./StatsFaqFooter";
 
 const Page = () => {
   return (
@@ -15,6 +16,9 @@ const Page = () => {
         <HowItWorks />
         <InsideZeroX />
         <FeaturesList />
+        <LiveStats />
+        <Faq />
+        <Footer />
       </div>
     </div>
   );

@@ -60,6 +60,7 @@ const config: Config = {
         sans: ["var(--font-geist-sans)"],
         mono: ["var(--font-geist-mono)"],
         manrope: ["var(--font-manrope)"],
+        parmanent_marker: ["var(--font-permanent-marker)"],
         "roboto-serif": ["var(--font-roboto-serif)"],
         inter: ["var(--font-inter)"],
       },
