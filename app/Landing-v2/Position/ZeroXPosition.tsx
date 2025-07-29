@@ -4,12 +4,12 @@ import Image from "next/image";
 
 const ZeroXPosition = () => {
   return (
-    <div className="bg-[#0F0F0F] px-24 py-16">
-      <div className="  flex flex-col gap-8 mx-auto">
+    <div className="bg-[#0F0F0F] px-24 py-16 2xl:px-28 ">
+      <div className="  flex flex-col gap-8 mx-auto 2xl:w-[95%]">
         <GradientWrapper className="h-fit w-fit rounded-full">
           <AutoFadeTextWrapper
             as="h2"
-            className="font-mono text-sm font-[500] py-1 px-2 rounded-full w-fit bg-[#19191A] uppercase 3xl:text-3xl"
+            className="font-mono text-sm font-[500] py-1 px-2 2xl:px-6 2xl:py-4 rounded-full w-fit bg-[#19191A] uppercase 2xl:text-3xl"
           >
             ZERO-X-POSITION
           </AutoFadeTextWrapper>
@@ -37,7 +37,7 @@ const ZeroXPosition = () => {
             className="inline-block mx-1 cursor-pointer group-hover:animate-jiggle"
             aria-hidden="true"
           />
-          . These tokens are native, and backed 1:1 by the user's collateral
+          . These tokens are native, and backed 1:1 by the user&apos;s collateral
           locked on Ethereum.
         </p>
 

@@ -147,14 +147,14 @@ const FeatureCard = ({ feature }: { feature: (typeof features)[number] }) => {
 
 const FeaturesList = () => {
   return (
-    <div className="w-full mx-auto px-2 md:px-[40px] lg:px-4 xl:w-full h-fit py-4 flex flex-col gap-6 2xl:gap-12 items-center  my-[10rem]">
+    <div className="w-full lg:w-[97%] 2xl:w-[90%] 2xl:px-[40px] max-w-[3359px]  mx-auto px-2 md:px-[40px] lg:px-4 xl:w-full h-fit py-4 flex flex-col gap-6 2xl:gap-12 items-center  my-[10rem]">
       <AutoFadeTextWrapper
         as="h2"
-        className="font-mono font-[500] text-sm  self-start px-2 uppercase lg:pl-[40px] "
+        className="font-mono font-[500] text-sm 2xl:text-[32px]  self-start px-2 uppercase lg:pl-[40px] "
       >
         Inside ZeroXBridge{" "}
         <GradientWrapper className="w-fit h-fit rounded-full">
-          <span className="uppercase inline-block py-1 px-2 rounded-full w-fit bg-[#19191A] ">
+          <span className="uppercase inline-block py-1 px-2 2xl:py-6 2xl:px-6 rounded-full w-fit bg-[#19191A] ">
             Coming Soon
           </span>
         </GradientWrapper>

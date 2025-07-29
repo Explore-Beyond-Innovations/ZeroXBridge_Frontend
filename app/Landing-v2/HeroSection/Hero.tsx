@@ -6,7 +6,7 @@ import GradientText from "../../components/ui/GradientText";
 
 const Hero = () => {
   return (
-    <div className="h-[100dvh] relative w-full">
+    <div className="h-[100dvh] relative w-full overflow-hidden">
       <div className="relative   z-10">
         <Navbar />
         <div className="flex flex-col  gap-4 mt-[clamp(100px,10dvh,150px)] 2xl:mt-[15vh]  max-w-[632px] mx-auto 2xl:max-w-[500px] 3xl:max-w-[650px]  4xl:max-w-[850px]">
