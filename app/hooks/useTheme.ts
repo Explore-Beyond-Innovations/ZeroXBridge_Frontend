@@ -1,8 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
 
+type Theme = "dark" | "light"
+
 export const useTheme = () => {
-  const [theme, setTheme] = useState<string>("");
+  const [theme, setTheme] = useState<Theme | null>(null);
 
   useEffect(() => {
     if (typeof window === "undefined" || !window.localStorage) return;
@@ -16,7 +18,7 @@ export const useTheme = () => {
 
     document.documentElement.classList.toggle("dark", activeTheme === "dark");
 
-    setTheme(activeTheme);
+    setTheme(activeTheme as Theme);
   }, []);
 
   const changeTheme = () => {
