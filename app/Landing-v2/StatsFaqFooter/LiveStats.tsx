@@ -125,7 +125,7 @@ const LiveStats = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
-              className="bg-[#141414] border border-[#1f1f1f] rounded-[16px] 2xl:rounded-[42px] px-4 py-3 2xl:px-8 2xl:py-8 flex flex-col justify-between h-[176px] w-[99%]  lg:w-[402px] 2xl:w-[99%] 2xl:h-[442px] relative"
+              className="bg-[#141414] border border-[#1f1f1f] rounded-[16px] 2xl:rounded-[42px] px-4 py-3 2xl:px-8 2xl:py-8 flex flex-col justify-between h-[176px] w-[99%]  lg:w-[402px] 2xl:w-[99%] 2xl:h-[458px] relative"
             >
               <h3 className="text-[15.72px] 2xl:text-[42.11px] font-normal text-gray-400">
                 xZB Supply
@@ -175,7 +175,7 @@ const LiveStats = () => {
           </div>
 
           {/* Latest Transactions Card */}
-          <motion.div className='hover:bg-[url("/border1.svg")] bg-cover bg-no-repeat w-full overflow-hidden h-[180px lg:w-[542px] 2xl:w-[1426.41px] 2xl:h-[433.19]  px[6px] py-[4px] rounded-[16px] 2xl:rounded-[42px] flex items-center justify-center'
+          <motion.div className='hover:bg-[url("/border1.svg")] bg-cover bg-no-repeat w-full overflow-hidden h-[180px lg:w-[542px] 2xl:w-[1426.41px] 2xl:h-[433.19px]  px[6px] py-[4px] rounded-[16px] 2xl:rounded-[42px] flex items-center justify-center'
           animate={controls}
           onHoverStart={() => {
             setIsHovered(true);
