@@ -12,7 +12,7 @@ const cardData = [
       "Users lock ETH or other supported tokens on Ethereum and receive xZB on Starknet",
     image: "/safe.png",
     containerstyling:
-      "md:w-[364px] xl:w-[402px] 2xl:w-[804px] 2xl:h-[928px]  w-full h-[481px] p-[2px] ",
+      "md:w-[48%] lg:w-[364px] xl:w-[432px] 2xl:w-[726px] 2xl:h-[848px]  w-full h-[481px] p-[2px] ",
     styling: "w-full h-full",
     imagestyle:
       "w-auto h-auto bg-cover mt-[150px] ml-[80px] 2xl:mt-[320px] 2xl:ml-[150px] scale-[1.9] group-hover:mt-[140px] 2xl:group-hover:mt-[300px]",
@@ -23,7 +23,7 @@ const cardData = [
       "Zero-knowledge proofs ensure the user’s L1 collateral is verified without revealing private data or bridging assets, enabling secure minting of xZB.",
     image: "/shield.png",
     containerstyling:
-      "md:w-[364px] xl:w-[402px] 2xl:w-[804px] 2xl:h-[928px]  w-full h-[481px] p-[2px]",
+      "md:w-[48%] lg:w-[364px] xl:w-[432px] 2xl:w-[726px] 2xl:h-[848px]  w-full h-[481px] p-[2px]",
     styling: "w-full h-full",
     imagestyle:
       "w-auto h-auto bg-cover mt-[130px] 2xl:mt-[320px] -ml-[20px] scale-[2.1] group-hover:mt-[120px] 2xl:group-hover:mt-[300px]",
@@ -34,7 +34,7 @@ const cardData = [
       "xZB is a non-wrapped, USD-pegged stable token issued on Starknet. It’s backed 1:1 by locked collateral on Ethereum L1 and is instantly usable across DeFi applications for lending, trading, and staking.",
     image: "/token.png",
     containerstyling:
-      "md:w-[364px] xl:w-[402px] 2xl:w-[804px] 2xl:h-[928px] lg:h-[760px]  w-full xl:h-[765px] h-[481px] p-[2px]",
+      "md:w-[48%] lg:w-[364px]  xl:w-[432px] 2xl:w-[726px] 2xl:h-[848px] lg:h-[760px]  w-full xl:h-[765px] h-[481px] p-[2px]",
     styling:
       "w-full h-full overflow-none bg-[#161616] rounded-[16px] py-[30px]",
     imagestyle:
@@ -46,7 +46,7 @@ const cardData = [
       "Powered by ZK-proofs, ZeroXBridge eliminates the need for multisigs, validators, or custodians, removing human risk and ensuring user-owned security.",
     image: "/castle.png",
     containerstyling:
-      "lg:w-[745px] xl:w-[825px] lg:h-[274px] lg:absolute 2xl:relative lg:-bottom-1 xl:bottom-0 lg:left-0 md:w-[364px] 2xl:w-[804px] 2xl:h-[928px]  w-full h-[481px] p-[2px] flex flex-col lg:flex-row 2xl:flex-col items-center justify-center",
+      "lg:w-[745px] xl:w-[880px] lg:h-[274px] lg:absolute 2xl:relative lg:-bottom-1 xl:bottom-0 lg:left-0 md:w-[48%] 2xl:w-[726px] 2xl:h-[848px]  w-full h-[481px] p-[2px] flex flex-col lg:flex-row 2xl:flex-col items-center justify-center",
     styling:
       "w-full h-full flex flex-col lg:flex-row 2xl:flex-col gap-4 bg-[#161616] rounded-[16px] py-[30px] ",
     imagestyle:
@@ -135,7 +135,7 @@ function AnimatedCard({
       animate={controls}
       className={`${
         card.containerstyling
-      } flex flex-col items-center bg-center justify-center  rounded-[16px] overflow-none ${
+      } flex flex-col items-center bg-center justify-center  rounded-[16px] 2xl:rounded-[24px] overflow-none ${
         isActive ? 'bg-[url("/border.svg")]' : "bg-none"
       } hover:bg-[url("/border.svg")]`}
       onHoverStart={() => {
@@ -209,8 +209,8 @@ function AnimatedCard({
 
 const InsideZeroX = () => {
   return (
-    <div className="w-fit px-2 2xl:px-[40px] h-fit py-4 flex flex-col gap-4 items-center mx-auto">
-      <h2 className="font-mono font-[500] text-[14px] text-[#A6A6A7] self-start px-2 uppercase">
+    <div className="w-fit px-6 md:px-2 2xl:w-[90%] 2xl:px-[40px] max-w-[3359px] h-fit py-4 my-[3rem] md:my-0 flex flex-col gap-4 items-center mx-auto">
+      <h2 className="font-mono font-[500] text-[14px] 2xl:text-[32px] 2xl:mb-8 text-[#A6A6A7] self-start px-2 uppercase">
         Inside ZeroXBridge
       </h2>
       <div className="flex flex-col md:flex-row md:flex-wrap lg:flex-row lg:flex-wrap 2xl:flex-row h-full gap-[16px] 2xl:gap-[24px] w-full  relative">

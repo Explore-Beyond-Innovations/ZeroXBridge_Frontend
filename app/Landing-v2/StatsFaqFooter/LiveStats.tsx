@@ -36,8 +36,8 @@ const LiveStats = () => {
   ];
 
   return (
-    <section className="w-full px-8 md:px-[50px] py-16 md:py-24 bg-[#0B0B0C]">
-      <div className="w-full mx-auto max-w-[3359px]">
+    <section className="w-full px-8 lg:px-0 xl:px-[40px] 2xl:px-0 py-16 2xl:py-24 bg-[#0B0B0C] 2xl:max-w-[3359px] mx-auto">
+      <div className="w-full lg:w-[95%] 2xl:w-[90%] mx-auto max-w-[3359px]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -47,27 +47,27 @@ const LiveStats = () => {
         >
           <AutoFadeTextWrapper
             as="h2"
-            className="font-mono font-[500] text-sm  self-start px-2 uppercase lg:pl-[40px] "
+            className="font-mono font-[500] text-sm 2xl:text-[32px]  self-start px-2 uppercase  2xl:pl-[40px] "
           >
             LIVE STATS
           </AutoFadeTextWrapper>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:flex md:flex-row gap-4 w-full items-center justify-center 2xl:justify-between 2xl:px-[2rem]">
+        <div className="grid grid-cols-1 lg:flex lg::flex-row gap-3 2xl:gap-4  w-full items-center justify-center 2xl:justify-between 2xl:px-[2rem]">
           {/* Total Value Locked Card */}
-          <div className='hover:bg-[url("/border1.svg")] bg-cover bg-no-repeat h-[180px] w-full md:w-[344px] 2xl:w-[892px] px[6px] py-[4px] rounded-[16px] flex items-center justify-center group'>
+          <div className='hover:bg-[url("/border1.svg")] bg-cover bg-no-repeat h-[180px] w-full  lg:w-[405px] 2xl:w-[892px] 2xl:h-[463.19] px[6px] py-[4px] rounded-[16px] 2xl:rounded-[42px] flex items-center justify-center group'>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               viewport={{ once: true }}
-              className="bg-[#141414] border border-[#1f1f1f] rounded-[16px] px-4 py-3 flex flex-col justify-between h-[176px] w-[99%] md:w-[339px] 2xl:w-[99.5%] 2xl:h-[178px] relative overflow-hidden"
+              className="bg-[#141414] border border-[#1f1f1f] rounded-[16px] 2xl:rounded-[42px] px-4 py-3 2xl:px-8 2xl:py-8 flex flex-col justify-between h-[176px] w-[99%]  lg:w-[400px] 2xl:w-[99.5%] 2xl:h-[458px] relative overflow-hidden"
             >
-              <h3 className="text-[15.72px] font-normal text-gray-400">
+              <h3 className="text-[15.72px] 2xl:text-[42.11px] font-normal text-gray-400">
                 Total Value Locked
               </h3>
-              <div className="flex items-end">
-                <motion.div className="backdrop-blur-md bg-[#1a1a1a] group-hover:bg-[#fff] transition-all duration-300 rounded-full px-5 py-3 flex items-center gap-2 group shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-black/30"
+              <div className="flex items-end ">
+                <motion.div className="backdrop-blur-md 2xl:w-[422.39px] 2xl:h-[126.32px] 2xl:px-10 bg-[#1a1a1a] group-hover:bg-[#fff] transition-all duration-300 rounded-full px-5 py-3 flex items-center gap-2 group shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-black/30"
                  whileHover={{
                   scale: 1.05,
                   transition: {
@@ -78,7 +78,7 @@ const LiveStats = () => {
                 }}
                 >
                   <svg
-                    className="group-hover:hidden w-[14.5px] h-[18.25px] text-[#fff]  transition-colors"
+                    className="group-hover:hidden w-[14.5px] 2xl:w-[38.16px] 2xl:h-[48.03px] h-[18.25px] text-[#fff]  transition-colors"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -94,13 +94,13 @@ const LiveStats = () => {
                     <circle cx="12" cy="16" r="1"></circle>
                     <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                   </svg>
-                  <span className="text-gray-300 group-hover:text-black text-sm font-[500]">
+                  <span className="text-gray-300 group-hover:text-black text-sm 2xl:text-[42.11px] font-[500]">
                     Coming Soon
                   </span>
                 </motion.div>
               </div>
               <svg
-                className="absolute hidden group-hover:flex top-0 right-0"
+                className="absolute hidden group-hover:flex top-0 right-0 2xl:scale-[2.5] 2xl:right-[5rem] 2xl:top-[8rem]"
                 width="110"
                 height="172"
                 viewBox="0 0 110 172"
@@ -119,21 +119,21 @@ const LiveStats = () => {
           </div>
 
           {/* XZB Supply Card */}
-          <div className='hover:bg-[url("/border1.svg")] bg-cover bg-no-repeat h-[180px] w-full md:w-[344px] 2xl:w-[892px] px[6px] py-[4px] rounded-[16px] flex items-center justify-center group'>
+          <div className='hover:bg-[url("/border1.svg")] bg-cover bg-no-repeat h-[180px] w-full  lg:w-[405px] 2xl:w-[892px] 2xl:h-[463.19] px[6px] py-[4px] rounded-[16px] 2xl:rounded-[42px] flex items-center justify-center group'>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
-              className="bg-[#141414] border border-[#1f1f1f] rounded-[16px] px-4 py-3 flex flex-col justify-between h-[176px] w-[99%] md:w-[339px] 2xl:w-[99.5%] 2xl:h-[178px] relative"
+              className="bg-[#141414] border border-[#1f1f1f] rounded-[16px] 2xl:rounded-[42px] px-4 py-3 2xl:px-8 2xl:py-8 flex flex-col justify-between h-[176px] w-[99%]  lg:w-[400px] 2xl:w-[99.5%] 2xl:h-[458px] relative"
             >
-              <h3 className="text-[15.72px] font-normal text-gray-400">
+              <h3 className="text-[15.72px] 2xl:text-[42.11px] font-normal text-gray-400">
                 xZB Supply
               </h3>
               <div className="flex items-end">
-                <button className="backdrop-blur-md bg-[#1a1a1a] group-hover:bg-[#fff] transition-all duration-300 rounded-full px-5 py-3 flex items-center gap-2 group shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-black/30">
+                <button className="backdrop-blur-md 2xl:w-[422.39px] 2xl:h-[126.32px] 2xl:px-10 bg-[#1a1a1a] group-hover:bg-[#fff] transition-all duration-300 rounded-full px-5 py-3 flex items-center gap-2 group shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-black/30">
                   <svg
-                    className="group-hover:hidden w-[14.5px] h-[18.25px] text-[#fff]  transition-colors"
+                    className="group-hover:hidden w-[14.5px] h-[18.25px] 2xl:w-[38.16px] 2xl:h-[48.03px] text-[#fff]  transition-colors"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -149,13 +149,13 @@ const LiveStats = () => {
                     <circle cx="12" cy="16" r="1"></circle>
                     <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                   </svg>
-                  <span className="text-gray-300 group-hover:text-black text-sm font-[500]">
+                  <span className="text-gray-300 2xl:text-[42.11px] group-hover:text-black text-sm font-[500]">
                     Coming Soon
                   </span>
                 </button>
               </div>
               <svg
-                className="absolute -right-1 -top-1 rounded-[16px] hidden group-hover:flex"
+                className="absolute -right-1 -top-1 rounded-[16px] hidden group-hover:flex 2xl:scale-[2.56] 2xl:right-[6.5rem] 2xl:top-[8.5rem]"
                 width="140"
                 height="182"
                 viewBox="0 0 140 176"
@@ -175,7 +175,7 @@ const LiveStats = () => {
           </div>
 
           {/* Latest Transactions Card */}
-          <motion.div className='hover:bg-[url("/border1.svg")] bg-cover bg-no-repeat w-full overflow-hidden h-[180px] md:w-[546px] 2xl:w-[1426.41px]   px[6px] py-[4px] rounded-[16px] flex items-center justify-center'
+          <motion.div className='hover:bg-[url("/border1.svg")] bg-cover bg-no-repeat w-full overflow-hidden h-[180px] 2xl:w-[1426.41px] 2xl:h-[463.19]   px[6px] py-[4px] rounded-[16px] 2xl:rounded-[42px] flex items-center justify-center'
           animate={controls}
           onHoverStart={() => {
             setIsHovered(true);
@@ -204,10 +204,10 @@ const LiveStats = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
               viewport={{ once: true }}
-              className="bg-[#141414] rounded-[16px] px-4 py-3 w-[99%] md:w-[542px] h-[176px]  2xl:w-[99.8%] 2xl:h-[178px]"
+              className="bg-[#141414] rounded-[16px] 2xl:rounded-[42px] px-4 py-3 2xl:px-8 2xl:py-8 w-[99%]  h-[176px]  2xl:w-[99.8%] 2xl:h-[458px]"
               
             >
-              <h3 className="text-[15.72px] font-normal text-gray-400 mb-4">
+              <h3 className="text-[15.72px] 2xl:text-[42.11px] font-normal text-gray-400 mb-4 2xl:mb-[4rem]">
                 Lastest Transactions
               </h3>
               <div className="relative flex items-center">
@@ -219,30 +219,37 @@ const LiveStats = () => {
                     transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
                     viewport={{ once: true }}
                     animate={
-                      tx.icon === "arrow"
+                      tx.icon === "swap"
                         ? {
-                            width: isHovered ? "68%" : "88%",
-                            left: isHovered ? "5rem": "", // Animate width shrink
+                          top: isHovered ? "" : "0",
+                            width: isHovered ? "88%" : "100%",
+                            left: isHovered ? "": "", // Animate width shrink
                             transition: { duration: 0.4, ease: "easeInOut" },
                           }
-                        : {}
+                        : {
+                          top: isHovered ? "0" : "",
+                          width: isHovered ? "100%" : "88%",
+                          left: isHovered ? "0" : "",
+                          zIndex: isHovered? "30" : "",
+                          transition: { duration: 0.4, ease: "easeInOut" },
+                        }
                     }
-                    className={`absolute  bg-[#1a1a1a] border border-[#252525] rounded-xl p-3 flex items-center justify-between ${
+                    className={`absolute 2xl:h-[168.69px] bg-[#1a1a1a] border border-[#252525] rounded-xl 2xl:rounded-[42.11px] p-3 flex items-center justify-between ${
                       tx.icon === "swap"
-                        ? "w-[456px] md:w-full z-30 top-0"
-                        : "w-[456px] 2xl:w-[96%] z-20 top-10 left-[1.5rem] text-[#606060]"
+                        ? `w-[456px] md:w-full z-30  ${isHovered ? "top-8 2xl:top-[4.5rem] left-[2rem] 2xl:left-[4.5rem]" : "top-0 "}`
+                        : `w-[456px] 2xl:w-[96%] z-20   left-[1.5rem] 2xl:left-[4.5rem] text-[#606060] ${isHovered ? "top-0" : "top-10 2xl:top-[6.5rem]"}`
                     }`}
                   >
                     <div className={`flex items-center gap-3 `}>
                       <div
-                        className={`w-8 h-8 ${
-                          index === 0 ? "bg-white" : "bg-[#444444]"
-                        } rounded-lg flex items-center justify-center`}
+                        className={`w-8 h-8 2xl:w-[105.27px] 2xl:h-[105.27px] ${
+                          index === 0 ? "bg-white group-hover:bg-[#444444]" : "bg-[#444444] group-hover:bg-white"
+                        } rounded-lg 2xl:rounded-[21.05px] flex items-center justify-center`}
                       >
                         {tx.icon === "swap" ? (
                           <svg
-                            className={`w-4 h-4 ${
-                              index === 0 ? "text-black" : "text-gray-300"
+                            className={`w-4 h-4 2xl:w-[63.16px] 2xl:h-[63.16px] text-black group-hover:text-gray-300  ${
+                              index === 0 ? "" : ""
                             }`}
                             fill="none"
                             stroke="currentColor"
@@ -253,10 +260,8 @@ const LiveStats = () => {
                           </svg>
                         ) : (
                           <svg
-                            width="24"
-                            height="24"
                             viewBox="0 0 24 24"
-                            className=" text-[#606060]"
+                            className=" text-[#606060] group-hover:text-black w-4 h-4 2xl:w-[63.16px] 2xl:h-[63.16px]"
                             fill="none"
                             stroke="#606060"
                             xmlns="http://www.w3.org/2000/svg"
@@ -270,16 +275,16 @@ const LiveStats = () => {
                           </svg>
                         )}
                       </div>
-                      <div>
-                        <div className=" text-sm font-medium">{tx.type}</div>
-                        <div className="text-[#606060] text-xs">
+                      <div className="flex flex-col 2xl:gap-6">
+                        <div className=" text-sm 2xl:text-[42.11px] font-medium text-white group-hover:text-[#606060]">{tx.type}</div>
+                        <div className="text-[#606060] 2xl:text-[36.84px] text-xs">
                           From {tx.from}
                         </div>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <div className=" text-sm font-semibold">{tx.amount}</div>
-                      <div className=" text-[#606060] text-xs">{tx.value}</div>
+                    <div className="text-right flex flex-col 2xl:gap-6">
+                      <div className=" text-sm 2xl:text-[42.11px] font-semibold text-white group-hover:text-[#606060]">{tx.amount}</div>
+                      <div className=" text-[#606060] text-xs 2xl:text-[36.84px]">{tx.value}</div>
                     </div>
                   </motion.div>
                 ))}

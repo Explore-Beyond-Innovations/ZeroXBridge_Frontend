@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const Navbar = () => {
   return (
-    <header className='justify-between  py-4 items-center flex w-full  mx-auto px-[clamp(16px,5vw,80px)] 3xl:px-[18.75rem]'>
+    <header className='justify-between  py-4 items-center hidden md:flex w-full  mx-auto px-[clamp(16px,5vw,80px)] 3xl:px-[18.75rem]'>
       <div className='w-12 h-12 flex items-center justify-center'>
         <Link href='/'>
           <Image src='/logo.png' alt='logo' width={100} height={100} />

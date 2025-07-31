@@ -114,7 +114,7 @@ const FeatureCard = ({ feature }: { feature: (typeof features)[number] }) => {
       animate={bgControls}
       className="flex flex-row gap-4 justify-between items-start border-b border-[#131314] text-[#B2B2B2] pb-[40px] px-1 text-start relative group"
     >
-      <div className="flex flex-col lg:flex-row w-full items-center justify-between gap-4 lg:px-[30px] lg:py-2">
+      <div className="flex flex-col lg:flex-row w-full items-center md:items-start lg:items-center justify-between gap-4 lg:px-[30px] lg:py-2">
         <AutoFadeTextWrapper className="w-full md:w-[400px] font-[400] 2xl:w-[800px]">
           {feature.title}
         </AutoFadeTextWrapper>
@@ -147,14 +147,14 @@ const FeatureCard = ({ feature }: { feature: (typeof features)[number] }) => {
 
 const FeaturesList = () => {
   return (
-    <div className="w-full mx-auto px-2 md:px-[40px] lg:px-4 xl:w-full h-fit py-4 flex flex-col gap-6 2xl:gap-12 items-center  my-[10rem]">
+    <div className="w-full lg:w-[95%] 2xl:w-[90%] 2xl:px-[40px] max-w-[3359px]  mx-auto px-2 md:px-[20px] lg:px-4 h-fit py-4 flex flex-col gap-6 2xl:gap-12 items-center my-[5rem]  2xl:my-[10rem]">
       <AutoFadeTextWrapper
         as="h2"
-        className="font-mono font-[500] text-sm  self-start px-2 uppercase lg:pl-[40px] "
+        className="font-mono font-[500] text-sm 2xl:text-[32px]  self-start px-2 uppercase md:pl-4 lg:pl-[40px] "
       >
         Inside ZeroXBridge{" "}
         <GradientWrapper className="w-fit h-fit rounded-full">
-          <span className="uppercase inline-block py-1 px-2 rounded-full w-fit bg-[#19191A] ">
+          <span className="uppercase inline-block py-1 px-2 2xl:py-6 2xl:px-6 rounded-full w-fit bg-[#19191A] ">
             Coming Soon
           </span>
         </GradientWrapper>

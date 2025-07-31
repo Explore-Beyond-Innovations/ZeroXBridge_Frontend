@@ -5,6 +5,7 @@ import { FeaturesList } from "./Landing-v2/ComingSoonFeatures";
 import { Hero } from "./Landing-v2/HeroSection";
 import { ZeroXPosition } from "./Landing-v2/Position";
 import { HowItWorks } from "./Landing-v2/HowItWorks";
+import { Faq, Footer, LiveStats } from "./Landing-v2/StatsFaqFooter";
 
 const Page = () => {
   return (
@@ -15,6 +16,9 @@ const Page = () => {
         <HowItWorks />
         <InsideZeroX />
         <FeaturesList />
+        <LiveStats />
+        <Faq />
+        <Footer />
       </div>
     </div>
   );

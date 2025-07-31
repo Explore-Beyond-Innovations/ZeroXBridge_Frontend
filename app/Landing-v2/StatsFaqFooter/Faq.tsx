@@ -39,8 +39,8 @@ const Faq = () => {
   };
 
   return (
-    <section className="w-full py-16 md:py-24 bg-[#0A0A0A]">
-      <div className="w-full px-8 sm:px-6 lg:px-8 max-w-[3359px] mx-auto">
+    <section className="w-full py-16 md:py-24 bg-[#0A0A0A] 2xl:max-w-[3359px] mx-auto ">
+      <div className="w-full xl:w-[95%] 2xl:w-[90%] px-8 sm:px-6 lg:px-8  max-w-[3359px]  mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -48,8 +48,8 @@ const Faq = () => {
           viewport={{ once: true }}
           className="mb-12"
         >
-          <h2 className="text-[14px] md:text-[16px] font-[500] text-[#eeeeee] uppercase tracking-wider">
-            FAQS
+          <h2 className="text-[14px] md:text-[16px] 2xl:text-[32px] font-[500] text-[#eeeeee] uppercase tracking-wider">
+            FREQUENTLY ASKED QUESTIONS
           </h2>
         </motion.div>
 

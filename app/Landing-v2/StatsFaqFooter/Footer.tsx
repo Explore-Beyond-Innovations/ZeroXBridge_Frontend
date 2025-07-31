@@ -28,7 +28,7 @@ const Footer = () => {
   return (
     <footer className="w-full pb-8 relative">
       {/* OnlyDust Promotional Banner */}
-      <section className=" relative py-8 bg-[url('/border1.svg')] bg-cover">
+      <section className=" relative py-8 bg-[url('/border1.svg')] bg-cover 2xl:h-[1146px]">
 
         <div className="max-w-[3359px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
@@ -39,22 +39,22 @@ const Footer = () => {
             className="relative overflow-hidden rounded-3xl"
           >
             {/* Content container with dark background */}
-            <div className="relative w-full md:w-[90%] mx-auto h-[462px] md:h-[410.08px] z-10 bg-[#161616] rounded-3xl p-6 md:p-[40px] overflow-hidden group">
-              <div className="relative z-20 flex flex-col gap-4 md:flex-row items-start justify-between h-full">
+            <div className="relative w-full md:w-[82%] mx-auto h-[462px] md:h-[410.08px] 2xl:h-[914.97px] 2xl:p-[4rem] 2xl:mt-[5rem] z-10 bg-[#161616] rounded-3xl 2xl:rounded-[42.11px] p-6 md:p-[40px] overflow-hidden group">
+              <div className="relative z-20 flex flex-col gap-4 md:flex-row items-start justify-between h-full ">
                 {/* Text content */}
-                <div className="flex-1 max-w-2/3 md:max-w-[400px]">
-                  <motion.p
+                <div className=" max-w-2/3 md:max-w-[255px] lg:max-w-[400px] 2xl:max-w-[700px] 2xl:h-[324px]">
+                  <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.1 }}
                     viewport={{ once: true }}
-                    className="text-[26.8px] md:text-2xl lg:text-[40.7px] font-[500] text-[#eeeeee] leading-[2rem] relative "
+                    className="text-[26.8px] md:text-2xl lg:text-[40.7px] 2xl:text-[72px] font-[500] text-[#eeeeee] leading-[2rem] 2xl:leading-[4.5rem] relative "
                   >
                     We are building {" "}
                     open-source, join
                     at{" "}
                     <span
-                      className={`font-parmanent_marker tracking-wide leading-normal relative text-[#eeeeee] group-hover:text-white`}
+                      className={`font-parmanent_marker tracking-wide leading-normal  relative text-[#eeeeee] group-hover:text-white`}
                     >
                       ONLYDUST{" "}
                       <svg
@@ -86,14 +86,14 @@ const Footer = () => {
                         </defs>
                       </svg>
                     </span>
-                  </motion.p>
+                  </motion.h2>
 
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
                     viewport={{ once: true }}
-                    className="flex md:absolute bottom-0 mt-4 group-hover:bg-[url('/border1.svg')] bg-cover bg-no-repeat rounded-full px-[2px] py-[2px]"
+                    className="flex md:absolute bottom-0 mt-4 group-hover:bg-[url('/border1.svg')] bg-cover bg-no-repeat rounded-full px-[2px] py-[2px] w-fit 2xl:w-[516.89px] 2xl:h-[107.12px] "
                   >
                     <motion.a
                       href="https://www.onlydust.com"
@@ -101,11 +101,11 @@ const Footer = () => {
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="inline-flex items-center gap-3 px-4 md:px-8 py-2 md:py-4 bg-[#202020] hover:bg-[#252525] text-xs text-white rounded-full transition-all duration-300 w-full "
+                      className="inline-flex items-center gap-3 px-4 md:px-8 py-2 md:py-4 bg-[#202020] hover:bg-[#252525] text-xs 2xl:text-[35.71px] text-white rounded-full transition-all duration-300 w-full "
                     >
                       OnlyDust / ZeroXBridge
                       <svg
-                        className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-200"
+                        className="w-4 h-4 2xl:w-[53.56px] 2xl:h-[53.56px] transform group-hover:translate-x-1 transition-transform duration-200"
                         fill="none"
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -125,9 +125,9 @@ const Footer = () => {
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6, delay: 0.3, ease: easeInOut }}
                   viewport={{ once: true }}
-                  className="flex md:absolute group-hover:-right-0 group-hover:-top-[3rem] md:-right-[4rem] md:top-[3rem] mx-auto"
+                  className="flex md:absolute group-hover:-right-0 group-hover:-top-[3rem] md:-right-[4rem] md:top-[3rem] 2xl:-right-[8rem] 2xl:top-[7rem] mx-auto"
                 >
-                  <div className="relative w-[303.31px] h-96 lg:w-[449.92px] lg:h-[430px] group-hover:lg:w-[314px] group-hover:opacity-100 opacity-20 mx-auto">
+                  <div className="relative w-[303.31px] h-96 2xl:w-[999.26px] 2xl:h-[959.41px] lg:w-[449.92px] lg:h-[430px] group-hover:lg:w-[314px] group-hover:2xl:w-[759px] group-hover:opacity-100 opacity-20 mx-auto">
                     <Image
                       src="/onlydust.svg"
                       alt="OnlyDust Logo"
@@ -143,8 +143,8 @@ const Footer = () => {
       </section>
 
       {/* Newsletter Section */}
-      <section className="py-16 bg-[#0B0B0C]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <section className="py-16 bg-[#0B0B0C] 2xl:h-[732px] flex items-center">
+        <div className="w-fit mx-auto px-4 sm:px-6 lg:px-8 py-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -168,7 +168,7 @@ const Footer = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter e-mail address"
-                className="flex-1 px-4 py-3 bg-[#1A1A1A] w-[400px] h-[48px]  rounded-[12px] text-white placeholder-[#97A1A4] focus:outline-none transition-colors"
+                className="flex-1 px-4 py-3 bg-[#1A1A1A] w-[400px] h-[48px] 2xl:w-[992px] 2xl:h-[78px]  rounded-[12px] 2xl:rounded-[19.53px] text-white placeholder-[#97A1A4] focus:outline-none transition-colors"
                 required
               />
               <motion.button
@@ -176,7 +176,7 @@ const Footer = () => {
                 disabled={isSubmitting || isSubmitted}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`px-6 py-3 font-[400] w-fit text-[16px] mx-auto rounded-full transition-all duration-300 flex items-center gap-2 ${
+                className={`px-6 2xl:px-10 py-3 font-[400] 2xl:h-[78px] w-fit 2xl:w-[279.05px] text-[16px] 2xl:text-[24px] text-center mx-auto rounded-full transition-all duration-300 flex items-center gap-2 ${
                   isSubmitted ? "" : "bg-white text-black hover:bg-gray-100"
                 } disabled:opacity-50 disabled:cursor-not-allowed`}
               >
@@ -238,22 +238,22 @@ const Footer = () => {
       </section>
 
       {/* Community Section */}
-      <section className="relative bg-[#0F0F0F] h-[790px] md:h-[431px] flex flex-col md:flex-row items-center justify-between">
-        <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 py-16  flex items-center justify-center ">
+      <section className="relative bg-[#0F0F0F] h-[790px] md:h-fit lg:h-[431px] 2xl:h-[732px] flex flex-col md:flex-row items-center justify-between w-full">
+        <div className="relative z-10 w-full 2xl-w-[97%] px-4 sm:px-6 lg:px-8 py-16  flex items-center justify-center ">
           <div className="max-w-[3359px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-8 2xl:gap-[4rem]">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="flex-1 text-center lg:text-left"
+              className="2xl:w-[1073px] flex-1 text-center lg:text-left"
             >
-              <h3 className="text-xl md:text-2xl lg:text-3xl font-normal text-white mb-4 w-full ">
+              <h3 className="text-xl md:text-2xl lg:text-3xl 2xl:text-[94.96px] font-normal text-white mb-4 w-full ">
                 Join our
-                <br />
-                <span className="font-parmanent_marker text-2xl md:text-3xl lg:text-4xl relative">
+                <br className="2xl:hidden" />
+                <span className="font-parmanent_marker text-2xl 2xl:pl-6 2xl:text-[94.96px] md:text-3xl lg:text-4xl relative">
                   <svg
-                    className="absolute -left-[3rem] top-0 hidden md:block"
+                    className="absolute -left-[3rem] top-0 hidden md:block 2xl:hidden"
                     width="36"
                     height="55"
                     viewBox="0 0 36 55"
@@ -281,7 +281,7 @@ const Footer = () => {
                   </svg>
                   Community!
                   <svg
-                    className="absolute -right-[4rem] top-0 hidden md:flex"
+                    className="absolute -right-[4rem] top-0 hidden md:flex 2xl:hidden"
                     width="61"
                     height="40"
                     viewBox="0 0 61 40"
@@ -309,7 +309,7 @@ const Footer = () => {
                   </svg>
                 </span>
               </h3>
-              <p className="text-gray-400 text-base md:text-[16px] w-[290px] 2xl:w-full mx-auto lg:mx-0">
+              <p className="text-gray-400 text-base md:text-[16px] 2xl:text-[35.61px] 2xl:mt-12 2xl:leading-[2.5rem] w-[290px] 2xl:w-full mx-auto lg:mx-0">
                 ZeroXBridge will enable the community
                 <br className="hidden sm:block" />
                 to vote on which assets get whitelisted
@@ -323,23 +323,21 @@ const Footer = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               viewport={{ once: true }}
-              className="flex flex-col md:flex-row gap-6 w-full 2xl:w-[1658.68px] h-[534px] items-center"
+              className="flex flex-col md:flex-row gap-6 w-full 2xl:w-[1658.68px] lg:h-[534px] items-center"
             >
               {/* Discord */}
               <motion.a
                 href="#"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="relative group flex-1 w-full md:w-[400px] 2xl:w-[814px] h-[257px] md:h-[280px] rounded-[16px] bg-[#161616]"
+                className="relative group flex-1 w-full md:w-[310px] lg:w-[400px] 3xl:w-[814px] 2xl:h-[429.56px] h-[257px] md:h-[280px] rounded-[16px] bg-[#161616]"
               >
                 <div className="relative w-full h-full rounded-2xl flex items-center justify-center transition-all duration-300 overflow-hidden">
                   <motion.svg
-                    className="absolute z-20 hidden group-hover:block transition-all ease-linear overflow-hidden w-full"
+                    className="absolute z-20 hidden group-hover:block transition-all ease-linear overflow-hidden w-full h-full"
                     initial={{ rotate: -45, opacity: 0 }}
                     animate={{ rotate: 0, opacity: 1 }}
                     transition={{ duration: 1.3, ease: 'easeOut' }}
-                    width="400"
-                    height="280"
                     viewBox="0 0 400 280"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -387,16 +385,14 @@ const Footer = () => {
                 href="#"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="relative group flex-1 w-[400px] 2xl:w-[814px] h-[257px] md:h-[280px] rounded-[16px] bg-[#161616]"
+                className="relative group flex-1 w-full md:w-[310px] lg:w-[400px] 3xl:w-[814px] 2xl:h-[429.56px] h-[257px] md:h-[280px] rounded-[16px] bg-[#161616]"
               >
                 <div className="relative w-full h-full rounded-2xl flex items-center justify-center transition-all duration-300 overflow-hidden">
                 <motion.svg
-                    className="absolute z-20 hidden group-hover:block transition-all ease-linear overflow-hidden w-full"
+                    className="absolute z-20 hidden group-hover:block transition-all ease-linear overflow-hidden w-full h-full"
                     initial={{ rotate: -45, opacity: 0 }}
                     animate={{ rotate: 0, opacity: 1 }}
                     transition={{ duration: 1.3, ease: 'easeOut' }}
-                    width="400"
-                    height="280"
                     viewBox="0 0 400 280"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -456,8 +452,8 @@ const Footer = () => {
       {/* Footer Links and Copyright */}
       <div className="w-full h-[383px] hidden md:flex justify-between items-center px-[4rem] relative bg-[#070707]">
         <div className="w-1/3 ">
-          <h4 className="text-white font-[700] mb-2">Quick Links</h4>
-          <ul className="space-y-2 text-[#B2B2B2] text-[14px]">
+          <h4 className="text-white font-[700] mb-2 2xl:text-[20px]">Quick Links</h4>
+          <ul className="space-y-2 text-[#B2B2B2] text-[14px] 2xl:text-[20px]">
             <li>
               <a
                 href="#"
@@ -527,14 +523,14 @@ const Footer = () => {
       <div className="w-full bg-[#0B0B0C] mt-2  md:bg-[#0F0F0F] h-[90px] md:h-[78px] flex justify-between items-center">
         <div className="w-full mx-auto px-4 sm:px-6 lg:px-[40px]">
           <div className="flex flex-row justify-between items-start md:items-center gap-4">
-            <p className="text-[#D0D0D0] max-w-[35%] md:max-w-full text-[14px]">
+            <p className="text-[#D0D0D0] max-w-[35%] md:max-w-full text-[14px] 2xl:text-[20px]">
               All Rights Reserved, © ZeroXBridge, 2025
             </p>
 
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-3 md:px-6 py-2 h-[37px] bg-[#2a2a2a] hover:bg-[#3a3a3a] text-[#D0D0D0] font-[400] text-[12px] md:text-[14px] rounded-full transition-all duration-300 flex items-center gap-2"
+              className="px-3 md:px-6 py-2 h-[37px] 2xl:w-[182px] 2xl:h-[44px] bg-[#2a2a2a] hover:bg-[#3a3a3a] text-[#D0D0D0] font-[400] text-[12px] md:text-[14px] 2xl:text-[20px] rounded-full transition-all duration-300 flex items-center gap-2"
             >
               Use the App
               <svg
