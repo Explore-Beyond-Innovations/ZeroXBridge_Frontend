@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { ThemeProvider } from "./ThemeContext";
+import StarknetProvider from "./dapp/components/Starknet-provider";
 
 export const metadata: Metadata = {
   title: "ZeroXBridge",
@@ -15,7 +15,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="font-inter text-sm">
-        <ThemeProvider>{children}</ThemeProvider>
+        <StarknetProvider>
+          {children}
+        </StarknetProvider>
       </body>
     </html>
   );

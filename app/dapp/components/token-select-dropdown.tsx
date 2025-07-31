@@ -8,7 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import type { Token } from "@/types/token";
-import { useTheme } from "@/app/ThemeContext";
+import { useTheme } from "@/app/hooks/useTheme";
 
 interface TokenSelectDropdownProps {
   selectedToken: Token | null;
@@ -21,7 +21,8 @@ export function TokenSelectDropdown({
   onTokenSelect,
   tokens,
 }: TokenSelectDropdownProps) {
-  const { isDarkMode } = useTheme();
+  const { theme } = useTheme();
+  const isDarkMode = theme === "dark";
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
