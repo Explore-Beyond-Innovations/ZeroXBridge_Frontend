@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const ZeroXPosition = () => {
   return (
-    <div className="bg-[#0F0F0F] px-24 py-16 2xl:px-28 ">
+    <div className="bg-[#0F0F0F] px-6 md:px-24 py-16 2xl:px-28 ">
       <div className="  flex flex-col gap-8 mx-auto 2xl:w-[95%]">
         <GradientWrapper className="h-fit w-fit rounded-full">
           <AutoFadeTextWrapper

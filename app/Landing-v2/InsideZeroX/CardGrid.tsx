@@ -209,7 +209,7 @@ function AnimatedCard({
 
 const InsideZeroX = () => {
   return (
-    <div className="w-fit px-2 2xl:w-[90%] 2xl:px-[40px] max-w-[3359px] h-fit py-4 flex flex-col gap-4 items-center mx-auto">
+    <div className="w-fit px-6 md:px-2 2xl:w-[90%] 2xl:px-[40px] max-w-[3359px] h-fit py-4 my-[3rem] md:my-0 flex flex-col gap-4 items-center mx-auto">
       <h2 className="font-mono font-[500] text-[14px] 2xl:text-[32px] 2xl:mb-8 text-[#A6A6A7] self-start px-2 uppercase">
         Inside ZeroXBridge
       </h2>
