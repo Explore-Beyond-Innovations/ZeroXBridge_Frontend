@@ -12,7 +12,7 @@ const cardData = [
       "Users lock ETH or other supported tokens on Ethereum and receive xZB on Starknet",
     image: "/safe.png",
     containerstyling:
-      "md:w-[364px] xl:w-[402px] 2xl:w-[726px] 2xl:h-[848px]  w-full h-[481px] p-[2px] ",
+      "md:w-[369px] xl:w-[432px] 2xl:w-[726px] 2xl:h-[848px]  w-full h-[481px] p-[2px] ",
     styling: "w-full h-full",
     imagestyle:
       "w-auto h-auto bg-cover mt-[150px] ml-[80px] 2xl:mt-[320px] 2xl:ml-[150px] scale-[1.9] group-hover:mt-[140px] 2xl:group-hover:mt-[300px]",
@@ -23,7 +23,7 @@ const cardData = [
       "Zero-knowledge proofs ensure the user’s L1 collateral is verified without revealing private data or bridging assets, enabling secure minting of xZB.",
     image: "/shield.png",
     containerstyling:
-      "md:w-[364px] xl:w-[402px] 2xl:w-[726px] 2xl:h-[848px]  w-full h-[481px] p-[2px]",
+      "md:w-[364px] xl:w-[432px] 2xl:w-[726px] 2xl:h-[848px]  w-full h-[481px] p-[2px]",
     styling: "w-full h-full",
     imagestyle:
       "w-auto h-auto bg-cover mt-[130px] 2xl:mt-[320px] -ml-[20px] scale-[2.1] group-hover:mt-[120px] 2xl:group-hover:mt-[300px]",
@@ -34,7 +34,7 @@ const cardData = [
       "xZB is a non-wrapped, USD-pegged stable token issued on Starknet. It’s backed 1:1 by locked collateral on Ethereum L1 and is instantly usable across DeFi applications for lending, trading, and staking.",
     image: "/token.png",
     containerstyling:
-      "md:w-[364px] xl:w-[402px] 2xl:w-[726px] 2xl:h-[848px] lg:h-[760px]  w-full xl:h-[765px] h-[481px] p-[2px]",
+      "md:w-[364px] xl:w-[432px] 2xl:w-[726px] 2xl:h-[848px] lg:h-[760px]  w-full xl:h-[765px] h-[481px] p-[2px]",
     styling:
       "w-full h-full overflow-none bg-[#161616] rounded-[16px] py-[30px]",
     imagestyle:
@@ -46,7 +46,7 @@ const cardData = [
       "Powered by ZK-proofs, ZeroXBridge eliminates the need for multisigs, validators, or custodians, removing human risk and ensuring user-owned security.",
     image: "/castle.png",
     containerstyling:
-      "lg:w-[745px] xl:w-[825px] lg:h-[274px] lg:absolute 2xl:relative lg:-bottom-1 xl:bottom-0 lg:left-0 md:w-[364px] 2xl:w-[726px] 2xl:h-[848px]  w-full h-[481px] p-[2px] flex flex-col lg:flex-row 2xl:flex-col items-center justify-center",
+      "lg:w-[745px] xl:w-[880px] lg:h-[274px] lg:absolute 2xl:relative lg:-bottom-1 xl:bottom-0 lg:left-0 md:w-[364px] 2xl:w-[726px] 2xl:h-[848px]  w-full h-[481px] p-[2px] flex flex-col lg:flex-row 2xl:flex-col items-center justify-center",
     styling:
       "w-full h-full flex flex-col lg:flex-row 2xl:flex-col gap-4 bg-[#161616] rounded-[16px] py-[30px] ",
     imagestyle:

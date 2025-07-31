@@ -147,7 +147,7 @@ const FeatureCard = ({ feature }: { feature: (typeof features)[number] }) => {
 
 const FeaturesList = () => {
   return (
-    <div className="w-full lg:w-[97%] 2xl:w-[90%] 2xl:px-[40px] max-w-[3359px]  mx-auto px-2 md:px-[40px] lg:px-4 xl:w-full h-fit py-4 flex flex-col gap-6 2xl:gap-12 items-center my-[5rem]  md:my-[10rem]">
+    <div className="w-full lg:w-[95%] 2xl:w-[90%] 2xl:px-[40px] max-w-[3359px]  mx-auto px-2 md:px-[40px] lg:px-4 h-fit py-4 flex flex-col gap-6 2xl:gap-12 items-center my-[5rem]  2xl:my-[10rem]">
       <AutoFadeTextWrapper
         as="h2"
         className="font-mono font-[500] text-sm 2xl:text-[32px]  self-start px-2 uppercase lg:pl-[40px] "

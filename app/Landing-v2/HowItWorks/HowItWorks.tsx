@@ -9,7 +9,7 @@ const Steps = () => {
         <div className="flex flex-col h-full w-full">
           <AutoFadeTextWrapper
             as="h2"
-            className="font-mono text-sm 2xl:text-[32px] 2xl:mb-12 font-[500] mb-5 uppercase flex-shrink-0"
+            className="font-mono text-sm 2xl:text-[32px] 2xl:mb-12 font-[500] mb-5 uppercase flex-shrink-0 "
           >
             How it works
           </AutoFadeTextWrapper>

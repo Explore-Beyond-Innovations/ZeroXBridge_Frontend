@@ -39,7 +39,7 @@ const Footer = () => {
             className="relative overflow-hidden rounded-3xl"
           >
             {/* Content container with dark background */}
-            <div className="relative w-full md:w-[97%] 2xl:w-[82%] mx-auto h-[462px] md:h-[410.08px] 2xl:h-[914.97px] 2xl:p-[4rem] 2xl:mt-[5rem] z-10 bg-[#161616] rounded-3xl 2xl:rounded-[42.11px] p-6 md:p-[40px] overflow-hidden group">
+            <div className="relative w-full md:w-[82%] mx-auto h-[462px] md:h-[410.08px] 2xl:h-[914.97px] 2xl:p-[4rem] 2xl:mt-[5rem] z-10 bg-[#161616] rounded-3xl 2xl:rounded-[42.11px] p-6 md:p-[40px] overflow-hidden group">
               <div className="relative z-20 flex flex-col gap-4 md:flex-row items-start justify-between h-full ">
                 {/* Text content */}
                 <div className=" max-w-2/3 md:max-w-[400px] 2xl:max-w-[700px] 2xl:h-[324px]">

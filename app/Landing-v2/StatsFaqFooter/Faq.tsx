@@ -40,7 +40,7 @@ const Faq = () => {
 
   return (
     <section className="w-full py-16 md:py-24 bg-[#0A0A0A] 2xl:max-w-[3359px] mx-auto ">
-      <div className="w-full xl:w-[97%] 2xl:w-[90%] px-8 sm:px-6 lg:px-8  max-w-[3359px]  mx-auto">
+      <div className="w-full xl:w-[95%] 2xl:w-[90%] px-8 sm:px-6 lg:px-8  max-w-[3359px]  mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
