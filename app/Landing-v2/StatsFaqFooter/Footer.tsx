@@ -42,7 +42,7 @@ const Footer = () => {
             <div className="relative w-full md:w-[82%] mx-auto h-[462px] md:h-[410.08px] 2xl:h-[914.97px] 2xl:p-[4rem] 2xl:mt-[5rem] z-10 bg-[#161616] rounded-3xl 2xl:rounded-[42.11px] p-6 md:p-[40px] overflow-hidden group">
               <div className="relative z-20 flex flex-col gap-4 md:flex-row items-start justify-between h-full ">
                 {/* Text content */}
-                <div className=" max-w-2/3 md:max-w-[400px] 2xl:max-w-[700px] 2xl:h-[324px]">
+                <div className=" max-w-2/3 md:max-w-[255px] lg:max-w-[400px] 2xl:max-w-[700px] 2xl:h-[324px]">
                   <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -238,7 +238,7 @@ const Footer = () => {
       </section>
 
       {/* Community Section */}
-      <section className="relative bg-[#0F0F0F] h-[790px] md:h-[431px] 2xl:h-[732px] flex flex-col md:flex-row items-center justify-between w-full">
+      <section className="relative bg-[#0F0F0F] h-[790px] md:h-fit lg:h-[431px] 2xl:h-[732px] flex flex-col md:flex-row items-center justify-between w-full">
         <div className="relative z-10 w-full 2xl-w-[97%] px-4 sm:px-6 lg:px-8 py-16  flex items-center justify-center ">
           <div className="max-w-[3359px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-8 2xl:gap-[4rem]">
             <motion.div
@@ -323,14 +323,14 @@ const Footer = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               viewport={{ once: true }}
-              className="flex flex-col md:flex-row gap-6 w-full 2xl:w-[1658.68px] h-[534px] items-center"
+              className="flex flex-col md:flex-row gap-6 w-full 2xl:w-[1658.68px] lg:h-[534px] items-center"
             >
               {/* Discord */}
               <motion.a
                 href="#"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="relative group flex-1 w-full md:w-[400px] 2xl:w-[814px] 2xl:h-[429.56px] h-[257px] md:h-[280px] rounded-[16px] bg-[#161616]"
+                className="relative group flex-1 w-full md:w-[310px] lg:w-[400px] 3xl:w-[814px] 2xl:h-[429.56px] h-[257px] md:h-[280px] rounded-[16px] bg-[#161616]"
               >
                 <div className="relative w-full h-full rounded-2xl flex items-center justify-center transition-all duration-300 overflow-hidden">
                   <motion.svg
@@ -385,7 +385,7 @@ const Footer = () => {
                 href="#"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="relative group flex-1 w-[400px] 2xl:w-[814px] 2xl:h-[429.56px] h-[257px] md:h-[280px] rounded-[16px] bg-[#161616]"
+                className="relative group flex-1 w-full md:w-[310px] lg:w-[400px] 3xl:w-[814px] 2xl:h-[429.56px] h-[257px] md:h-[280px] rounded-[16px] bg-[#161616]"
               >
                 <div className="relative w-full h-full rounded-2xl flex items-center justify-center transition-all duration-300 overflow-hidden">
                 <motion.svg
