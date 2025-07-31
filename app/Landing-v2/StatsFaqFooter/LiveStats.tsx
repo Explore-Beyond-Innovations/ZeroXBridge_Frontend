@@ -55,13 +55,13 @@ const LiveStats = () => {
 
         <div className="grid grid-cols-1 lg:flex lg::flex-row gap-3 2xl:gap-4  w-full items-center justify-center 2xl:justify-between 2xl:px-[2rem]">
           {/* Total Value Locked Card */}
-          <div className='hover:bg-[url("/border1.svg")] bg-cover bg-no-repeat h-[180px] w-full  lg:w-[415px] 2xl:w-[892px] 2xl:h-[463.19] px[6px] py-[4px] rounded-[16px] 2xl:rounded-[42px] flex items-center justify-center group'>
+          <div className='hover:bg-[url("/border1.svg")] bg-cover bg-no-repeat h-[180px] w-full  lg:w-[415px] 2xl:w-[892px] 2xl:h-[463.19px] px[6px] py-[4px] rounded-[16px] 2xl:rounded-[42px] flex items-center justify-center group'>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               viewport={{ once: true }}
-              className="bg-[#141414] border border-[#1f1f1f] rounded-[16px] 2xl:rounded-[42px] px-4 py-3 2xl:px-8 2xl:py-8 flex flex-col justify-between h-[176px] w-[99%]  lg:w-[402px] 2xl:w-[99.5%] 2xl:h-[99.5%]  relative overflow-hidden"
+              className="bg-[#141414] border border-[#1f1f1f] rounded-[16px] 2xl:rounded-[42px] px-4 py-3 2xl:px-8 2xl:py-8 flex flex-col justify-between h-[176px] w-[99%]  lg:w-[402px] 2xl:w-[99.5%] 2xl:h-[458px] relative overflow-hidden"
             >
               <h3 className="text-[15.72px] 2xl:text-[42.11px] font-normal text-gray-400">
                 Total Value Locked
@@ -119,13 +119,13 @@ const LiveStats = () => {
           </div>
 
           {/* XZB Supply Card */}
-          <div className='hover:bg-[url("/border1.svg")] bg-cover bg-no-repeat h-[180px] w-full  lg:w-[415px] 2xl:w-[892px] 2xl:h-[463.19] px[6px] py-[4px] rounded-[16px] 2xl:rounded-[42px] flex items-center justify-center group'>
+          <div className='hover:bg-[url("/border1.svg")] bg-cover bg-no-repeat h-[180px] w-full  lg:w-[415px] 2xl:w-[892px] 2xl:h-[463.19px] px[6px] py-[4px] rounded-[16px] 2xl:rounded-[42px] flex items-center justify-center group'>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
-              className="bg-[#141414] border border-[#1f1f1f] rounded-[16px] 2xl:rounded-[42px] px-4 py-3 2xl:px-8 2xl:py-8 flex flex-col justify-between h-[176px] w-[99%]  lg:w-[402px] 2xl:w-[99%] 2xl:h-[99.5%] relative"
+              className="bg-[#141414] border border-[#1f1f1f] rounded-[16px] 2xl:rounded-[42px] px-4 py-3 2xl:px-8 2xl:py-8 flex flex-col justify-between h-[176px] w-[99%]  lg:w-[402px] 2xl:w-[99%] 2xl:h-[442px] relative"
             >
               <h3 className="text-[15.72px] 2xl:text-[42.11px] font-normal text-gray-400">
                 xZB Supply
