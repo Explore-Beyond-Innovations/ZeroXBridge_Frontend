@@ -175,7 +175,7 @@ const LiveStats = () => {
           </div>
 
           {/* Latest Transactions Card */}
-          <motion.div className='hover:bg-[url("/border1.svg")] bg-cover bg-no-repeat w-full overflow-hidden h-[180px lg:w-[542px] 2xl:w-[1426.41px] 2xl:h-[433.19px]  px[6px] py-[4px] rounded-[16px] 2xl:rounded-[42px] flex items-center justify-center'
+          <motion.div className='hover:bg-[url("/border1.svg")] bg-cover bg-no-repeat w-full overflow-hidden h-[180px lg:w-[542px] 2xl:w-[1426.41px] 2xl:h-[463.19px]  px[6px] py-[4px] rounded-[16px] 2xl:rounded-[42px] flex items-center justify-center'
           animate={controls}
           onHoverStart={() => {
             setIsHovered(true);
