@@ -91,7 +91,7 @@ const StepsAccordion = () => {
             <div
               className={`overflow-hidden transition-all flex items-end duration-300 ease-in-out ${
                 openStep === step.id
-                  ? "opacity-100 flex-1 max-h-[85px] md:max-h-[366.32px] 2xl:max-h-full"
+                  ? "opacity-100 flex-1 max-h-[85px] md:max-h-[366.32px]  2xl:max-h-full"
                   : "max-h-0 h-0 opacity-0"
               }`}
             >
