@@ -61,7 +61,7 @@ const LiveStats = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               viewport={{ once: true }}
-              className="bg-[#141414] border border-[#1f1f1f] rounded-[16px] 2xl:rounded-[42px] px-4 py-3 2xl:px-8 2xl:py-8 flex flex-col justify-between h-[176px] w-[99%]  lg:w-[402px] 2xl:w-[99.5%] 2xl:h-[458px] relative overflow-hidden"
+              className="bg-[#141414] border border-[#1f1f1f] rounded-[16px] 2xl:rounded-[42px] px-4 py-3 2xl:px-8 2xl:py-8 flex flex-col justify-between h-[176px] w-[99%]  lg:w-[402px] 2xl:w-[99.5%] 2xl:h-[99.5%]  relative overflow-hidden"
             >
               <h3 className="text-[15.72px] 2xl:text-[42.11px] font-normal text-gray-400">
                 Total Value Locked
@@ -125,7 +125,7 @@ const LiveStats = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
-              className="bg-[#141414] border border-[#1f1f1f] rounded-[16px] 2xl:rounded-[42px] px-4 py-3 2xl:px-8 2xl:py-8 flex flex-col justify-between h-[176px] w-[99%]  lg:w-[402px] 2xl:w-[99.5%] 2xl:h-[458px] relative"
+              className="bg-[#141414] border border-[#1f1f1f] rounded-[16px] 2xl:rounded-[42px] px-4 py-3 2xl:px-8 2xl:py-8 flex flex-col justify-between h-[176px] w-[99%]  lg:w-[402px] 2xl:w-[99%] 2xl:h-[99.5%] relative"
             >
               <h3 className="text-[15.72px] 2xl:text-[42.11px] font-normal text-gray-400">
                 xZB Supply
