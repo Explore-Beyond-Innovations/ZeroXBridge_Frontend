@@ -6,9 +6,9 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 import type { Token } from "@/types/token";
-import { useTheme } from "../ThemeContext";
+import { useTheme } from "@/app/ThemeContext";
 
 interface TokenSelectDropdownProps {
   selectedToken: Token | null;

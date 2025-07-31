@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { ThemeProvider } from "./ThemeContext";
 
 export const metadata: Metadata = {
   title: "ZeroXBridge",
@@ -13,7 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="font-inter text-sm">{children}</body>
+      <body className="font-inter text-sm">
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }
