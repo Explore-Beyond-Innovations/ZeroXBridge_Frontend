@@ -36,8 +36,8 @@ const LiveStats = () => {
   ];
 
   return (
-    <section className="w-full px-8 lg:px-0 2xl:px-0 py-16 2xl:py-24 bg-[#0B0B0C] 2xl:max-w-[3359px] mx-auto">
-      <div className="w-full lg:w-[97%] 2xl:w-[90%] mx-auto max-w-[3359px]">
+    <section className="w-full px-8 lg:px-0 xl:px-[40px] 2xl:px-0 py-16 2xl:py-24 bg-[#0B0B0C] 2xl:max-w-[3359px] mx-auto">
+      <div className="w-full lg:w-[95%] 2xl:w-[90%] mx-auto max-w-[3359px]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -47,7 +47,7 @@ const LiveStats = () => {
         >
           <AutoFadeTextWrapper
             as="h2"
-            className="font-mono font-[500] text-sm 2xl:text-[32px]  self-start px-2 uppercase lg:pl-[80px] 2xl:pl-[40px] "
+            className="font-mono font-[500] text-sm 2xl:text-[32px]  self-start px-2 uppercase  2xl:pl-[40px] "
           >
             LIVE STATS
           </AutoFadeTextWrapper>
