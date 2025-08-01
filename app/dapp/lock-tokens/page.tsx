@@ -1,16 +1,14 @@
 "use client";
 import TokenLockInterface from "@/app/dapp/components/lock-tokens";
-import { useTheme } from "@/app/hooks/useTheme";
+// import { useTheme } from "@/app/hooks/useTheme";
 
 const TokenLockPage = () => {
-  const { theme } = useTheme();
-  const isDarkMode = theme === "dark";
+  // const { theme } = useTheme();
+  // const isDarkMode = theme === "dark";
 
   return (
     <div
-      className={`flex flex-col items-center justify-center h-fit lg:h-full w-full ${
-        isDarkMode ? "bg-[#09050E]" : "bg-white"
-      }`}>
+      className={`flex flex-col items-center justify-center h-fit lg:h-full w-full dark:bg-[#09050E] bg-[#FFF]`}>
       <TokenLockInterface />
     </div>
   );

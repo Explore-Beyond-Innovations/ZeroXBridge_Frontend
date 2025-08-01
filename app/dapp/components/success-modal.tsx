@@ -27,14 +27,11 @@ export function SuccessModal({
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent
-        className={`sm:max-w-md border-[#202020] ${
-          isDarkMode ? "bg-[#09050E]" : "bg-white"
+        className={`sm:max-w-md border-[#202020] dark:bg-[#09050E] bg-[#FFF]"
         }`}>
         <div className="flex flex-col items-center text-center space-y-6 pb-6">
           <div
-            className={`w-[186px] h-[186px] rounded-full border-2 flex items-center justify-center ${
-              isDarkMode ? "border-gray-600" : "border-gray-300"
-            }`}>
+            className={`w-[186px] h-[186px] rounded-full border-2 flex items-center justify-center dark:border-gray-600 border-gray-300`}>
             <Image
               src={isDarkMode ? CheckDark : Check}
               alt="Check Icon"
@@ -72,21 +69,13 @@ export function SuccessModal({
 
           <div className="w-full space-y-3">
             <Button
-              className={`w-full ${
-                isDarkMode
-                  ? "bg-[#1F1F1F] hover:bg-gray-600"
-                  : "bg-[#1F1F1F] hover:bg-gray-700"
-              } text-[#F4F4F4]`}>
+              className={`w-full dark:bg-[#1F1F1F] dark:hover:bg-[#1F1F1F] bg-[#1F1F1F] text-[#F4F4F4]`}>
               <Globe className="w-4 h-4 mr-2" />
               View on Explorer
             </Button>
             <Button
               variant="outline"
-              className={`w-full bg-transparent rounded-full ${
-                isDarkMode
-                  ? "bg-[#CDCDCD] text-[#111111] hover:bg-gray-800"
-                  : "border-gray-300 text-gray-900 hover:bg-gray-50"
-              }`}
+              className={`w-full bg-transparent rounded-full dark:bg-[#CDCDCD] dark:text-[#111111] border-gray-300 text-gray-900 dark:hover:bg-[#CDCDCD]`}
               onClick={onClose}>
               Return to Dashboard
             </Button>

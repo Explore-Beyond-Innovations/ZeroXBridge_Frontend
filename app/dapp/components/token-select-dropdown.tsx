@@ -8,7 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import type { Token } from "@/types/token";
-import { useTheme } from "@/app/hooks/useTheme";
+// import { useTheme } from "@/app/hooks/useTheme";
 
 interface TokenSelectDropdownProps {
   selectedToken: Token | null;
@@ -21,23 +21,19 @@ export function TokenSelectDropdown({
   onTokenSelect,
   tokens,
 }: TokenSelectDropdownProps) {
-  const { theme } = useTheme();
-  const isDarkMode = theme === "dark";
+  // const { theme } = useTheme();
+  // const isDarkMode = theme === "dark";
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className={`w-full justify-between px-0 h-auto ${
-            isDarkMode ? "text-[#fff]" : "text-gray-900"
-          }`}>
+          className={`w-full justify-between px-0 h-auto dark:text-[#fff] text-gray-900`}>
           <div className="flex items-center gap-3">
             {selectedToken ? (
               <>
                 <div
-                  className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                    isDarkMode ? "bg-gray-600" : "bg-gray-800"
-                  }`}>
+                  className={`w-8 h-8 rounded-full flex items-center justify-center bg-gray-600 bg-gray-800`}>
                   <span className="text-white text-sm font-bold">
                     {selectedToken.symbol.slice(0, 2)}
                   </span>
@@ -57,25 +53,17 @@ export function TokenSelectDropdown({
             ) : (
               <>
                 <div
-                  className={`flex items-center justify-center w-11 h-11 rounded-full ${
-                    isDarkMode ? "bg-[#272727]" : "bg-[#F6F6F6]"
-                  }`}>
+                  className={`flex items-center justify-center w-11 h-11 rounded-full dark:bg-[#272727] bg-[#F6F6F6]`}>
                   <div
-                    className={`w-4 h-4 rounded-full ${
-                      isDarkMode ? "bg-[#414141]" : "bg-[#E1E1E1]"
-                    }`}></div>
+                    className={`w-4 h-4 rounded-full dark:bg-[#414141] bg-[#E1E1E1]`}></div>
                 </div>
                 <div className="text-left">
                   <div
-                    className={`font-medium ${
-                      isDarkMode ? "text-[#737373]" : "text-[#C1C1C1]"
-                    }`}>
+                    className={`font-medium dark:text-[#737373] text-[#C1C1C1]`}>
                     Lock
                   </div>
                   <div
-                    className={`${
-                      isDarkMode ? "text-[#AFAFAF]" : "text-[#646464]"
-                    }`}>
+                    className={`dark:text-[#AFAFAF] text-[#646464]`}>
                     - Select Token -
                   </div>
                 </div>
@@ -83,34 +71,22 @@ export function TokenSelectDropdown({
             )}
           </div>
           <div
-            className={`${
-              isDarkMode ? "border-[#292929]" : ""
-            } border p-3 rounded-full`}>
+            className={`dark:border-[#292929] border p-3 rounded-full`}>
             <ChevronDown
-              className={`h-6 w-6 ${
-                isDarkMode ? "text-[#989898]" : "text-gray-400"
-              }`}
+              className={`h-6 w-6 dark:text-[#989898] text-gray-400`}
             />
           </div>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        className={`w-64 ${
-          isDarkMode
-            ? "bg-gray-800 border-gray-700"
-            : "bg-white border-gray-200"
-        }`}>
+        className={`w-64 dark:bg-gray-800 dark:border-gray-700 bg-white border-gray-200`}>
         {tokens.map((token) => (
           <DropdownMenuItem
             key={token.symbol}
             onClick={() => onTokenSelect(token)}
-            className={`flex items-center gap-3 p-3 ${
-              isDarkMode ? " text-white" : "hover:bg-gray-50 text-gray-900"
-            }`}>
+            className={`flex items-center gap-3 p-3 dark:text-white hover:bg-gray-50 text-gray-900`}>
             <div
-              className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                isDarkMode ? "bg-gray-600" : "bg-gray-800"
-              }`}>
+              className={`w-8 h-8 rounded-full flex items-center justify-center dark:bg-gray-600 bg-gray-800`}>
               <span className="text-white text-sm font-bold">
                 {token.symbol.slice(0, 2)}
               </span>
@@ -118,9 +94,7 @@ export function TokenSelectDropdown({
             <div>
               <div className="font-medium">{token.symbol}</div>
               <div
-                className={`text-sm ${
-                  isDarkMode ? "text-gray-400" : "text-gray-500"
-                }`}>
+                className={`text-sm dark:text-gray-400 text-gray-500`}>
                 {token.name}
               </div>
             </div>

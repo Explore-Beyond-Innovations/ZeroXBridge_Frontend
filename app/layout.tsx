@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { ConnectionProvider } from "@/app/context/ConnectionContext";
 import "./globals.css";
-import StarknetProvider from "./dapp/components/Starknet-provider";
 
 export const metadata: Metadata = {
   title: "ZeroXBridge",
