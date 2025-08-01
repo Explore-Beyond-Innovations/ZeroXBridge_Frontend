@@ -11,9 +11,9 @@
     "prefix": ""
   },
   "aliases": {
-    "components": "@/components",
+    "components": "@/app/dapp/components",
     "utils": "@/lib/utils",
-    "ui": "@/components/ui",
+    "ui": "@/app/dapp/components/ui",
     "lib": "@/lib",
     "hooks": "@/hooks"
   },

@@ -44,7 +44,9 @@ function Sidebar({
               href={href}
               onClick={onClose}
               className={`flex justify-between items-center py-[10px] pl-3 pr-[6px] rounded-[8px] gap-x-[18px]  ${
-                isActive ? "text-sidebar-text-active" : "text-sidebar-text"
+                isActive
+                  ? "text-sidebar-text-active border-[#F4F4F4] border-[1px] dark:border-none"
+                  : "text-sidebar-text"
               }`}
               style={
                 isActive

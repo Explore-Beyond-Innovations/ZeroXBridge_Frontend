@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -6,6 +6,7 @@
 
 @theme {
   --font-inter: "Inter", sans-serif;
+  --font-mono: "Geist Mono", sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-logo: var(--logo);
@@ -15,11 +16,22 @@
   --color-theme-icon-fill-active: var(--theme-icon-fill-active);
   --color-theme-icon-fill-not-active: var(--theme-icon-fill-not-active);
   --color-linear-primary-gradient: var(--linear-primary-gradient);
+  --color-linear-reverse-primary-gradient: var(
+    --linear-reverse-primary-gradient
+  );
   --color-primary-border: var(--primary-border);
   --color-sidebar-text: var(--sidebar-text);
   --color-sidebar-text-active: var(--sidebar-text-active);
   --color-primary-text: var(--primary-text);
   --color-wallet-border: var(--wallet-border);
+
+  --color-container: var(--container);
+  --color-container-border: var(--container-border);
+
+  --color-card: var(--card);
+  --color-card-border: var(--card-border);
+  --shadow-sm-shadow: var(--sm-shadow);
+  --shadow-sm-connect-shadow: var(--sm-connect-shadow);
 }
 
 :root {
@@ -33,6 +45,11 @@
 
   /* Background Gradients */
   --linear-primary-gradient: linear-gradient(180deg, #ffffff 0%, #ffffff 100%);
+  --linear-reverse-primary-gradient: linear-gradient(
+    180deg,
+    #1f1f1f 0%,
+    #1c1c1c 100%
+  );
 
   /* Borders */
   --primary-border: #e8e8e8;
@@ -42,10 +59,18 @@
   --primary-text: #444444;
   --sidebar-text: #909090;
   --sidebar-text-active: #303030;
+
+  --container: #f7f7f7;
+  --container-border: linear-gradient(to bottom, #eaeaea, #eaeaea);
+
+  --sm-shadow: 0px 1px 2px 0px #78787840 inset;
+  --sm-connect-shadow: 0px 1px 2px 0px #78787833 inset;
+
+  --card: oklch(1 0 0);
+  --card-border: #eaeaea;
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
@@ -89,6 +114,11 @@
 
   /* Background Gradients */
   --linear-primary-gradient: linear-gradient(180deg, #1f1f1f 0%, #1c1c1c 100%);
+  --linear-reverse-primary-gradient: linear-gradient(
+    180deg,
+    #cdcdcd 0%,
+    #d7d7d7 100%
+  );
 
   /* Borders */
   --primary-border: #202020;
@@ -98,7 +128,12 @@
   --primary-text: #f4f4f4;
   --sidebar-text: #a4a4a4;
   --sidebar-text-active: #ffffff;
+
+  --container: #161616;
+  --container-border: linear-gradient(311.7deg, #202020 20.1%, #363636 124.75%);
+
   --card: oklch(0.205 0 0);
+  --card-border: #202020;
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
@@ -127,10 +162,18 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --sm-shadow: 0px 1px 1px 0px #ffffff40 inset;
+  --sm-connect-shadow: 0px 1px 2px 0px #78787840 inset;
 }
 
 button {
   cursor: pointer;
+}
+
+button:disabled,
+input:disabled,
+select:disabled {
+  cursor: not-allowed;
 }
 
 @theme inline {

@@ -4,6 +4,7 @@ import ConnectWalletButton from "../ui/ConnectWalletButton";
 import HamburgerIcon from "@/svg/HamburgerIcon";
 import { X } from "lucide-react";
 import { useConnection } from "@/app/context/ConnectionContext";
+import AddressBar from "../ui/AddressBar";
 
 function Topbar({
   onMenuClick,
@@ -14,7 +15,7 @@ function Topbar({
 }) {
   const { isConnected } = useConnection();
   return (
-    <div className="px-6 py-4 lg:px-10 lg:py-6 lg:border-b-primary-border lg:border-b-[1px] flex items-center font-light justify-between z-[50]">
+    <div className="px-6 py-4 lg:px-10 lg:py-5 lg:border-b-primary-border lg:border-b-[1px] flex items-center font-light justify-between z-[50]">
       <div className="flex gap-x-3 items-center ">
         <button onClick={onMenuClick} className="lg:hidden text-foreground">
           {!isSidebarOpen ? <HamburgerIcon /> : <X />}

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ConnectionProvider } from "@/app/context/ConnectionContext";
 import "./globals.css";
 import StarknetProvider from "./dapp/components/Starknet-provider";
 
@@ -15,9 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="font-inter text-sm">
-        <StarknetProvider>
-          {children}
-        </StarknetProvider>
+        <ConnectionProvider>{children}</ConnectionProvider>
       </body>
     </html>
   );
