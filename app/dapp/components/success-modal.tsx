@@ -1,8 +1,8 @@
 "use client";
 
-import { X, Globe } from "lucide-react";
+import { Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent } from "./ui/dialog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import type { LockTransaction } from "@/types/token";
 import { useTheme } from "@/app/ThemeContext";
 import Check from "../../public/check.png";
@@ -20,8 +20,8 @@ export function SuccessModal({
   onClose,
   transaction,
 }: SuccessModalProps) {
-  if (!transaction) return null;
   const { isDarkMode } = useTheme();
+  if (!transaction) return null;
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
