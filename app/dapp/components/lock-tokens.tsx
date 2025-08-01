@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { Menu, Info, Wallet } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/app/components/ui/input";
-import { Card, CardContent } from "@/app/components/ui/card";
-import { TokenSelectDropdown } from "@/app/components/token-select-dropdown";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent } from "@/components/ui/card";
+import { TokenSelectDropdown } from "@/app/dapp/components/token-select-dropdown";
 import { SuccessModal } from "@/app/components/success-modal";
 import type { Token, LockTransaction } from "@/types/token";
 import { useTheme } from "@/app/ThemeContext";
@@ -46,7 +46,6 @@ const mockTokens: Token[] = [
 ];
 
 const TokenLockInterface = () => {
-  const [isWalletConnected, setIsWalletConnected] = useState(false);
   const [selectedToken, setSelectedToken] = useState<Token | null>(null);
   const [amount, setAmount] = useState("");
   const { isConnected } = useAccount();
@@ -55,10 +54,6 @@ const TokenLockInterface = () => {
     useState<LockTransaction | null>(null);
 
   const { isDarkMode } = useTheme();
-
-  const handleConnectWallet = () => {
-    setIsWalletConnected(true);
-  };
 
   const handleTokenSelect = (token: Token) => {
     setSelectedToken(token);
@@ -295,7 +290,7 @@ const TokenLockInterface = () => {
                       ? "bg-[#1F1F1F] text-[#F4F4F4] border-gray-600 hover:bg-gray-700"
                       : "bg-[#FFF] border-gray-300 text-[#030303] hover:bg-gray-50"
                   }`}
-                  onClick={handleConnectWallet}>
+                  >
                   <Wallet className="w-4 h-4 mr-2" />
                   Connect Wallet
                 </Button>

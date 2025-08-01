@@ -1,5 +1,5 @@
 "use client";
-import TokenLockInterface from "@/app/components/lock-tokens";
+import TokenLockInterface from "@/app/dapp/components/lock-tokens";
 import { useTheme } from "@/app/ThemeContext";
 
 const TokenLockPage = () => {
