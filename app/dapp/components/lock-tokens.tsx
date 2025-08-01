@@ -6,9 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { TokenSelectDropdown } from "@/app/dapp/components/token-select-dropdown";
-import { SuccessModal } from "@/app/components/success-modal";
+import { SuccessModal } from "@/app/dapp/components/success-modal";
 import type { Token, LockTransaction } from "@/types/token";
-import { useTheme } from "@/app/ThemeContext";
+import { useTheme } from "@/app/hooks/useTheme";
 import { useAccount } from "@starknet-react/core";
 
 // Mock token data
@@ -53,7 +53,8 @@ const TokenLockInterface = () => {
   const [lastTransaction, setLastTransaction] =
     useState<LockTransaction | null>(null);
 
-  const { isDarkMode } = useTheme();
+  const { theme } = useTheme();
+  const isDarkMode = theme === "dark";
 
   const handleTokenSelect = (token: Token) => {
     setSelectedToken(token);
