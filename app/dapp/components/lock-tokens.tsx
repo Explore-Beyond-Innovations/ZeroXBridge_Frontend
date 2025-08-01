@@ -48,7 +48,7 @@ const mockTokens: Token[] = [
 const TokenLockInterface = () => {
   const [selectedToken, setSelectedToken] = useState<Token | null>(null);
   const [amount, setAmount] = useState("");
-  const { isConnected } = useAccount();
+  const  [isConnected, setIsConnected]  = useState(true);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [lastTransaction, setLastTransaction] =
     useState<LockTransaction | null>(null);
