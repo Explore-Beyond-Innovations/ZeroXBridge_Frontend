@@ -1,22 +1,22 @@
-"use client";
+"use client"
 
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
-import LogoIcon from "@/svg/LogoIcon";
+import type React from "react"
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts"
 
 interface ChartCardProps {
-  selectedChart: "tvl" | "volume" | "price";
-  onChartChange: (chart: "tvl" | "volume" | "price") => void;
+  selectedChart: "tvl" | "volume" | "price"
+  onChartChange: (chart: "tvl" | "volume" | "price") => void
+  theme: string 
 }
 
 // Small logo component specifically for ChartCard
 function SmallLogo({ className, ...props }: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
-      
       viewBox="0 0 36 27"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-       preserveAspectRatio="xMidYMid meet"
+      preserveAspectRatio="xMidYMid meet"
       className={className}
       {...props}
     >
@@ -32,16 +32,11 @@ function SmallLogo({ className, ...props }: React.SVGProps<SVGSVGElement>) {
       </g>
       <defs>
         <clipPath id="clip0_786_5598">
-          <rect
-            width="35.0613"
-            height="25.6459"
-            fill="currentColor"
-            transform="translate(0 0.677032)"
-          />
+          <rect width="35.0613" height="25.6459" fill="currentColor" transform="translate(0 0.677032)" />
         </clipPath>
       </defs>
     </svg>
-  );
+  )
 }
 
 // Mock data for different chart types with the exact dates and values
@@ -76,46 +71,49 @@ const chartData = {
     { time: "Jan 31", value: 50000 },
     { time: "Feb 1", value: 150000 },
   ],
-};
+}
 
 const chartConfig = {
-  tvl: { 
-    label: "TVL", 
+  tvl: {
+    label: "TVL",
     color: "#8884d8",
-    format: (value: number) => `$${(value / 1000).toFixed(0)}K` 
+    format: (value: number) => `$${(value / 1000).toFixed(0)}K`,
   },
-  volume: { 
-    label: "Volume", 
+  volume: {
+    label: "Volume",
     color: "#82ca9d",
-    format: (value: number) => `$${(value / 1000).toFixed(0)}K` 
+    format: (value: number) => `$${(value / 1000).toFixed(0)}K`,
   },
-  price: { 
-    label: "Price", 
+  price: {
+    label: "Price",
     color: "#ffc658",
-    format: (value: number) => `$${(value / 1000).toFixed(0)}K` 
+    format: (value: number) => `$${(value / 1000).toFixed(0)}K`,
   },
-};
+}
 
-export default function ChartCard({ selectedChart, onChartChange }: ChartCardProps) {
-  const currentData = chartData[selectedChart];
-  const config = chartConfig[selectedChart];
+export default function ChartCard({ selectedChart, onChartChange, theme }: ChartCardProps) {
+  const lineColor = theme === 'dark' ? '#fff' : '#000';
+  console.log('ChartCard theme:', theme, 'lineColor:', lineColor);
+  const axisAndGridColor = '#888';
+
+  const currentData = chartData[selectedChart]
+  const config = chartConfig[selectedChart]
 
   return (
-    <div className="bg-card border border-card-border rounded-xl p-3 sm:p-4 h-full flex flex-col">
+    <div className="bg-card border border-card-border rounded-xl px-4 py-3 h-full flex flex-col">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-3 sm:mb-4 gap-2 sm:gap-3">
         <div className="flex flex-col space-y-1">
           <div className="flex items-center space-x-2">
-            <SmallLogo className="w-8 h-8 mr-2"  />
-            <h3 className="text-base sm:text-lg font-semibold text-primary-text">
-              ZeroXBridge (xZB)
-            </h3>
+            <div className="w-5 h-5 overflow-visible">
+              <SmallLogo className="w-full h-full" />
+            </div>
+            <h3 className="text-base sm:text-lg font-semibold text-primary-text">ZeroXBridge (xZB)</h3>
           </div>
           <div className="flex items-center space-x-2">
             <p className="text-lg sm:text-xl font-bold text-primary-text">$1.1392</p>
             <span className="text-xs sm:text-sm text-green-600 font-medium">+2.38%</span>
           </div>
         </div>
-        
         <div className="flex space-x-1 bg-muted rounded-lg p-1">
           {(["tvl", "volume", "price"] as const).map((chart) => (
             <button
@@ -132,39 +130,43 @@ export default function ChartCard({ selectedChart, onChartChange }: ChartCardPro
           ))}
         </div>
       </div>
-
       <div className="flex-1 min-h-0">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={currentData}>
-            <XAxis 
-              dataKey="time" 
-              stroke="hsl(var(--muted-foreground))"
+            <CartesianGrid horizontal vertical={false} stroke={axisAndGridColor} strokeDasharray="4 4" strokeWidth={1} />
+            <XAxis
+              dataKey="time"
+              stroke={axisAndGridColor}
               fontSize={10}
               axisLine={false}
               tickLine={false}
             />
-            <YAxis 
-              stroke="hsl(var(--muted-foreground))"
+            <YAxis
+              stroke={axisAndGridColor}
               fontSize={10}
               axisLine={false}
               tickLine={false}
               tickFormatter={(value) => {
-                if (value === 0) return "0";
-                if (value >= 100000) return `$${(value / 1000).toFixed(0)}K`;
-                if (value >= 1000) return `$${(value / 1000).toFixed(0)}K`;
-                return `$${value}`;
+                if (value === 0) return "0"
+                if (value >= 100000) return `$${(value / 1000).toFixed(0)}K`
+                if (value >= 1000) return `$${(value / 1000).toFixed(0)}K`
+                return `$${value}`
               }}
               ticks={[0, 1000, 5000, 10000, 100000, 250000]}
             />
+            <Tooltip formatter={(value: number) => config.format(value)} />
             <Line
+              key={theme}
               type="monotone"
               dataKey="value"
-              stroke={config.color}
+              stroke={lineColor}
               strokeWidth={2}
+              dot={false}
+              activeDot={false}
             />
           </LineChart>
         </ResponsiveContainer>
       </div>
     </div>
-  );
-} 
+  )
+}

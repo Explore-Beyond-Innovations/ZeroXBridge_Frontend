@@ -24,14 +24,14 @@ export default function AssetPieChart() {
         {/* First Row - Chart and Color/Token Representation */}
         <div className="grid grid-cols-2 gap-4 flex-1 min-h-0">
           {/* Left Column - Donut Chart with Lock Icon */}
-          <div className="relative flex items-center justify-center min-h-0">
+          <div className="relative flex items-center justify-center min-h-0 h-40">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
                   data={assetData}
                   cx="50%"
                   cy="50%"
-                  innerRadius={35}
+                  innerRadius={55}
                   outerRadius={70}
                   paddingAngle={2}
                   dataKey="percentage"
@@ -45,8 +45,8 @@ export default function AssetPieChart() {
             
             {/* Lock Icon in Center */}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-              <div className="w-6 h-6 bg-muted rounded-full flex items-center justify-center">
-                <Lock className="w-3 h-3 text-muted-foreground" />
+              <div className="w-14 h-14 bg-muted rounded-full flex items-center justify-center">
+                <Lock className="w-10 h-10 text-muted-foreground" />
               </div>
             </div>
           </div>
