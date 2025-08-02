@@ -58,6 +58,8 @@
   /* Background Gradients */
   --linear-primary-gradient: linear-gradient(180deg, #1f1f1f 0%, #1c1c1c 100%);
 
+  --btn-bg: #1F1F1F;
+
   /* Borders */
   --primary-border: #202020;
   --wallet-border: transparent;
@@ -66,6 +68,14 @@
   --primary-text: #f4f4f4;
   --sidebar-text: #a4a4a4;
   --sidebar-text-active: #ffffff;
+
+  /* claim/burn ui tokens */
+  --claim-burn-bg: #161616CC;
+  --claim-burn-modal-text: #C3C3C3;
+  --modal-date-text: #737373;
+  --close-btn-border: #292929;
+  --claim-area-btn: #232323;
+  --claim-area: #1D1D1D;
 }
 
 button {

@@ -4,8 +4,20 @@ import useTheme from "@/app/hooks/useTheme";
 import { useWallet } from "@/app/hooks/useWallet";
 import { useMemo, useState } from "react";
 import { SuccessModal } from "./success";
-import ConnectWalletButton from "../ui/ConnectWalletButton";
+import { ConnectWalletButton } from "../ui/ConnectWalletButton";
 import Image from "next/image";
+import { ClaimBurnTab } from "./tab";
+import { Geist_Mono, Inter } from "next/font/google";
+import { Hamburger } from "@/svg/Hamburger";
+import { Info } from "@/svg/Info";
+
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+});
 
 type BurnClaimData = {
   available: number;
@@ -56,165 +68,141 @@ const ClaimBurn = () => {
 
   return (
     <div className="min-h-screen p-8">
-      <div className="max-w-2xl mx-auto">
-        <div className="flex justify-center mb-8 relative">
-          <div
-            className={`relative inline-flex items-center rounded-full p-1 ${
-              isDark
-                ? "bg-[#1c1c1c] border border-[#202020]"
-                : "bg-[#ededed] border border-[#e8e8e8]"
-            }`}
-          >
-            <div
-              className={`absolute top-1 left-1 w-[calc(50%-4px)] h-[calc(100%-8px)] rounded-full transition-transform duration-300 ease-in-out ${
-                isDark ? "bg-[#2e2e2e]" : "bg-white"
-              }`}
-              style={{
-                transform:
-                  activeTab === "claim" ? "translateX(0)" : "translateX(100%)",
-              }}
-            />
-
-            <button
-              onClick={() => setActiveTab("claim")}
-              className={`relative z-10 px-6 py-2 rounded-full transition-all duration-200 ${
-                activeTab === "claim"
-                  ? isDark
-                    ? "text-white"
-                    : "text-[#303030]"
-                  : isDark
-                    ? "text-[#a4a4a4] hover:text-white"
-                    : "text-[#909090] hover:text-[#303030]"
-              }`}
-            >
-              Claim xZB
-            </button>
-
-            <button
-              onClick={() => setActiveTab("burn")}
-              className={`relative z-10 px-6 py-2 rounded-full transition-all duration-200 ${
-                activeTab === "burn"
-                  ? isDark
-                    ? "text-white"
-                    : "text-[#303030]"
-                  : isDark
-                    ? "text-[#a4a4a4] hover:text-white"
-                    : "text-[#909090] hover:text-[#303030]"
-              }`}
-            >
-              Burn xZB
-            </button>
-          </div>
-        </div>
-
+      <div className="max-w-lg mx-auto">
+        <ClaimBurnTab activeTab={activeTab} setActiveTab={setActiveTab} />
         <div
-          className={`rounded-2xl border p-8 ${
-            isDark
-              ? "bg-gradient-to-b from-[#1f1f1f] to-[#1c1c1c] border-[#202020]"
-              : "bg-white border-[#e8e8e8]"
-          }`}
+          className={`rounded-2xl p-0.5 bg-gradient-to-r from-[var(--primary-border)] to-[var(--toggle-slider-bg)]`}
         >
-          <div className="flex items-center justify-between mb-8">
-            <div className="flex items-center">
-              <div
-                className={`w-12 h-12 rounded-xl flex items-center justify-center mr-4 ${
-                  isDark ? "bg-[var(--toggle-slider-bg)]" : "bg-[#f6f6f6]"
-                }`}
-              >
-                <Image
-                  src="/xZB.svg"
-                  height={30}
-                  width={30}
-                  alt="ZeroXBridge Logo"
+          <div className="bg-[var(--claim-burn-bg)] rounded-[14px]">
+            <div className="flex justify-end p-4 cursor-pointer">
+              <Hamburger />
+            </div>
+            <div className="rounded-4xl bg-[var(--claim-area)] h-fit p-6 border-2 border-[var(--primary-border)]">
+              <div className="flex items-center justify-between mb-8">
+                <div className="flex items-center">
+                  <div
+                    className={`w-16 h-16 rounded-full flex items-center justify-center mr-4 ${
+                      isDark ? "bg-[var(--toggle-slider-bg)]" : "bg-[#f6f6f6]"
+                    }`}
+                  >
+                    <Image
+                      src="/xZB.svg"
+                      height={40}
+                      width={40}
+                      alt="ZeroXBridge Logo"
+                    />
+                  </div>
+                  <div>
+                    <h2 className="text-lg font-regular text-[var(--claim-burn-text-disabled)]">
+                      {activeTab === "claim" ? "Claim" : "Burn"}
+                    </h2>
+                    <p className="text-sm">xZB</p>
+                  </div>
+                </div>
+              </div>
+              <div className="mb-6 relative border-b-2 border-[var(--claim-area-btn)]">
+                <input
+                  type="number"
+                  inputMode="decimal"
+                  placeholder="0.00"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                  disabled={!isConnected}
+                  className={`no-spinner w-full py-4 text-4xl font-light bg-transparent outline-none border-none pr-20 ${
+                    isDark
+                      ? "text-white placeholder-[#515151]"
+                      : "text-[#303030] placeholder-[#c4c4c4]"
+                  } ${geistMono.className}`}
                 />
-              </div>
-              <div>
-                <h2
-                  className={`text-lg font-semibold ${isDark ? "text-white" : "text-[#303030]"}`}
+                <button
+                  onClick={handleMaxClick}
+                  disabled={!isConnected}
+                  className={`absolute top-1/2 h-10 right-0 -translate-y-1/2 text-sm px-6 py-1 rounded-4xl transition-colors bg-[var(--claim-area-btn)] ${
+                    isConnected
+                      ? isDark
+                        ? "text-[#a4a4a4] hover:text-white hover:bg-[var(--claim-area-btn)]"
+                        : "text-[#909090] hover:text-[#303030] hover:bg-[#f6f6f6]"
+                      : isDark
+                        ? "text-[#515151] cursor-not-allowed"
+                        : "text-[#d3d3d3] cursor-not-allowed"
+                  }`}
                 >
-                  {activeTab === "claim" ? "Claim" : "Burn"}
-                </h2>
-                <p
-                  className={`text-sm ${isDark ? "text-[#a4a4a4]" : "text-[#909090]"}`}
-                >
-                  xZB
-                </p>
+                  Max
+                </button>
               </div>
+
+              <InfoRow
+                label={`Available to ${activeTab === "claim" ? "Claim" : "Burn"}:`}
+                value={
+                  isConnected
+                    ? `${currentData.available} xZB (${currentData.value})`
+                    : "-- xZB"
+                }
+                isDark={isDark}
+              />
+            </div>
+
+            <div className="p-8">
+              <div className="space-y-2 mb-4">
+                <InfoRow
+                  label="Price:"
+                  value={`${currentData.price} xZB per ETH`}
+                  isDark={isDark}
+                />
+                <InfoRow
+                  label={
+                    activeTab === "claim" ? "Frontend Fee:" : "Redemption Fee:"
+                  }
+                  value={
+                    activeTab === "claim"
+                      ? currentData.fee
+                      : isConnected && amount
+                        ? "3%"
+                        : "--%"
+                  }
+                  isDark={isDark}
+                />
+                {activeTab === "burn" && isConnected && amount && (
+                  <InfoRow
+                    label="You'd recieve"
+                    value="302.21 ETH"
+                    isDark={isDark}
+                    valueFontWeight="font-bold"
+                  />
+                )}
+              </div>
+
+              {activeTab === "burn" && (
+                <div className="flex flex-col gap-2 mb-8 bg-[var(--claim-area)] px-4 py-4 rounded-2xl border border-[var(--primary-border)]">
+                  <Info />
+                  <p
+                    className={`text-sm text-[var(--burn-info-text)] leading-relaxed ${inter.className}`}
+                  >
+                    Burning xZB tokens releases your locked USDC/USDT/ETH tokens
+                    from the contract.
+                  </p>
+                </div>
+              )}
+
+              {!isConnected ? (
+                <ConnectWalletButton full className="font-light" />
+              ) : (
+                <button
+                  onClick={handleAction}
+                  disabled={!amount || amount === "0" || amount === "0.00"}
+                  className={`w-full py-4 rounded-4xl font-bold text-sm transition-colors ${
+                    amount && amount !== "0" && amount !== "0.00"
+                      ? "bg-[#ededed] text-black hover:bg-[#d3d3d3] active:bg-[#c4c4c4]"
+                      : isDark
+                        ? "bg-[#2e2e2e] text-[#515151] cursor-not-allowed"
+                        : "bg-[#f0f0f0] text-[#c4c4c4] cursor-not-allowed"
+                  } ${inter.className}`}
+                >
+                  {activeTab === "claim" ? "Claim xZB" : "Burn xZB"}
+                </button>
+              )}
             </div>
           </div>
-
-          <div className="mb-6 relative">
-            <input
-              type="number"
-              inputMode="decimal"
-              placeholder="0.00"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              disabled={!isConnected}
-              className={`no-spinner w-full text-4xl font-light bg-transparent outline-none border-none pr-20 ${
-                isDark
-                  ? "text-white placeholder-[#515151]"
-                  : "text-[#303030] placeholder-[#c4c4c4]"
-              }`}
-            />
-            <button
-              onClick={handleMaxClick}
-              disabled={!isConnected}
-              className={`absolute top-1/2 right-0 -translate-y-1/2 text-sm px-3 py-1 rounded transition-colors ${
-                isConnected
-                  ? isDark
-                    ? "text-[#a4a4a4] hover:text-white hover:bg-[#2e2e2e]"
-                    : "text-[#909090] hover:text-[#303030] hover:bg-[#f6f6f6]"
-                  : isDark
-                    ? "text-[#515151] cursor-not-allowed"
-                    : "text-[#d3d3d3] cursor-not-allowed"
-              }`}
-            >
-              Max
-            </button>
-          </div>
-
-          <div className="space-y-4 mb-8">
-            <InfoRow
-              label={`Available to ${activeTab === "claim" ? "Claim" : "Burn"}:`}
-              value={
-                isConnected
-                  ? `${currentData.available} xZB (${currentData.value})`
-                  : "-- xZB"
-              }
-              isDark={isDark}
-            />
-            <InfoRow
-              label="Price:"
-              value={`${currentData.price} xZB per ETH`}
-              isDark={isDark}
-            />
-            <InfoRow
-              label={
-                activeTab === "claim" ? "Frontend Fee:" : "Redemption Fee:"
-              }
-              value={currentData.fee}
-              isDark={isDark}
-            />
-          </div>
-
-          {!isConnected ? (
-            <ConnectWalletButton fullWidth />
-          ) : (
-            <button
-              onClick={handleAction}
-              disabled={!amount || amount === "0" || amount === "0.00"}
-              className={`w-full py-4 rounded-xl transition-colors ${
-                amount && amount !== "0" && amount !== "0.00"
-                  ? "bg-[#ededed] text-black hover:bg-[#d3d3d3] active:bg-[#c4c4c4]"
-                  : isDark
-                    ? "bg-[#2e2e2e] text-[#515151] cursor-not-allowed"
-                    : "bg-[#f0f0f0] text-[#c4c4c4] cursor-not-allowed"
-              }`}
-            >
-              {activeTab === "claim" ? "Claim xZB" : "Burn xZB"}
-            </button>
-          )}
         </div>
       </div>
 
@@ -228,20 +216,23 @@ const ClaimBurn = () => {
   );
 };
 
-const InfoRow = ({
-  label,
-  value,
-  isDark,
-}: {
+interface InfoRowProps {
   label: string;
   value: string;
   isDark: boolean;
-}) => (
+  valueFontWeight?: string;
+}
+
+const InfoRow = ({ label, value, isDark, valueFontWeight }: InfoRowProps) => (
   <div className="flex justify-between">
-    <span className={`text-sm ${isDark ? "text-[#a4a4a4]" : "text-[#909090]"}`}>
+    <span
+      className={`text-sm font-normal ${isDark ? "text-[var(--claim-burn-text-disabled)]" : "text-[#909090]"}`}
+    >
       {label}
     </span>
-    <span className={`text-sm ${isDark ? "text-white" : "text-[#303030]"}`}>
+    <span
+      className={`text-sm ${valueFontWeight ? valueFontWeight : "font-normal"} ${isDark ? "text-[var(--claim-burn-text)]" : "text-[#303030]"}`}
+    >
       {value}
     </span>
   </div>

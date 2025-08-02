@@ -1,6 +1,6 @@
 import Logo from "../ui/Logo";
 import ThemeSwitcher from "../ui/ThemeSwitcher";
-import ConnectWalletButton from "../ui/ConnectWalletButton";
+import { ConnectWalletButton } from "../ui/ConnectWalletButton";
 import HamburgerIcon from "@/svg/HamburgerIcon";
 import { X } from "lucide-react";
 
@@ -21,7 +21,7 @@ function Topbar({
       </div>
       <div className="flex items-center gap-x-2">
         <ThemeSwitcher />
-        <ConnectWalletButton />
+        <ConnectWalletButton withGradient />
       </div>
     </div>
   );
