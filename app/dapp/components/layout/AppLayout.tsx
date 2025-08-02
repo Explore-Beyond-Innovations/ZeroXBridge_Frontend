@@ -18,7 +18,7 @@ function AppLayout({ children }: { children: React.ReactNode }) {
           isOpen={isSidebarOpen}
           onClose={() => setIsSidebarOpen(false)}
         />
-        <div className="flex-1 h-full overflow-y-auto p-[22px] pt-10  text-primary-text">
+        <div className="flex-1 h-full overflow-y-auto text-primary-text">
           {children}
         </div>
       </div>
