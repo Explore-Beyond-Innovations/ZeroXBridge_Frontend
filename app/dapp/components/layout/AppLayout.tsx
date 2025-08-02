@@ -8,17 +8,17 @@ function AppLayout({ children }: { children: React.ReactNode }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
-    <div className="h-[100vh] overflow-y-hidden flex flex-col bg-background">
+    <div className="h-[100vh] flex flex-col bg-background">
       <Topbar
         onMenuClick={() => setIsSidebarOpen((prev) => !prev)}
         isSidebarOpen={isSidebarOpen}
       />
-      <div className="flex flex-1 relative">
+      <div className="flex flex-1 relative overflow-y-hidden">
         <Sidebar
           isOpen={isSidebarOpen}
           onClose={() => setIsSidebarOpen(false)}
         />
-        <div className="flex-1 overflow-y-auto h-full p-[22px] text-primary-text">
+        <div className="flex-1 h-full overflow-y-auto p-[22px] pt-10  text-primary-text">
           {children}
         </div>
       </div>
