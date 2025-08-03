@@ -85,8 +85,10 @@ export function SwapSuccessModal({
             <button
               className={`w-full p-3 flex justify-center rounded-[8px] items-center gap-x-2  ${
                 isDark
+
                   ? 'bg-[#1F1F1F] hover:bg-gray-600'
                   : 'bg-[#1F1F1F] hover:bg-gray-700'
+
               } text-[#F4F4F4]`}
             >
               <Globe className='w-4 h-4' />

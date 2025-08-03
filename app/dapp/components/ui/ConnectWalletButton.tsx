@@ -46,6 +46,8 @@ export const ConnectWalletButton = ({
     }
   }, [error]);
 
+
+
   const handleClick = () => {
     if (action) {
       action();
