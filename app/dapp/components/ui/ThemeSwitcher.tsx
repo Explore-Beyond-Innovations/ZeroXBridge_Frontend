@@ -5,8 +5,7 @@ import MoonIcon from "@/svg/MoonIcon";
 import SunIcon from "@/svg/SunIcon";
 
 function ThemeSwitcher() {
-  const { theme, toggleTheme } = useThemeContext();
-  const isDarkMode = theme === "dark";
+  const { isDark, toggleTheme } = useThemeContext();
   return (
     <div
       onClick={toggleTheme}
@@ -14,12 +13,12 @@ function ThemeSwitcher() {
     >
       <div
         className={`absolute left-[3px] top-1/2 h-[calc(100%-4px)] w-[calc(50%-4px)] -translate-y-1/2 rounded-full bg-toggle-slider-bg border-[1px] border-toggle-slider-border transition-all duration-200 ease-in-out ${
-          !isDarkMode ? "translate-x-0" : "translate-x-[calc(100%+3px)]"
+          !isDark ? "translate-x-0" : "translate-x-[calc(100%+3px)]"
         }`}
       />
       <span
         className={`relative z-10 flex flex-1 justify-center items-center h-full rounded-full text-center transition-colors duration-300 ${
-          !isDarkMode
+          !isDark
             ? "text-theme-icon-fill-active"
             : "text-theme-icon-fill-not-active"
         }`}
@@ -28,7 +27,7 @@ function ThemeSwitcher() {
       </span>
       <span
         className={`relative z-10 flex-1  rounded-full justify-center h-full items-center flex transition-colors duration-300 ${
-          isDarkMode
+          isDark
             ? "text-theme-icon-fill-active"
             : "text-theme-icon-fill-not-active"
         }`}

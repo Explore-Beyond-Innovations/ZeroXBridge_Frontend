@@ -12,8 +12,7 @@ export const ClaimBurnTab = ({
   activeTab,
   setActiveTab,
 }: ClaimBurnTabProps) => {
-  const { theme } = useThemeContext();
-  const isDark = useMemo(() => theme === "dark", [theme]);
+  const { isDark } = useThemeContext();
   return (
     <div className="flex justify-center mb-8 relative">
       <div

@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Menu } from "lucide-react";
-import ConnectWalletButton from "../components/ui/ConnectWalletButton";
 import SwapFromInput from "./components/SwapFromInput";
 import SwapToInput from "./components/SwapToInput";
 import SwapToggle from "./components/SwapToggle";
@@ -11,6 +10,7 @@ import SwapToggle from "./components/SwapToggle";
 import { tokens_swap as tokens } from "@/utils/data";
 import { useConnection } from "@/app/context/ConnectionContext";
 import { SwapSuccessModal } from "./components/SwapSuccessModal";
+import { ConnectWalletButton } from "../components/ui/ConnectWalletButton";
 
 export default function SwapPage() {
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);

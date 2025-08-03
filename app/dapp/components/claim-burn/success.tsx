@@ -30,8 +30,7 @@ export const SuccessModal = ({
   type,
   amount,
 }: SuccessModalProps) => {
-  const { theme } = useThemeContext();
-  const isDark = useMemo(() => theme === "dark", [theme]);
+  const { isDark } = useThemeContext();
   const date = new Date().toLocaleString("en-US", {
     dateStyle: "long",
     timeStyle: "medium",

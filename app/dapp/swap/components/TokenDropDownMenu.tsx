@@ -1,6 +1,5 @@
 "use client";
 import { ChevronDown } from "lucide-react";
-import { useTheme } from "@/app/hooks/useTheme";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,6 +7,7 @@ import {
   DropdownMenuTrigger,
 } from "../../components/ui/dropdown-menu";
 import Image from "next/image";
+import { useThemeContext } from "@/app/hooks/context";
 
 interface Token {
   logo: string;
@@ -25,8 +25,7 @@ export function TokenSelectDropdown({
   onTokenSelect,
   tokens,
 }: TokenSelectDropdownProps) {
-  const { theme } = useTheme();
-  const isDarkMode = theme === "dark";
+  const { isDark } = useThemeContext();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -56,7 +55,7 @@ export function TokenSelectDropdown({
               <div className="font-medium text-sm">{token.name}</div>
               <div
                 className={`text-xs ${
-                  isDarkMode ? "text-gray-400" : "text-gray-500"
+                  isDark ? "text-gray-400" : "text-gray-500"
                 }`}
               >
                 {token.symbol}

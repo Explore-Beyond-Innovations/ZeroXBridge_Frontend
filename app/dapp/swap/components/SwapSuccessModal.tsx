@@ -1,12 +1,12 @@
 "use client";
 
 import { Globe } from "lucide-react";
-import { useTheme } from "@/app/hooks/useTheme";
 import Check from "@/public/check.png";
 import CheckDark from "@/public/check-dark.png";
 import Image from "next/image";
 import { Dialog, DialogContent } from "../../components/ui/dialog";
 import { getFormattedDate } from "@/lib/utils";
+import { useThemeContext } from "@/app/hooks/context";
 
 interface SuccessModalProps {
   isOpen: boolean;
@@ -28,8 +28,7 @@ export function SwapSuccessModal({
   onClose,
   transaction,
 }: SuccessModalProps) {
-  const { theme } = useTheme();
-  const isDarkMode = theme === "dark";
+  const { isDark } = useThemeContext();
   if (!transaction) return null;
 
   return (
@@ -84,7 +83,7 @@ export function SwapSuccessModal({
           <div className="w-full space-y-3">
             <button
               className={`w-full p-3 flex justify-center rounded-[8px] items-center gap-x-2  ${
-                isDarkMode
+                isDark
                   ? "bg-[#1F1F1F] hover:bg-gray-600"
                   : "bg-[#1F1F1F] hover:bg-gray-700"
               } text-[#F4F4F4]`}

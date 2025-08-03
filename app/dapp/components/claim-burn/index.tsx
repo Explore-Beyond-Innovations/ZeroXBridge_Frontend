@@ -28,13 +28,12 @@ type BurnClaimData = {
 };
 
 const ClaimBurn = () => {
-  const { theme } = useThemeContext();
+  const { isDark } = useThemeContext();
   const { isConnected } = useWallet();
   const [activeTab, setActiveTab] = useState("claim");
   const [amount, setAmount] = useState("");
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
-  const isDark = useMemo(() => theme === "dark", [theme]);
 
   const CLAIM_BURN_DATA: Record<string, BurnClaimData> = useMemo(
     () => ({

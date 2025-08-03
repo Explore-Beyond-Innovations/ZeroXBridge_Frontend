@@ -29,8 +29,7 @@ export const ConnectWalletButton = ({
     shortAddress,
   } = useWallet();
 
-  const { theme } = useThemeContext();
-  const isDark = useMemo(() => theme === "dark", [theme]);
+  const { isDark } = useThemeContext();
 
   const handleClick = async () => {
     if (isConnected) {
