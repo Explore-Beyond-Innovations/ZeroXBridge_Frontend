@@ -66,6 +66,8 @@
   --sm-shadow: 0px 1px 2px 0px #78787840 inset;
   --sm-connect-shadow: 0px 1px 2px 0px #78787833 inset;
 
+  --claim-area-input-border-light: #F1F1F1;
+
   --card: oklch(1 0 0);
   --card-border: #eaeaea;
   --radius: 0.625rem;
@@ -138,6 +140,8 @@
   --close-btn-border: #292929;
   --claim-area-btn: #232323;
   --claim-area: #1D1D1D;
+  --claim-text-disabled: #737373;
+  --claim-input-placeholder: #DDDDDD;
 
 
   --container: #161616;

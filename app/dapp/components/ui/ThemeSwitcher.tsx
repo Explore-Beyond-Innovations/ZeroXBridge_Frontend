@@ -1,14 +1,15 @@
 "use client";
-import useTheme from "@/app/hooks/useTheme";
+import { useThemeContext } from "@/app/hooks/context/theme";
+
 import MoonIcon from "@/svg/MoonIcon";
 import SunIcon from "@/svg/SunIcon";
 
 function ThemeSwitcher() {
-  const { theme, changeTheme } = useTheme();
+  const { theme, toggleTheme } = useThemeContext();
   const isDarkMode = theme === "dark";
   return (
     <div
-      onClick={changeTheme}
+      onClick={toggleTheme}
       className="relative flex h-10 w-[80px] cursor-pointer items-center gap-x-1 rounded-full bg-toggle-bg p-[3px] transition-all duration-300"
     >
       <div

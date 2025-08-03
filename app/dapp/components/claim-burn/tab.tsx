@@ -1,7 +1,7 @@
 "use client";
 
-import useTheme, { Theme } from "@/app/hooks/useTheme";
-import React from "react";
+import { useThemeContext } from "@/app/hooks/context";
+import React, { useMemo } from "react";
 
 interface ClaimBurnTabProps {
   activeTab: string;
@@ -12,15 +12,15 @@ export const ClaimBurnTab = ({
   activeTab,
   setActiveTab,
 }: ClaimBurnTabProps) => {
-  const {theme} = useTheme()
-  const isDark = theme === "dark"
+  const { theme } = useThemeContext();
+  const isDark = useMemo(() => theme === "dark", [theme]);
   return (
     <div className="flex justify-center mb-8 relative">
       <div
         className={`relative inline-flex items-center rounded-full p-1 ${
           isDark
             ? "bg-[#1c1c1c] border border-[#202020]"
-            : "bg-[#ededed] border border-[#e8e8e8]"
+            : "bg-[var(--toggle-bg)] border border-[var(--toggle-slider-border)]"
         }`}
       >
         <div

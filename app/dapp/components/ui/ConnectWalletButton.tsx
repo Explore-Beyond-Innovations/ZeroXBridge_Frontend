@@ -3,6 +3,8 @@ import { BrokenLink } from "@/svg/BrokenLink";
 import { Spinner } from "@/svg/Spinner";
 import WalletIcon from "@/svg/WalletIcon";
 import { GradientDirection, GradientWrapperPrimary } from "./Gradients";
+import { useThemeContext } from "@/app/hooks/context";
+import { useMemo } from "react";
 
 interface ConnectWalletButtonProps {
   full?: boolean;
@@ -10,7 +12,7 @@ interface ConnectWalletButtonProps {
   /** Toggle gradient border wrapping */
   withGradient?: boolean;
   /** The direction of the gradient */
-  gradientDirection?: GradientDirection
+  gradientDirection?: GradientDirection;
 }
 
 export const ConnectWalletButton = ({
@@ -26,6 +28,9 @@ export const ConnectWalletButton = ({
     isConnecting,
     shortAddress,
   } = useWallet();
+
+  const { theme } = useThemeContext();
+  const isDark = useMemo(() => theme === "dark", [theme]);
 
   const handleClick = async () => {
     if (isConnected) {
@@ -43,7 +48,7 @@ export const ConnectWalletButton = ({
     <button
       className={`${baseClasses} ${
         isConnected ? "justify-between" : "justify-center gap-x-2"
-      } bg-[var(--btn-bg)] ${
+      } ${isDark ? "bg-[var(--btn-bg)]" : "bg-white"} ${
         isConnecting && !isConnected ? "cursor-not-allowed opacity-75" : ""
       }`}
       onClick={handleClick}

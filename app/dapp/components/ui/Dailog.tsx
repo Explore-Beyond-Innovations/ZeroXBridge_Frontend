@@ -1,7 +1,9 @@
 "use client";
 
 import * as Dialog from "@radix-ui/react-dialog";
-import { ReactNode } from "react";
+import { ReactNode, useMemo } from "react";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import { useThemeContext } from "@/app/hooks/context";
 
 interface DialogBaseProps {
   isOpen: boolean;
@@ -25,13 +27,20 @@ export const DialogBase = ({
   size = "md",
   className = "",
 }: DialogBaseProps) => {
+  const { theme } = useThemeContext();
+  const isDark = useMemo(() => theme === "dark", [theme]);
   return (
     <Dialog.Root open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-50 z-50" />
+        <Dialog.Overlay
+          className={`fixed inset-0 z-50 ${isDark ? "bg-black/30" : "bg-[#F0F0F0]/30"} backdrop-blur-[8px]`}
+        />
         <Dialog.Content
           className={`fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 focus:outline-none rounded-2xl bg-background border border-primary-border ${SIZE_MAP[size]} ${className}`}
         >
+          <VisuallyHidden asChild>
+            <Dialog.Title />
+          </VisuallyHidden>
           {children}
         </Dialog.Content>
       </Dialog.Portal>
