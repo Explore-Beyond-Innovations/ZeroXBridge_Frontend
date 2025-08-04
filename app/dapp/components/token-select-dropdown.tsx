@@ -101,7 +101,14 @@ export function TokenSelectDropdown({
               </div>
             </div>
             <div className="ml-auto">
-              <span className="text-green-500 text-sm">{token.riskLevel}</span>
+              <span
+                className={
+                  token.riskLevel === "High Risk"
+                    ? "text-[#B23232] dark:bg-[#FF60600F] bg-[#FF60600F] p-1 rounded-sm text-sm"
+                    : "text-[#32B289] dark:bg-[#C9FFEE0F] bg-[#C9FFEE5C] p-1 rounded-sm text-sm"
+                }>
+                {token.riskLevel}
+              </span>
             </div>
           </DropdownMenuItem>
         ))}

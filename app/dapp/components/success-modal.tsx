@@ -4,7 +4,7 @@ import { Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import type { LockTransaction } from "@/types/token";
-import { useTheme } from "@/app/hooks/useTheme";
+import { useThemeContext } from "@/app/context/theme-provider";
 import Check from "@/public/check.png";
 import CheckDark from "@/public/check-dark.png";
 import Image from "next/image";
@@ -20,8 +20,7 @@ export function SuccessModal({
   onClose,
   transaction,
 }: SuccessModalProps) {
-  const { theme } = useTheme();
-  const isDarkMode = theme === "dark";
+  const { isDark } = useThemeContext();
   if (!transaction) return null;
 
   return (
@@ -33,7 +32,7 @@ export function SuccessModal({
           <div
             className={`w-[186px] h-[186px] rounded-full border-2 flex items-center justify-center`}>
             <Image
-              src={isDarkMode ? CheckDark : Check}
+              src={isDark ? CheckDark : Check}
               alt="Check Icon"
               width={186}
               height={186}
@@ -44,7 +43,7 @@ export function SuccessModal({
           <div>
             <h2
               className={`text-2xl font-bold mb-2 ${
-                isDarkMode ? "text-[#F4F4F4]" : "text-gray-900"
+                isDark ? "text-[#F4F4F4]" : "text-gray-900"
               }`}>
               {transaction.token.symbol} Locked!
             </h2>
