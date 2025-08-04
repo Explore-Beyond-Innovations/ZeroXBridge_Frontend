@@ -1,7 +1,8 @@
 import React from "react";
+import ClaimBurn from "../components/claim-burn";
 
 function page() {
-  return <div>Claim/Burn token page</div>;
+  return <ClaimBurn />;
 }
 
 export default page;

@@ -66,6 +66,8 @@
   --sm-shadow: 0px 1px 2px 0px #78787840 inset;
   --sm-connect-shadow: 0px 1px 2px 0px #78787833 inset;
 
+  --claim-area-input-border-light: #F1F1F1;
+
   --card: oklch(1 0 0);
   --card-border: #eaeaea;
   --radius: 0.625rem;
@@ -120,6 +122,8 @@
     #d7d7d7 100%
   );
 
+  --btn-bg: #1F1F1F;
+
   /* Borders */
   --primary-border: #202020;
   --wallet-border: transparent;
@@ -128,6 +132,17 @@
   --primary-text: #f4f4f4;
   --sidebar-text: #a4a4a4;
   --sidebar-text-active: #ffffff;
+
+  /* claim/burn ui tokens */
+  --claim-burn-bg: #161616CC;
+  --claim-burn-modal-text: #C3C3C3;
+  --modal-date-text: #737373;
+  --close-btn-border: #292929;
+  --claim-area-btn: #232323;
+  --claim-area: #1D1D1D;
+  --claim-text-disabled: #737373;
+  --claim-input-placeholder: #DDDDDD;
+
 
   --container: #161616;
   --container-border: linear-gradient(311.7deg, #202020 20.1%, #363636 124.75%);
@@ -168,6 +183,16 @@
 
 button {
   cursor: pointer;
+}
+
+.no-spinner::-webkit-outer-spin-button,
+.no-spinner::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.no-spinner {
+  -moz-appearance: textfield; /* Firefox */
 }
 
 button:disabled,

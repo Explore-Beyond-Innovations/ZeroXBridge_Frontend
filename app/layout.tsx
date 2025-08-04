@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { ConnectionProvider } from "@/app/context/ConnectionContext";
-import { ThemeProvider } from "@/app/context/ThemeContext";
 import "./globals.css";
+import { ThemeProvider, ConnectionProvider } from "./context";
 
 export const metadata: Metadata = {
   title: "ZeroXBridge",

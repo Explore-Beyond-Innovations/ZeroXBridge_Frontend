@@ -21,8 +21,6 @@ export function TokenSelectDropdown({
   onTokenSelect,
   tokens,
 }: TokenSelectDropdownProps) {
-  // const { theme } = useTheme();
-  // const isDarkMode = theme === "dark";
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
