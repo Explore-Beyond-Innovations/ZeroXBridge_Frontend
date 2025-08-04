@@ -27,11 +27,11 @@ export function SuccessModal({
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent
-        className={`sm:max-w-md border-[#202020] dark:bg-[#09050E] bg-[#FFF]"
+        className={`sm:max-w-md border-none dark:bg-[#09050E] "
         }`}>
         <div className="flex flex-col items-center text-center space-y-6 pb-6">
           <div
-            className={`w-[186px] h-[186px] rounded-full border-2 flex items-center justify-center dark:border-gray-600 border-gray-300`}>
+            className={`w-[186px] h-[186px] rounded-full border-2 flex items-center justify-center`}>
             <Image
               src={isDarkMode ? CheckDark : Check}
               alt="Check Icon"
@@ -44,11 +44,11 @@ export function SuccessModal({
           <div>
             <h2
               className={`text-2xl font-bold mb-2 ${
-                isDarkMode ? "text-white" : "text-gray-900"
+                isDarkMode ? "text-[#F4F4F4]" : "text-gray-900"
               }`}>
               {transaction.token.symbol} Locked!
             </h2>
-            <p className={`${isDarkMode ? "text-gray-300" : "text-gray-600"}`}>
+            <p className={`dark:text-[#C3C3C3] text-gray-600 max-w-[285px]`}>
               {"You've locked "}
               <span className="font-semibold">
                 {transaction.amount} {transaction.token.symbol}
@@ -60,22 +60,23 @@ export function SuccessModal({
             </p>
           </div>
 
-          <p
-            className={`text-sm ${
-              isDarkMode ? "text-gray-400" : "text-gray-500"
-            }`}>
+          <p className={`text-sm dark:text-[#737373] text-gray-500}`}>
             {transaction.timestamp}
           </p>
 
-          <div className="w-full space-y-3">
+          <div className="w-full space-y-3 mt-3">
             <Button
-              className={`w-full dark:bg-[#1F1F1F] dark:hover:bg-[#1F1F1F] bg-[#1F1F1F] text-[#F4F4F4]`}>
+              className={`h-10 w-full dark:bg-[#1F1F1F] dark:hover:bg-[#1F1F1F] bg-[#1F1F1F] text-[#F4F4F4]`}
+              style={{
+                boxShadow: "0 1px 2px 0 rgba(120, 120, 120, 0.25) inset",
+                background: "linear-gradient(180deg, #1F1F1F 0%, #1C1C1C 100%)",
+              }}>
               <Globe className="w-4 h-4 mr-2" />
               View on Explorer
             </Button>
             <Button
               variant="outline"
-              className={`w-full bg-transparent rounded-full dark:bg-[#CDCDCD] dark:text-[#111111] border-gray-300 text-gray-900 dark:hover:bg-[#CDCDCD]`}
+              className={`h-10 w-full bg-transparent rounded-full dark:bg-[#CDCDCD] dark:text-[#111111] border-gray-300 text-gray-900 dark:hover:bg-[#CDCDCD]`}
               onClick={onClose}>
               Return to Dashboard
             </Button>

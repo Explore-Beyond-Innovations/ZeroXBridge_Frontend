@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ConnectionProvider } from "@/app/context/ConnectionContext";
+import { ThemeProvider } from "@/app/context/ThemeContext";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -15,7 +16,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="font-inter text-sm">
-        <ConnectionProvider>{children}</ConnectionProvider>
+        <ThemeProvider>
+          <ConnectionProvider>{children}</ConnectionProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
