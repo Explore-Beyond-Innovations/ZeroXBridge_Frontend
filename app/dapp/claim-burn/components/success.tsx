@@ -1,13 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { DialogBase } from "../ui/Dailog";
+import { DialogBase } from "../../components/ui/Dailog";
 import { Geist_Mono, Inter } from "next/font/google";
 import { Close } from "@/svg/CloseIcon";
 import { GlobeIcon } from "@/svg/GlobeIcon";
-import { GradientWrapperPrimary } from "../ui/Gradients";
+import { GradientWrapperPrimary } from "../../components/ui/Gradients";
 import { useThemeContext } from "@/app/hooks/context";
-import { useMemo } from "react";
 
 const geistMono = Geist_Mono({
   subsets: ["latin"],

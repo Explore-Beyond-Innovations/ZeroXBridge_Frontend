@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Dialog, DialogContent } from "../../components/ui/dialog";
 import { getFormattedDate } from "@/lib/utils";
 import { useThemeContext } from "@/app/hooks/context";
+import { DialogBase } from "../../components/ui/Dailog";
 
 interface SuccessModalProps {
   isOpen: boolean;
@@ -32,7 +33,7 @@ export function SwapSuccessModal({
   if (!transaction) return null;
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <DialogBase isOpen={isOpen} onClose={onClose} size="md">
       <DialogContent
         className={`sm:max-w-md border-[#c6c6c6] dark:border-[#202020] border-[1.11px] dark:bg-[#111111] bg-white`}
       >
@@ -100,6 +101,6 @@ export function SwapSuccessModal({
           </div>
         </div>
       </DialogContent>
-    </Dialog>
+    </DialogBase>
   );
 }

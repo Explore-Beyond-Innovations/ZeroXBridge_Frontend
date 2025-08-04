@@ -8,9 +8,9 @@ import SwapToggle from "./components/SwapToggle";
 
 // Dummy tokens data
 import { tokens_swap as tokens } from "@/utils/data";
-import { useConnection } from "@/app/context/ConnectionContext";
 import { SwapSuccessModal } from "./components/SwapSuccessModal";
 import { ConnectWalletButton } from "../components/ui/ConnectWalletButton";
+import { useWallet } from "@/app/hooks";
 
 export default function SwapPage() {
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
@@ -24,8 +24,7 @@ export default function SwapPage() {
       ).toFixed(2)
     : "";
 
-  // Dummy connection status
-  const { isConnected } = useConnection();
+  const { isConnected } = useWallet();
 
   function handleToggle() {
     const temp = fromToken;

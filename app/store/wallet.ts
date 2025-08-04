@@ -7,6 +7,7 @@ export interface WalletState {
   chainId: number | null;
   isConnecting: boolean;
   error: string | null;
+  isWalletModalOpen: boolean;
 }
 
 export interface WalletActions {
@@ -17,6 +18,8 @@ export interface WalletActions {
   setConnecting: (isConnecting: boolean) => void;
   setError: (error: string | null) => void;
   clearError: () => void;
+  openWalletModal: () => void;
+  closeWalletModal: () => void;
 }
 
 export type WalletStore = WalletState & WalletActions;
@@ -83,6 +86,9 @@ export const useWalletStore = create<WalletStore>()(
       setConnecting: (isConnecting) => set({ isConnecting }),
       setError: (error) => set({ error }),
       clearError: () => set({ error: null }),
+      isWalletModalOpen: false,
+      openWalletModal: () => set({ isWalletModalOpen: true }),
+      closeWalletModal: () => set({ isWalletModalOpen: false }),
     }),
     {
       name: "wallet-storage", // we need this for localStorage persistence

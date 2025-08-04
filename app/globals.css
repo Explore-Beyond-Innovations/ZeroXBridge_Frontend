@@ -68,6 +68,9 @@
 
   --claim-area-input-border-light: #F1F1F1;
 
+  /* tokens on the dashboard ui */
+  --card-text-disabled: #bdbdbd;
+
   --card: oklch(1 0 0);
   --card-border: #eaeaea;
   --radius: 0.625rem;
@@ -146,6 +149,9 @@
 
   --container: #161616;
   --container-border: linear-gradient(311.7deg, #202020 20.1%, #363636 124.75%);
+
+  /* tokens on the dashboard ui */
+  --card-text-disabled: var(--claim-text-disabled);
 
   --card: oklch(0.205 0 0);
   --card-border: #202020;
