@@ -63,7 +63,7 @@ export const ClaimCard = () => {
         </p>
       </div>
       <button
-        onClick={() => router.push("/claim-burn")}
+        onClick={() => router.push("/dapp/claim-burn")}
         className={`w-[99px] rounded-[8px] bg-[#F4F4F4] dark:bg-[#2E2E2E] text-sm font-light h-[37px] text-[#757575] dark:text-${isConnected ? "[#F4F4F4]" : "[#737373]"}`}
       >
         Get Started

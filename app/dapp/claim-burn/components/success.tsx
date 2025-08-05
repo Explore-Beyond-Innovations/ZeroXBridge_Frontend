@@ -36,14 +36,13 @@ export const SuccessModal = ({
   });
 
   return (
-    <DialogBase isOpen={isOpen} onClose={onClose} size="md">
-      <button
-        onClick={onClose}
-        className={`absolute flex justify-center items-center border ${isDark ? "border-[var(--close-btn-border)]" : "border-[var(--wallet-border)]"} rounded-full h-8 w-8 top-4 right-4 text-2xl leading-none text-sidebar-text`}
-      >
-        <Close />
-      </button>
-
+    <DialogBase
+      isOpen={isOpen}
+      onClose={onClose}
+      size="md"
+      className="p-8"
+      addCloseBtn
+    >
       <div className="flex flex-col gap-2">
         <div
           className={`w-50 h-50 mx-auto ${isDark ? "bg-[var(--toggle-slider-bg)]" : "bg-[#F6F6F6]"} rounded-full flex items-center justify-center`}

@@ -13,6 +13,8 @@ interface ConnectWalletButtonProps {
   withGradient?: boolean;
   /** The direction of the gradient */
   gradientDirection?: GradientDirection;
+  /** Make button thinner with reduced padding */
+  thin?: boolean;
 }
 
 export const ConnectWalletButton = ({
@@ -20,6 +22,7 @@ export const ConnectWalletButton = ({
   className = "",
   withGradient = true,
   gradientDirection,
+  thin = false,
 }: ConnectWalletButtonProps) => {
   const {
     connectWallet,
@@ -28,7 +31,6 @@ export const ConnectWalletButton = ({
     isConnecting,
     shortAddress,
   } = useWallet();
-
   const { isDark } = useThemeContext();
 
   const handleClick = async () => {
@@ -39,8 +41,19 @@ export const ConnectWalletButton = ({
     }
   };
 
-  const baseClasses = `flex items-center px-3 py-[10px] rounded-[8px] text-primary-text border border-wallet-border transition-all duration-200 hover:opacity-80 active:opacity-60 ${
-    full ? "w-full py-4 rounded-xl" : ""
+  const getPaddingAndRoundness = () => {
+    if (thin) {
+      return "px-3 py-1 rounded-[6px]";
+    }
+    if (full) {
+      return "py-4 rounded-[8px]";
+    }
+    // default spacing
+    return "py-[8px] rounded-[8px]";
+  };
+
+  const baseClasses = `flex items-center px-3 ${getPaddingAndRoundness()} text-primary-text border border-wallet-border transition-all duration-200 hover:opacity-80 active:opacity-60 ${
+    full ? "w-full" : ""
   } ${className}`;
 
   const ButtonContent = (

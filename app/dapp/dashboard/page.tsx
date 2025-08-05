@@ -1,65 +1,79 @@
 "use client";
-import Image from "next/image";
+import { useState } from "react";
 import { WalletCard, ClaimCard } from "./components/card";
-import { DashboardChart, AssetChart } from "./components/chart";
-import { SearchIcon, Triangle } from "lucide-react";
+import { DashboardChart, TVLChart, AssetChart } from "./components/chart";
+import { SearchIcon } from "lucide-react";
 import { useThemeContext } from "@/app/hooks/context";
+import { AssetsMenu } from "./components/asset-menu";
+import { ChartTabs } from "./components/chart-tab";
+
+
+
+const assets = [
+  { name: "Bitcoin", symbol: "btc", icon: "/bitcoin.svg", id: "bitcoin" },
+  { name: "Ethereum", symbol: "eth", icon: "/token-logos/eth-logo.svg", id: "ethereum" },
+  { name: "StarkNet", symbol: "strk", icon: "/token-logos/strk-logo.svg", id: "starknet" },
+];
 
 export default function DashboardPage() {
   const { isDark } = useThemeContext();
+  const [currentAsset, setCurrentAsset] = useState(assets[0]);
+
+  const onAssetSelect = (id: string) => {
+    const found = assets.find((asset) => asset.id === id);
+    if (found) setCurrentAsset(found);
+  };
+
   return (
-    <div className="p-2 grid grid-cols-1 lg:grid-cols-3 gap-4">
-      <div className="flex flex-col gap-y-4 lg:col-span-1">
-        <WalletCard />
-        <ClaimCard />
-      </div>
-      <div className="bg-white border-[1.11px] border-[#efefef] dark:border-[#202020] dark:bg-[#1E1E1E] rounded-2xl p-3 col-span-1 lg:col-span-2">
-        <div className="flex gap-x-4">
-          <p className="text-sm font-medium mb-4">Total Users</p>
-          <p className="text-sm font-normal text-[#dddddd] dark:text-[#4f4f4f] capitalize">
-            total value locked
-          </p>
+    <div className="w-full flex justify-center">
+      <div
+        className="
+          w-full
+          p-2
+          grid grid-cols-1 lg:grid-cols-3 gap-4
+          2xl:max-w-[1400px] 2xl:px-0
+          [@media(min-width:1920px)]:max-w-[1600px]
+          [@media(min-width:2560px)]:max-w-[1800px]
+        "
+      >
+        <div className="flex flex-col gap-y-4 lg:col-span-1">
+          <WalletCard />
+          <ClaimCard />
         </div>
-        <DashboardChart />
-      </div>
-      <div className="col-span-1 lg:col-span-3 bg-white dark:bg-[#1E1E1E] rounded-2xl p-3 border-[1.11px] border-[#efefef] dark:border-[#202020]">
-        <div className="flex gap-y-2 flex-col mb-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <Image
-                src="/bitcoin.svg"
-                alt="Bitcoin Logo"
-                height={24}
-                width={24}
+
+        <div className="bg-white border-[1.11px] border-[#efefef] dark:border-[#202020] dark:bg-[#1E1E1E] rounded-2xl p-3 col-span-1 lg:col-span-2">
+          <ChartTabs
+            tabs={[
+              { label: "Total Users", content: <DashboardChart /> },
+              { label: "Total Value Locked", content: <TVLChart /> },
+            ]}
+          />
+        </div>
+
+        <div className="col-span-1 lg:col-span-3 bg-white dark:bg-[#1E1E1E] rounded-2xl p-3 border-[1.11px] border-[#efefef] dark:border-[#202020]">
+          <div className="flex gap-y-2 flex-col mb-4">
+            <div className="flex items-center justify-between">
+              <AssetsMenu
+                currentAsset={currentAsset}
+                assets={assets}
+                onSelect={onAssetSelect}
               />
-              <p className="text-sm dark:text-[#fff] text-[#000]">
-                Bitcoin <span className="text-[#696969]">(BTC)</span>
-              </p>
+              <div className="relative w-[234px] bg-[#F4F4F4] dark:bg-[#181818] rounded-[8px] px-2 h-[37px]">
+                <input
+                  type="text"
+                  placeholder="Search token"
+                  className="rounded-xl py-2 px-4 pl-6 bg-[#F4F4F4] dark:bg-[#181818] text-sm dark:text-[#434343] text-[#9D9D9D] focus:outline-none"
+                />
+                <SearchIcon
+                  color={isDark ? "#696969" : "#B9B9B9"}
+                  size="18"
+                  className="absolute top-2.5"
+                />
+              </div>
             </div>
-            <div className="relative w-[234px]  bg-[#F4F4F4] dark:bg-[#181818] rounded-[8px] px-2 h-[37px]">
-              <input
-                type="text"
-                placeholder="Search token"
-                className="rounded-xl py-2 px-4 pl-6 bg-[#F4F4F4] dark:bg-[#181818] text-sm dark:text-[#434343] text-[#9D9D9D] focus:outline-none"
-              />
-              <SearchIcon
-                color={isDark ? "#696969" : "#B9B9B9"}
-                size="18"
-                className="absolute top-2.5"
-              />
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <p className="text-[32px] text-[#444444] dark:text-[#B7B5B9] font-mono font-normal">
-              $117,201.01
-            </p>
-            <div className="flex gap-x-1">
-              <Triangle fill="#32B289" color="#32B289" size="16" />
-              <p className="text-sm text-[#32B289] flex items-center">+2.38%</p>
-            </div>
+            <AssetChart assetId={currentAsset.id} />
           </div>
         </div>
-        <AssetChart />
       </div>
     </div>
   );
