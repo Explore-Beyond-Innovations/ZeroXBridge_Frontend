@@ -30,7 +30,8 @@ type BurnClaimData = {
 
 export default function ClaimBurnPage() {
   const { isDark } = useThemeContext();
-  const { isConnected } = useWallet();
+  const { strkConnected, ethConnected, openWalletModal } = useWallet();
+  const isConnected = strkConnected || ethConnected;
   const [activeTab, setActiveTab] = useState("claim");
   const [amount, setAmount] = useState("");
   const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -208,7 +209,11 @@ export default function ClaimBurnPage() {
                 )}
 
                 {!isConnected ? (
-                  <ConnectWalletButton full className="font-light" />
+                  <ConnectWalletButton
+                    full
+                    className="font-light"
+                    action={openWalletModal}
+                  />
                 ) : (
                   <button
                     onClick={handleAction}

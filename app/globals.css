@@ -36,6 +36,7 @@
 
 :root {
   --logo: #2e2e2e;
+    --toast-text-color: #000000;
 
   --toggle-bg: #ededed;
   --toggle-slider-bg: #ffffff;
@@ -110,6 +111,7 @@
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --logo: #ffffff;
+  --toast-text-color: #ffffff;
 
   --toggle-bg: #1c1c1c;
   --toggle-slider-bg: #2e2e2e;

@@ -21,3 +21,9 @@ export function getFormattedDate(): string {
 
   return `${day} ${month} ${year} ${hours12}:${minutes}:${seconds}${ampm}`;
 }
+
+export const shortenAddress = (address: string) => {
+  if (!address) return;
+  const shortened = `${address.slice(0, 4)}...${address.slice(-6)}`;
+  return shortened;
+};
