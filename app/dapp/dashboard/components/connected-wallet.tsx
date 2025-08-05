@@ -21,8 +21,8 @@ export const ConnectedWallet = ({
       <div className="flex items-center gap-x-2">
         <Image
           src={walletPlatformLogo}
-          height={20}
-          width={20}
+          height={17}
+          width={17}
           alt={walletPlatform}
           className="rounded"
         />

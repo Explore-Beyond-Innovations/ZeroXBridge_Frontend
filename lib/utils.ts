@@ -27,3 +27,17 @@ export const shortenAddress = (address: string) => {
   const shortened = `${address.slice(0, 4)}...${address.slice(-6)}`;
   return shortened;
 };
+
+export const getInjectedStarknetWallets = () => {
+  if (typeof window === "undefined") return [];
+
+  if ((window as any).starknet?.providers) {
+    return (window as any).starknet.providers;
+  }
+
+  if ((window as any).starknet) {
+    return [(window as any).starknet];
+  }
+
+  return [];
+};

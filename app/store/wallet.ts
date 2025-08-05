@@ -11,7 +11,22 @@ export interface WalletState {
   strkConnected: boolean;
   strkConnecting: boolean;
   error: string | null;
+
+  // we need these values to dynamically compute the logo/platforms
+  // being connected to, instead of passing static image values as props
+  strkPlatformName: string | null;
+  strkPlatformLogo: string | null;
+  ethPlatformName: string | null;
+  ethPlatformLogo: string | null;
 }
+
+export type Network = "ETH" | "STRK";
+
+type Wallet = {
+  network: Network;
+  platformName: string;
+  platformLogo: string;
+};
 
 export interface WalletActions {
   openWalletModal: () => void;
@@ -30,13 +45,14 @@ export interface WalletActions {
   setError: (error: string | null) => void;
   clearError: () => void;
   resetWallet: (type: "ETH" | "STRK") => void;
+  setWalletPlatform: (data: Wallet) => void;
 }
 
 export type WalletStore = WalletState & WalletActions;
 
 export const useWalletStore = create<WalletStore>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       isWalletModalOpen: false,
       activeNetwork: null,
       ethAddress: null,
@@ -47,6 +63,10 @@ export const useWalletStore = create<WalletStore>()(
       strkConnected: false,
       strkConnecting: false,
       error: null,
+      strkPlatformLogo: null,
+      strkPlatformName: null,
+      ethPlatformLogo: null,
+      ethPlatformName: null,
 
       openWalletModal: () => set({ isWalletModalOpen: true }),
       closeWalletModal: () => set({ isWalletModalOpen: false }),
@@ -65,6 +85,20 @@ export const useWalletStore = create<WalletStore>()(
           strkConnected: data.connected,
           strkConnecting: data.connecting,
         }),
+
+      setWalletPlatform: (data) => {
+        if (data.network === "ETH") {
+          set({
+            ethPlatformLogo: data.platformLogo,
+            ethPlatformName: data.platformName,
+          });
+        } else {
+          set({
+            strkPlatformLogo: data.platformLogo,
+            strkPlatformName: data.platformName,
+          });
+        }
+      },
 
       setError: (error) => set({ error }),
       clearError: () => set({ error: null }),

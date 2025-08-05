@@ -4,10 +4,10 @@ import Image from "next/image";
 import { ConnectWalletButton } from "../../components/ui/ConnectWalletButton";
 import { ConnectedWallet } from "./connected-wallet";
 import { useCallback, useState } from "react";
-import { shortenAddress } from "@/lib/utils";
+import { getInjectedStarknetWallets, shortenAddress } from "@/lib/utils";
 import { toast } from "sonner";
-
-export type Network = "ETH" | "STRK";
+import { Network } from "@/app/store/wallet";
+import { StarknetProviders } from "@/lib/connectors";
 
 interface WalletProps {
   walletName: string;
@@ -42,10 +42,27 @@ const WalletItem = ({
   const handleConnect = useCallback(async () => {
     try {
       setState("connecting");
+
       if (network === "ETH") {
         await connectEthWallet("injected");
       } else if (network === "STRK") {
-        await connectStrkWallet("argentX");
+        const providers = getInjectedStarknetWallets();
+        if (providers.length === 0) {
+          console.error("No Starknet wallets found");
+          toast.error("No Starknet wallets found")
+          return;
+        }
+
+        if (providers.length === 1) {
+          await connectStrkWallet(providers?.[0]?.id);
+        } else {
+          const selectedProvider = providers.find((p: StarknetProviders) => p.id === "braavos");
+          // this would basically trail off for now, since i'm not including any state to
+          // manage the selection UI.
+          // it may come up later when there's a UI for that, and considering we can agree people would have multiple
+          // wallet extensions in their browser.
+          await connectStrkWallet(selectedProvider.id);
+        }
       }
     } catch (err) {
       console.error("Connection error:", err);
@@ -85,7 +102,7 @@ const WalletItem = ({
           <p className="text-red-500 text-xs">{error}</p>
         )}
 
-        {isWalletConnected  ? (
+        {isWalletConnected ? (
           <ConnectedWallet
             address={walletAddress}
             walletPlatform={walletPlatform ?? ""}
@@ -122,13 +139,17 @@ export const ConnectWalletModal = () => {
     strkConnecting,
     disconnectEthWallet,
     disconnectStrkWallet,
+    ethPlatformLogo,
+    ethPlatformName,
+    strkPlatformName,
+    strkPlatformLogo,
   } = useWallet();
 
   const copyWalletAddress = useCallback(async (address: string) => {
     if (!address) return;
     try {
       await navigator.clipboard.writeText(address);
-      toast.error("Wallet address copied!");
+      toast.success("Wallet address copied!");
     } catch (error) {
       console.error("Failed to copy address:", error);
     }
@@ -169,8 +190,8 @@ export const ConnectWalletModal = () => {
             assetLogo="/token-logos/eth-logo.svg"
             isWalletConnected={ethConnected}
             isConnecting={ethConnecting}
-            walletPlatform="MetaMask"
-            walletPlatformLogo="/metamask.svg"
+            walletPlatform={ethPlatformName ?? ""}
+            walletPlatformLogo={ethPlatformLogo ?? "/wallet-logos/metamask.svg"}
             onDisconnect={disconnectEthWallet}
             onCopy={handleCopyEthAddress}
           />
@@ -189,8 +210,8 @@ export const ConnectWalletModal = () => {
             walletAddress={
               shortenAddress(strkAddress as string) || "0x0000...0000"
             }
-            walletPlatform="ArgentX"
-            walletPlatformLogo="/ready-wallet.svg"
+            walletPlatform={strkPlatformName ?? ""}
+            walletPlatformLogo={strkPlatformLogo ?? "/wallet-logos/read.svg"}
             onDisconnect={disconnectStrkWallet}
             onCopy={handleCopyStrkAddress}
           />

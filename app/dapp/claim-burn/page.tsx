@@ -30,8 +30,7 @@ type BurnClaimData = {
 
 export default function ClaimBurnPage() {
   const { isDark } = useThemeContext();
-  const { strkConnected, ethConnected, openWalletModal } = useWallet();
-  const isConnected = strkConnected || ethConnected;
+  const { isConnected, openWalletModal } = useWallet();
   const [activeTab, setActiveTab] = useState("claim");
   const [amount, setAmount] = useState("");
   const [showSuccessModal, setShowSuccessModal] = useState(false);

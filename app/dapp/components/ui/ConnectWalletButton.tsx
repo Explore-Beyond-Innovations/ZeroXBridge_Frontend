@@ -76,7 +76,7 @@ export const ConnectWalletButton = ({
       );
     }
 
-    if (isConnected && walletAddress) {
+    if (isConnected) {
       return (
         <div className="flex items-center justify-between w-full">
           <div className="flex items-center gap-x-2">

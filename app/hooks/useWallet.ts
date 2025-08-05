@@ -1,11 +1,21 @@
 import { useCallback, useEffect } from "react";
 import { useWalletStore } from "../store/wallet";
 import { useEthereumWallet, useStarknetWallet } from "./";
-import { starknetConnectors } from "@/lib/connectors";
+import {
+  StarknetConnectorId,
+  starknetConnectorMeta,
+  starknetConnectors,
+} from "@/lib/connectors";
 
 export const useWallet = () => {
-  const { setEthWallet, setStrkWallet, clearError, resetWallet, ...store } =
-    useWalletStore();
+  const {
+    setEthWallet,
+    setStrkWallet,
+    clearError,
+    resetWallet,
+    setWalletPlatform,
+    ...store
+  } = useWalletStore();
 
   const ethWallet = useEthereumWallet();
   const strkWallet = useStarknetWallet();
@@ -39,6 +49,27 @@ export const useWallet = () => {
       clearError();
       try {
         await ethWallet.connectEthereumWallet(connectorId);
+
+        const provider = window.ethereum as any;
+        const platformName = provider?.isMetaMask
+          ? "MetaMask"
+          : provider?.isCoinbaseWallet
+            ? "Coinbase Wallet"
+            : "Ethereum Wallet";
+
+        // we can add support for more later
+        const platformLogo =
+          platformName === "MetaMask"
+            ? "/wallet-logos/metamask.svg"
+            : platformName === "Coinbase Wallet"
+              ? "/wallet-logos/coinbase.svg"
+              : "/wallet-logos/default-eth.svg";
+
+        setWalletPlatform({
+          network: "ETH",
+          platformName,
+          platformLogo,
+        });
       } catch (error) {
         resetWallet("ETH");
         store.setError(String(error));
@@ -58,11 +89,19 @@ export const useWallet = () => {
   }, [ethWallet, resetWallet, store.setError]);
 
   const connectStrkWallet = useCallback(
-    async (connectorId: "braavos" | "argentX") => {
+    async (connectorId: StarknetConnectorId) => {
       clearError();
       try {
         strkWallet.connectStarknetWallet({
           connector: starknetConnectors[connectorId],
+        });
+
+        const { name, icon } = starknetConnectorMeta[connectorId];
+
+        setWalletPlatform({
+          network: "STRK",
+          platformName: name,
+          platformLogo: icon,
         });
       } catch (error) {
         resetWallet("STRK");
@@ -82,6 +121,8 @@ export const useWallet = () => {
     }
   }, [strkWallet, resetWallet, store.setError]);
 
+  const isConnected = store.strkConnected || store.ethConnected
+
   return {
     ethAddress: store.ethAddress,
     ethConnected: store.ethConnected,
@@ -92,8 +133,14 @@ export const useWallet = () => {
     strkConnected: store.strkConnected,
     strkConnecting: store.strkConnecting,
 
+    strkPlatformName: store.strkPlatformName,
+    strkPlatformLogo: store.strkPlatformLogo,
+    ethPlatformName: store.ethPlatformName,
+    ethPlatformLogo: store.ethPlatformLogo,
+
     isWalletModalOpen: store.isWalletModalOpen,
     error: store.error,
+    isConnected,
 
     openWalletModal: store.openWalletModal,
     closeWalletModal: store.closeWalletModal,
