@@ -1,7 +1,7 @@
 "use client";
 
 import { PieChartIcon } from "lucide-react";
-import ConnectWalletButton from "../ui/ConnectWalletButton";
+import {ConnectWalletButton} from "../ui/ConnectWalletButton";
 
 export default function EmptyState() {
   return (
