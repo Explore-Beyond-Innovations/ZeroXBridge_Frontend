@@ -37,8 +37,6 @@ export const WalletCard = () => {
           <PlusIcon /> Add {isConnected ? "another" : ""} wallet
         </button>
       </div>
-
-      <ConnectWalletModal />
     </>
   );
 };
