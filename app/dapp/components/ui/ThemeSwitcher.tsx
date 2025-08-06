@@ -1,5 +1,5 @@
 "use client";
-import { useThemeContext } from "@/app/hooks/context/theme";
+import { useThemeContext } from "@/app/context/theme-provider";
 
 import MoonIcon from "@/svg/MoonIcon";
 import SunIcon from "@/svg/SunIcon";
@@ -9,8 +9,7 @@ function ThemeSwitcher() {
   return (
     <div
       onClick={toggleTheme}
-      className="relative flex h-10 w-[80px] cursor-pointer items-center gap-x-1 rounded-full bg-toggle-bg p-[3px] transition-all duration-300"
-    >
+      className="relative flex h-10 w-[80px] cursor-pointer items-center gap-x-1 rounded-full bg-toggle-bg p-[3px] transition-all duration-300">
       <div
         className={`absolute left-[3px] top-1/2 h-[calc(100%-4px)] w-[calc(50%-4px)] -translate-y-1/2 rounded-full bg-toggle-slider-bg border-[1px] border-toggle-slider-border transition-all duration-200 ease-in-out ${
           !isDark ? "translate-x-0" : "translate-x-[calc(100%+3px)]"
@@ -21,8 +20,7 @@ function ThemeSwitcher() {
           !isDark
             ? "text-theme-icon-fill-active"
             : "text-theme-icon-fill-not-active"
-        }`}
-      >
+        }`}>
         <SunIcon />
       </span>
       <span
@@ -30,8 +28,7 @@ function ThemeSwitcher() {
           isDark
             ? "text-theme-icon-fill-active"
             : "text-theme-icon-fill-not-active"
-        }`}
-      >
+        }`}>
         <MoonIcon />
       </span>
     </div>

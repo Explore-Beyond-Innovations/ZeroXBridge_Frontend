@@ -36,7 +36,7 @@ export const ConnectWalletButton = ({
   isConnected = false,
   walletAddress = null,
   error = null,
-  showBrokenLink
+  showBrokenLink,
 }: ConnectWalletButtonProps) => {
   const { isDark } = useThemeContext();
 
@@ -59,7 +59,7 @@ export const ConnectWalletButton = ({
     if (full) {
       return "py-4 rounded-[8px]";
     }
-    return "py-[8px] rounded-[8px]";
+    return "py-2 rounded-[8px]";
   };
 
   const baseClasses = `flex items-center justify-center px-3 ${getPaddingAndRoundness()} text-primary-text border border-wallet-border transition-all duration-200 hover:opacity-80 active:opacity-60 ${

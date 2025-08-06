@@ -209,9 +209,8 @@ export default function ClaimBurnPage() {
 
                 {!isConnected ? (
                   <ConnectWalletButton
-                    full
-                    className="font-light"
                     action={openWalletModal}
+                    className="w-full rounded-[12px] font-light"
                   />
                 ) : (
                   <button

@@ -24,7 +24,7 @@ export default function SwapPage() {
       ).toFixed(2)
     : "";
 
-  const { isConnected } = useWallet();
+  const { isConnected, openWalletModal } = useWallet();
 
   function handleToggle() {
     const temp = fromToken;
@@ -36,7 +36,7 @@ export default function SwapPage() {
   }
 
   return (
-    <div className="w-full flex justify-center">
+    <div className="w-full pt-20 flex justify-center">
       <div
         className="w-full lg:w-[440px] h-fit p-[1.11px] rounded-[18px] overflow-hidden"
         style={{
@@ -120,7 +120,10 @@ export default function SwapPage() {
                 Swap
               </button>
             ) : (
-              <ConnectWalletButton className="w-full" />
+              <ConnectWalletButton
+                className="w-full rounded-[12px] font-light"
+                action={openWalletModal}
+              />
             )}
           </div>
         </div>

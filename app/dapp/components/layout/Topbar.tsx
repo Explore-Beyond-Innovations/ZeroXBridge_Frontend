@@ -32,7 +32,7 @@ function Topbar({
           action={openWalletModal}
           isConnected={isWalletConnected}
           showBrokenLink
-          walletAddress={shortenAddress(walletAddress as string)}
+          walletAddress={shortenAddress(walletAddress as string) ?? "0x0fq0...6vfa"}
         />
       </div>
     </div>
