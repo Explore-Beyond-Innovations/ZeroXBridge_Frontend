@@ -255,3 +255,13 @@ select:disabled {
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .text-logo {
+    color: var(--color-logo);
+    font-family: var(--font-inter);
+    font-weight: 600;
+    font-size: 1.25rem; 
+    line-height: 1.75rem;
+  }
+}

@@ -3,12 +3,20 @@
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 import { Lock } from "lucide-react";
 
+// const assetData = [
+//   { name: 'USDT', value: 3193.21, percentage: 55.4, color: '#2F80ED', price: 1.00 },
+//   { name: 'ETH', value: 2931.49, percentage: 21.7, color: '#27AE60', price: 3245.67 },
+//   { name: 'SOL', value: 938.84, percentage: 19.3, color: '#F2994A', price: 98.45 },
+//   { name: 'STRK', value: 411.32, percentage: 14.1, color: '#EB5757', price: 1.23 },
+//   { name: 'FTM', value: 221.32, percentage: 9.55, color: '#9B51E0', price: 0.45 }
+// ];
+
 const assetData = [
-  { name: 'USDT', value: 3193.21, percentage: 55.4, color: '#2F80ED', price: 1.00 },
+{ name: 'USDT', value: 3193.21, percentage: 45.4, color: '#2F80ED', price: 1.00 },
   { name: 'ETH', value: 2931.49, percentage: 21.7, color: '#27AE60', price: 3245.67 },
-  { name: 'SOL', value: 938.84, percentage: 19.3, color: '#F2994A', price: 98.45 },
-  { name: 'STRK', value: 411.32, percentage: 14.1, color: '#EB5757', price: 1.23 },
-  { name: 'FTM', value: 221.32, percentage: 9.55, color: '#9B51E0', price: 0.45 }
+ { name: 'SOL', value: 938.84, percentage: 19.3, color: '#F2994A', price: 98.45 },
+  { name: 'STRK', value: 411.32, percentage: 8.1, color: '#EB5757', price: 1.23 },
+{ name: 'FTM', value: 221.32, percentage: 5.5, color: '#9B51E0', price: 0.45 }
 ];
 
 export default function AssetPieChart() {

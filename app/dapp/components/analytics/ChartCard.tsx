@@ -7,6 +7,8 @@ interface ChartCardProps {
   selectedChart: "tvl" | "volume" | "price"
   onChartChange: (chart: "tvl" | "volume" | "price") => void
   theme: string 
+   currentPrice?: string;
+  priceChange?: string;
 }
 
 // Small logo component specifically for ChartCard
@@ -91,7 +93,7 @@ const chartConfig = {
   },
 }
 
-export default function ChartCard({ selectedChart, onChartChange, theme }: ChartCardProps) {
+export default function ChartCard({ selectedChart, onChartChange, theme, currentPrice, priceChange }: ChartCardProps) {
   const lineColor = theme === 'dark' ? '#fff' : '#000';
   console.log('ChartCard theme:', theme, 'lineColor:', lineColor);
   const axisAndGridColor = '#888';
@@ -110,8 +112,8 @@ export default function ChartCard({ selectedChart, onChartChange, theme }: Chart
             <h3 className="text-base sm:text-lg font-semibold text-primary-text">ZeroXBridge (xZB)</h3>
           </div>
           <div className="flex items-center space-x-2">
-            <p className="text-lg sm:text-xl font-bold text-primary-text">$1.1392</p>
-            <span className="text-xs sm:text-sm text-green-600 font-medium">+2.38%</span>
+            <p className="text-lg sm:text-xl font-bold text-primary-text">{currentPrice || "$1.1392"}</p>
+            <span className="text-xs sm:text-sm text-green-600 font-medium">{priceChange || "+2.38%"}</span>
           </div>
         </div>
         <div className="flex space-x-1 bg-muted rounded-lg p-1">

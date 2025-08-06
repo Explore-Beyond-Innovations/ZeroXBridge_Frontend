@@ -61,7 +61,7 @@ function SwapFromInput({
         <input
           placeholder="0.00"
           disabled={!isConnected}
-          className="text-[32px]/[106%] text-[#1E1E1E]dark:text-[#F4F4F4] disabled:text-[#DDDDDD] dark:disabled:text-[#353535] font-light -tracking-[4%] font-mono w-full focus:outline-none"
+          className="text-[32px]/[106%] text-[#1E1E1E] dark:text-[#F4F4F4] disabled:text-[#DDDDDD] dark:disabled:text-[#353535] font-light -tracking-[4%] font-mono w-full focus:outline-none"
           value={!isConnected || !amount ? "" : amount}
           onChange={(e) => {
             const value = e.target.value;
@@ -74,6 +74,7 @@ function SwapFromInput({
         <button
           className="py-[7px] px-[13.4px] bg-[#F4F4F4] dark:bg-[#232323] border-[1.11px] dark:border-none border-[#EEEEEE] rounded-full text-[#737373] dark:text-[#F5F5F5] disabled:text-[#737373] disabled:opacity-45 leading-[112%] whitespace-nowrap"
           disabled={!isConnected}
+           onClick={() => balance && setAmount(balance)}
         >
           Max
         </button>
