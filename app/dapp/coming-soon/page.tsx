@@ -77,7 +77,7 @@ const ComingSoon = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <main className="flex-1 p-6">
+      <main className="flex flex-1 w-full items-center justify-center p-6 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[20px]">
           {data.map((item) => (
             <div
