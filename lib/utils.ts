@@ -31,13 +31,28 @@ export const shortenAddress = (address: string) => {
 export const getInjectedStarknetWallets = () => {
   if (typeof window === "undefined") return [];
 
-  if ((window as any).starknet?.providers) {
-    return (window as any).starknet.providers;
+  const wallets = [];
+
+  if ((window as any).starknet_braavos) {
+    wallets.push({
+      provider: (window as any).starknet_braavos,
+    });
   }
 
-  if ((window as any).starknet) {
-    return [(window as any).starknet];
+  if ((window as any).starknet_argentX) {
+    wallets.push({
+      provider: (window as any).starknet_argentX,
+    });
   }
 
-  return [];
+  if ((window as any).starknet && wallets.length === 0) {
+    wallets.push({
+      id: (window as any).starknet.id || "unknown",
+      name: (window as any).starknet.name || "Unknown Wallet",
+      icon: "/wallet-logos/ready.svg",
+      provider: (window as any).starknet,
+    });
+  }
+
+  return wallets;
 };

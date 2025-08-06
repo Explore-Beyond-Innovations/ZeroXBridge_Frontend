@@ -3,11 +3,18 @@ import { DialogBase } from "../../components/ui/Dailog";
 import Image from "next/image";
 import { ConnectWalletButton } from "../../components/ui/ConnectWalletButton";
 import { ConnectedWallet } from "./connected-wallet";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getInjectedStarknetWallets, shortenAddress } from "@/lib/utils";
 import { toast } from "sonner";
 import { Network } from "@/app/store/wallet";
-import { StarknetProviders } from "@/lib/connectors";
+import { StarknetConnectorId, StarknetProviders } from "@/lib/connectors";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../../components/ui/dropdown-menu";
+import { ChevronDownIcon } from "lucide-react";
 
 interface WalletProps {
   walletName: string;
@@ -38,6 +45,10 @@ const WalletItem = ({
 }: WalletProps) => {
   const [state, setState] = useState<State>("idle");
   const { connectEthWallet, connectStrkWallet, error } = useWallet();
+  // the provider type is quite verbose, that's why i'm using a shallow cast
+  const [walletProviders, setWalletProviders] = useState<StarknetProviders[]>(
+    [],
+  );
 
   const handleConnect = useCallback(async () => {
     try {
@@ -47,29 +58,32 @@ const WalletItem = ({
         await connectEthWallet("injected");
       } else if (network === "STRK") {
         const providers = getInjectedStarknetWallets();
+        setWalletProviders(providers.map((p) => p.provider));
+
         if (providers.length === 0) {
-          console.error("No Starknet wallets found");
-          toast.error("No Starknet wallets found")
+          console.error("No StarkNet wallets found");
+          toast.error("No StarkNet wallets found");
           return;
         }
 
         if (providers.length === 1) {
-          await connectStrkWallet(providers?.[0]?.id);
-        } else {
-          const selectedProvider = providers.find((p: StarknetProviders) => p.id === "braavos");
-          // this would basically trail off for now, since i'm not including any state to
-          // manage the selection UI.
-          // it may come up later when there's a UI for that, and considering we can agree people would have multiple
-          // wallet extensions in their browser.
-          await connectStrkWallet(selectedProvider.id);
+          await connectStrkWallet(providers[0].provider.id);
         }
       }
     } catch (err) {
       console.error("Connection error:", err);
+      toast.error("Failed to connect wallet");
     } finally {
       setState("idle");
     }
   }, [network, connectEthWallet, connectStrkWallet]);
+
+  useEffect(() => {
+    if (network === "STRK") {
+      const providers = getInjectedStarknetWallets();
+      setWalletProviders(providers.map((p) => p.provider));
+    }
+  }, [network]);
 
   return (
     <div className="bg-[#F5F5F5] dark:bg-card rounded-[8px] w-full flex gap-x-4 p-4 items-center border border-[#EFEFEF] dark:border-[#202020]">
@@ -110,6 +124,45 @@ const WalletItem = ({
             onDisconnect={onDisconnect}
             walletPlatformLogo={walletPlatformLogo ?? "/ready-wallet.svg"}
           />
+        ) : walletProviders.length > 1 ? (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button
+                className="flex items-center gap-x-2  w-full justify-between text-xs text-primary-text bg-white dark:bg-[var(--btn-bg)] border border-wallet-border rounded px-2 py-1 hover:opacity-80"
+                onClick={(e) => e.stopPropagation()}
+              >
+                Select Wallet
+                <ChevronDownIcon />
+              </button>
+            </DropdownMenuTrigger>
+
+            <DropdownMenuContent
+              side="bottom"
+              align="start"
+              className="w-40 lg:w-64 bg-card border-card-border border-[0.5px] mt-2"
+            >
+              {walletProviders.map((provider) => (
+                <DropdownMenuItem
+                  key={provider.id}
+                  className="flex items-center gap-x-2 px-2 py-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-[#2a2a2a] rounded text-sm"
+                  onSelect={async () => {
+                    setState("connecting");
+                    await connectStrkWallet(provider?.id as StarknetConnectorId);
+                    setState("idle");
+                  }}
+                >
+                  <Image
+                    src={provider.icon}
+                    alt={provider.name}
+                    width={16}
+                    height={16}
+                    className="rounded"
+                  />
+                  {provider.name}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
         ) : (
           <ConnectWalletButton
             full
