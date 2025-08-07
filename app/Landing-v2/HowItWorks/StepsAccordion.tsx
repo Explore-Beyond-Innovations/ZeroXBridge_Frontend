@@ -59,7 +59,7 @@ const StepsAccordion = () => {
   return (
     <div className="flex flex-col-reverse w-full h-full gap-8 lg:grid lg:grid-cols-2">
       {/* Left side - Steps */}
-      <div className="flex-1 space-y-4 h-[95%] 2xl:h-[855.28px] flex flex-col 2xl:mt-8 ">
+      <div className="flex-1 md:space-y-4 h-[95%] 2xl:h-[855.28px] flex flex-col 2xl:mt-8 ">
         {steps.map((step) => (
           <div
             key={step.id}
@@ -69,7 +69,7 @@ const StepsAccordion = () => {
           >
             <button
               onClick={() => toggleStep(step.id)}
-              className={`w-full border-b border-[#1D1D1E] px-1 pt-6 pb-3 2xl:pb-6 text-left transition-colors duration-200 flex items-center justify-between flex-shrink-0 ${step.id === 1 && "border-t border-[#1D1D1E]"} `}
+              className={`w-full border-b border-[#1D1D1E] px-1 pt-4 md:pt-6 pb-4 md:pb-3 2xl:pb-6 text-left transition-colors duration-200 flex items-center justify-between flex-shrink-0 ${step.id === 1 && "border-t border-[#1D1D1E]"} `}
             >
               <div className="flex items-center space-x-4">
                 <div
@@ -84,7 +84,7 @@ const StepsAccordion = () => {
                 >
                   <AutoFadeTextWrapper className={`${
                     step.id === openStep ? "text-white" : "text-[#626263]"
-                  }  2xl:text-[40px]`}>{step.title}</AutoFadeTextWrapper>
+                  } text-[16px]  2xl:text-[40px]`}>{step.title}</AutoFadeTextWrapper>
                 </span>
               </div>
             </button>

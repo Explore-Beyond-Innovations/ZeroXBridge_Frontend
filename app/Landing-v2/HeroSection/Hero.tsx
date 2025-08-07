@@ -10,7 +10,7 @@ const Hero = () => {
       <div className="relative   z-10">
         <Navbar />
         <div className="flex flex-col  gap-4 mt-[clamp(100px,10dvh,150px)] text-[36px] 2xl:mt-[15vh] max-w-[85%]  md:max-w-[632px] mx-auto 2xl:max-w-[500px] 3xl:max-w-[650px]  4xl:max-w-[850px]">
-          <h1 className="">
+          <h1 className="leading-tight md:leading-normal">
             Secure <GradientText>Cross-Chain</GradientText> Liquidity with
             Zero-Knowledge Proofs
           </h1>

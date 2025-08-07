@@ -175,10 +175,10 @@ function AnimatedCard({
               : ""
           }`}
         >
-          <h2 className="text-[19.78px] 2xl:text-[24px] font-[400] ">
+          <h2 className="text-[22px] 2xl:text-[24px] font-[400] ">
             {card.title}
           </h2>
-          <p className="text-[12px] lg:text-[14px] 2xl:text-[16px] font-[300] ">
+          <p className="text-[14px] 2xl:text-[16px] font-[300] ">
             {card.description}
           </p>
         </div>

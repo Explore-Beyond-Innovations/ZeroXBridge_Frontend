@@ -161,14 +161,14 @@ const Footer = () => {
             </p>
           </motion.div>
 
-          <form onSubmit={handleNewsletterSubmit} className="w-fit mx-auto">
+          <form onSubmit={handleNewsletterSubmit} className="w-full md:w-fit mx-auto">
             <div className="flex flex-col sm:flex-row gap-1">
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter e-mail address"
-                className="flex-1 px-4 py-3 bg-[#1A1A1A] w-[400px] h-[48px] 2xl:w-[992px] 2xl:h-[78px]  rounded-[12px] 2xl:rounded-[19.53px] text-white placeholder-[#97A1A4] focus:outline-none transition-colors"
+                className="flex-1 px-4 py-3 bg-[#1A1A1A] w-full md:w-[400px] h-[48px] 2xl:w-[992px] 2xl:h-[78px]  rounded-[12px] 2xl:rounded-[19.53px] text-white placeholder-[#97A1A4] focus:outline-none transition-colors"
                 required
               />
               <motion.button
