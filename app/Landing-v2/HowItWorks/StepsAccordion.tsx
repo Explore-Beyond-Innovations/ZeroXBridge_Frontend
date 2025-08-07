@@ -95,7 +95,7 @@ const StepsAccordion = () => {
                   : "max-h-0 h-0 opacity-0"
               }`}
             >
-              <div className="px-6 py-4 text-sm ">
+              <div className="px-6 md:py-4 text-sm ">
                 <AutoFadeTextWrapper className="2xl:text-[24px]">{step.description}</AutoFadeTextWrapper>
               </div>
             </div>
