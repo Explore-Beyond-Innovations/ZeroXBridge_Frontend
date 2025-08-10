@@ -50,24 +50,16 @@ export const ConnectWalletButton = ({
     [isConnected, wallet?.isConnected]
   );
   const resolvedWalletAddress = useMemo(
-    () =>
-      walletAddress ??
-      (wallet as any)?.walletAddress ??
-      (wallet as any)?.address ??
-      null,
-    [walletAddress, wallet]
+    () => walletAddress ?? wallet?.ethAddress ?? wallet?.strkAddress ?? null,
+    [walletAddress, wallet?.ethAddress, wallet?.strkAddress]
   );
   const resolvedIsLoading = useMemo(
-    () =>
-      isLoading ??
-      (wallet as any)?.isConnecting ??
-      (wallet as any)?.isLoading ??
-      false,
-    [isLoading, wallet]
+    () => isLoading ?? wallet?.ethConnecting ?? wallet?.strkConnecting ?? false,
+    [isLoading, wallet?.ethConnecting, wallet?.strkConnecting]
   );
   const resolvedError = useMemo(
-    () => error ?? (wallet as any)?.error ?? null,
-    [error, wallet]
+    () => error ?? wallet?.error ?? null,
+    [error, wallet?.error]
   );
 
   useEffect(() => {

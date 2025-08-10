@@ -4,7 +4,7 @@ import { Globe } from "lucide-react";
 import Check from "@/public/check.png";
 import CheckDark from "@/public/check-dark.png";
 import Image from "next/image";
-import { Dialog, DialogContent } from "../../components/ui/dialog";
+import { DialogContent } from "../../components/ui/dialog";
 import { getFormattedDate } from "@/lib/utils";
 import { useThemeContext } from "@/app/hooks/context";
 import { DialogBase } from "../../components/ui/Dailog";

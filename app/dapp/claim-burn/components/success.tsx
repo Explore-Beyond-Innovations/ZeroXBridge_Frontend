@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { DialogBase } from "../../components/ui/Dailog";
 import { Geist_Mono, Inter } from "next/font/google";
-import { Close } from "@/svg/CloseIcon";
 import { GlobeIcon } from "@/svg/GlobeIcon";
 import { GradientWrapperPrimary } from "../../components/ui/Gradients";
 import { useThemeContext } from "@/app/hooks/context";

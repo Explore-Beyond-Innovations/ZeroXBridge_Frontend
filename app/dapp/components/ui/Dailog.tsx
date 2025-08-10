@@ -2,7 +2,6 @@
 
 import * as Dialog from "@radix-ui/react-dialog";
 import { ReactNode, useMemo } from "react";
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { useThemeContext } from "@/app/hooks/context";
 import { Close } from "@/svg/CloseIcon";
 

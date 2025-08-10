@@ -11,8 +11,8 @@ const ConnectionContext = createContext<ConnectionContextType | undefined>(undef
 interface ConnectionProviderProps {
   children: ReactNode;
 }
-
-export const ConnectionProvider = ({ children }: { children: ReactNode }) => {
+ 
+export const ConnectionProvider = ({ children }: ConnectionProviderProps) => {
 const [isConnected, setIsConnected] = useState(false);
  const [walletAddress, setWalletAddress] = useState<string | null>(null);
 

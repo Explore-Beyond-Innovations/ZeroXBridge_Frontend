@@ -1,4 +1,5 @@
 import { clsx, type ClassValue } from "clsx";
+import { StarknetProviders, starknetConnectorMeta } from "@/lib/connectors";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -28,29 +29,40 @@ export const shortenAddress = (address: string) => {
   return shortened;
 };
 
-export const getInjectedStarknetWallets = () => {
+export const getInjectedStarknetWallets = (): StarknetProviders[] => {
   if (typeof window === "undefined") return [];
 
-  const wallets = [];
+  type StarknetWindow = {
+    starknet?: unknown;
+    starknet_braavos?: unknown;
+    starknet_argentX?: unknown;
+  };
+  const win = window as unknown as StarknetWindow;
 
-  if ((window as any).starknet_braavos) {
+  const wallets: StarknetProviders[] = [];
+
+  if (win.starknet_braavos) {
     wallets.push({
-      provider: (window as any).starknet_braavos,
+      id: starknetConnectorMeta.braavos.id,
+      name: starknetConnectorMeta.braavos.name,
+      icon: starknetConnectorMeta.braavos.icon,
     });
   }
 
-  if ((window as any).starknet_argentX) {
+  if (win.starknet_argentX) {
     wallets.push({
-      provider: (window as any).starknet_argentX,
+      id: starknetConnectorMeta.argentX.id,
+      name: starknetConnectorMeta.argentX.name,
+      icon: starknetConnectorMeta.argentX.icon,
     });
   }
 
-  if ((window as any).starknet && wallets.length === 0) {
+  // Fallback
+  if (win.starknet && wallets.length === 0) {
     wallets.push({
-      id: (window as any).starknet.id || "unknown",
-      name: (window as any).starknet.name || "Unknown Wallet",
-      icon: "/wallet-logos/ready.svg",
-      provider: (window as any).starknet,
+      id: starknetConnectorMeta.argentX.id,
+      name: starknetConnectorMeta.argentX.name,
+      icon: starknetConnectorMeta.argentX.icon,
     });
   }
 

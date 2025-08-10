@@ -58,7 +58,7 @@ const WalletItem = ({
         await connectEthWallet("injected");
       } else if (network === "STRK") {
         const providers = getInjectedStarknetWallets();
-        setWalletProviders(providers.map((p) => p.provider));
+        setWalletProviders(providers);
 
         if (providers.length === 0) {
           console.error("No StarkNet wallets found");
@@ -67,7 +67,7 @@ const WalletItem = ({
         }
 
         if (providers.length === 1) {
-          await connectStrkWallet(providers[0].provider.id);
+          await connectStrkWallet(providers[0].id as StarknetConnectorId);
         }
       }
     } catch (err) {
@@ -81,7 +81,7 @@ const WalletItem = ({
   useEffect(() => {
     if (network === "STRK") {
       const providers = getInjectedStarknetWallets();
-      setWalletProviders(providers.map((p) => p.provider));
+      setWalletProviders(providers);
     }
   }, [network]);
 

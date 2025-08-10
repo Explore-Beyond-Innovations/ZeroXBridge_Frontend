@@ -1,7 +1,6 @@
 "use client"
 
 import { useWallet } from "@/app/hooks";
-import { ConnectWalletModal } from "./connect-wallet";
 import { PlusIcon } from "lucide-react";
 import { Geist_Mono } from "next/font/google";
 import { useRouter } from "next/navigation";

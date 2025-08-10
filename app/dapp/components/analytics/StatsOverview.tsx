@@ -9,10 +9,9 @@ interface Stat {
 
 interface StatsOverviewProps {
   stats: Stat[];
-  isLoading?: boolean;
 }
 
-export default function StatsOverview({ stats, isLoading }: StatsOverviewProps) {
+export default function StatsOverview({ stats }: StatsOverviewProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
      {stats.map((stat) => (
