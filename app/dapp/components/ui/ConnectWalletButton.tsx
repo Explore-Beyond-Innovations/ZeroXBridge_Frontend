@@ -1,10 +1,13 @@
-import { BrokenLink } from "@/svg/BrokenLink";
-import { Spinner } from "@/svg/Spinner";
-import WalletIcon from "@/svg/WalletIcon";
-import { GradientDirection, GradientWrapperPrimary } from "./Gradients";
-import { useThemeContext } from "@/app/hooks/context";
-import { useEffect } from "react";
-import { toast } from "sonner";
+'use client';
+
+import { BrokenLink } from '@/svg/BrokenLink';
+import { Spinner } from '@/svg/Spinner';
+import WalletIcon from '@/svg/WalletIcon';
+import { GradientDirection, GradientWrapperPrimary } from './Gradients';
+import { useThemeContext } from '@/app/hooks/context';
+import { useEffect, useMemo } from 'react';
+import { toast } from 'sonner';
+import { useWallet } from '@/app/hooks/useWallet';
 
 interface ConnectWalletButtonProps {
   full?: boolean;
@@ -27,68 +30,88 @@ interface ConnectWalletButtonProps {
 
 export const ConnectWalletButton = ({
   full,
-  className = "",
+  className = '',
   withGradient = true,
   gradientDirection,
   thin = false,
   action,
-  isLoading = false,
-  isConnected = false,
-  walletAddress = null,
-  error = null,
+  isLoading,
+  isConnected,
+  walletAddress,
+  error,
   showBrokenLink,
 }: ConnectWalletButtonProps) => {
   const { isDark } = useThemeContext();
 
+  // Pull defaults from the wallet hook, but allow props to override
+  const wallet = useWallet(); // { isConnected, openWalletModal, ... }
+  const resolvedIsConnected = useMemo(
+    () => isConnected ?? wallet?.isConnected ?? false,
+    [isConnected, wallet?.isConnected]
+  );
+  const resolvedWalletAddress = useMemo(
+    () =>
+      walletAddress ??
+      (wallet as any)?.walletAddress ??
+      (wallet as any)?.address ??
+      null,
+    [walletAddress, wallet]
+  );
+  const resolvedIsLoading = useMemo(
+    () =>
+      isLoading ??
+      (wallet as any)?.isConnecting ??
+      (wallet as any)?.isLoading ??
+      false,
+    [isLoading, wallet]
+  );
+  const resolvedError = useMemo(
+    () => error ?? (wallet as any)?.error ?? null,
+    [error, wallet]
+  );
+
   useEffect(() => {
-    if (error) {
-      toast.error(`Connection error: ${error}`);
-    }
-  }, [error]);
-
-
+    if (resolvedError) toast.error(`Connection error: ${resolvedError}`);
+  }, [resolvedError]);
 
   const handleClick = () => {
-    if (action) {
-      action();
-    }
+    // Use provided action if any; otherwise open the wallet modal from the hook
+    const fallback = wallet?.openWalletModal;
+    const fn = action ?? fallback;
+    if (fn) fn();
   };
 
   const getPaddingAndRoundness = () => {
-    if (thin) {
-      return "px-3 py-1 rounded-[6px]";
-    }
-    if (full) {
-      return "py-4 rounded-[8px]";
-    }
-    return "py-2 rounded-[8px]";
+    if (thin) return 'px-3 py-1 rounded-[6px]';
+    if (full) return 'py-4 rounded-[8px]';
+    return 'py-2 rounded-[8px]';
   };
 
   const baseClasses = `flex items-center justify-center px-3 ${getPaddingAndRoundness()} text-primary-text border border-wallet-border transition-all duration-200 hover:opacity-80 active:opacity-60 ${
-    full ? "w-full" : ""
+    full ? 'w-full' : ''
   } ${className}`;
 
   const getButtonContent = () => {
-    if (isLoading) {
+    if (resolvedIsLoading) {
       return (
-        <div className="flex items-center justify-center gap-x-2">
+        <div className='flex items-center justify-center gap-x-2'>
           <Spinner />
-          <span className="inline-block">Connecting...</span>
+          <span className='inline-block'>Connecting...</span>
         </div>
       );
     }
 
-    if (isConnected) {
+    if (resolvedIsConnected) {
       return (
-        <div className="flex items-center justify-between w-full">
-          <div className="flex items-center gap-x-2">
+        <div className='flex items-center justify-between w-full'>
+          <div className='flex items-center gap-x-2'>
             <WalletIcon />
-            <span className="inline-block text-sm font-normal">
-              {walletAddress}
+            <span className='inline-block text-sm font-normal'>
+              {resolvedWalletAddress}
             </span>
           </div>
           {showBrokenLink && (
-            <div className="border-l border-wallet-border pl-2 ml-2">
+            <div className='border-l border-wallet-border pl-2 ml-2'>
               <BrokenLink />
             </div>
           )}
@@ -97,9 +120,9 @@ export const ConnectWalletButton = ({
     }
 
     return (
-      <div className="flex items-center justify-center gap-x-2">
+      <div className='flex items-center justify-center gap-x-2'>
         <WalletIcon />
-        <span className="inline-block">Connect Wallet</span>
+        <span className='inline-block'>Connect Wallet</span>
       </div>
     );
   };
@@ -107,13 +130,18 @@ export const ConnectWalletButton = ({
   const ButtonContent = (
     <button
       className={`${baseClasses} ${
-        isConnected ? "justify-between" : "justify-center gap-x-2"
-      } ${isDark ? "bg-[var(--btn-bg)]" : "bg-white"} ${
-        isLoading ? "cursor-not-allowed opacity-75" : "cursor-pointer"
-      } ${error ? "border-red-300" : ""}`}
+        resolvedIsConnected ? 'justify-between' : 'justify-center gap-x-2'
+      } ${isDark ? 'bg-[var(--btn-bg)]' : 'bg-white'} ${
+        resolvedIsLoading ? 'cursor-not-allowed opacity-75' : 'cursor-pointer'
+      } ${resolvedError ? 'border-red-300' : ''}`}
       onClick={handleClick}
-      disabled={isLoading}
-      title={isConnected ? "Manage wallet connections" : "Connect your wallet"}
+      disabled={resolvedIsLoading}
+      title={
+        resolvedIsConnected
+          ? 'Manage wallet connections'
+          : 'Connect your wallet'
+      }
+      type='button'
     >
       {getButtonContent()}
     </button>
@@ -121,10 +149,10 @@ export const ConnectWalletButton = ({
 
   return withGradient ? (
     <GradientWrapperPrimary
-      gradientDirection={gradientDirection || "to-top"}
-      borderRadius="rounded-xl"
-      padding="p-[1px]"
-      className={full ? "w-full" : ""}
+      gradientDirection={gradientDirection || 'to-top'}
+      borderRadius='rounded-xl'
+      padding='p-[1px]'
+      className={full ? 'w-full' : ''}
     >
       {ButtonContent}
     </GradientWrapperPrimary>

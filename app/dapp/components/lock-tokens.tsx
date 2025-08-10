@@ -1,14 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { Menu, Info, Wallet } from 'lucide-react';
+import { Menu, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
 import { TokenSelectDropdown } from '@/app/dapp/components/token-select-dropdown';
 import { SuccessModal } from '@/app/dapp/components/success-modal';
 import type { Token, LockTransaction } from '@/types/token';
-import { useConnection } from '@/app/context/ConnectionContext';
 import { ConnectWalletButton } from './ui/ConnectWalletButton';
 import { useWallet } from '@/app/hooks';
 
