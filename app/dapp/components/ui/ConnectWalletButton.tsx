@@ -74,6 +74,8 @@ export const ConnectWalletButton = ({
     if (resolvedError) toast.error(`Connection error: ${resolvedError}`);
   }, [resolvedError]);
 
+
+
   const handleClick = () => {
     // Use provided action if any; otherwise open the wallet modal from the hook
     const fallback = wallet?.openWalletModal;
