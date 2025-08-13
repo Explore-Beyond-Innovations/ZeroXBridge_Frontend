@@ -9,12 +9,14 @@ import {
 import Image from "next/image";
 import { useThemeContext } from "@/app/hooks/context";
 
-interface Token {
-  logo: string;
-  name: string;
-  symbol: string;
-  currentPrice: number;
-}
+// interface Token {
+//   logo: string;
+//   name: string;
+//   symbol: string;
+//   currentPrice: number;
+// }
+
+import { Token } from "@/types/tokens";
 
 interface TokenSelectDropdownProps {
   onTokenSelect: (token: Token) => void;

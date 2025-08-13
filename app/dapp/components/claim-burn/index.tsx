@@ -2,10 +2,10 @@
 
 import { useWallet } from "@/app/hooks/useWallet";
 import { useMemo, useState } from "react";
-import { SuccessModal } from "./success";
+import { SuccessModal } from "../../../dapp/claim-burn/components/success";
 import { ConnectWalletButton } from "../ui/ConnectWalletButton";
 import Image from "next/image";
-import { ClaimBurnTab } from "./tab";
+import { ClaimBurnTab } from "../../../dapp/claim-burn/components/tab";
 import { Geist_Mono, Inter } from "next/font/google";
 import { Hamburger } from "@/svg/Hamburger";
 import { Info } from "@/svg/Info";

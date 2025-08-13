@@ -2,8 +2,8 @@
 
 import * as Dialog from "@radix-ui/react-dialog";
 import { ReactNode, useMemo } from "react";
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { useThemeContext } from "@/app/hooks/context";
+import { Close } from "@/svg/CloseIcon";
 
 interface DialogBaseProps {
   isOpen: boolean;
@@ -11,13 +11,16 @@ interface DialogBaseProps {
   children: ReactNode;
   size?: "sm" | "md" | "lg" | "xl";
   className?: string;
+  title?: string;
+  /* helps you decided whether to give the modal a close button or not */
+  addCloseBtn?: boolean;
 }
 
 const SIZE_MAP = {
-  sm: "max-w-sm min-w-[18rem] p-6",
-  md: "max-w-md min-w-[22rem] p-8",
-  lg: "max-w-lg min-w-[28rem] p-10",
-  xl: "max-w-xl min-w-[34rem] p-12",
+  sm: "max-w-sm min-w-[18rem]",
+  md: "max-w-md min-w-[22rem]",
+  lg: "max-w-lg min-w-[28rem]",
+  xl: "max-w-xl min-w-[34rem]",
 };
 
 export const DialogBase = ({
@@ -26,6 +29,8 @@ export const DialogBase = ({
   children,
   size = "md",
   className = "",
+  title,
+  addCloseBtn,
 }: DialogBaseProps) => {
   const { theme } = useThemeContext();
   const isDark = useMemo(() => theme === "dark", [theme]);
@@ -38,9 +43,21 @@ export const DialogBase = ({
         <Dialog.Content
           className={`fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 focus:outline-none rounded-2xl bg-background border border-primary-border ${SIZE_MAP[size]} ${className}`}
         >
-          <VisuallyHidden asChild>
-            <Dialog.Title />
-          </VisuallyHidden>
+          {addCloseBtn && (
+            <Dialog.Close asChild>
+              <button
+                onClick={onClose}
+                className={`absolute flex justify-center items-center border dark:border-[var(--close-btn-border)] border-[var(--wallet-border)] rounded-full h-8 w-8 top-2 right-2 text-2xl leading-none text-sidebar-text`}
+              >
+                <Close />
+              </button>
+            </Dialog.Close>
+          )}
+          {title && (
+            <Dialog.Title className="border-b border-[#F5F5F5] dark:border-[#444444] pb-3">
+              {title}
+            </Dialog.Title>
+          )}
           {children}
         </Dialog.Content>
       </Dialog.Portal>

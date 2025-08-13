@@ -2,109 +2,133 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 export interface WalletState {
-  isConnected: boolean;
-  address: string | null;
-  chainId: number | null;
-  isConnecting: boolean;
+  isWalletModalOpen: boolean;
+  ethAddress: string | null;
+  ethConnected: boolean;
+  ethConnecting: boolean;
+  ethChainId: number | null;
+  strkAddress: string | null;
+  strkConnected: boolean;
+  strkConnecting: boolean;
   error: string | null;
+
+  // we need these values to dynamically compute the logo/platforms
+  // being connected to, instead of passing static image values as props
+  strkPlatformName: string | null;
+  strkPlatformLogo: string | null;
+  ethPlatformName: string | null;
+  ethPlatformLogo: string | null;
 }
 
+export type Network = "ETH" | "STRK";
+
+type Wallet = {
+  network: Network;
+  platformName: string;
+  platformLogo: string;
+};
+
 export interface WalletActions {
-  connectWallet: () => Promise<void>;
-  disconnectWallet: () => void;
-  setAddress: (address: string | null) => void;
-  setChainId: (chainId: number | null) => void;
-  setConnecting: (isConnecting: boolean) => void;
+  openWalletModal: () => void;
+  closeWalletModal: () => void;
+  setEthWallet: (data: {
+    address: string | null;
+    connected: boolean;
+    connecting: boolean;
+    chainId: number | null;
+  }) => void;
+  setStrkWallet: (data: {
+    address: string | null;
+    connected: boolean;
+    connecting: boolean;
+  }) => void;
   setError: (error: string | null) => void;
   clearError: () => void;
+  resetWallet: (type: "ETH" | "STRK") => void;
+  setWalletPlatform: (data: Wallet) => void;
 }
 
 export type WalletStore = WalletState & WalletActions;
 
-const generateMockAddress = (): string => {
-  const chars = "0123456789abcdef";
-  let address = "0x";
-  for (let i = 0; i < 40; i++) {
-    address += chars[Math.floor(Math.random() * chars.length)];
-  }
-  return address;
-};
-
 export const useWalletStore = create<WalletStore>()(
   persist(
-    (set, get) => ({
-      isConnected: false,
-      address: null,
-      chainId: null,
-      isConnecting: false,
+    (set) => ({
+      isWalletModalOpen: false,
+      activeNetwork: null,
+      ethAddress: null,
+      ethConnected: false,
+      ethConnecting: false,
+      ethChainId: null,
+      strkAddress: null,
+      strkConnected: false,
+      strkConnecting: false,
       error: null,
+      strkPlatformLogo: null,
+      strkPlatformName: null,
+      ethPlatformLogo: null,
+      ethPlatformName: null,
 
-      connectWallet: async () => {
-        const { isConnected, isConnecting } = get();
-        if (isConnected || isConnecting) return;
+      openWalletModal: () => set({ isWalletModalOpen: true }),
+      closeWalletModal: () => set({ isWalletModalOpen: false }),
 
-        set({ isConnecting: true, error: null });
+      setEthWallet: (data) =>
+        set({
+          ethAddress: data.address,
+          ethConnected: data.connected,
+          ethConnecting: data.connecting,
+          ethChainId: data.chainId,
+        }),
 
-        try {
-          await new Promise((resolve) => setTimeout(resolve, 1000));
-          const mockAddress = generateMockAddress();
-          const mockChainId = 1;
+      setStrkWallet: (data) =>
+        set({
+          strkAddress: data.address,
+          strkConnected: data.connected,
+          strkConnecting: data.connecting,
+        }),
 
+      setWalletPlatform: (data) => {
+        if (data.network === "ETH") {
           set({
-            isConnected: true,
-            address: mockAddress,
-            chainId: mockChainId,
-            isConnecting: false,
-            error: null,
+            ethPlatformLogo: data.platformLogo,
+            ethPlatformName: data.platformName,
           });
-        } catch (error) {
+        } else {
           set({
-            isConnecting: false,
-            error:
-              error instanceof Error
-                ? error.message
-                : "Failed to connect wallet",
+            strkPlatformLogo: data.platformLogo,
+            strkPlatformName: data.platformName,
           });
         }
       },
 
-      disconnectWallet: () => {
-        set({
-          isConnected: false,
-          address: null,
-          chainId: null,
-          isConnecting: false,
-          error: null,
-        });
-      },
-
-      setAddress: (address) => set({ address }),
-      setChainId: (chainId) => set({ chainId }),
-      setConnecting: (isConnecting) => set({ isConnecting }),
       setError: (error) => set({ error }),
       clearError: () => set({ error: null }),
+
+      resetWallet: (type) => {
+        if (type === "ETH") {
+          set({
+            ethAddress: null,
+            ethConnected: false,
+            ethConnecting: false,
+            ethChainId: null,
+          });
+        } else {
+          set({
+            strkAddress: null,
+            strkConnected: false,
+            strkConnecting: false,
+          });
+        }
+      },
     }),
     {
       name: "wallet-storage", // we need this for localStorage persistence
       partialize: (state) => ({
-        isConnected: state.isConnected,
-        address: state.address,
-        chainId: state.chainId,
+        ethAddress: state.ethAddress,
+        ethConnected: state.ethConnected,
+        ethChainId: state.ethChainId,
+        strkAddress: state.strkAddress,
+        strkConnected: state.strkConnected,
       }),
     },
   ),
 );
-
-export const selectWalletConnection = (state: WalletStore) => ({
-  isConnected: state.isConnected,
-  isConnecting: state.isConnecting,
-});
-
-export const selectWalletAddress = (state: WalletStore) => ({
-  address: state.address,
-  shortAddress: state.address
-    ? `${state.address.slice(0, 4)}...${state.address.slice(-6)}`
-    : null,
-});
-
-export const selectWalletError = (state: WalletStore) => state.error;

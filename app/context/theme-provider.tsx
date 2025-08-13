@@ -17,9 +17,16 @@ export interface ThemeContextValues {
 }
 
 export const ThemeContext = createContext<ThemeContextValues | undefined>(
-  undefined,
+  undefined
 );
 
+export const useThemeContext = () => {
+  const context = useContext(ThemeContext);
+  if (!context)
+    throw new Error("useThemeContext must be used within a ThemeProvider");
+  return context;
+};
+  
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const [theme, setTheme] = useState<Theme>("light");
 
@@ -27,7 +34,9 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     const storedTheme = localStorage.getItem("theme") as Theme | null;
 
     const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)",
+
+      "(prefers-color-scheme: dark)"
+
     ).matches;
     const activeTheme = storedTheme || (prefersDark ? "dark" : "light");
 

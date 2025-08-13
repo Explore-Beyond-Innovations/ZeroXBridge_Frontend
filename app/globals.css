@@ -36,6 +36,7 @@
 
 :root {
   --logo: #2e2e2e;
+    --toast-text-color: #000000;
 
   --toggle-bg: #ededed;
   --toggle-slider-bg: #ffffff;
@@ -67,6 +68,9 @@
   --sm-connect-shadow: 0px 1px 2px 0px #78787833 inset;
 
   --claim-area-input-border-light: #F1F1F1;
+
+  /* tokens on the dashboard ui */
+  --card-text-disabled: #bdbdbd;
 
   --card: oklch(1 0 0);
   --card-border: #eaeaea;
@@ -107,6 +111,7 @@
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --logo: #ffffff;
+  --toast-text-color: #ffffff;
 
   --toggle-bg: #1c1c1c;
   --toggle-slider-bg: #2e2e2e;
@@ -146,6 +151,9 @@
 
   --container: #161616;
   --container-border: linear-gradient(311.7deg, #202020 20.1%, #363636 124.75%);
+
+  /* tokens on the dashboard ui */
+  --card-text-disabled: var(--claim-text-disabled);
 
   --card: oklch(0.205 0 0);
   --card-border: #202020;
@@ -245,5 +253,15 @@ select:disabled {
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .text-logo {
+    color: var(--color-logo);
+    font-family: var(--font-inter);
+    font-weight: 600;
+    font-size: 1.25rem; 
+    line-height: 1.75rem;
   }
 }

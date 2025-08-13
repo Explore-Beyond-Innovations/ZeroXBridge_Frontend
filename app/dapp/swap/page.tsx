@@ -8,9 +8,9 @@ import SwapToggle from "./components/SwapToggle";
 
 // Dummy tokens data
 import { tokens_swap as tokens } from "@/utils/data";
-import { useConnection } from "@/app/context/ConnectionContext";
 import { SwapSuccessModal } from "./components/SwapSuccessModal";
 import { ConnectWalletButton } from "../components/ui/ConnectWalletButton";
+import { useWallet } from "@/app/hooks";
 
 export default function SwapPage() {
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
@@ -24,8 +24,7 @@ export default function SwapPage() {
       ).toFixed(2)
     : "";
 
-  // Dummy connection status
-  const { isConnected } = useConnection();
+  const { isConnected, openWalletModal } = useWallet();
 
   function handleToggle() {
     const temp = fromToken;
@@ -37,7 +36,7 @@ export default function SwapPage() {
   }
 
   return (
-    <div className="w-full flex justify-center">
+    <div className="w-full pt-20 flex justify-center">
       <div
         className="w-full lg:w-[440px] h-fit p-[1.11px] rounded-[18px] overflow-hidden"
         style={{
@@ -121,7 +120,10 @@ export default function SwapPage() {
                 Swap
               </button>
             ) : (
-              <ConnectWalletButton className="w-full" />
+              <ConnectWalletButton
+                className="w-full rounded-[12px] font-light"
+                action={openWalletModal}
+              />
             )}
           </div>
         </div>
