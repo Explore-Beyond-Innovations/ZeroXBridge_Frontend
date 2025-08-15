@@ -21,16 +21,24 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
+            <Link href='#'>About</Link>
+          </li>
+          <li>
             <Link href='#'>Blog</Link>
           </li>
           <li>
             <Link href='#'>X</Link>
           </li>
         </ul>
-        <button className='bg-white text-base  rounded-full text-black px-3 py-1.5 flex items-center gap-2'>
+        <a
+          href='https://app.zeroxbridge.xyz'
+          target='_blank'
+          rel='noopener noreferrer'
+          className='bg-white text-base rounded-full text-black px-3 py-1.5 flex items-center gap-2'
+        >
           Launch App
           <ArrowIcon direction='right' />
-        </button>
+        </a>
       </nav>
     </header>
   );
