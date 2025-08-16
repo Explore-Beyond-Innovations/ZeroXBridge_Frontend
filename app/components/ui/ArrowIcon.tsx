@@ -12,9 +12,15 @@ const ArrowIcon = ({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...svgProps}
-      className={`${direction === "left" ? "rotate-180" : ""} ${
-        direction === "up" ? "rotate-90" : ""
-      } ${direction === "down" ? "-rotate-90" : ""}`}
+      className={`${svgProps.className ? svgProps.className + " " : ""}${
+        direction === "left"
+          ? "rotate-180"
+          : direction === "up"
+          ? "-rotate-90"
+          : direction === "down"
+          ? "rotate-90"
+          : ""
+      }`}
     >
       <path
         fillRule="evenodd"
