@@ -38,7 +38,7 @@ export default function DashboardPage() {
       <div
         className="
           w-full
-          p-2
+          md:p-2
           grid grid-cols-1 lg:grid-cols-3 gap-4
           2xl:max-w-[1400px] 2xl:px-0
           [@media(min-width:1920px)]:max-w-[1600px]
