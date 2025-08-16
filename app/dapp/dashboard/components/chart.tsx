@@ -22,7 +22,6 @@ const dummyData = [
   { date: "Aug", value: 28000 },
 ];
 
-
 const formatYAxisValue = (value: number) => {
   if (value >= 1000000) {
     return `${(value / 1000000).toFixed(0)}M`;
@@ -31,7 +30,6 @@ const formatYAxisValue = (value: number) => {
   }
   return value.toString();
 };
-
 
 export const DashboardChart = () => {
   const { theme } = useThemeContext();
@@ -146,7 +144,7 @@ export const AssetChart = ({ assetId }: AssetChartProps) => {
   return (
     <div>
       <div className="flex items-center gap-2 mb-4">
-        <p className="text-[32px] text-[#444444] dark:text-[#B7B5B9] font-mono font-normal">
+        <p className="text-2xl md:text-[32px] text-[#444444] dark:text-[#B7B5B9] font-mono font-normal">
           {isLoading ? "Loading..." : `$${latest.toLocaleString()}`}
         </p>
         <div className="flex gap-x-1">
@@ -157,7 +155,9 @@ export const AssetChart = ({ assetId }: AssetChartProps) => {
             />
           </svg>
           <p
-            className={`text-sm flex items-center ${isUp ? "text-[#32B289]" : "text-[#EF4444]"}`}
+            className={`text-sm flex items-center ${
+              isUp ? "text-[#32B289]" : "text-[#EF4444]"
+            }`}
           >
             {isUp ? "+" : ""}
             {change}%
@@ -194,11 +194,12 @@ export const AssetChart = ({ assetId }: AssetChartProps) => {
             tickLine={false}
             tick={{ fontSize: 12, fill: isDark ? "#888" : "#666" }}
             tickFormatter={(value) => {
-              if (value >= 1_000_000) return `${(value / 1_000_000).toFixed(0)}M`;
-              if (value >= 1_000) return `${(value / 1_000).toFixed(0)}K`;
+              if (value >= 1_000_000)
+                return `$${(value / 1_000_000).toFixed(0)}M`;
+              if (value >= 1_000) return `$${(value / 1_000).toFixed(0)}K`;
               return value.toString();
             }}
-            width={40}
+            width={55}
           />
 
           <CartesianGrid
