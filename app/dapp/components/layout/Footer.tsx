@@ -2,7 +2,7 @@ import { MoveRight } from "lucide-react";
 
 export const ComingSoonFooter = () => {
   return (
-    <footer className="sm:static lg:static xl:absolute bottom-0 bg-gradient-to-r from-pink-300 via-purple-300 to-orange-200 py-[26px] px-[30px] mt-4 lg:mt-12 w-[100%]">
+    <footer className="sm:static lg:static xl:absolute 2xl:absolute bottom-0 bg-gradient-to-r from-pink-300 via-purple-300 to-orange-200 py-[26px] px-[30px] mt-4 lg:mt-12 w-[100%]">
       <div className="bg-white dark:bg-black py-[30px] px-[37px] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-[16px] rounded-[16px]">
         <div className="text-[20px] whitespace-nowrap  text-[#222223] dark:text-[#DADADA]">
           Be the first to know! 🔔

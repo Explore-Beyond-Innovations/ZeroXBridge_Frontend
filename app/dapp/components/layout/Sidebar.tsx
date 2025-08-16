@@ -31,9 +31,9 @@ function Sidebar({
 
   return (
     <div
-      className={`md:border-r-primary-border bg-background md:border-r-[1px] w-full lg:w-fit md:w-fit z-50 md:relative absolute top-0 left-0 font-light h-full transition-transform duration-300 md:translate-x-0 ${
-        isOpen ? "translate-x-0" : "-translate-x-full"
-      }`}
+      className={`bg-background z-50 absolute top-0 left-0 font-light h-full transition-transform duration-300
+         w-full sm:w-[280px] lg:relative lg:translate-x-0 lg:w-fit
+         ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
     >
       <div className="p-[24px] lg:p-[42px_30px_45px_40px] flex flex-col gap-y-[6px] items-stretch">
         {routes.map(({ label, href, icon: Icon }) => {
