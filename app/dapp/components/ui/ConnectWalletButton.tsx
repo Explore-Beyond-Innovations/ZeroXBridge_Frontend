@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { BrokenLink } from '@/svg/BrokenLink';
-import { Spinner } from '@/svg/Spinner';
-import WalletIcon from '@/svg/WalletIcon';
-import { GradientDirection, GradientWrapperPrimary } from './Gradients';
-import { useThemeContext } from '@/app/hooks/context';
-import { useEffect, useMemo } from 'react';
-import { toast } from 'sonner';
-import { useWallet } from '@/app/hooks/useWallet';
+import { BrokenLink } from "@/svg/BrokenLink";
+import { Spinner } from "@/svg/Spinner";
+import WalletIcon from "@/svg/WalletIcon";
+import { GradientDirection, GradientWrapperPrimary } from "./Gradients";
+import { useThemeContext } from "@/app/hooks/context";
+import { useEffect, useMemo } from "react";
+import { toast } from "sonner";
+import { useWallet } from "@/app/hooks/useWallet";
 
 interface ConnectWalletButtonProps {
   full?: boolean;
@@ -30,7 +30,7 @@ interface ConnectWalletButtonProps {
 
 export const ConnectWalletButton = ({
   full,
-  className = '',
+  className = "",
   withGradient = true,
   gradientDirection,
   thin = false,
@@ -66,8 +66,6 @@ export const ConnectWalletButton = ({
     if (resolvedError) toast.error(`Connection error: ${resolvedError}`);
   }, [resolvedError]);
 
-
-
   const handleClick = () => {
     // Use provided action if any; otherwise open the wallet modal from the hook
     const fallback = wallet?.openWalletModal;
@@ -76,36 +74,36 @@ export const ConnectWalletButton = ({
   };
 
   const getPaddingAndRoundness = () => {
-    if (thin) return 'px-3 py-1 rounded-[6px]';
-    if (full) return 'py-4 rounded-[8px]';
-    return 'py-2 rounded-[8px]';
+    if (thin) return "px-3 py-1 rounded-[6px]";
+    if (full) return "py-4 rounded-[8px]";
+    return "py-2 rounded-[8px]";
   };
 
   const baseClasses = `flex items-center justify-center px-3 ${getPaddingAndRoundness()} text-primary-text border border-wallet-border transition-all duration-200 hover:opacity-80 active:opacity-60 ${
-    full ? 'w-full' : ''
+    full ? "w-full" : ""
   } ${className}`;
 
   const getButtonContent = () => {
     if (resolvedIsLoading) {
       return (
-        <div className='flex items-center justify-center gap-x-2'>
+        <div className="flex items-center justify-center gap-x-2">
           <Spinner />
-          <span className='inline-block'>Connecting...</span>
+          <span className="inline-block">Connecting...</span>
         </div>
       );
     }
 
     if (resolvedIsConnected) {
       return (
-        <div className='flex items-center justify-between w-full'>
-          <div className='flex items-center gap-x-2'>
+        <div className="flex items-center justify-between w-full">
+          <div className="flex items-center gap-x-2">
             <WalletIcon />
-            <span className='inline-block text-sm font-normal'>
+            <span className="inline-block text-sm font-normal">
               {resolvedWalletAddress}
             </span>
           </div>
           {showBrokenLink && (
-            <div className='border-l border-wallet-border pl-2 ml-2'>
+            <div className="border-l border-wallet-border pl-2 ml-2">
               <BrokenLink />
             </div>
           )}
@@ -114,9 +112,11 @@ export const ConnectWalletButton = ({
     }
 
     return (
-      <div className='flex items-center justify-center gap-x-2'>
+      <div className="flex items-center justify-center gap-x-2">
         <WalletIcon />
-        <span className='inline-block'>Connect Wallet</span>
+        <span className="inline-block font-medium sm:text-[14px]">
+          Connect Wallet
+        </span>
       </div>
     );
   };
@@ -124,18 +124,18 @@ export const ConnectWalletButton = ({
   const ButtonContent = (
     <button
       className={`${baseClasses} ${
-        resolvedIsConnected ? 'justify-between' : 'justify-center gap-x-2'
-      } ${isDark ? 'bg-[var(--btn-bg)]' : 'bg-white'} ${
-        resolvedIsLoading ? 'cursor-not-allowed opacity-75' : 'cursor-pointer'
-      } ${resolvedError ? 'border-red-300' : ''}`}
+        resolvedIsConnected ? "justify-between" : "justify-center gap-x-2"
+      } ${isDark ? "bg-[var(--btn-bg)]" : "bg-white"} ${
+        resolvedIsLoading ? "cursor-not-allowed opacity-75" : "cursor-pointer"
+      } ${resolvedError ? "border-red-300" : ""}`}
       onClick={handleClick}
       disabled={resolvedIsLoading}
       title={
         resolvedIsConnected
-          ? 'Manage wallet connections'
-          : 'Connect your wallet'
+          ? "Manage wallet connections"
+          : "Connect your wallet"
       }
-      type='button'
+      type="button"
     >
       {getButtonContent()}
     </button>
@@ -143,10 +143,10 @@ export const ConnectWalletButton = ({
 
   return withGradient ? (
     <GradientWrapperPrimary
-      gradientDirection={gradientDirection || 'to-top'}
-      borderRadius='rounded-xl'
-      padding='p-[1px]'
-      className={full ? 'w-full' : ''}
+      gradientDirection={gradientDirection || "to-top"}
+      borderRadius="rounded-xl"
+      padding="p-[1px]"
+      className={full ? "w-full" : ""}
     >
       {ButtonContent}
     </GradientWrapperPrimary>
