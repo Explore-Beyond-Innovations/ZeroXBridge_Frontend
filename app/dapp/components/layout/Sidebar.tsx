@@ -31,7 +31,7 @@ function Sidebar({
 
   return (
     <div
-      className={`lg:border-r-primary-border bg-background lg:border-r-[1px] w-full lg:w-fit z-50 md:relative absolute top-0 left-0 font-light h-full transition-transform duration-300 md:translate-x-0 ${
+      className={`md:border-r-primary-border bg-background md:border-r-[1px] w-full lg:w-fit md:w-fit z-50 md:relative absolute top-0 left-0 font-light h-full transition-transform duration-300 md:translate-x-0 ${
         isOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
@@ -74,7 +74,7 @@ function Sidebar({
         })}
       </div>
 
-      <div className="py-[10px] pl-6 lg:pl-10 border-y-[1px] border-y-primary-border">
+      <div className="py-[10px] mt-14 sm:mt-2 pl-6 lg:pl-10 border-y-[1px] border-y-primary-border">
         <Link
           href="/dapp/settings"
           onClick={onClose}
