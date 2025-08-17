@@ -131,7 +131,7 @@ const page = () => {
             <p className="text-sm mb-4 font-mono text-[#EEEEEE]">THE PROBLEM</p>
             <p className="text-[24px] md:text-[40px] leading-[120%] text-[#C9C9C9] tracking-[-2%] max-w-[18ch]">Traditional cross chain solutions face a lot of critical challenges today.</p>
           </div>
-          <div className="w-full h-full">
+          <div className="w-full h-[300px]">
             <div className="w-full h-full">
               <Accordion />
             </div>

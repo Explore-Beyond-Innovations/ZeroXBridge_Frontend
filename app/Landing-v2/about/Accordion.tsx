@@ -72,19 +72,19 @@ const Accordion = () => {
                 >
                   <AutoFadeTextWrapper className={`${
                     step.id === openStep ? "text-[#D0D0D0]" : "text-[#626263]"
-                  } text-[16px]  2xl:text-[24px]`}>{step.title}</AutoFadeTextWrapper>
+                  } text-[16px]  xl:text-[24px]`}>{step.title}</AutoFadeTextWrapper>
                 </span>
               </div>
             </button>
             <div
               className={`overflow-hidden transition-all flex items-end duration-300 ease-in-out ${
                 openStep === step.id
-                  ? "opacity-100 flex-1 max-h-[85px] md:max-h-[366.32px]  2xl:max-h-full"
+                  ? "opacity-100 flex-1 max-h-[85px]  2xl:max-h-full"
                   : "max-h-0 h-0 opacity-0"
               }`}
             >
               <div className="pl-10 py-2 md:py-4 text-sm ">
-                <AutoFadeTextWrapper className="text-[14px] text-[#D0D0D0] 2xl:text-[16px]">{step.description}</AutoFadeTextWrapper>
+                <AutoFadeTextWrapper className="text-[14px] text-[#D0D0D0] xl:text-[16px]">{step.description}</AutoFadeTextWrapper>
               </div>
             </div>
           </div>
