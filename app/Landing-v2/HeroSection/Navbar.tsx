@@ -13,6 +13,9 @@ const Navbar = () => {
       <nav className='flex items-center gap-6'>
         <ul className='flex items-center gap-6'>
           <li>
+            <Link href='/Landing-v2/about'>About</Link>
+          </li>
+          <li>
             <Link href='#'>Docs</Link>
           </li>
           <li>
