@@ -31,9 +31,9 @@ function Sidebar({
 
   return (
     <div
-      className={`lg:border-r-primary-border bg-background lg:border-r-[1px] w-full lg:w-fit z-50 md:relative absolute top-0 left-0 font-light h-full transition-transform duration-300 md:translate-x-0 ${
-        isOpen ? "translate-x-0" : "-translate-x-full"
-      }`}
+      className={`bg-background z-50 absolute top-0 left-0 font-light h-full transition-transform duration-300
+         w-full sm:w-[280px] lg:relative lg:translate-x-0 lg:w-fit
+         ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
     >
       <div className="p-[24px] lg:p-[42px_30px_45px_40px] flex flex-col gap-y-[6px] items-stretch">
         {routes.map(({ label, href, icon: Icon }) => {
@@ -74,7 +74,7 @@ function Sidebar({
         })}
       </div>
 
-      <div className="py-[10px] pl-6 lg:pl-10 border-y-[1px] border-y-primary-border">
+      <div className="py-[10px] mt-14 sm:mt-2 pl-6 lg:pl-10 border-y-[1px] border-y-primary-border">
         <Link
           href="/dapp/settings"
           onClick={onClose}

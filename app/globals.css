@@ -36,7 +36,7 @@
 
 :root {
   --logo: #2e2e2e;
-    --toast-text-color: #000000;
+  --toast-text-color: #000000;
 
   --toggle-bg: #ededed;
   --toggle-slider-bg: #ffffff;
@@ -67,7 +67,7 @@
   --sm-shadow: 0px 1px 2px 0px #78787840 inset;
   --sm-connect-shadow: 0px 1px 2px 0px #78787833 inset;
 
-  --claim-area-input-border-light: #F1F1F1;
+  --claim-area-input-border-light: #f1f1f1;
 
   /* tokens on the dashboard ui */
   --card-text-disabled: #bdbdbd;
@@ -127,7 +127,7 @@
     #d7d7d7 100%
   );
 
-  --btn-bg: #1F1F1F;
+  --btn-bg: #1f1f1f;
 
   /* Borders */
   --primary-border: #202020;
@@ -139,15 +139,14 @@
   --sidebar-text-active: #ffffff;
 
   /* claim/burn ui tokens */
-  --claim-burn-bg: #161616CC;
-  --claim-burn-modal-text: #C3C3C3;
+  --claim-burn-bg: #161616cc;
+  --claim-burn-modal-text: #c3c3c3;
   --modal-date-text: #737373;
   --close-btn-border: #292929;
   --claim-area-btn: #232323;
-  --claim-area: #1D1D1D;
+  --claim-area: #1d1d1d;
   --claim-text-disabled: #737373;
-  --claim-input-placeholder: #DDDDDD;
-
+  --claim-input-placeholder: #dddddd;
 
   --container: #161616;
   --container-border: linear-gradient(311.7deg, #202020 20.1%, #363636 124.75%);
@@ -261,7 +260,20 @@ select:disabled {
     color: var(--color-logo);
     font-family: var(--font-inter);
     font-weight: 600;
-    font-size: 1.25rem; 
+    font-size: 1.25rem;
     line-height: 1.75rem;
+  }
+
+  .animate-slidedown {
+    animation: slidedown 0.3s ease-out;
+  }
+
+  @keyframes slidedown {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
   }
 }

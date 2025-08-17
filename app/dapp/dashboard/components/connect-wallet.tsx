@@ -47,7 +47,7 @@ const WalletItem = ({
   const { connectEthWallet, connectStrkWallet, error } = useWallet();
   // the provider type is quite verbose, that's why i'm using a shallow cast
   const [walletProviders, setWalletProviders] = useState<StarknetProviders[]>(
-    [],
+    []
   );
 
   const handleConnect = useCallback(async () => {
@@ -99,16 +99,16 @@ const WalletItem = ({
               isConnecting
                 ? "bg-yellow-500 animate-pulse"
                 : isWalletConnected
-                  ? "bg-[#32B289]"
-                  : "bg-[#D9D9D9]"
+                ? "bg-[#32B289]"
+                : "bg-[#D9D9D9]"
             }`}
           />
           <span className="text-[#4B4B4B] dark:text-[#c3c3c3] text-xs">
             {isConnecting
               ? "Connecting..."
               : isWalletConnected
-                ? "Connected"
-                : "Not connected"}
+              ? "Connected"
+              : "Not connected"}
           </span>
         </div>
 
@@ -147,7 +147,9 @@ const WalletItem = ({
                   className="flex items-center gap-x-2 px-2 py-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-[#2a2a2a] rounded text-sm"
                   onSelect={async () => {
                     setState("connecting");
-                    await connectStrkWallet(provider?.id as StarknetConnectorId);
+                    await connectStrkWallet(
+                      provider?.id as StarknetConnectorId
+                    );
                     setState("idle");
                   }}
                 >
