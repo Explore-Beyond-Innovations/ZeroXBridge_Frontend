@@ -178,8 +178,8 @@ const page = () => {
           <div className="w-full grid mt-8 gap-y-8 gap-x-4 grid-cols-3">
             {
               team.map((member, index) => (
-                <div key={index} className="flex flex-col gap-2">
-                  <div className="w-full h-full max-h-[377px] sm:max-h-[456px] 2xl:w-[400px] 2xl:h-[456px] bg-[#161616] flex items-end justify-center">
+                <div key={index} className="flex w-full h-full flex-col gap-2">
+                  <div className="w-full h-full max-h-[377px] sm:max-h-[456px] bg-[#161616] flex items-end justify-start">
                     <Image src={member.image} alt={member.name} width={500} height={500} className="w-auto h-full object-cover" />
                   </div>
                   <div className="flex gap-3 pt-3">
