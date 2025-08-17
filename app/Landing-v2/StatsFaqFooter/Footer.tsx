@@ -456,6 +456,14 @@ const Footer = () => {
           <ul className="space-y-2 text-[#B2B2B2] text-[14px] 2xl:text-[20px]">
             <li>
               <a
+                href="/Landing-v2/about"
+                className=" transition-colors"
+              >
+                About
+              </a>
+            </li>
+            <li>
+              <a
                 href="#"
                 className=" transition-colors"
               >
