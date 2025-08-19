@@ -61,7 +61,7 @@ const Accordion = () => {
             >
               <div className="flex items-center space-x-3">
                 <div
-                  className={`w-6 h-6 bg-[#19191A] transition-all duration-200 rounded-full flex items-center justify-center 2xl:text-[16px] text-sm ${
+                  className={`w-6 h-6 4k:size-[69px] 4k:text-[32px] bg-[#19191A] transition-all duration-200 rounded-full flex items-center justify-center 2xl:text-[16px] text-sm ${
                     step.id === openStep ? "text-[#D0D0D0]" : "text-[#6C6C6C]"
                   }`}
                 >
@@ -72,7 +72,7 @@ const Accordion = () => {
                 >
                   <AutoFadeTextWrapper className={`${
                     step.id === openStep ? "text-[#D0D0D0]" : "text-[#626263]"
-                  } text-[16px]  xl:text-[24px]`}>{step.title}</AutoFadeTextWrapper>
+                  } text-[16px] 4k:text-[40px] xl:text-[24px]`}>{step.title}</AutoFadeTextWrapper>
                 </span>
               </div>
             </button>
@@ -83,8 +83,8 @@ const Accordion = () => {
                   : "max-h-0 h-0 opacity-0"
               }`}
             >
-              <div className="pl-10 py-2 md:py-4 text-sm ">
-                <AutoFadeTextWrapper className="text-[14px] text-[#D0D0D0] xl:text-[16px]">{step.description}</AutoFadeTextWrapper>
+              <div className="pl-10  py-2 md:py-4 text-sm ">
+                <AutoFadeTextWrapper className="text-[14px] text-[#D0D0D0] 4k:text-[24px] xl:text-[16px]">{step.description}</AutoFadeTextWrapper>
               </div>
             </div>
           </div>
