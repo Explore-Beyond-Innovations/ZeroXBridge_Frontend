@@ -13,7 +13,7 @@ const GradientWrapperHover: React.FC<GradientWrapperHoverProps> = ({
 }) => {
   return (
     <motion.div
-      className={`p-0 rounded-2xl overflow-hidden 4k:h-[508px]  xl:h-[200px] ${className}`}
+      className={`p-0 rounded-2xl overflow-hidden 4k:h-[508px] 4k:max-w-[1047px]  xl:h-[200px] ${className}`}
       style={{
         backgroundImage: "url('/border.svg')",
         backgroundPosition: "center",

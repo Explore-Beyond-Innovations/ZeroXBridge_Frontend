@@ -74,9 +74,9 @@ const page = () => {
     },
   ];
   return (
-    <section className="w-full bg-[#0A0A0A] ">
+    <section className="w-full  bg-[#0A0A0A] ">
       <div
-        className="xl:h-[406px]"
+        className="xl:h-[406px] 4k:h-[894px] bg-[#090D10] relative "
         style={{
           backgroundImage: "url('/star-noise-2.png')",
           backgroundPosition: "center",
@@ -86,9 +86,9 @@ const page = () => {
         }}
       >
         <Navbar />
-        <div className="w-full py-12 px-5 lg:px-[clamp(16px,5vw,80px)] ">
-          <div className="sm:max-w-[70ch] py-10 mx-auto flex flex-col gap-4">
-            <h1 className="text-[36px] text-[#EEEEEE] lg:text-[48px] leading-[106%] 4k:text-[64px] 4k:text-[64px] tracking-[-2%]">
+        <div className="w-full 4k:h-full flex items-center justify-center px-5 lg:px-[clamp(16px,5vw,80px)] py-12">
+          <div className="sm:max-w-[70ch] flex flex-col gap-4 text-left">
+            <h1 className="text-[36px] text-[#EEEEEE] 4k:max-w-[858px] lg:text-[48px] leading-[106%] 4k:text-[64px] tracking-[-2%]">
               ZeroXBridge is more than a cross-chain solution, it is a
               revolution.
             </h1>
@@ -102,13 +102,15 @@ const page = () => {
             </div>
           </div>
         </div>
+
+        <div className="absolute 4k:block hidden bottom-0 left-0 w-full h-full bg-[url('/Group2.svg')] bg-cover bg-no-repeat bg-center" />
       </div>
 
       <div
         id="our-mission"
-        className="w-full bg-[#0F0F0F] lg:flex justify-between items-center grid gap-4 grid-cols-1 sm:grid-cols-2 py-16 px-5 lg:px-[clamp(16px,5vw,80px)] 4k:px-[10rem] "
+        className="w-full  bg-[#0F0F0F] lg:flex justify-between items-center grid gap-4 grid-cols-1 sm:grid-cols-2 4k:h-[664px] py-16 px-5 lg:px-[clamp(16px,5vw,80px)] 4k:px-[10rem] "
       >
-        <div className="flex  flex-col max-w-[507px] 4k:max-w-[1100px] gap-4 ">
+        <div className="flex  4k:w-[1100px]  flex-col max-w-[507px] 4k:w-[1100px] 4k:max-w-[1100px] gap-4 ">
           <GradientWrapper className="h-fit w-fit rounded-full">
             <AutoFadeTextWrapper
               as="p"
@@ -144,17 +146,17 @@ const page = () => {
         </div>
       </div>
 
-      <div className="w-full grid gap-4 grid-cols-1 px-5 lg:flex justify-between  py-12 my-6 lg:px-[clamp(16px,5vw,80px)] 4k:px-[10rem] ">
-        <div className="flex max-w-[507px] 4k:max-w-[1100px]  flex-col gap-4  h-full">
+      <div className="w-full grid gap-4 grid-cols-1 px-5 lg:flex justify-between  4k:py-[8rem] 4k:mt-[3rem] 4k:mb-[8rem]   py-12 my-6 lg:px-[clamp(16px,5vw,80px)] 4k:px-[10rem] ">
+        <div className="flex max-w-[507px]  4k:max-w-[1100px] 4k:w-[1100px] flex-col gap-4  h-full">
           <p className="text-sm 4k:text-[32px] mb-4 font-mono text-[#EEEEEE]">
             THE PROBLEM
           </p>
-          <p className="text-[24px] md:text-[40px] 4k:leading-[106%] leading-[120%] 4k:text-[80px] text-[#C9C9C9] tracking-[-2%] 4k:max-w-[979px] ">
+          <p className="text-[24px]  md:text-[40px] 4k:leading-[106%] leading-[120%] 4k:text-[80px] text-[#C9C9C9] tracking-[-2%] 4k:max-w-[979px] ">
             Traditional cross chain solutions face a lot of critical challenges
             today.
           </p>
         </div>
-        <div className="  max-w-[507px] 4k:max-w-[1100px] h-[300px]">
+        <div className="  max-w-[507px]  4k:w-[1100px] 4k:max-w-[1100px] h-[300px] 4k:h-[480px]">
           <div className="w-full h-full">
             <Accordion />
           </div>
@@ -162,11 +164,11 @@ const page = () => {
       </div>
 
       {/* SOLUTION */}
-      <div className="w-full flex flex-col gap-4 py-12 my-10 px-5 lg:px-[clamp(16px,5vw,80px)] 4k:px-[10rem] ">
-        <p className="text-sm 4k:text-[32px] font-mono text-[#EEEEEE]">
+      <div className="w-full  flex flex-col gap-4   4k:py-[100px] py-12 my-10 px-5 lg:px-[clamp(16px,5vw,80px)] 4k:px-[10rem] ">
+        <p className="text-sm 4k:text-[32px] 4k:mb-[2rem] font-mono text-[#EEEEEE]">
           THE SOLUTION
         </p>
-        <p className="text-[24px] 4k:text-[48px] md:max-w-[40ch] mb-6 text-[#C9C9C9] leading-[120%] tracking-[-2%]">
+        <p className="text-[24px] 4k:text-[48px] md:max-w-[40ch] 4k:mb-[2rem] mb-6 text-[#C9C9C9] leading-[120%] tracking-[-2%]">
           There is no doubt that ZeroXBridge is at the game of solving these
           problems through our innovative approach.
         </p>
@@ -210,18 +212,21 @@ const page = () => {
 
       {/* TEAM SECTION */}
       <div className="w-full px-5 bg-[#0F0F0F] py-16 mb-6 lg:px-[clamp(16px,5vw,80px)] 4k:px-[10rem] ">
-        <GradientWrapper className="h-fit w-fit rounded-full">
+        <GradientWrapper className="h-fit w-fit 4k:mt-[3rem] rounded-full">
           <AutoFadeTextWrapper
             as="p"
-            className="font-mono text-sm font-[500] text-[#9C9C9D] py-1 4k:py-3 4k:px-5 px-2 4k:text-[32px] rounded-full w-fit bg-[#19191A] uppercase "
+            className="font-mono text-sm font-[500] text-[#9C9C9D] py-1 4k:py-5 4k:px-7 px-2 4k:text-[32px] rounded-full w-fit bg-[#19191A] uppercase "
           >
             OUR TEAM
           </AutoFadeTextWrapper>
         </GradientWrapper>
-        <div className="w-full grid mt-8 gap-y-8 gap-x-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div className="w-full grid mt-8 4k:mt-[5rem] gap-y-8 gap-x-6 4k:gap-x-[40px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {team.map((member, index) => (
-            <div key={index} className="flex w-full h-full flex-col gap-2">
-              <div className="w-full h-full max-h-[377px] sm:max-h-[456px] bg-[#161616] flex items-end justify-start">
+            <div
+              key={index}
+              className="flex w-full 4k:h-[1524px] 4k:max-w-[1075px]  h-full flex-col gap-2"
+            >
+              <div className="w-full h-full max-h-[377px] 4k:hidden sm:max-h-[456px] bg-[#161616] flex items-end justify-start">
                 <Image
                   src={member.image}
                   alt={member.name}
@@ -230,18 +235,29 @@ const page = () => {
                   className="w-auto h-full object-cover"
                 />
               </div>
+              <div className="relative w-full h-full max-h-[1200px] hidden 4k:block bg-[#161616]">
+                <Image
+                  src={member.image}
+                  alt={member.name}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+
               <div className="flex gap-3 pt-3">
-                <p className="text-[24px] text-[#C9C9C9]">{member.name}</p>
-                <p className="text-[16px] font-light text-[#9E9E9E]">
+                <p className="text-[24px] 4k:text-[48px] text-[#C9C9C9]">
+                  {member.name}
+                </p>
+                <p className="text-[16px] 4k:text-[32px] font-light text-[#9E9E9E]">
                   {member.skill}
                 </p>
               </div>
               <div>
-                <p className="text-[16px] font-light text-[#9E9E9E]">
+                <p className="text-[16px] 4k:text-[32px] font-light text-[#9E9E9E]">
                   {member.role}
                 </p>
               </div>
-              <div className="flex font-light items-center gap-6">
+              <div className=" 4k:hidden flex font-light items-center gap-6">
                 <Link
                   href={`https://x.com/${member.x}`}
                   className="flex items-center gap-2"
@@ -264,13 +280,36 @@ const page = () => {
                   <p>{member.github}</p>
                 </Link>
               </div>
+              <div className="hidden 4k:flex font-light items-center gap-6">
+                <Link
+                  href={`https://x.com/${member.x}`}
+                  className="flex items-center gap-2"
+                  target="_blank"
+                >
+                  <Image src="/XLogo.svg" alt="x" width={60} height={60} />
+                  <p className="4k:text-[32px]">{member.x}</p>
+                </Link>
+                <Link
+                  href={`https://github.com/${member.github}`}
+                  className="flex items-center gap-2"
+                  target="_blank"
+                >
+                  <Image
+                    src="/GithubLogo.svg"
+                    alt="github"
+                    width={60}
+                    height={60}
+                  />
+                  <p className="4k:text-[32px]">{member.github}</p>
+                </Link>
+              </div>
             </div>
           ))}
         </div>
       </div>
 
       {/* FOOTER */}
-      {/* <Footer /> */}
+      <Footer />
     </section>
   );
 };
