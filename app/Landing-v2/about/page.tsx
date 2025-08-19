@@ -106,9 +106,9 @@ const page = () => {
 
       <div
         id="our-mission"
-        className="w-full bg-[#0F0F0F] lg:flex justify-between items-center grid gap-4 grid-cols-1 sm:grid-cols-2 py-16 px-5 lg:px-[clamp(16px,5vw,80px)] 4k:px-20 "
+        className="w-full bg-[#0F0F0F] lg:flex justify-between items-center grid gap-4 grid-cols-1 sm:grid-cols-2 py-16 px-5 lg:px-[clamp(16px,5vw,80px)] 4k:px-[10rem] "
       >
-        <div className="flex  flex-col max-w-[507px] 4k:max-w-[1100px] gap-4">
+        <div className="flex  flex-col max-w-[507px] 4k:max-w-[1100px] gap-4 ">
           <GradientWrapper className="h-fit w-fit rounded-full">
             <AutoFadeTextWrapper
               as="p"
@@ -144,7 +144,7 @@ const page = () => {
         </div>
       </div>
 
-      <div className="w-full grid gap-4 grid-cols-1 px-5 lg:flex justify-between  py-12 my-6 lg:px-[clamp(16px,5vw,80px)] ">
+      <div className="w-full grid gap-4 grid-cols-1 px-5 lg:flex justify-between  py-12 my-6 lg:px-[clamp(16px,5vw,80px)] 4k:px-[10rem] ">
         <div className="flex max-w-[507px] 4k:max-w-[1100px]  flex-col gap-4  h-full">
           <p className="text-sm 4k:text-[32px] mb-4 font-mono text-[#EEEEEE]">
             THE PROBLEM
@@ -162,7 +162,7 @@ const page = () => {
       </div>
 
       {/* SOLUTION */}
-      <div className="w-full flex flex-col gap-4 py-12 my-10 px-5 lg:px-[clamp(16px,5vw,80px)] ">
+      <div className="w-full flex flex-col gap-4 py-12 my-10 px-5 lg:px-[clamp(16px,5vw,80px)] 4k:px-[10rem] ">
         <p className="text-sm 4k:text-[32px] font-mono text-[#EEEEEE]">
           THE SOLUTION
         </p>
@@ -209,16 +209,16 @@ const page = () => {
       </div>
 
       {/* TEAM SECTION */}
-      <div className="w-full px-5 bg-[#0F0F0F] py-16 mb-6 lg:px-[clamp(16px,5vw,80px)] ">
+      <div className="w-full px-5 bg-[#0F0F0F] py-16 mb-6 lg:px-[clamp(16px,5vw,80px)] 4k:px-[10rem] ">
         <GradientWrapper className="h-fit w-fit rounded-full">
           <AutoFadeTextWrapper
             as="p"
-            className="font-mono text-sm font-[500] text-[#9C9C9D] py-1 px-2 rounded-full w-fit bg-[#19191A] uppercase "
+            className="font-mono text-sm font-[500] text-[#9C9C9D] py-1 4k:py-3 4k:px-5 px-2 4k:text-[32px] rounded-full w-fit bg-[#19191A] uppercase "
           >
             OUR TEAM
           </AutoFadeTextWrapper>
         </GradientWrapper>
-        <div className="w-full grid mt-8 gap-y-8 gap-x-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div className="w-full grid mt-8 gap-y-8 gap-x-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {team.map((member, index) => (
             <div key={index} className="flex w-full h-full flex-col gap-2">
               <div className="w-full h-full max-h-[377px] sm:max-h-[456px] bg-[#161616] flex items-end justify-start">
