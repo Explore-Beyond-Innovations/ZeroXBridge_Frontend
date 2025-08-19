@@ -69,7 +69,7 @@ export function TokenSelectDropdown({
                 </div>
                 <div className="text-left">
                   <div
-                    className={`font-medium dark:text-[#737373] text-[#C1C1C1]`}
+                    className={`font-medium dark:text-[#737373] text-[#C1C1C1] text-[14px] sm:text-[16px]`}
                   >
                     Lock
                   </div>

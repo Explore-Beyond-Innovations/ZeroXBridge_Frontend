@@ -100,7 +100,7 @@ const TokenLockInterface = () => {
 
   return (
     <div
-      className={`w-full max-w-[440px] mx-auto border rounded-[17px]
+      className={`w-full sm:max-w-[440px] mx-auto border rounded-[17px]
          dark:bg-[#161616cc] dark:border-[#202020] bg-[#F7F7F7] border-[#EAEAEA]`}
     >
       <div className="flex justify-end pt-2 px-4 w-full max-w-md">
@@ -113,7 +113,7 @@ const TokenLockInterface = () => {
         </Button>
       </div>
 
-      <div className="max-w-md mx-auto w-full">
+      <div className="sm:max-w-md mx-auto w-full">
         <Card
           className={`border-none shadow-none pt-2 bg-[#F7F7F7] dark:bg-[#161616cc]`}
         >
@@ -143,7 +143,7 @@ const TokenLockInterface = () => {
                     size="sm"
                     onClick={handleMaxClick}
                     disabled={!isConnected || !selectedToken}
-                    className={`dark:bg-[#232323] px-[13.3px] rounded-full text-[#737373] hover:bg-gray-50 bg-[#F4F4F4]`}
+                    className={`dark:bg-[#232323] text-[14px] sm:text-[16px] border-[1.11px] border-[#EEEEEE] dark:border-none px-[13.3px] rounded-full text-[#737373] hover:bg-gray-50 bg-[#F4F4F4]`}
                   >
                     Max
                   </Button>
@@ -168,7 +168,7 @@ const TokenLockInterface = () => {
               </div>
             </div>
 
-            <div className="space-y-3 border-gray-200 dark:border-gray-700 px-5 sm:p-5">
+            <div className="flex flex-col gap-1 sm:space-y-3 border-gray-200 dark:border-gray-700 px-5 sm:p-5">
               <div className="flex justify-between text-sm">
                 <span className={`dark:text-[#737373] text-[#909090]`}>
                   Token Price:
