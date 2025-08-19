@@ -36,9 +36,9 @@ export default function SwapPage() {
   }
 
   return (
-    <div className="w-full pt-20 flex justify-center">
+    <div className="w-full md:pt-20 flex justify-center">
       <div
-        className="w-full lg:w-[440px] h-fit p-[1.11px] rounded-[18px] overflow-hidden"
+        className="w-full  lg:w-[440px] md:h-fit p-[1.11px] rounded-[18px] overflow-hidden"
         style={{
           backgroundImage: "var(--container-border)",
         }}

@@ -17,10 +17,10 @@ interface DialogBaseProps {
 }
 
 const SIZE_MAP = {
-  sm: "max-w-sm min-w-[18rem]",
-  md: "max-w-md min-w-[22rem]",
-  lg: "max-w-lg min-w-[28rem]",
-  xl: "max-w-xl min-w-[34rem]",
+  sm: "w-[90%] max-w-sm sm:min-w-[18rem]",
+  md: "w-[90%] max-w-md sm:min-w-[22rem]",
+  lg: "w-[90%] max-w-lg sm:min-w-[28rem]",
+  xl: "w-[90%] max-w-xl sm:min-w-[34rem]",
 };
 
 export const DialogBase = ({
@@ -38,7 +38,9 @@ export const DialogBase = ({
     <Dialog.Root open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <Dialog.Portal>
         <Dialog.Overlay
-          className={`fixed inset-0 z-50 ${isDark ? "bg-black/30" : "bg-[#F0F0F0]/30"} backdrop-blur-[8px]`}
+          className={`fixed inset-0 z-50 ${
+            isDark ? "bg-black/30" : "bg-[#F0F0F0]/30"
+          } backdrop-blur-[8px]`}
         />
         <Dialog.Content
           className={`fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 focus:outline-none rounded-2xl bg-background border border-primary-border ${SIZE_MAP[size]} ${className}`}
