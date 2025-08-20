@@ -1,14 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
+import React, { useState } from 'react';
 import { useConnect } from 'wagmi';
 import { ChevronLeft } from 'lucide-react';
+import { useWalletConnection } from "@/app/hooks/useWalletConnection";
+import WalletErrorComponent from "./WalletError";
 
 interface EthereumWalletModalProps {
   onBack: () => void;
 }
 
 const EthereumWalletModal: React.FC<EthereumWalletModalProps> = ({ onBack }) => {
-  const { connect, connectors } = useConnect();
+  const { connectors } = useConnect();
+  const { 
+    isConnecting, 
+    error, 
+    connectWallet, 
+    clearError
+  } = useWalletConnection('ethereum');
+
+  const [selectedConnector, setSelectedConnector] = useState<any>(null);
 
   const walletIcons: Record<string, string> = {
     metamask: '/icons/wallets/metamask.svg',
@@ -17,24 +27,52 @@ const EthereumWalletModal: React.FC<EthereumWalletModalProps> = ({ onBack }) => 
     injected: '/wallet.svg',
   };
 
+  const handleWalletConnect = async (connector: any) => {
+    try {
+      setSelectedConnector(connector);
+      await connectWallet(connector);
+      onBack(); // Close modal on success
+    } catch (error) {
+      // Error is handled by the hook
+    }
+  };
+
+  const handleRetry = () => {
+    if (selectedConnector) {
+      handleWalletConnect(selectedConnector);
+    }
+  };
+
   return (
     <div className="space-y-4">
       {/* Back Button */}
       <button
         onClick={onBack}
         className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-4"
+        disabled={isConnecting}
       >
         <ChevronLeft size={20} />
         <span>Back to options</span>
       </button>
+
+      {/* Error Display */}
+      {error && (
+        <WalletErrorComponent
+          error={error}
+          walletName={selectedConnector?.name}
+          onRetry={handleRetry}
+          onDismiss={clearError}
+          className="mb-4"
+        />
+      )}
 
       {/* Wallet List */}
       <div className="space-y-3">
         {connectors.map((connector: any) => (
           <button
             key={connector.id}
-            onClick={() =>{ connect({ connector }); onBack()}}
-            // disabled={!connector.ready}
+            onClick={() => handleWalletConnect(connector)}
+            disabled={isConnecting}
             className="w-full flex items-center justify-between p-4 rounded-lg bg-[#291A43] hover:bg-[#342251] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <div className="flex items-center gap-3">
@@ -63,7 +101,7 @@ const EthereumWalletModal: React.FC<EthereumWalletModalProps> = ({ onBack }) => 
           href="https://ethereum.org/wallets"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-400 hover:text-blue-300"
+          className="text-[#A26DFF] hover:text-[#A26DFF]/80"
         >
           Learn more about wallets
         </a>
