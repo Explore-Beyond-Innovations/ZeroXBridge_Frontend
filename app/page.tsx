@@ -1,9 +1,24 @@
-const App = () => {
-  return (
-    <div>
-      <h2>Welcome to the app</h2>
-    </div>
-  );
+"use client";
+
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import Preloader from "./dapp/components/ui/Preloader";
+
+const Page = () => {
+  const [showPreloader] = useState(true);
+  const navigate = useRouter();
+
+  if (showPreloader) {
+    return (
+      <Preloader
+        onComplete={() => {
+          navigate.push('/dapp/dashboard');
+        }}
+      />
+    );
+  }
+
+  return null;
 };
 
-export default App;
+export default Page;
