@@ -1,10 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from 'react';
 import { useConnect } from 'wagmi';
-import { ChevronLeft } from 'lucide-react';
+import { ChevronLeft, RefreshCw } from 'lucide-react';
 import { useWalletConnection } from "@/app/hooks/useWalletConnection";
 import WalletErrorComponent from "./WalletError";
 import WalletLoader from "./WalletLoader";
+import WalletEmptyState from "./WalletEmptyState";
+import WalletRecommendations from "./WalletRecommendations";
+import { 
+  getAvailableWallets, 
+  getInstalledWallets, 
+  getMissingWallets,
+  hasAnyWalletsInstalled,
+  checkWalletInstallation 
+} from "@/app/utils/walletDetection";
 
 interface EthereumWalletModalProps {
   onBack: () => void;
@@ -21,11 +30,26 @@ const EthereumWalletModal: React.FC<EthereumWalletModalProps> = ({ onBack, onCon
   } = useWalletConnection('ethereum');
 
   const [selectedConnector, setSelectedConnector] = useState<any>(null);
+  const [walletDetection, setWalletDetection] = useState(() => checkWalletInstallation());
+  const [showRecommendations, setShowRecommendations] = useState(false);
 
   // Notify parent of connection state changes
   useEffect(() => {
     onConnectionStateChange?.(isConnecting);
   }, [isConnecting, onConnectionStateChange]);
+
+  // Get wallet information
+  const availableWallets = getAvailableWallets('ethereum');
+  const installedWallets = getInstalledWallets('ethereum');
+  const missingWallets = getMissingWallets('ethereum');
+  const hasWallets = hasAnyWalletsInstalled('ethereum');
+
+  // Refresh wallet detection
+  const refreshWalletDetection = () => {
+    setWalletDetection(checkWalletInstallation());
+    // Force re-render of connectors
+    window.location.reload();
+  };
 
   const walletIcons: Record<string, string> = {
     metamask: '/icons/wallets/metamask.svg',
@@ -50,6 +74,28 @@ const EthereumWalletModal: React.FC<EthereumWalletModalProps> = ({ onBack, onCon
     }
   };
 
+  // Show empty state if no wallets are available
+  if (!hasWallets && connectors.length === 0) {
+    return (
+      <div className="space-y-4">
+        {/* Back Button */}
+        <button
+          onClick={onBack}
+          className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-4"
+        >
+          <ChevronLeft size={20} />
+          <span>Back to options</span>
+        </button>
+
+        <WalletEmptyState
+          category="ethereum"
+          availableWallets={availableWallets}
+          onRefresh={refreshWalletDetection}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-4">
       {/* Back Button */}
@@ -69,6 +115,27 @@ const EthereumWalletModal: React.FC<EthereumWalletModalProps> = ({ onBack, onCon
           walletName={selectedConnector?.name}
           onRetry={handleRetry}
           onDismiss={clearError}
+          className="mb-4"
+        />
+      )}
+
+      {/* Wallet Recommendations Toggle */}
+      {(missingWallets.length > 0 || installedWallets.length > 0) && (
+        <button
+          onClick={() => setShowRecommendations(!showRecommendations)}
+          className="w-full flex items-center justify-between p-2 text-sm text-gray-400 hover:text-white transition-colors mb-2"
+        >
+          <span>Wallet Status ({installedWallets.length} installed)</span>
+          <span className={`transition-transform ${showRecommendations ? 'rotate-180' : ''}`}>▼</span>
+        </button>
+      )}
+
+      {/* Wallet Recommendations */}
+      {showRecommendations && (
+        <WalletRecommendations
+          installedWallets={installedWallets}
+          missingWallets={missingWallets}
+          category="ethereum"
           className="mb-4"
         />
       )}
@@ -136,6 +203,28 @@ const EthereumWalletModal: React.FC<EthereumWalletModalProps> = ({ onBack, onCon
           );
         })}
       </div>
+
+      {/* Refresh Detection */}
+      {connectors.length === 0 && (
+        <div className="text-center py-4 border-t border-gray-700">
+          <p className="text-sm text-gray-400 mb-3">
+            Wallet not appearing?
+          </p>
+          <button
+            onClick={refreshWalletDetection}
+            className="
+              inline-flex items-center gap-2 px-4 py-2 
+              bg-[#291A43] hover:bg-[#342251] 
+              text-white text-sm rounded-lg 
+              transition-colors duration-200
+              border border-gray-600 hover:border-gray-500
+            "
+          >
+            <RefreshCw size={14} />
+            Refresh Wallets
+          </button>
+        </div>
+      )}
 
       {/* Help Text */}
       <p className="text-center text-sm text-gray-400 mt-4">
