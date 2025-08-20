@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { MoveRight } from "lucide-react";
 
 // if the data isn't depending on any prop in the component, it should be outside its
 // render method so we avoid re-computing it again on every render.
