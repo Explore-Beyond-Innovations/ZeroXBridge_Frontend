@@ -14,12 +14,16 @@ interface ConnectModalProps {
 
 const ConnectModal: React.FC<ConnectModalProps> = ({ isModalOpen, setIsModalOpen }) => {
   const [activeChain, setActiveChain] = useState<'ethereum' | 'starknet' | null>(null);
+  const [isAnyWalletConnecting, setIsAnyWalletConnecting] = useState(false);
   
   const { address: starknetAddress } = useStarknetAccount();
   const { address: ethereumAddress } = useEthereumAccount();
 
   const handleOverlayClick = () => {
-    setIsModalOpen(false);
+    // Prevent closing modal during connection
+    if (!isAnyWalletConnecting) {
+      setIsModalOpen(false);
+    }
   };
 
   const handleModalClick = (e: React.MouseEvent) => {
@@ -27,7 +31,10 @@ const ConnectModal: React.FC<ConnectModalProps> = ({ isModalOpen, setIsModalOpen
   };
 
   const handleBack = () => {
-    setActiveChain(null);
+    // Prevent going back during connection
+    if (!isAnyWalletConnecting) {
+      setActiveChain(null);
+    }
   };
 
   return (
@@ -43,8 +50,15 @@ const ConnectModal: React.FC<ConnectModalProps> = ({ isModalOpen, setIsModalOpen
       >
         {/* Close Button */}
         <button
-          className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
-          onClick={() => setIsModalOpen(false)}
+          className={`
+            absolute top-4 right-4 transition-colors
+            ${isAnyWalletConnecting 
+              ? 'text-gray-600 cursor-not-allowed' 
+              : 'text-white hover:text-gray-300'
+            }
+          `}
+          onClick={() => !isAnyWalletConnecting && setIsModalOpen(false)}
+          disabled={isAnyWalletConnecting}
         >
           <X size={24} />
         </button>
@@ -116,9 +130,15 @@ const ConnectModal: React.FC<ConnectModalProps> = ({ isModalOpen, setIsModalOpen
               </button>
             </div>
           ) : activeChain === 'ethereum' ? (
-            <EthereumWalletModal onBack={handleBack} />
+            <EthereumWalletModal 
+              onBack={handleBack} 
+              onConnectionStateChange={setIsAnyWalletConnecting}
+            />
           ) : (
-            <StarknetWalletModal onBack={handleBack} />
+            <StarknetWalletModal 
+              onBack={handleBack}
+              onConnectionStateChange={setIsAnyWalletConnecting}
+            />
           )}
         </div>
       </div>
