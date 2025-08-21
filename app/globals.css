@@ -130,23 +130,25 @@ body {
 
 /* Custom Scrollbar - Combined and Simplified */
 .custom-scrollbar::-webkit-scrollbar {
-  height: 8px;
-  width: 8px;
+  height: 6px;
+  width: 6px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
   background: transparent;
-  margin: 0 4px;
+  margin: 0 2px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
   border-radius: 20px;
-  background: #d4c2f3;
-  transition: background 0.2s ease;
+  background: #A26DFF;
+  opacity: 0.3;
+  transition: all 0.2s ease;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #b69fe6;
+  background: #A26DFF;
+  opacity: 0.6;
 }
 
 .dark .custom-scrollbar::-webkit-scrollbar-thumb {
@@ -155,6 +157,19 @@ body {
 
 .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #5c4a85;
+}
+
+/* Hide scrollbar for mobile devices */
+@media (max-width: 768px) {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+  
+  .custom-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
 }
 
 /* Ensure Smooth Rendering on Webkit Browsers */

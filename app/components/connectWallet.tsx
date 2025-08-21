@@ -39,42 +39,50 @@ const ConnectModal: React.FC<ConnectModalProps> = ({ isModalOpen, setIsModalOpen
 
   return (
     <div
-      className={`fixed inset-0 bg-black/40 z-50 flex items-center justify-center px-4 ${
+      className={`fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4 ${
         isModalOpen ? "visible" : "hidden"
       }`}
       onClick={handleOverlayClick}
     >
       <div 
-        className="relative w-full max-w-md bg-[#0F0F0F] rounded-[10px] p-6"
+        className="
+          relative w-full max-w-md bg-[#0F0F0F] rounded-[10px] 
+          max-h-[85vh] sm:max-h-[80vh] md:max-h-[75vh] 
+          overflow-hidden flex flex-col
+          mx-auto my-auto
+        "
         onClick={handleModalClick}
       >
-        {/* Close Button */}
-        <button
-          className={`
-            absolute top-4 right-4 transition-colors
-            ${isAnyWalletConnecting 
-              ? 'text-gray-600 cursor-not-allowed' 
-              : 'text-white hover:text-gray-300'
+        {/* Header Section - Fixed */}
+        <div className="px-6 pt-6 pb-4 flex-shrink-0">
+          {/* Close Button */}
+          <button
+            className={`
+              absolute top-4 right-4 transition-colors z-20
+              ${isAnyWalletConnecting 
+                ? 'text-gray-600 cursor-not-allowed' 
+                : 'text-white hover:text-gray-300'
+              }
+            `}
+            onClick={() => !isAnyWalletConnecting && setIsModalOpen(false)}
+            disabled={isAnyWalletConnecting}
+          >
+            <X size={24} />
+          </button>
+
+          {/* Title */}
+          <h2 className="text-white text-xl font-semibold text-center">
+            {activeChain === null 
+              ? 'Select a Network'
+              : activeChain === 'ethereum'
+              ? 'Connect Ethereum Wallet'
+              : 'Connect Starknet Wallet'
             }
-          `}
-          onClick={() => !isAnyWalletConnecting && setIsModalOpen(false)}
-          disabled={isAnyWalletConnecting}
-        >
-          <X size={24} />
-        </button>
+          </h2>
+        </div>
 
-        {/* Title */}
-        <h2 className="text-white text-xl font-semibold my-3 text-center">
-          {activeChain === null 
-            ? 'Select a Network'
-            : activeChain === 'ethereum'
-            ? 'Connect Ethereum Wallet'
-            : 'Connect Starknet Wallet'
-          }
-        </h2>
-
-        {/* Content */}
-        <div className="mt-6">
+        {/* Content - Scrollable area */}
+        <div className="px-6 pb-6 flex-1 overflow-y-auto overflow-x-hidden custom-scrollbar">
           {activeChain === null ? (
             <div className="space-y-4">
               {/* Ethereum Option */}
