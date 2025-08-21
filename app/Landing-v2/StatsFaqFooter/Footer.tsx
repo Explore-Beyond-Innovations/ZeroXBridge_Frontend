@@ -9,27 +9,38 @@ const Footer = () => {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState<string>("");
 
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
+    setError(""); 
+
+    // Basic email regex validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
 
     setIsSubmitting(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    setEmail("");
 
-    // Reset success message after 3 seconds
-    setTimeout(() => setIsSubmitted(false), 3000);
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+
+      setIsSubmitted(true);
+      setEmail("");
+      setTimeout(() => setIsSubmitted(false), 3000);
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <footer className="w-full pb-8 relative">
       {/* OnlyDust Promotional Banner */}
       <section className=" relative py-8 bg-[url('/border1.svg')] bg-cover 2xl:h-[1146px]">
-
         <div className="max-w-[3359px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -50,9 +61,7 @@ const Footer = () => {
                     viewport={{ once: true }}
                     className="text-[26.8px] md:text-2xl lg:text-[40.7px] 2xl:text-[72px] font-[500] text-[#eeeeee] leading-[2rem] 2xl:leading-[4.5rem] relative "
                   >
-                    We are building {" "}
-                    open-source, join
-                    at{" "}
+                    We are building open-source, join at{" "}
                     <span
                       className={`font-parmanent_marker tracking-wide leading-normal  relative text-[#eeeeee] group-hover:text-white`}
                     >
@@ -161,8 +170,11 @@ const Footer = () => {
             </p>
           </motion.div>
 
-          <form onSubmit={handleNewsletterSubmit} className="w-full md:w-fit mx-auto">
-            <div className="flex flex-col sm:flex-row gap-1">
+          <form
+            onSubmit={handleNewsletterSubmit}
+            className="w-full md:w-fit mx-auto"
+          >
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-1">
               <input
                 type="email"
                 value={email}
@@ -233,7 +245,10 @@ const Footer = () => {
                 )}
               </motion.button>
             </div>
+           
           </form>
+
+          {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
         </div>
       </section>
 
@@ -337,7 +352,7 @@ const Footer = () => {
                     className="absolute z-20 hidden group-hover:block transition-all ease-linear overflow-hidden w-full h-full"
                     initial={{ rotate: -45, opacity: 0 }}
                     animate={{ rotate: 0, opacity: 1 }}
-                    transition={{ duration: 1.3, ease: 'easeOut' }}
+                    transition={{ duration: 1.3, ease: "easeOut" }}
                     viewBox="0 0 400 280"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -388,11 +403,11 @@ const Footer = () => {
                 className="relative group flex-1 w-full md:w-[310px] lg:w-[400px] 3xl:w-[814px] 2xl:h-[429.56px] h-[257px] md:h-[280px] rounded-[16px] bg-[#161616]"
               >
                 <div className="relative w-full h-full rounded-2xl flex items-center justify-center transition-all duration-300 overflow-hidden">
-                <motion.svg
+                  <motion.svg
                     className="absolute z-20 hidden group-hover:block transition-all ease-linear overflow-hidden w-full h-full"
                     initial={{ rotate: -45, opacity: 0 }}
                     animate={{ rotate: 0, opacity: 1 }}
-                    transition={{ duration: 1.3, ease: 'easeOut' }}
+                    transition={{ duration: 1.3, ease: "easeOut" }}
                     viewBox="0 0 400 280"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -452,45 +467,32 @@ const Footer = () => {
       {/* Footer Links and Copyright */}
       <div className="w-full h-[383px] hidden md:flex justify-between items-center px-[4rem] relative bg-[#070707]">
         <div className="w-1/3 ">
-          <h4 className="text-white font-[700] mb-2 2xl:text-[20px]">Quick Links</h4>
+          <h4 className="text-white font-[700] mb-2 2xl:text-[20px]">
+            Quick Links
+          </h4>
           <ul className="space-y-2 text-[#B2B2B2] text-[14px] 2xl:text-[20px]">
             <li>
-              <a
-                href="/Landing-v2/about"
-                className=" transition-colors"
-              >
+              <a href="/Landing-v2/about" className=" transition-colors">
                 About
               </a>
             </li>
             <li>
-              <a
-                href="#"
-                className=" transition-colors"
-              >
+              <a href="#" className=" transition-colors">
                 Apps
               </a>
             </li>
             <li>
-              <a
-                href="#"
-                className=" transition-colors"
-              >
+              <a href="#" className=" transition-colors">
                 Docs
               </a>
             </li>
             <li>
-              <a
-                href="#"
-                className=" transition-colors"
-              >
+              <a href="#" className=" transition-colors">
                 Community
               </a>
             </li>
             <li>
-              <a
-                href="#"
-                className=" transition-colors"
-              >
+              <a href="#" className=" transition-colors">
                 Blog
               </a>
             </li>
