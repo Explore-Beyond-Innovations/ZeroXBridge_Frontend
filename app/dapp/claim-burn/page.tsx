@@ -11,6 +11,7 @@ import { Hamburger } from "@/svg/Hamburger";
 import { Info } from "@/svg/Info";
 import { useThemeContext } from "@/app/hooks/context";
 import { InfoRow } from "./components/info";
+import { useAccount, useContract } from "@starknet-react/core";
 
 const geistMono = Geist_Mono({
   subsets: ["latin"],
@@ -28,12 +29,22 @@ type BurnClaimData = {
   displayAmount: string;
 };
 
+// pretty much the contract address. i chose to word it differently
+const bridgeAddress =
+  "0x0123a4ce7980e3c4f5832af0735fc3beabdc157379e09aaf7c5e62dfa8c19427";
+
 export default function ClaimBurnPage() {
   const { isDark } = useThemeContext();
   const { isConnected, openWalletModal } = useWallet();
   const [activeTab, setActiveTab] = useState("claim");
   const [amount, setAmount] = useState("");
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+
+  const { status, address } = useAccount();
+  const { contract } = useContract({
+    abi: bridgeAbi, // this would break for now until i get an ABI provided
+    address: bridgeAddress,
+  });
 
   const CLAIM_BURN_DATA: Record<string, BurnClaimData> = useMemo(
     () => ({
@@ -61,8 +72,37 @@ export default function ClaimBurnPage() {
     if (isConnected) setAmount(currentData.displayAmount);
   };
 
-  const handleAction = () => {
-    if (isConnected && amount) setShowSuccessModal(true);
+  const handleAction = async () => {
+    if (!contract || status !== "connected") return;
+
+    try {
+      if (activeTab === "burn") {
+        const tx = await contract.invoke("burn_xzb_for_unlock", [
+          amount,
+          address,
+        ]);
+        console.log("Burn Tx:", tx);
+      } else {
+        // this proof here is a dummy placeholder until i'm aware of how to get it from the server.
+        const proof = [
+          "0x123",
+          "0x64",
+          "0x1",
+          `${Math.floor(Date.now() / 1000)}`,
+        ];
+        const commitmentHash = "0xabc";
+
+        const tx = await contract.invoke("mint_and_claim_xzb", [
+          proof,
+          commitmentHash,
+        ]);
+        console.log("Claim Tx:", tx);
+      }
+
+      setShowSuccessModal(true);
+    } catch (err) {
+      console.error(`${activeTab} failed:`, err);
+    }
   };
 
   const isActionable = !!(amount && amount !== "0" && amount !== "0.00");
