@@ -1,7 +1,6 @@
+
 import React from "react";
 import { TokenSelectDropdown } from "./TokenDropDownMenu";
-
-// Dummy token type data
 import { Token } from "@/types/tokens";
 import { tokens_swap as tokens } from "@/utils/data";
 import Image from "next/image";
@@ -13,6 +12,7 @@ interface SwapFromInputProps {
   setAmount: (amount: string) => void;
   balance?: string;
   isConnected: boolean;
+  isLoading?: boolean;
 }
 
 const numberRegex = /^[0-9]*[.,]?[0-9]*$/;
@@ -24,6 +24,7 @@ function SwapFromInput({
   setAmount,
   balance,
   isConnected,
+  isLoading = false,
 }: SwapFromInputProps) {
   return (
     <div
@@ -54,13 +55,14 @@ function SwapFromInput({
         <TokenSelectDropdown
           onTokenSelect={setToken}
           tokens={tokens.filter((item) => item.name !== token.name)}
+          isLoading={isLoading}
         />
       </div>
 
       <div className="flex items-center mb-[14px] w-full space-x-2">
         <input
           placeholder="0.00"
-          disabled={!isConnected}
+          disabled={!isConnected || isLoading}
           className="text-[32px]/[106%] text-[#1E1E1E] dark:text-[#F4F4F4] disabled:text-[#DDDDDD] dark:disabled:text-[#353535] font-light -tracking-[4%] font-mono w-full focus:outline-none"
           value={!isConnected || !amount ? "" : amount}
           onChange={(e) => {
@@ -73,8 +75,8 @@ function SwapFromInput({
 
         <button
           className="py-[7px] px-[13.4px] bg-[#F4F4F4] dark:bg-[#232323] border-[1.11px] dark:border-none border-[#EEEEEE] rounded-full text-[#737373] dark:text-[#F5F5F5] disabled:text-[#737373] disabled:opacity-45 leading-[112%] whitespace-nowrap"
-          disabled={!isConnected}
-           onClick={() => balance && setAmount(balance)}
+          disabled={!isConnected || isLoading}
+          onClick={() => balance && setAmount(balance)}
         >
           Max
         </button>

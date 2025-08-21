@@ -9,6 +9,7 @@ interface SwapToInputProps {
   setToken: (token: Token) => void;
   amount: string;
   isConnected: boolean;
+  isLoading?: boolean;
 }
 
 function SwapToInput({
@@ -16,6 +17,7 @@ function SwapToInput({
   setToken,
   amount,
   isConnected,
+  isLoading = false,
 }: SwapToInputProps) {
   return (
     <div
@@ -47,6 +49,7 @@ function SwapToInput({
         <TokenSelectDropdown
           onTokenSelect={setToken}
           tokens={tokens.filter((item) => item.name !== token.name)}
+          isLoading={isLoading}
         />
       </div>
 
