@@ -9,27 +9,38 @@ const Footer = () => {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState<string>("");
 
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
+    setError(""); 
+
+    // Basic email regex validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
 
     setIsSubmitting(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    setEmail("");
 
-    // Reset success message after 3 seconds
-    setTimeout(() => setIsSubmitted(false), 3000);
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+
+      setIsSubmitted(true);
+      setEmail("");
+      setTimeout(() => setIsSubmitted(false), 3000);
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <footer className="w-full pb-8 relative">
+    <footer className="w-full relative">
       {/* OnlyDust Promotional Banner */}
       <section className=" relative py-8 bg-[url('/border1.svg')] bg-cover 2xl:h-[1146px]">
-
         <div className="max-w-[3359px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -50,9 +61,7 @@ const Footer = () => {
                     viewport={{ once: true }}
                     className="text-[26.8px] md:text-2xl lg:text-[40.7px] 2xl:text-[72px] font-[500] text-[#eeeeee] leading-[2rem] 2xl:leading-[4.5rem] relative "
                   >
-                    We are building {" "}
-                    open-source, join
-                    at{" "}
+                    We are building open-source, join at{" "}
                     <span
                       className={`font-parmanent_marker tracking-wide leading-normal  relative text-[#eeeeee] group-hover:text-white`}
                     >
@@ -161,14 +170,17 @@ const Footer = () => {
             </p>
           </motion.div>
 
-          <form onSubmit={handleNewsletterSubmit} className="w-fit mx-auto">
-            <div className="flex flex-col sm:flex-row gap-1">
+          <form
+            onSubmit={handleNewsletterSubmit}
+            className="w-full md:w-fit mx-auto"
+          >
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-1">
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter e-mail address"
-                className="flex-1 px-4 py-3 bg-[#1A1A1A] w-[400px] h-[48px] 2xl:w-[992px] 2xl:h-[78px]  rounded-[12px] 2xl:rounded-[19.53px] text-white placeholder-[#97A1A4] focus:outline-none transition-colors"
+                className="flex-1 px-4 py-3 bg-[#1A1A1A] w-full md:w-[400px] h-[48px] 2xl:w-[992px] 2xl:h-[78px]  rounded-[12px] 2xl:rounded-[19.53px] text-white placeholder-[#97A1A4] focus:outline-none transition-colors"
                 required
               />
               <motion.button
@@ -233,25 +245,28 @@ const Footer = () => {
                 )}
               </motion.button>
             </div>
+           
           </form>
+
+          {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
         </div>
       </section>
 
       {/* Community Section */}
-      <section className="relative bg-[#0F0F0F] h-[790px] md:h-fit lg:h-[431px] 2xl:h-[732px] flex flex-col md:flex-row items-center justify-between w-full">
-        <div className="relative z-10 w-full 2xl-w-[97%] px-4 sm:px-6 lg:px-8 py-16  flex items-center justify-center ">
-          <div className="max-w-[3359px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-8 2xl:gap-[4rem]">
+      <section className="relative bg-[#0F0F0F] py-16 md:py-20 lg:py-24 2xl:py-32 flex flex-col lg:flex-row items-center justify-between w-full">
+        <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
+          <div className="max-w-[3359px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12 xl:gap-16 2xl:gap-20">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="2xl:w-[1073px] flex-1 text-center lg:text-left"
+              className="flex-1 text-center lg:text-left max-w-full lg:max-w-[50%]"
             >
-              <h3 className="text-xl md:text-2xl lg:text-3xl 2xl:text-[94.96px] font-normal text-white mb-4 w-full ">
+              <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-[94.96px] font-normal text-white mb-4 lg:mb-6 2xl:mb-8">
                 Join our
                 <br className="2xl:hidden" />
-                <span className="font-parmanent_marker text-2xl 2xl:pl-6 2xl:text-[94.96px] md:text-3xl lg:text-4xl relative">
+                <span className="font-parmanent_marker text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-[94.96px] 2xl:pl-6 relative">
                   <svg
                     className="absolute -left-[3rem] top-0 hidden md:block 2xl:hidden"
                     width="36"
@@ -309,7 +324,7 @@ const Footer = () => {
                   </svg>
                 </span>
               </h3>
-              <p className="text-gray-400 text-base md:text-[16px] 2xl:text-[35.61px] 2xl:mt-12 2xl:leading-[2.5rem] w-[290px] 2xl:w-full mx-auto lg:mx-0">
+              <p className="text-gray-400 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-[35.61px] 2xl:leading-[2.5rem] max-w-full lg:max-w-none">
                 ZeroXBridge will enable the community
                 <br className="hidden sm:block" />
                 to vote on which assets get whitelisted
@@ -323,21 +338,21 @@ const Footer = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               viewport={{ once: true }}
-              className="flex flex-col md:flex-row gap-6 w-full 2xl:w-[1658.68px] lg:h-[534px] items-center"
+              className="flex flex-col sm:flex-row gap-4 sm:gap-6 lg:gap-8 w-full lg:w-auto lg:flex-1"
             >
               {/* Discord */}
               <motion.a
                 href="#"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="relative group flex-1 w-full md:w-[310px] lg:w-[400px] 3xl:w-[814px] 2xl:h-[429.56px] h-[257px] md:h-[280px] rounded-[16px] bg-[#161616]"
+                className="relative group w-full sm:w-[calc(50%-12px)] lg:w-[280px] xl:w-[320px] 2xl:w-[400px] h-[200px] sm:h-[220px] md:h-[240px] lg:h-[280px] xl:h-[320px] 2xl:h-[400px] rounded-[16px] bg-[#161616]"
               >
                 <div className="relative w-full h-full rounded-2xl flex items-center justify-center transition-all duration-300 overflow-hidden">
                   <motion.svg
                     className="absolute z-20 hidden group-hover:block transition-all ease-linear overflow-hidden w-full h-full"
                     initial={{ rotate: -45, opacity: 0 }}
                     animate={{ rotate: 0, opacity: 1 }}
-                    transition={{ duration: 1.3, ease: 'easeOut' }}
+                    transition={{ duration: 1.3, ease: "easeOut" }}
                     viewBox="0 0 400 280"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -364,9 +379,9 @@ const Footer = () => {
                     </defs>
                   </motion.svg>
 
-                  <div className="relative z-30 w-[94px] h-[94px] bg-[#282828] group-hover:bg-[#5865F2]  rounded-2xl flex items-center justify-center transition-all duration-300">
+                  <div className="relative z-30 w-[60px] h-[60px] sm:w-[70px] sm:h-[70px] md:w-[80px] md:h-[80px] lg:w-[90px] lg:h-[90px] xl:w-[100px] xl:h-[100px] 2xl:w-[120px] 2xl:h-[120px] bg-[#282828] group-hover:bg-[#5865F2] rounded-2xl flex items-center justify-center transition-all duration-300">
                     <svg
-                      className="w-20 h-20 text-gray-400 group-hover:text-white transition-colors"
+                      className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18 xl:w-20 xl:h-20 2xl:w-24 2xl:h-24 text-gray-400 group-hover:text-white transition-colors"
                       fill="currentColor"
                       viewBox="0 0 24 24"
                     >
@@ -385,14 +400,14 @@ const Footer = () => {
                 href="#"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="relative group flex-1 w-full md:w-[310px] lg:w-[400px] 3xl:w-[814px] 2xl:h-[429.56px] h-[257px] md:h-[280px] rounded-[16px] bg-[#161616]"
+                className="relative group w-full sm:w-[calc(50%-12px)] lg:w-[280px] xl:w-[320px] 2xl:w-[400px] h-[200px] sm:h-[220px] md:h-[240px] lg:h-[280px] xl:h-[320px] 2xl:h-[400px] rounded-[16px] bg-[#161616]"
               >
                 <div className="relative w-full h-full rounded-2xl flex items-center justify-center transition-all duration-300 overflow-hidden">
-                <motion.svg
+                  <motion.svg
                     className="absolute z-20 hidden group-hover:block transition-all ease-linear overflow-hidden w-full h-full"
                     initial={{ rotate: -45, opacity: 0 }}
                     animate={{ rotate: 0, opacity: 1 }}
-                    transition={{ duration: 1.3, ease: 'easeOut' }}
+                    transition={{ duration: 1.3, ease: "easeOut" }}
                     viewBox="0 0 400 280"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -418,9 +433,9 @@ const Footer = () => {
                       </radialGradient>
                     </defs>
                   </motion.svg>
-                  <div className="relative z-30 w-[94px] h-[94px] bg-[#282828] group-hover:bg-[#37AEE2] group-hover:text-white rounded-2xl flex items-center justify-center transition-all duration-300">
+                  <div className="relative z-30 w-[60px] h-[60px] sm:w-[70px] sm:h-[70px] md:w-[80px] md:h-[80px] lg:w-[90px] lg:h-[90px] xl:w-[100px] xl:h-[100px] 2xl:w-[120px] 2xl:h-[120px] bg-[#282828] group-hover:bg-[#37AEE2] group-hover:text-white rounded-2xl flex items-center justify-center transition-all duration-300">
                     <svg
-                      className="w-20 h-20 transition-colors duration-300"
+                      className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18 xl:w-20 xl:h-20 2xl:w-24 2xl:h-24 transition-colors duration-300"
                       viewBox="0 0 80 71"
                       xmlns="http://www.w3.org/2000/svg"
                     >
@@ -452,37 +467,32 @@ const Footer = () => {
       {/* Footer Links and Copyright */}
       <div className="w-full h-[383px] hidden md:flex justify-between items-center px-[4rem] relative bg-[#070707]">
         <div className="w-1/3 ">
-          <h4 className="text-white font-[700] mb-2 2xl:text-[20px]">Quick Links</h4>
+          <h4 className="text-white font-[700] mb-2 2xl:text-[20px]">
+            Quick Links
+          </h4>
           <ul className="space-y-2 text-[#B2B2B2] text-[14px] 2xl:text-[20px]">
             <li>
-              <a
-                href="#"
-                className=" transition-colors"
-              >
+              <a href="/Landing-v2/about" className=" transition-colors">
+                About
+              </a>
+            </li>
+            <li>
+              <a href="#" className=" transition-colors">
                 Apps
               </a>
             </li>
             <li>
-              <a
-                href="#"
-                className=" transition-colors"
-              >
+              <a href="#" className=" transition-colors">
                 Docs
               </a>
             </li>
             <li>
-              <a
-                href="#"
-                className=" transition-colors"
-              >
+              <a href="#" className=" transition-colors">
                 Community
               </a>
             </li>
             <li>
-              <a
-                href="#"
-                className=" transition-colors"
-              >
+              <a href="#" className=" transition-colors">
                 Blog
               </a>
             </li>
