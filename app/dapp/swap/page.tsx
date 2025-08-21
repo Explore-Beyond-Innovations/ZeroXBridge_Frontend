@@ -94,11 +94,11 @@ function SwapQuoteDetailsSkeleton() {
   );
 }
 
-function SwapButtonSkeleton() {
-  return (
-    <div className="h-12 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse w-full" />
-  );
-}
+// function SwapButtonSkeleton() {
+//   return (
+//     <div className="h-12 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse w-full" />
+//   );
+// }
 
 export default function SwapPage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -179,7 +179,6 @@ export default function SwapPage() {
             {isLoading ? (
               <>
                 <SwapQuoteDetailsSkeleton />
-                <SwapButtonSkeleton />
               </>
             ) : (
               <>
