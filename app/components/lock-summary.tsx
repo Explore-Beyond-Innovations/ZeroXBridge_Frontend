@@ -1,13 +1,15 @@
-"use client"
+"use client";
 
 import { Info, X } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function LockSummary() {
+  const { t } = useTranslation();
 
-    const handleInputChange = (event: React.FormEvent<HTMLInputElement>) => {
-        const target = event.currentTarget;
-        target.value = target.value.replace(/[^0-9.]/g, ""); 
-      };
+  const handleInputChange = (event: React.FormEvent<HTMLInputElement>) => {
+    const target = event.currentTarget;
+    target.value = target.value.replace(/[^0-9.]/g, "");
+  };
 
   return (
     <div className=" w-full h-full fixed inset-0 bg-black bg-opacity-50 z-[999] flex items-center justify-center p-5 ">
@@ -19,21 +21,23 @@ export default function LockSummary() {
           />
         </button>
         <h1 className="text-center text-[#D4D4D4] font-bold text-xl ">
-          Lock Summary
+          {t("lockSummary.title")}
         </h1>
 
         <label htmlFor="amount" className="w-full block ">
           <div className=" flex flex-row items-center justify-between mb-2">
             {" "}
             <p className="text-[#D4D4D4] text-sm font-medium ">
-              Amount to Lock
+              {t("lockSummary.amountToLock")}
             </p>{" "}
-            <p className=" text-[#D4D4D4] text-base font-medium ">MAX</p>{" "}
+            <p className=" text-[#D4D4D4] text-base font-medium ">
+              {t("common.max")}
+            </p>{" "}
           </div>
           <input
             type="text"
             id="amount"
-            placeholder="Enter Token Amount"
+            placeholder={t("lockSummary.enterTokenAmount")}
             onInput={handleInputChange}
             className="w-full bg-[#1F1333] border-[0.4px] border-[#8B8B8B] py-5 px-[30px] rounded-[8.81px] text-[#8B8B8B] font-normal text-sm  placeholder:text-[#8B8B8B] placeholder:font-normal placeholder:ext-sm  outline-none "
           />

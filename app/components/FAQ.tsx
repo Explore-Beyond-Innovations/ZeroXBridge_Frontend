@@ -2,6 +2,7 @@
 import { Manrope, Roboto_Serif } from "next/font/google";
 import Image from "next/image";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 interface FaqItem {
   item: {
@@ -62,6 +63,7 @@ const FaqItem = ({ item, onToggle, isOpen }: FaqItem) => {
 
 const FAQ = () => {
   const [isOpenIndex, setIsOpenIndex] = useState<number | null>(null);
+  const { t } = useTranslation();
   const onToggle = (index: number | null) => {
     setIsOpenIndex(isOpenIndex === index ? null : index);
   };
@@ -79,24 +81,23 @@ const FAQ = () => {
           ZeroXBridge is here to answer all your questions and keep you updated.
         </p>
 
-        {Array(7)
-          .fill(null)
-          .map((_, index) => {
+        {t("faq.questions", { returnObjects: true }).map(
+          (faqItem: any, index: number) => {
             return (
               <FaqItem
                 item={{
-                  question: `What is ZeroXBridge built on?`,
-                  answer: `Morem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque.`,
-                }} // Sample data
+                  question: faqItem.question,
+                  answer: faqItem.answer,
+                }}
                 key={index}
                 onToggle={() => onToggle(index)}
                 isOpen={index === isOpenIndex}
               />
             );
-          })}
-    
-          <div className="gradient-01 z-0 rounded-full  "></div>
-        
+          }
+        )}
+
+        <div className="gradient-01 z-0 rounded-full  "></div>
       </div>
     </div>
   );

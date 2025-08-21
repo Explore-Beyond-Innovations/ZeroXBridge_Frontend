@@ -1,42 +1,46 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
-import wallet from '../../public/wallet.svg';
-import write from '../../public/write.svg';
-import scroll from '../../public/scroll.svg';
-import token from '../../public/token.svg';
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
+import wallet from "../../public/wallet.svg";
+import write from "../../public/write.svg";
+import scroll from "../../public/scroll.svg";
+import token from "../../public/token.svg";
 import blur3 from "@/public/outerBlur.svg";
+import { useTranslation } from "react-i18next";
 
-const steps = [
-  {
-    number: 1,
-    title: "Connect Wallet",
-    image: wallet,
-    description: "First, you'll have to connect your wallet and then deposit collateral (ETH, USDC, STRK etc) on Ethereum L1."
-  },
-  {
-    number: 2,
-    title: "ZK-STARK Proof",
-    image: write,
-    description: "A ZK-STARK proof verifies the deposit without exposing sensitive data."
-  },
-  {
-    number: 3,
-    title: "STARKNET VERIFIES PROOF",
-    image: scroll,
-    description: "Starknet verifies the proof and unlocks borrowing power from liquidity vaults."
-  },
-  {
-    number: 4,
-    title: "BORROW, LEND OR TRADE",
-    image: token,
-    description: "And that's all, you can now borrow, lend, or trade using their collateralized funds."
-  }
-];
+// Move steps inside the component where t is available
 
 const HowItWorks = () => {
+  const { t } = useTranslation();
   const [currentStep, setCurrentStep] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+
+  const steps = [
+    {
+      number: 1,
+      title: t("howItWorks.step1.title"),
+      image: wallet,
+      description: t("howItWorks.step1.description"),
+    },
+    {
+      number: 2,
+      title: t("howItWorks.step2.title"),
+      image: write,
+      description: t("howItWorks.step2.description"),
+    },
+    {
+      number: 3,
+      title: t("howItWorks.step3.title"),
+      image: scroll,
+      description: t("howItWorks.step3.description"),
+    },
+    {
+      number: 4,
+      title: t("howItWorks.step4.title"),
+      image: token,
+      description: t("howItWorks.step4.description"),
+    },
+  ];
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -89,10 +93,10 @@ const HowItWorks = () => {
         {/* Section Title */}
         <div className="text-center mb-12 lg:mb-24 animate-fade-in">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 gradient-text">
-            How it Works
+            {t("howItWorks.title")}
           </h2>
           <p className="text-gray-300 text-base sm:text-lg lg:text-[18px] font-serif">
-            These easy 4 steps are all you need to Get Started
+            {t("howItWorks.subtitle")}
           </p>
         </div>
 
@@ -105,11 +109,11 @@ const HowItWorks = () => {
                 <div
                   key={index}
                   className={`absolute w-full h-full flex items-center justify-center transition-all duration-1000 ${
-                    currentStep === index 
-                      ? isAnimating 
-                        ? 'opacity-0 scale-90' 
-                        : 'opacity-100 scale-100' 
-                      : 'opacity-0 scale-90'
+                    currentStep === index
+                      ? isAnimating
+                        ? "opacity-0 scale-90"
+                        : "opacity-100 scale-100"
+                      : "opacity-0 scale-90"
                   }`}
                 >
                   <div className="animate-float">
@@ -119,7 +123,7 @@ const HowItWorks = () => {
                         width={500}
                         height={500}
                         alt={step.title}
-                        className='w-[150px] h-[150px] sm:w-[200px] sm:h-[200px] lg:w-[245px] lg:h-[245px]'
+                        className="w-[150px] h-[150px] sm:w-[200px] sm:h-[200px] lg:w-[245px] lg:h-[245px]"
                       />
                     </div>
                   </div>
@@ -130,7 +134,13 @@ const HowItWorks = () => {
 
           {/* Text Section */}
           <div className="relative order-1 md:order-2 lg:pl-4">
-            <div className={`transition-all duration-1000 ${isAnimating ? 'opacity-0 transform translate-y-4' : 'opacity-100 transform translate-y-0'}`}>
+            <div
+              className={`transition-all duration-1000 ${
+                isAnimating
+                  ? "opacity-0 transform translate-y-4"
+                  : "opacity-100 transform translate-y-0"
+              }`}
+            >
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 lg:w-[60px] lg:h-[60px] rounded-full border border-[#A26DFF] text-white flex items-center justify-center text-base lg:text-[18px] font-serif flex-shrink-0">
                   {steps[currentStep].number}.
@@ -148,7 +158,9 @@ const HowItWorks = () => {
                     {steps.map((_, index) => (
                       <button
                         key={index}
-                        className={`w-10 lg:w-12 h-[0.8px] rounded-full transition-all ${currentStep === index ? 'bg-[#A26DFF]' : 'bg-gray-600'}`}
+                        className={`w-10 lg:w-12 h-[0.8px] rounded-full transition-all ${
+                          currentStep === index ? "bg-[#A26DFF]" : "bg-gray-600"
+                        }`}
                         onClick={() => handleStepChange(index)}
                         disabled={isAnimating}
                       />
@@ -163,7 +175,12 @@ const HowItWorks = () => {
 
       <style jsx>{`
         .gradient-text {
-          background: linear-gradient(90deg, #26183E 0%, #A26DFF 47.5%, #26183E 100%);
+          background: linear-gradient(
+            90deg,
+            #26183e 0%,
+            #a26dff 47.5%,
+            #26183e 100%
+          );
           -webkit-background-clip: text;
           background-clip: text;
           color: transparent;
@@ -171,8 +188,13 @@ const HowItWorks = () => {
         }
 
         @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
+          0%,
+          100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
         }
 
         .animate-float {
@@ -184,8 +206,14 @@ const HowItWorks = () => {
         }
 
         @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
       `}</style>
     </div>

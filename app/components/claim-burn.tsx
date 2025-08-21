@@ -4,6 +4,7 @@ import { ChevronDown, Info } from "lucide-react";
 import Image from "next/image";
 import { useEthereum } from "./Ethereum-provider";
 import { ethers } from "ethers";
+import { useTranslation } from "react-i18next";
 
 interface TokenData {
   available: number;
@@ -34,21 +35,21 @@ const SAMPLE_ASSETS: Asset[] = [
     name: "Ethereum",
     symbol: "ETH",
     icon: "/token.svg",
-    address: "0x0000000000000000000000000000000000000000" // ETH address
+    address: "0x0000000000000000000000000000000000000000", // ETH address
   },
   {
     id: "2",
     name: "USD Coin",
     symbol: "USDC",
     icon: "/token.svg",
-    address: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48" // USDC address
+    address: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48", // USDC address
   },
   {
     id: "3",
     name: "Tether",
     symbol: "USDT",
     icon: "/token.svg",
-    address: "0xdAC17F958D2ee523a2206206994597C13D831ec7" // USDT address
+    address: "0xdAC17F958D2ee523a2206206994597C13D831ec7", // USDT address
   },
 ];
 
@@ -60,6 +61,7 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
   isDarkMode,
   isLoading,
 }) => {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<"claim" | "burn">("claim");
   const [selectedAsset, setSelectedAsset] = useState<Asset | null>(null);
   const [burnAmount, setBurnAmount] = useState<string>("");
@@ -69,14 +71,14 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
   const [isProcessing, setIsProcessing] = useState(false);
   const [userEthBalance, setUserEthBalance] = useState<string | null>(null);
   const [maxAmount, setMaxAmount] = useState<string>("");
-  
-  const { 
-    isConnected: isEthereumConnected, 
+
+  const {
+    isConnected: isEthereumConnected,
     // connect: connectEthereum,
     // depositAsset,
     // claimTokens,
     address: ethereumAddress,
-    provider
+    provider,
   } = useEthereum();
 
   // Reset error when tab changes
@@ -122,16 +124,21 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
   // Update input validation
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    if (value === "" || /^\d*\.?\d*$/.test(value)) { // Allow empty or decimal numbers
+    if (value === "" || /^\d*\.?\d*$/.test(value)) {
+      // Allow empty or decimal numbers
       setBurnAmount(value);
-      
+
       // Clear error if amount is valid
       if (selectedAsset?.symbol === "ETH" && userEthBalance) {
         const inputAmount = Number(value);
         const maxAllowed = Number(maxAmount);
-        
+
         if (inputAmount > maxAllowed) {
-          setError(`Amount exceeds available balance (${Number(userEthBalance).toFixed(5)} ETH). Please enter a smaller amount.`);
+          setError(
+            `Amount exceeds available balance (${Number(userEthBalance).toFixed(
+              5
+            )} ETH). Please enter a smaller amount.`
+          );
         } else {
           setError(null);
         }
@@ -163,13 +170,13 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
       if (!isEthereumConnected || !ethereumAddress) {
         try {
           // await connectEthereum();
-          await new Promise(resolve => setTimeout(resolve, 1000));
-          
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+
           if (!isEthereumConnected || !ethereumAddress) {
             throw new Error("Failed to connect Ethereum wallet");
           }
         } catch (error: any) {
-          console.error('error', error)
+          console.error("error", error);
           throw new Error("Please connect your Ethereum wallet first");
         }
       }
@@ -184,9 +191,10 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
 
       // Determine asset type (0 for ETH, 1 for ERC20)
       const assetType = selectedAsset.symbol === "ETH" ? 0 : 1;
-      
+
       // Get asset address
-      const tokenAddress = selectedAsset.address || "0x0000000000000000000000000000000000000000";
+      const tokenAddress =
+        selectedAsset.address || "0x0000000000000000000000000000000000000000";
 
       // For ETH transfers, validate balance before proceeding
       if (assetType === 0) {
@@ -199,7 +207,9 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
         if (balance < amountInWei) {
           const balanceInEth = ethers.formatEther(balance);
           throw new Error(
-            `Insufficient ETH balance. You have ${Number(balanceInEth).toFixed(5)} ETH but trying to send ${amount} ETH. Please reduce the amount or add more ETH to your wallet.`
+            `Insufficient ETH balance. You have ${Number(balanceInEth).toFixed(
+              5
+            )} ETH but trying to send ${amount} ETH. Please reduce the amount or add more ETH to your wallet.`
           );
         }
       }
@@ -210,7 +220,7 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
         amount,
         userAddress: ethereumAddress,
         isEthereumConnected,
-        hasAddress: !!ethereumAddress
+        hasAddress: !!ethereumAddress,
       });
 
       // Call depositAsset function
@@ -219,19 +229,25 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
       //   tokenAddress,
       //   amount
       // );
-      
+
       // console.log("Transaction hash:", txHash);
       setHasBurned(true);
       onBurn(amount, assetId);
     } catch (error) {
       console.error("Error in handleBurn:", error);
-      const errorMessage = error instanceof Error ? error.message : "An error occurred while burning tokens";
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : "An error occurred while burning tokens";
       setError(errorMessage);
-      
+
       // If it's an insufficient funds error, add a suggestion
       if (errorMessage.includes("Insufficient")) {
         setTimeout(() => {
-          setError(errorMessage + "\n\nTip: Try reducing the amount or adding more funds to your wallet.");
+          setError(
+            errorMessage +
+              "\n\nTip: Try reducing the amount or adding more funds to your wallet."
+          );
         }, 100);
       }
     } finally {
@@ -253,7 +269,11 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
       onClaim(selectedAsset?.id || "");
     } catch (error) {
       console.error("Error in handleClaim:", error);
-      setError(error instanceof Error ? error.message : "An error occurred while claiming tokens");
+      setError(
+        error instanceof Error
+          ? error.message
+          : "An error occurred while claiming tokens"
+      );
     } finally {
       setIsProcessing(false);
     }
@@ -267,8 +287,8 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
       if (activeTab === "claim" && !isEthereumConnected) {
         // await connectEthereum();
         // Wait a bit for the connection to be established
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
         // Check if connection was successful
         if (!isEthereumConnected || !ethereumAddress) {
           throw new Error("Failed to connect Ethereum wallet");
@@ -276,7 +296,11 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
       }
     } catch (error) {
       console.error("Error connecting:", error);
-      setError(error instanceof Error ? error.message : "An error occurred while connecting");
+      setError(
+        error instanceof Error
+          ? error.message
+          : "An error occurred while connecting"
+      );
     } finally {
       setIsProcessing(false);
     }
@@ -320,7 +344,7 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
           }`}
           onClick={() => setActiveTab("burn")}
         >
-          Burn xZB
+          {t("claimBurn.burnXZB")}
         </button>
       </div>
 
@@ -330,7 +354,13 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
         } rounded-3xl lg:px-[37px] lg:pt-5 pb-[30px] pt-[30px] px-6 w-full`}
       >
         {error && (
-          <div className={`${isDarkMode ? "bg-[#E25876] text-white" : "bg-[#FFE5EA] text-[#E25876]"} rounded-xl py-4 px-6 text-center`}>
+          <div
+            className={`${
+              isDarkMode
+                ? "bg-[#E25876] text-white"
+                : "bg-[#FFE5EA] text-[#E25876]"
+            } rounded-xl py-4 px-6 text-center`}
+          >
             <p>{error}</p>
           </div>
         )}
@@ -338,8 +368,8 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
         {/* Title */}
         <h2 className="text-sm lg:text-lg font-medium">
           {activeTab === "claim"
-            ? "Claim Your xZB Tokens Now"
-            : "Burn Your xZB Tokens Now"}
+            ? t("claimBurn.claimYourXZB")
+            : t("claimBurn.burnYourXZB")}
         </h2>
 
         {/* Burn First Warning */}
@@ -352,7 +382,7 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
             } rounded-xl py-4 px-6 text-center`}
           >
             <p className={`${isDarkMode ? "text-white" : "text-[#E25876]"}`}>
-              Please burn your tokens first before claiming. This ensures proper token redemption.
+              {t("claimBurn.burnFirstWarning")}
             </p>
           </div>
         )}
@@ -364,7 +394,9 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
               isDarkMode ? "text-gray-400" : "text-[#09050E]"
             } text-xs md:text-sm`}
           >
-            {activeTab === "claim" ? "Available to claim" : "xZB Balance"}
+            {activeTab === "claim"
+              ? t("claimBurn.availableToClaim")
+              : t("claimBurn.xZBBalance")}
           </p>
           <p className="text-2xl font-bold lg:text-3xl lg:font-medium lg:mt-[3px] mt-[6px]">
             {activeTab === "claim"
@@ -377,14 +409,18 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
               isDarkMode ? "text-gray-400" : "text-[#09050E]"
             } text-[10px] md:text-sm`}
           >
-            -${tokenData.usdValue.toLocaleString()}
+            -${tokenData.usdValue.toLocaleString()} {t("claimBurn.usdValue")}
           </p>
         </div>
 
         {activeTab === "burn" && (
           <div>
-            <p className={`${isDarkMode ? "text-gray-400" : "text-[#53436D]"} text-xs mb:text-sm mb-2 lg:mb-1`}>
-              Enter amount to Burn
+            <p
+              className={`${
+                isDarkMode ? "text-gray-400" : "text-[#53436D]"
+              } text-xs mb:text-sm mb-2 lg:mb-1`}
+            >
+              {t("claimBurn.enterAmountToBurn")}
               {selectedAsset?.symbol === "ETH" && userEthBalance && (
                 <span className="ml-2 text-xs">
                   (Available: {Number(userEthBalance).toFixed(5)} ETH)
@@ -405,10 +441,16 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
               />
               <button
                 className={`absolute right-4 top-1/2 -translate-y-1/2 text-[#6c5dd3] text-xs lg:text-sm ${
-                  (!selectedAsset || (selectedAsset.symbol === "ETH" && !userEthBalance)) ? "opacity-50 cursor-not-allowed" : ""
+                  !selectedAsset ||
+                  (selectedAsset.symbol === "ETH" && !userEthBalance)
+                    ? "opacity-50 cursor-not-allowed"
+                    : ""
                 }`}
                 onClick={handleMaxClick}
-                disabled={!selectedAsset || (selectedAsset.symbol === "ETH" && !userEthBalance)}
+                disabled={
+                  !selectedAsset ||
+                  (selectedAsset.symbol === "ETH" && !userEthBalance)
+                }
               >
                 MAX
               </button>
@@ -563,7 +605,9 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
           <button
             className={`w-full bg-gradient-to-b from-[#A26DFF] to-[#09050E] hover:bg-[#5a4eb8] rounded-2xl p-[14px] lg:p-4 font-bold lg:font-medium transition-colors ${
               !isDarkMode && "text-white"
-            } ${(isLoading || isProcessing) ? "opacity-50 cursor-not-allowed" : ""}`}
+            } ${
+              isLoading || isProcessing ? "opacity-50 cursor-not-allowed" : ""
+            }`}
             onClick={async () => {
               if (activeTab === "claim") {
                 if (!isEthereumConnected) {
@@ -576,18 +620,20 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
               }
             }}
             disabled={
-              isLoading || 
+              isLoading ||
               isProcessing ||
-              (activeTab === "claim" && !hasBurned) || 
-              (activeTab === "burn" && (!burnAmount || !selectedAsset || parseFloat(burnAmount) <= 0))
+              (activeTab === "claim" && !hasBurned) ||
+              (activeTab === "burn" &&
+                (!burnAmount || !selectedAsset || parseFloat(burnAmount) <= 0))
             }
           >
             {isLoading || isProcessing
-              ? "Processing..." 
-              : activeTab === "claim" 
-                ? (isEthereumConnected ? "Claim xZB" : "Connect Ethereum Wallet") 
-                : "Burn xZB"
-            }
+              ? t("common.loading")
+              : activeTab === "claim"
+              ? isEthereumConnected
+                ? t("claimBurn.claimXZB")
+                : t("claimBurn.connectEthereumWallet")
+              : t("claimBurn.burnXZB")}
           </button>
         ) : (
           <button
@@ -597,7 +643,7 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
             onClick={handleConnect}
             disabled={isProcessing}
           >
-            {isProcessing ? "Connecting..." : "Connect Wallet"}
+            {isProcessing ? t("common.loading") : t("deposit.connectWallet")}
           </button>
         )}
       </div>

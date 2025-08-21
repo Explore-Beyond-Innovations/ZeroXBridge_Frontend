@@ -2,18 +2,19 @@
 import { usePathname } from "next/navigation";
 import { Geist, Geist_Mono, Manrope, Roboto_Serif } from "next/font/google";
 import "./globals.css";
+import "./i18n"; // Initialize i18n
 import Sidebar from "./components/Sidebar";
 import { ThemeProvider, useTheme } from "./ThemeContext";
+import { LanguageProvider } from "./contexts/LanguageContext";
 import Navbar from "./components/navbar";
 import NavigationBar from "./components/mobile-navigator";
 import { StarknetProvider } from "./components/Starknet-provider";
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { WagmiProvider } from 'wagmi'
-import { config } from './config'
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { WagmiProvider } from "wagmi";
+import { config } from "./config";
 
 // 2. Set up a React Query client.
-const queryClient = new QueryClient()
-
+const queryClient = new QueryClient();
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -56,14 +57,18 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable} ${robotoSerif.variable} antialiased bg-[#09050E]`}
       >
-           <WagmiProvider config={config}>
-           <QueryClientProvider client={queryClient}> 
-        <StarknetProvider>
-          <ThemeProvider>
-            <LayoutContent showSidebar={showSidebar}>{children}</LayoutContent>
-          </ThemeProvider>
-        </StarknetProvider>
-        </QueryClientProvider> 
+        <WagmiProvider config={config}>
+          <QueryClientProvider client={queryClient}>
+            <StarknetProvider>
+              <LanguageProvider>
+                <ThemeProvider>
+                  <LayoutContent showSidebar={showSidebar}>
+                    {children}
+                  </LayoutContent>
+                </ThemeProvider>
+              </LanguageProvider>
+            </StarknetProvider>
+          </QueryClientProvider>
         </WagmiProvider>
       </body>
     </html>

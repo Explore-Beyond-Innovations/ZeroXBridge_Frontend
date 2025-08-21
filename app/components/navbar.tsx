@@ -19,6 +19,8 @@ import { useEffect } from "react";
 import ConnectModal from "./connectWallet";
 import { useAccount } from "@starknet-react/core";
 import { useWalletState } from "../hooks/useWalletState";
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 // import { useRegistration } from '../hooks/useRegistration';
 
 interface NavbarProps {
@@ -32,6 +34,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDarkMode }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [disconnectModal, setdisconnectModalOpen] = useState(false);
   const { isConnected } = useAccount();
+  const { t } = useTranslation();
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -125,7 +128,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDarkMode }) => {
                 >
                   <input
                     type="text"
-                    placeholder="Search"
+                    placeholder={t("navigation.search")}
                     className={`${
                       isDarkMode
                         ? "bg-black/30 text-white"
@@ -220,6 +223,9 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDarkMode }) => {
               </div>
             </div>
 
+            {/* Language Switcher */}
+            <LanguageSwitcher isDarkMode={isDarkMode} />
+
             {/* Connect Wallet button with gradient border */}
             <div className={gradientBorder}>
               <button
@@ -274,11 +280,16 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDarkMode }) => {
                 className="w-full flex items-center justify-between p-4 rounded-lg bg-[#291A43] hover:bg-[#342251] transition-colors"
               >
                 <div className="flex items-center gap-3">
-                  <Image src="/eth-icon.png" alt="Ethereum" className="w-8 h-8" width={500} height={500} />
+                  <Image
+                    src="/eth-icon.png"
+                    alt="Ethereum"
+                    className="w-8 h-8"
+                    width={500}
+                    height={500}
+                  />
                   <div className="text-left">
                     <p className="font-medium text-white">
-                      {" "}
-                      Disconnect Ethereum
+                      {t("navigation.disconnectEthereum")}
                     </p>
                     <p className="text-sm text-gray-400">
                       {ethereumAddress
@@ -286,7 +297,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDarkMode }) => {
                             0,
                             6
                           )}...${ethereumAddress.slice(-4)}`
-                        : "Not connected"}
+                        : t("navigation.notConnected")}
                     </p>
                   </div>
                 </div>
@@ -303,10 +314,16 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDarkMode }) => {
                 className="w-full flex items-center justify-between p-4 rounded-lg bg-[#291A43] hover:bg-[#342251] transition-colors"
               >
                 <div className="flex items-center gap-3">
-                  <Image src="/wallet.svg" alt="Starknet" className="w-8 h-8" width={500} height={500} />
+                  <Image
+                    src="/wallet.svg"
+                    alt="Starknet"
+                    className="w-8 h-8"
+                    width={500}
+                    height={500}
+                  />
                   <div className="text-left">
                     <p className="font-medium text-white">
-                      Disconnect Starknet
+                      {t("navigation.disconnectStarknet")}
                     </p>
                     <p className="text-sm text-gray-400">
                       {starknetAddress
@@ -314,7 +331,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDarkMode }) => {
                             0,
                             6
                           )}...${starknetAddress.slice(-4)}`
-                        : "Not connected"}
+                        : t("navigation.notConnected")}
                     </p>
                   </div>
                 </div>
@@ -327,10 +344,13 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDarkMode }) => {
 
               {/* Disconnect all */}
               <button
-                onClick={() => {disconnectAll(); setdisconnectModalOpen(false)}}
+                onClick={() => {
+                  disconnectAll();
+                  setdisconnectModalOpen(false);
+                }}
                 className="w-full p-4 rounded-lg bg-[#291A43] hover:bg-[#342251] transition-colors"
               >
-                <p>Disconnect All</p>
+                <p>{t("navigation.disconnect")}</p>
               </button>
             </div>
           </div>
@@ -383,7 +403,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDarkMode }) => {
                 }`}
               >
                 <span className="flex items-center w-full justify-between px-2 py-4">
-                  <p>Search</p>
+                  <p>{t("navigation.search")}</p>
                   <SearchIcon className="text-white" size={24} />
                 </span>
               </Link>
@@ -394,7 +414,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDarkMode }) => {
                 }`}
               >
                 <span className="flex items-center w-full justify-between px-2 py-4">
-                  <p>Notifications</p>
+                  <p>{t("navigation.notifications")}</p>
                   <Bell className="text-white" size={24} />
                 </span>
               </Link>
@@ -405,10 +425,15 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDarkMode }) => {
                 }`}
               >
                 <span className="flex items-center w-full justify-between px-2 py-4">
-                  <p>Settings</p>
+                  <p>{t("navigation.settings")}</p>
                   <Settings className="text-white" size={24} />
                 </span>
               </Link>
+
+              {/* Language Switcher for Mobile */}
+              <div className="block py-3 px-4 border-b border-[#A26DFF]">
+                <LanguageSwitcher isDarkMode={isDarkMode} className="w-full" />
+              </div>
             </nav>
           </div>
         </div>

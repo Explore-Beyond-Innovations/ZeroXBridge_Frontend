@@ -5,6 +5,7 @@ import coreProblemImg from "@/public/images/problem.png";
 import coreSolutionImg from "@/public/images/solution.png";
 import Arrow from "@/public/icons/Arrow";
 import blur3 from "@/public/topBlur.svg"; // Import the blur effect SVG
+import { useTranslation } from "react-i18next";
 
 interface SectionTitleProps {
   children: React.ReactNode;
@@ -42,7 +43,9 @@ const SectionText: React.FC<SectionTextProps> = ({ children }) => (
 
 const ListItem: React.FC<ListItemProps> = ({ children }) => (
   <li className="flex items-start gap-3">
-    <span className="mt-0.5 flex-shrink-0"><Arrow className="w-5 h-5" /></span>
+    <span className="mt-0.5 flex-shrink-0">
+      <Arrow className="w-5 h-5" />
+    </span>
     <span className="text-[#D4D4D4]">{children}</span>
   </li>
 );
@@ -50,57 +53,49 @@ const ListItem: React.FC<ListItemProps> = ({ children }) => (
 const SubList: React.FC<SubListProps> = ({ items }) => (
   <ul className="text-[#8B8B8B] list-disc pl-8 md:pl-10 mt-2 mb-2 space-y-1">
     {items.map((item, index) => (
-      <li key={index} className="text-sm">{item}</li>
+      <li key={index} className="text-sm">
+        {item}
+      </li>
     ))}
   </ul>
 );
 
 const AboutCoreProblems: React.FC = () => {
+  const { t } = useTranslation();
   // Data for the component
-  const problems: string[] = [
-    "Security vulnerabilities in centralized bridges leading to hacks and exploits",
-    "Inefficient capital allocation due to wrapped tokens and fragmented liquidity",
-    "Limited cross-chain utility of liquid staking tokens",
-    "High gas fees and delays in asset transfers"
-  ];
+  const problems: string[] = t("aboutCoreProblems.problems", {
+    returnObjects: true,
+  });
 
   const solutionItems: SolutionItem[] = [
     {
-      title: "Zero-Knowledge Proofs",
-      description: "Instead of moving assets between chains, we use ZK-STARK proofs to verify asset ownership on Ethereum while unlocking liquidity on Starknet.",
-      subItems: []
+      title: t("aboutCoreProblems.solutions.zeroKnowledgeProofs.title"),
+      description: t(
+        "aboutCoreProblems.solutions.zeroKnowledgeProofs.description"
+      ),
+      subItems: [],
     },
     {
-      title: "Trustless Architecture",
+      title: t("aboutCoreProblems.solutions.trustlessArchitecture.title"),
       description: "",
-      subItems: [
-        "Users deposit collateral on Ethereum L1.",
-        "ZK-STARK proof verifies the deposit without exposing sensitive data.",
-        "Starknet validates the proof and enables borrowing from liquidity vaults.",
-        "Users can immediately access trading, lending, and borrowing capabilities."
-      ]
+      subItems: t(
+        "aboutCoreProblems.solutions.trustlessArchitecture.subItems",
+        { returnObjects: true }
+      ),
     },
     {
-      title: "Capital Efficiency",
+      title: t("aboutCoreProblems.solutions.capitalEfficiency.title"),
       description: "",
-      subItems: [
-        "No wrapped tokens required.",
-        "Assets remain secure on Ethereum while being utilized on Starknet.",
-        "Liquid staking tokens can be used cross-chain without unstaking.",
-        "Instant settlement through proof verification."
-      ]
-    }
+      subItems: t("aboutCoreProblems.solutions.capitalEfficiency.subItems", {
+        returnObjects: true,
+      }),
+    },
   ];
 
   return (
     <div className="relative md:m-0 pt-12 pb-4 md:py-16 mx-8 px-6 md:px-10 w-[85%] mx-auto">
       <div className="absolute -top-[250px] left-1/2 -translate-x-1/2 z-10">
-        <Image
-          src={blur3}
-          alt="Glow Effect"
-          width={700}
-          height={600}
-        />
+        <Image src={blur3} alt="Glow Effect" width={700} height={600} />
       </div>
 
       {/* Problems Section */}
@@ -154,7 +149,9 @@ const AboutCoreProblems: React.FC = () => {
                   <span className="font-medium">{solution.title}</span>
                   {solution.description ? `: ${solution.description}` : ""}
                 </ListItem>
-                {solution.subItems.length > 0 && <SubList items={solution.subItems} />}
+                {solution.subItems.length > 0 && (
+                  <SubList items={solution.subItems} />
+                )}
               </div>
             ))}
           </ul>
