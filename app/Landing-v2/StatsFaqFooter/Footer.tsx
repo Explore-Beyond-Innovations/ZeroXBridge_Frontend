@@ -38,7 +38,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="w-full pb-8 relative">
+    <footer className="w-full relative">
       {/* OnlyDust Promotional Banner */}
       <section className=" relative py-8 bg-[url('/border1.svg')] bg-cover 2xl:h-[1146px]">
         <div className="max-w-[3359px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
