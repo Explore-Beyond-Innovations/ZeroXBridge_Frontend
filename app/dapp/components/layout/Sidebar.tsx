@@ -11,7 +11,8 @@ import PieChartIcon from "@/svg/PieChartIcon";
 import HourglassIcon from "@/svg/HourglassIcon";
 import SettingsIcon from "@/svg/SettingsIcon";
 import { useTranslation } from "react-i18next";
-import "../../../i18n-client"; // Initialize i18n on client side
+import LanguageSwitcher from "../../../components/LanguageSwitcher";
+import "../../../i18n-client";
 
 function Sidebar({
   isOpen,
@@ -106,6 +107,16 @@ function Sidebar({
             <span>{t("navigation.settings")}</span>
           </div>
         </Link>
+
+        {/* Language switcher for mobile only */}
+        <div className="lg:hidden mt-4 pl-3">
+          <div className="flex items-center gap-x-3 py-[10px]">
+            <span className="text-[#A4A4A4] text-sm">
+              {t("language.switchLanguage")}
+            </span>
+            <LanguageSwitcher size="sm" showText={true} />
+          </div>
+        </div>
       </div>
     </div>
   );

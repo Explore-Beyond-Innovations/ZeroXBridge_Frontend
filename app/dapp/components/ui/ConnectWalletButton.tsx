@@ -115,9 +115,9 @@ export const ConnectWalletButton = ({
     }
 
     return (
-      <div className="flex items-center justify-center gap-x-2">
+      <div className="flex items-center justify-center gap-x-1 md:gap-x-2">
         <WalletIcon />
-        <span className="inline-block font-medium sm:text-[14px]">
+        <span className="inline-block font-medium text-[12px] sm:text-[14px]">
           {t("wallet.connect")}
         </span>
       </div>

@@ -32,7 +32,10 @@ function Topbar({
         <Logo />
       </div>
       <div className="flex items-center gap-x-2">
-        <LanguageSwitcher />
+        {/* Language switcher only on desktop/4K */}
+        <div className="hidden lg:block">
+          <LanguageSwitcher size="sm" />
+        </div>
         <ThemeSwitcher />
         <ConnectWalletButton
           withGradient

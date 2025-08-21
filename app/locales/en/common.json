@@ -254,5 +254,27 @@
     "title": "Join Our Wonderful Community Today!",
     "description": "Stay Connected with exciting updates, do not be left out of this revolution",
     "button": "Join Community"
+  },
+  "comingSoon": {
+    "seamlessWallet": {
+      "title": "Seamless Wallet Integrations",
+      "description": "xZB will soon be natively accessible through popular Starknet wallets allowing users to instantly connect, hold, and deploy their xZB in DeFi — without extra setup or manual imports."
+    },
+    "governanceDAO": {
+      "title": "Governance DAO & Token Whitelist Voting",
+      "description": "ZeroXBridge will enable the community to vote on which assets get whitelisted and help shape key protocol decisions — ensuring decentralization and user-driven evolution."
+    },
+    "accountAbstraction": {
+      "title": "Account Abstraction Support",
+      "description": "xZB will soon be natively accessible through popular Starknet wallets allowing users to instantly connect, hold, and deploy their xZB in DeFi — without extra setup or manual imports."
+    },
+    "stakingAPY": {
+      "title": "Staking + APY for Liquidity Providers",
+      "description": "ZeroXBridge will enable users to earn passive yield by staking or locking assets, rewarding participation and driving deeper liquidity in the ecosystem."
+    },
+    "paymasterIntegration": {
+      "title": "Paymaster Integration",
+      "description": "ZeroXBridge will let users interact with the app without needing ETH for gas, removing friction and simplifying onboarding for new Starknet users."
+    }
   }
 }
