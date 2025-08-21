@@ -1,12 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from 'react';
-import { useConnect } from 'wagmi';
+import { useConnect, useAccount } from 'wagmi';
 import { ChevronLeft, RefreshCw } from 'lucide-react';
 import { useWalletConnection } from "@/app/hooks/useWalletConnection";
 import WalletErrorComponent from "./WalletError";
 import WalletLoader from "./WalletLoader";
 import WalletEmptyState from "./WalletEmptyState";
 import WalletRecommendations from "./WalletRecommendations";
+import WalletSuccess from "./WalletSuccess";
+import WalletConnectionProgress from "./WalletConnectionProgress";
+import { InfoTooltip } from "./WalletTooltip";
 import { 
   getAvailableWallets, 
   getInstalledWallets, 
@@ -22,11 +25,15 @@ interface EthereumWalletModalProps {
 
 const EthereumWalletModal: React.FC<EthereumWalletModalProps> = ({ onBack, onConnectionStateChange }) => {
   const { connectors } = useConnect();
+  const { address } = useAccount();
   const { 
     isConnecting, 
     error, 
     connectWallet, 
-    clearError
+    clearError,
+    connectionStep,
+    isSuccess,
+    connectedWallet
   } = useWalletConnection('ethereum');
 
   const [selectedConnector, setSelectedConnector] = useState<any>(null);
@@ -118,6 +125,36 @@ const EthereumWalletModal: React.FC<EthereumWalletModalProps> = ({ onBack, onCon
           className="mb-4"
         />
       )}
+
+      {/* Success State */}
+      {isSuccess && connectedWallet && address && (
+        <WalletSuccess
+          walletName={connectedWallet}
+          address={address}
+          onClose={onBack}
+          className="mb-4"
+        />
+      )}
+
+      {/* Connection Progress */}
+      {(isConnecting || isSuccess) && (
+        <WalletConnectionProgress
+          step={connectionStep}
+          walletName={selectedConnector?.name}
+          className="mb-4"
+        />
+      )}
+
+      {/* Title */}
+      <div className="flex items-center justify-center gap-2 mb-4">
+        <h3 className="text-white text-lg font-semibold">
+          Connect Ethereum Wallet
+        </h3>
+        <InfoTooltip
+          content="Choose an Ethereum wallet to connect. MetaMask is recommended for beginners, while WalletConnect supports 300+ wallets."
+          position="bottom"
+        />
+      </div>
 
       {/* Wallet Recommendations Toggle */}
       {(missingWallets.length > 0 || installedWallets.length > 0) && (

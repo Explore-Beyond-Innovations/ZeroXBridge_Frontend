@@ -4,13 +4,16 @@
 
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { useConnect } from "@starknet-react/core";
+import { useConnect, useAccount } from "@starknet-react/core";
 import { ChevronLeft, RefreshCw } from "lucide-react";
 import { useWalletConnection } from "@/app/hooks/useWalletConnection";
 import WalletErrorComponent from "./WalletError";
 import WalletLoader from "./WalletLoader";
 import WalletEmptyState from "./WalletEmptyState";
 import WalletRecommendations from "./WalletRecommendations";
+import WalletSuccess from "./WalletSuccess";
+import WalletConnectionProgress from "./WalletConnectionProgress";
+import { InfoTooltip } from "./WalletTooltip";
 import { 
   getAvailableWallets, 
   getInstalledWallets, 
@@ -30,11 +33,15 @@ export default function ConnectModal({
 }: ConnectModalProps) {
   // StarkNet React hooks
   const { connectors } = useConnect();
+  const { address } = useAccount();
   const { 
     isConnecting, 
     error, 
     connectWallet, 
-    clearError
+    clearError,
+    connectionStep,
+    isSuccess,
+    connectedWallet
   } = useWalletConnection('starknet');
 
   const [selectedConnector, setSelectedConnector] = useState<any>(null);
@@ -123,10 +130,35 @@ export default function ConnectModal({
         />
       )}
 
+      {/* Success State */}
+      {isSuccess && connectedWallet && address && (
+        <WalletSuccess
+          walletName={connectedWallet}
+          address={address}
+          onClose={onBack}
+          className="mb-4"
+        />
+      )}
+
+      {/* Connection Progress */}
+      {(isConnecting || isSuccess) && (
+        <WalletConnectionProgress
+          step={connectionStep}
+          walletName={selectedConnector?.name}
+          className="mb-4"
+        />
+      )}
+
       {/* Title */}
-      <h2 className="text-white text-xl font-semibold mb-2 text-center">
-        Select a wallet
-      </h2>
+      <div className="flex items-center justify-center gap-2 mb-2">
+        <h2 className="text-white text-xl font-semibold text-center">
+          Select a wallet
+        </h2>
+        <InfoTooltip
+          content="Choose a Starknet wallet to connect and access all platform features. Make sure your wallet is installed and unlocked."
+          position="bottom"
+        />
+      </div>
 
       {/* Subtitle */}
       <p className="font-[400] text-[12px] text-white mb-6 text-center justify-center">

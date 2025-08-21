@@ -4,7 +4,7 @@ import { useConnect as useEthereumConnect } from 'wagmi';
 import { WalletError, parseWalletError, createWalletError, WalletErrorType } from '@/app/utils/walletErrors';
 
 export type WalletType = 'ethereum' | 'starknet';
-export type ConnectionStep = 'idle' | 'connecting' | 'connected' | 'failed';
+export type ConnectionStep = 'idle' | 'connecting' | 'connected' | 'failed' | 'success';
 
 interface WalletConnectionState {
   isConnecting: boolean;
@@ -101,12 +101,19 @@ export const useWalletConnection = (walletType: WalletType) => {
         timeoutRef.current = null;
       }
 
-      // Success
+      // Success - first show success state briefly
       updateState({
         isConnecting: false,
-        connectionStep: 'connected',
+        connectionStep: 'success',
         connectedWallet: connector.name || connector.id
       });
+
+      // After a brief moment, transition to connected state
+      setTimeout(() => {
+        updateState({
+          connectionStep: 'connected'
+        });
+      }, 1500);
 
       return result;
 
@@ -149,6 +156,7 @@ export const useWalletConnection = (walletType: WalletType) => {
     cleanup,
     isIdle: state.connectionStep === 'idle',
     isConnected: state.connectionStep === 'connected',
+    isSuccess: state.connectionStep === 'success',
     hasFailed: state.connectionStep === 'failed',
     canRetry: !state.isConnecting && state.connectionStep === 'failed'
   };
