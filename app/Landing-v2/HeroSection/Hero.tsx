@@ -9,27 +9,29 @@ const Hero = () => {
     <div className='h-[100dvh] relative w-full overflow-hidden'>
       <div className='relative   z-10'>
         <Navbar />
-        <div className='flex flex-col  gap-4 mt-[clamp(100px,10dvh,150px)] text-[36px] 2xl:mt-[15vh] max-w-[85%]  md:max-w-[632px] mx-auto 2xl:max-w-[500px] 3xl:max-w-[650px]  4xl:max-w-[850px]'>
-          <h1 className='leading-tight md:leading-normal'>
+        <div className="flex flex-col gap-6 mt-20 lg:mt-32 max-w-4xl mx-auto px-6">
+          <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
             Secure <GradientText>Cross-Chain</GradientText> Liquidity with
             Zero-Knowledge Proofs
           </h1>
-          <p className='text-[16px]'>
+
+          <p className="text-lg text-gray-400 max-w-2xl">
             Unlock liquidity on Starknet using ZK,{' '}
-            <span className='text-[#6C6C6C]'>no centralized bridges.</span>
+            <span className="text-gray-500">no centralized bridges.</span>
           </p>
-          <div className='flex gap-2 items-center '>
+
+          <div className="flex flex-col sm:flex-row gap-4 sm:items-center">
             <a
-              href='https://app.zeroxbridge.xyz'
-              target='_blank'
-              rel='noopener noreferrer'
-              className='bg-white text-base rounded-full text-black px-4 py-2 flex items-center gap-2'
+              href="https://app.zeroxbridge.xyz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white text-black px-6 py-3 rounded-full font-medium inline-flex items-center justify-center gap-2 hover:bg-gray-100 transition-colors"
             >
               Launch App
-              <ArrowIcon direction='right' />
+              <ArrowIcon direction="right" />
             </a>
 
-            <button className='bg-[#1F1F1F] text-base rounded-[12px] text-white px-4 py-2 flex items-center gap-2'>
+            <button className="bg-gray-800 text-white px-6 py-3 rounded-xl font-medium inline-flex items-center justify-center gap-2 hover:bg-gray-700 transition-colors">
               Read Docs
             </button>
           </div>

@@ -253,20 +253,20 @@ const Footer = () => {
       </section>
 
       {/* Community Section */}
-      <section className="relative bg-[#0F0F0F] h-[790px] md:h-fit lg:h-[431px] 2xl:h-[732px] flex flex-col md:flex-row items-center justify-between w-full">
-        <div className="relative z-10 w-full 2xl-w-[97%] px-4 sm:px-6 lg:px-8 py-16  flex items-center justify-center ">
-          <div className="max-w-[3359px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-8 2xl:gap-[4rem]">
+      <section className="relative bg-[#0F0F0F] py-16 md:py-20 lg:py-24 2xl:py-32 flex flex-col lg:flex-row items-center justify-between w-full">
+        <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
+          <div className="max-w-[3359px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12 xl:gap-16 2xl:gap-20">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="2xl:w-[1073px] flex-1 text-center lg:text-left"
+              className="flex-1 text-center lg:text-left max-w-full lg:max-w-[50%]"
             >
-              <h3 className="text-xl md:text-2xl lg:text-3xl 2xl:text-[94.96px] font-normal text-white mb-4 w-full ">
+              <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-[94.96px] font-normal text-white mb-4 lg:mb-6 2xl:mb-8">
                 Join our
                 <br className="2xl:hidden" />
-                <span className="font-parmanent_marker text-2xl 2xl:pl-6 2xl:text-[94.96px] md:text-3xl lg:text-4xl relative">
+                <span className="font-parmanent_marker text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-[94.96px] 2xl:pl-6 relative">
                   <svg
                     className="absolute -left-[3rem] top-0 hidden md:block 2xl:hidden"
                     width="36"
@@ -324,7 +324,7 @@ const Footer = () => {
                   </svg>
                 </span>
               </h3>
-              <p className="text-gray-400 text-base md:text-[16px] 2xl:text-[35.61px] 2xl:mt-12 2xl:leading-[2.5rem] w-[290px] 2xl:w-full mx-auto lg:mx-0">
+              <p className="text-gray-400 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-[35.61px] 2xl:leading-[2.5rem] max-w-full lg:max-w-none">
                 ZeroXBridge will enable the community
                 <br className="hidden sm:block" />
                 to vote on which assets get whitelisted
@@ -338,14 +338,14 @@ const Footer = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               viewport={{ once: true }}
-              className="flex flex-col md:flex-row gap-6 w-full 2xl:w-[1658.68px] lg:h-[534px] items-center"
+              className="flex flex-col sm:flex-row gap-4 sm:gap-6 lg:gap-8 w-full lg:w-auto lg:flex-1"
             >
               {/* Discord */}
               <motion.a
                 href="#"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="relative group flex-1 w-full md:w-[310px] lg:w-[400px] 3xl:w-[814px] 2xl:h-[429.56px] h-[257px] md:h-[280px] rounded-[16px] bg-[#161616]"
+                className="relative group w-full sm:w-[calc(50%-12px)] lg:w-[280px] xl:w-[320px] 2xl:w-[400px] h-[200px] sm:h-[220px] md:h-[240px] lg:h-[280px] xl:h-[320px] 2xl:h-[400px] rounded-[16px] bg-[#161616]"
               >
                 <div className="relative w-full h-full rounded-2xl flex items-center justify-center transition-all duration-300 overflow-hidden">
                   <motion.svg
@@ -379,9 +379,9 @@ const Footer = () => {
                     </defs>
                   </motion.svg>
 
-                  <div className="relative z-30 w-[94px] h-[94px] bg-[#282828] group-hover:bg-[#5865F2]  rounded-2xl flex items-center justify-center transition-all duration-300">
+                  <div className="relative z-30 w-[60px] h-[60px] sm:w-[70px] sm:h-[70px] md:w-[80px] md:h-[80px] lg:w-[90px] lg:h-[90px] xl:w-[100px] xl:h-[100px] 2xl:w-[120px] 2xl:h-[120px] bg-[#282828] group-hover:bg-[#5865F2] rounded-2xl flex items-center justify-center transition-all duration-300">
                     <svg
-                      className="w-20 h-20 text-gray-400 group-hover:text-white transition-colors"
+                      className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18 xl:w-20 xl:h-20 2xl:w-24 2xl:h-24 text-gray-400 group-hover:text-white transition-colors"
                       fill="currentColor"
                       viewBox="0 0 24 24"
                     >
@@ -400,7 +400,7 @@ const Footer = () => {
                 href="#"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="relative group flex-1 w-full md:w-[310px] lg:w-[400px] 3xl:w-[814px] 2xl:h-[429.56px] h-[257px] md:h-[280px] rounded-[16px] bg-[#161616]"
+                className="relative group w-full sm:w-[calc(50%-12px)] lg:w-[280px] xl:w-[320px] 2xl:w-[400px] h-[200px] sm:h-[220px] md:h-[240px] lg:h-[280px] xl:h-[320px] 2xl:h-[400px] rounded-[16px] bg-[#161616]"
               >
                 <div className="relative w-full h-full rounded-2xl flex items-center justify-center transition-all duration-300 overflow-hidden">
                   <motion.svg
@@ -433,9 +433,9 @@ const Footer = () => {
                       </radialGradient>
                     </defs>
                   </motion.svg>
-                  <div className="relative z-30 w-[94px] h-[94px] bg-[#282828] group-hover:bg-[#37AEE2] group-hover:text-white rounded-2xl flex items-center justify-center transition-all duration-300">
+                  <div className="relative z-30 w-[60px] h-[60px] sm:w-[70px] sm:h-[70px] md:w-[80px] md:h-[80px] lg:w-[90px] lg:h-[90px] xl:w-[100px] xl:h-[100px] 2xl:w-[120px] 2xl:h-[120px] bg-[#282828] group-hover:bg-[#37AEE2] group-hover:text-white rounded-2xl flex items-center justify-center transition-all duration-300">
                     <svg
-                      className="w-20 h-20 transition-colors duration-300"
+                      className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18 xl:w-20 xl:h-20 2xl:w-24 2xl:h-24 transition-colors duration-300"
                       viewBox="0 0 80 71"
                       xmlns="http://www.w3.org/2000/svg"
                     >
