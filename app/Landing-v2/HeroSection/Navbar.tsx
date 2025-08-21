@@ -1,3 +1,4 @@
+"use client";
 import ArrowIcon from '@/app/components/ui/ArrowIcon';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
@@ -31,7 +32,7 @@ const Navbar = () => {
             <Link href="#">About</Link>
           </li>
           <li>
-            <Link href="#">Blog</Link>
+            <Link href="/blog">Blog</Link>
           </li>
           <li>
             <Link href="#">X</Link>
