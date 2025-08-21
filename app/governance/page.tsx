@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import { LearnOverview } from "../components/dapp/governance/learn-overview";
 
 // Types for our data
 interface Proposal {
@@ -91,10 +92,10 @@ export default function GovernancePage() {
             <p className="text-black">Manage vSTRK</p>
           </div>
           <Link href="/governance/voting-proposals">
-          <div className="flex gap-2 items-center">
-            <CheckSquare className="text-black w-6 h-6" />
-            <p className="text-black">Voting Proposals</p>
-          </div>
+            <div className="flex gap-2 items-center">
+              <CheckSquare className="text-black w-6 h-6" />
+              <p className="text-black">Voting Proposals</p>
+            </div>
           </Link>
         </div>
       </div>
@@ -226,6 +227,9 @@ export default function GovernancePage() {
                   </div>
                 </div>
               ))}
+            </div>
+            <div className="py-20">
+              <LearnOverview />
             </div>
           </div>
         </div>
