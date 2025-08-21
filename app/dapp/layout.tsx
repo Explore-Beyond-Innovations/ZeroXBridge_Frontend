@@ -7,7 +7,7 @@ import { config } from "../config";
 import { Toaster } from "sonner";
 import { usePathname } from "next/navigation";
 
-function layout({
+function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -38,4 +38,4 @@ function layout({
   );
 }
 
-export default layout;
+export default Layout;

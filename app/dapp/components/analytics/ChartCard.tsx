@@ -1,13 +1,21 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts"
+import type React from "react";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  CartesianGrid,
+} from "recharts";
 
 interface ChartCardProps {
-  selectedChart: "tvl" | "volume" | "price"
-  onChartChange: (chart: "tvl" | "volume" | "price") => void
-  theme: string 
-   currentPrice?: string;
+  selectedChart: "tvl" | "volume" | "price";
+  onChartChange: (chart: "tvl" | "volume" | "price") => void;
+  theme: string;
+  currentPrice?: string;
   priceChange?: string;
 }
 
@@ -34,11 +42,16 @@ function SmallLogo({ className, ...props }: React.SVGProps<SVGSVGElement>) {
       </g>
       <defs>
         <clipPath id="clip0_786_5598">
-          <rect width="35.0613" height="25.6459" fill="currentColor" transform="translate(0 0.677032)" />
+          <rect
+            width="35.0613"
+            height="25.6459"
+            fill="currentColor"
+            transform="translate(0 0.677032)"
+          />
         </clipPath>
       </defs>
     </svg>
-  )
+  );
 }
 
 // Mock data for different chart types with the exact dates and values
@@ -49,8 +62,8 @@ const chartData = {
     { time: "Jan 27", value: 10000 },
     { time: "Jan 28", value: 5000 },
     { time: "Jan 29", value: 1000 },
-    { time: "Jan 30", value: 0 },
-    { time: "Jan 31", value: 50000 },
+    { time: "Jan 30", value: 1000 },
+    { time: "Jan 31", value: 150000 },
     { time: "Feb 1", value: 150000 },
   ],
   volume: [
@@ -59,7 +72,7 @@ const chartData = {
     { time: "Jan 27", value: 10000 },
     { time: "Jan 28", value: 5000 },
     { time: "Jan 29", value: 1000 },
-    { time: "Jan 30", value: 0 },
+    { time: "Jan 30", value: 1000 },
     { time: "Jan 31", value: 50000 },
     { time: "Feb 1", value: 150000 },
   ],
@@ -73,7 +86,7 @@ const chartData = {
     { time: "Jan 31", value: 50000 },
     { time: "Feb 1", value: 150000 },
   ],
-}
+};
 
 const chartConfig = {
   tvl: {
@@ -91,32 +104,45 @@ const chartConfig = {
     color: "#ffc658",
     format: (value: number) => `$${(value / 1000).toFixed(0)}K`,
   },
-}
+};
 
-export default function ChartCard({ selectedChart, onChartChange, theme, currentPrice, priceChange }: ChartCardProps) {
-  const lineColor = theme === 'dark' ? '#fff' : '#000';
-  console.log('ChartCard theme:', theme, 'lineColor:', lineColor);
-  const axisAndGridColor = '#888';
+export default function ChartCard({
+  selectedChart,
+  onChartChange,
+  theme,
+  currentPrice,
+  priceChange,
+}: ChartCardProps) {
+  const lineColor = theme === "dark" ? "#fff" : "#000";
+  console.log("ChartCard theme:", theme, "lineColor:", lineColor);
+  const axisAndGridColor = theme === "dark" ? "#444" : "#e5e5e5";
+  const textColor = theme === "dark" ? "#999" : "#999";
 
-  const currentData = chartData[selectedChart]
-  const config = chartConfig[selectedChart]
+  const currentData = chartData[selectedChart];
+  const config = chartConfig[selectedChart];
 
   return (
     <div className="bg-card border border-card-border rounded-xl px-4 py-3 h-full flex flex-col">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-3 sm:mb-4 gap-2 sm:gap-3">
         <div className="flex flex-col space-y-1">
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 my-2 md:my-0">
             <div className="w-5 h-5 overflow-visible">
               <SmallLogo className="w-full h-full" />
             </div>
-            <h3 className="text-base sm:text-lg font-semibold text-primary-text">ZeroXBridge (xZB)</h3>
+            <h3 className="text-base sm:text-lg font-semibold text-primary-text">
+              ZeroXBridge (xZB)
+            </h3>
           </div>
           <div className="flex items-center space-x-2">
-            <p className="text-lg sm:text-xl font-bold text-primary-text">{currentPrice || "$1.1392"}</p>
-            <span className="text-xs sm:text-sm text-green-600 font-medium">{priceChange || "+2.38%"}</span>
+            <p className="text-lg sm:text-xl font-bold text-primary-text">
+              {currentPrice || "$1.1392"}
+            </p>
+            <span className="text-xs sm:text-sm text-green-600 font-medium">
+              {priceChange || "+2.38%"}
+            </span>
           </div>
         </div>
-        <div className="flex space-x-1 bg-muted rounded-lg p-1">
+        <div className="w-fit border border-gray-200 flex space-x-1 bg-muted rounded-lg p-1">
           {(["tvl", "volume", "price"] as const).map((chart) => (
             <button
               key={chart}
@@ -132,31 +158,57 @@ export default function ChartCard({ selectedChart, onChartChange, theme, current
           ))}
         </div>
       </div>
-      <div className="flex-1 min-h-0">
+      <div className="flex-1 min-h-0 h-64 sm:h-80">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={currentData}>
-            <CartesianGrid horizontal vertical={false} stroke={axisAndGridColor} strokeDasharray="4 4" strokeWidth={1} />
+          <LineChart 
+            data={currentData} 
+            margin={{ top: 10, right: 10, left: -20, bottom: 10 }}
+          >
+            <CartesianGrid
+              horizontal={true}
+              vertical={false}
+              stroke={axisAndGridColor}
+              strokeDasharray="3 3"
+              strokeWidth={1}
+            />
             <XAxis
               dataKey="time"
-              stroke={axisAndGridColor}
+              stroke={textColor}
               fontSize={10}
               axisLine={false}
               tickLine={false}
+              tick={{ fill: textColor, fontSize: 10 }}
+              interval="preserveStartEnd"
+              angle={0}
+              textAnchor="middle"
+              height={30}
             />
             <YAxis
-              stroke={axisAndGridColor}
-              fontSize={10}
+              stroke={textColor}
+              fontSize={11}
               axisLine={false}
               tickLine={false}
+              tick={{ fill: textColor }}
+              width={50}
               tickFormatter={(value) => {
-                if (value === 0) return "0"
-                if (value >= 100000) return `$${(value / 1000).toFixed(0)}K`
-                if (value >= 1000) return `$${(value / 1000).toFixed(0)}K`
-                return `$${value}`
+                if (value === 0) return "0";
+                if (value >= 100000) return `$${(value / 1000).toFixed(0)}K`;
+                if (value >= 1000) return `$${(value / 1000).toFixed(0)}K`;
+                return `$${value}`;
               }}
-              ticks={[0, 1000, 5000, 10000, 100000, 250000]}
+              domain={['dataMin', 'dataMax']}
+              tickCount={6}
             />
-            <Tooltip formatter={(value: number) => config.format(value)} />
+            <Tooltip 
+              formatter={(value: number) => [config.format(value), config.label]}
+              labelStyle={{ color: theme === "dark" ? "#fff" : "#000" }}
+              contentStyle={{
+                backgroundColor: theme === "dark" ? "#1a1a1a" : "#fff",
+                border: `1px solid ${theme === "dark" ? "#333" : "#e5e5e5"}`,
+                borderRadius: "8px",
+                fontSize: "12px"
+              }}
+            />
             <Line
               key={theme}
               type="monotone"
@@ -164,11 +216,17 @@ export default function ChartCard({ selectedChart, onChartChange, theme, current
               stroke={lineColor}
               strokeWidth={2}
               dot={false}
-              activeDot={false}
+              activeDot={{
+                r: 4,
+                stroke: lineColor,
+                strokeWidth: 2,
+                fill: theme === "dark" ? "#1a1a1a" : "#fff"
+              }}
+              connectNulls={false}
             />
           </LineChart>
         </ResponsiveContainer>
       </div>
     </div>
-  )
+  );
 }
