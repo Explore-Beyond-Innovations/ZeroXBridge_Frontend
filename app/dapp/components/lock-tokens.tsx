@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,6 +10,7 @@ import { SuccessModal } from "@/app/dapp/components/success-modal";
 import type { Token, LockTransaction } from "@/types/token";
 import { ConnectWalletButton } from "./ui/ConnectWalletButton";
 import { useWallet } from "@/app/hooks";
+import { Skeleton } from "./ui/skeleton";
 
 // Mock token data
 const mockTokens: Token[] = [
@@ -51,6 +52,7 @@ const TokenLockInterface = () => {
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [lastTransaction, setLastTransaction] =
     useState<LockTransaction | null>(null);
+  const [loadingToken, setLoadingToken] = useState(true)
 
   const { isConnected, openWalletModal } = useWallet();
 
@@ -98,6 +100,14 @@ const TokenLockInterface = () => {
     return "0";
   };
 
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        setLoadingToken(false);
+      }, 7000);
+
+      return () => clearTimeout(timer);
+    }, []);
+
   return (
     <div
       className={`w-full sm:max-w-[440px] mx-auto border rounded-[17px]
@@ -125,6 +135,7 @@ const TokenLockInterface = () => {
                 selectedToken={selectedToken}
                 onTokenSelect={handleTokenSelect}
                 tokens={mockTokens}
+                loadingToken={loadingToken}
               />
 
               <div className="space-y-4">
@@ -158,9 +169,11 @@ const TokenLockInterface = () => {
                     >
                       <span className="text-[#737373]">Available Balance:</span>
                       <span className="text-[#1E1E1E] dark:text-[#CBCBCB]">
-                        {selectedToken
-                          ? `${selectedToken.balance} ${selectedToken.symbol}`
-                          : "-- xZB"}
+                        {selectedToken ? (
+                          `${selectedToken.balance} ${selectedToken.symbol}`
+                        ) : (
+                          <Skeleton className="h-4 w-12" />
+                        )}
                       </span>
                     </div>
                   </>
@@ -176,9 +189,11 @@ const TokenLockInterface = () => {
                 <span
                   className={`font-medium dark:text-[#AFAFAF] text-[#909090]`}
                 >
-                  {selectedToken
-                    ? `$${selectedToken.price.toLocaleString()}`
-                    : "$--"}
+                  {selectedToken ? (
+                    `$${selectedToken.price.toLocaleString()}`
+                  ) : (
+                    <Skeleton className="h-2 w-12" />
+                  )}
                 </span>
               </div>
 
@@ -189,9 +204,11 @@ const TokenLockInterface = () => {
                 <span
                   className={`font-medium dark:text-[#AFAFAF] text-[#909090]`}
                 >
-                  {selectedToken
-                    ? `$${selectedToken.liquidity.toLocaleString()}`
-                    : "$--"}
+                  {selectedToken ? (
+                    `$${selectedToken.liquidity.toLocaleString()}`
+                  ) : (
+                    <Skeleton className="h-2 w-12" />
+                  )}
                 </span>
               </div>
 
@@ -202,7 +219,11 @@ const TokenLockInterface = () => {
                 <span
                   className={`font-medium dark:text-[#AFAFAF] text-[#909090]`}
                 >
-                  {selectedToken ? `$${selectedToken.xzbRate}` : "$--"}
+                  {selectedToken ? (
+                    `$${selectedToken.xzbRate}`
+                  ) : (
+                    <Skeleton className="h-2 w-12" />
+                  )}
                 </span>
               </div>
 
