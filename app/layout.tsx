@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider, ConnectionProvider } from "./context";
+import { LanguageProvider } from "./contexts/LanguageContext";
 
 export const metadata: Metadata = {
   title: "ZeroXBridge",
@@ -16,7 +17,9 @@ export default function RootLayout({
     <html lang="en">
       <body className="font-inter text-sm">
         <ThemeProvider>
-          <ConnectionProvider>{children}</ConnectionProvider>
+          <ConnectionProvider>
+            <LanguageProvider>{children}</LanguageProvider>
+          </ConnectionProvider>
         </ThemeProvider>
       </body>
     </html>

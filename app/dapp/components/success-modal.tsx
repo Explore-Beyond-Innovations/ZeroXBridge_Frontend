@@ -8,6 +8,8 @@ import { useThemeContext } from "@/app/context/theme-provider";
 import Check from "@/public/check.png";
 import CheckDark from "@/public/check-dark.png";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
+import "../../i18n-client"; // Initialize i18n on client side
 
 interface SuccessModalProps {
   isOpen: boolean;
@@ -21,16 +23,19 @@ export function SuccessModal({
   transaction,
 }: SuccessModalProps) {
   const { isDark } = useThemeContext();
+  const { t } = useTranslation();
   if (!transaction) return null;
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent
         className={`sm:max-w-md border-none dark:bg-[#09050E] "
-        }`}>
+        }`}
+      >
         <div className="flex flex-col items-center text-center space-y-6 pb-6">
           <div
-            className={`w-[186px] h-[186px] rounded-full border-2 flex items-center justify-center`}>
+            className={`w-[186px] h-[186px] rounded-full border-2 flex items-center justify-center`}
+          >
             <Image
               src={isDark ? CheckDark : Check}
               alt="Check Icon"
@@ -44,18 +49,15 @@ export function SuccessModal({
             <h2
               className={`text-2xl font-bold mb-2 ${
                 isDark ? "text-[#F4F4F4]" : "text-gray-900"
-              }`}>
-              {transaction.token.symbol} Locked!
+              }`}
+            >
+              {transaction.token.symbol} {t("lockSummary.title")}!
             </h2>
             <p className={`dark:text-[#C3C3C3] text-gray-600 max-w-[285px]`}>
-              {"You've locked "}
-              <span className="font-semibold">
-                {transaction.amount} {transaction.token.symbol}
-              </span>
-              {" and you've received "}
-              <span className="font-semibold">
-                {transaction.xzbReceived.toFixed(2)} xZB!
-              </span>
+              {t("lockSummary.title")} {transaction.amount}{" "}
+              {transaction.token.symbol}
+              {t("claimBurn.availableToClaim")}{" "}
+              {transaction.xzbReceived.toFixed(2)} xZB!
             </p>
           </div>
 
@@ -69,15 +71,17 @@ export function SuccessModal({
               style={{
                 boxShadow: "0 1px 2px 0 rgba(120, 120, 120, 0.25) inset",
                 background: "linear-gradient(180deg, #1F1F1F 0%, #1C1C1C 100%)",
-              }}>
+              }}
+            >
               <Globe className="w-4 h-4 mr-2" />
-              View on Explorer
+              {t("common.view")} {t("common.on")} {t("common.explorer")}
             </Button>
             <Button
               variant="outline"
               className={`h-10 w-full bg-transparent rounded-full dark:bg-[#CDCDCD] dark:text-[#111111] border-gray-300 text-gray-900 dark:hover:bg-[#CDCDCD]`}
-              onClick={onClose}>
-              Return to Dashboard
+              onClick={onClose}
+            >
+              {t("common.back")} {t("common.to")} {t("navigation.dashboard")}
             </Button>
           </div>
         </div>

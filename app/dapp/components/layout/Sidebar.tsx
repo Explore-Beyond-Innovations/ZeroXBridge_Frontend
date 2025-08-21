@@ -10,15 +10,8 @@ import LockIcon from "@/svg/LockIcon";
 import PieChartIcon from "@/svg/PieChartIcon";
 import HourglassIcon from "@/svg/HourglassIcon";
 import SettingsIcon from "@/svg/SettingsIcon";
-
-const routes = [
-  { label: "Dashboard", href: "/dapp/dashboard", icon: HomeIcon },
-  { label: "Swap", href: "/dapp/swap", icon: SwapIcon },
-  { label: "Claim/Burn Tokens", href: "/dapp/claim-burn", icon: CryptoIcon },
-  { label: "Lock Tokens", href: "/dapp/lock-tokens", icon: LockIcon },
-  { label: "Analytics", href: "/dapp/analytics", icon: PieChartIcon },
-  { label: "Coming Soon", href: "/dapp/coming-soon", icon: HourglassIcon },
-];
+import { useTranslation } from "react-i18next";
+import "../../../i18n-client"; // Initialize i18n on client side
 
 function Sidebar({
   isOpen,
@@ -28,6 +21,32 @@ function Sidebar({
   onClose: () => void;
 }) {
   const pathname = usePathname();
+  const { t } = useTranslation();
+
+  const routes = [
+    {
+      label: t("navigation.dashboard"),
+      href: "/dapp/dashboard",
+      icon: HomeIcon,
+    },
+    { label: t("navigation.swap"), href: "/dapp/swap", icon: SwapIcon },
+    {
+      label: t("navigation.claimBurn"),
+      href: "/dapp/claim-burn",
+      icon: CryptoIcon,
+    },
+    {
+      label: t("navigation.lockTokens"),
+      href: "/dapp/lock-tokens",
+      icon: LockIcon,
+    },
+    {
+      label: t("navigation.analytics"),
+      href: "/dapp/analytics",
+      icon: PieChartIcon,
+    },
+    { label: "Coming Soon", href: "/dapp/coming-soon", icon: HourglassIcon },
+  ];
 
   return (
     <div
@@ -84,7 +103,7 @@ function Sidebar({
         >
           <div className="flex items-center gap-x-3">
             <SettingsIcon />
-            <span>Settings</span>
+            <span>{t("navigation.settings")}</span>
           </div>
         </Link>
       </div>

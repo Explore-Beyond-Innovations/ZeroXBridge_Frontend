@@ -8,6 +8,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import type { Token } from "@/types/token";
+import { useTranslation } from "react-i18next";
+import "../../i18n-client"; // Initialize i18n on client side
 // import { useTheme } from "@/app/hooks/useTheme";
 
 interface TokenSelectDropdownProps {
@@ -21,6 +23,7 @@ export function TokenSelectDropdown({
   onTokenSelect,
   tokens,
 }: TokenSelectDropdownProps) {
+  const { t } = useTranslation();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -40,7 +43,7 @@ export function TokenSelectDropdown({
                 </div>
                 <div className="text-left">
                   <div className="text-sm dark:text-[#737373] text-[#C1C1C1]">
-                    Lock
+                    {t("lockSummary.title")}
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="text-base text-[#505050] dark:text-white">
@@ -71,10 +74,10 @@ export function TokenSelectDropdown({
                   <div
                     className={`font-medium dark:text-[#737373] text-[#C1C1C1] text-[14px] sm:text-[16px]`}
                   >
-                    Lock
+                    {t("lockSummary.title")}
                   </div>
                   <div className={`dark:text-[#AFAFAF] text-[#646464]`}>
-                    - Select Token -
+                    - {t("common.select")} {t("common.token")} -
                   </div>
                 </div>
               </>

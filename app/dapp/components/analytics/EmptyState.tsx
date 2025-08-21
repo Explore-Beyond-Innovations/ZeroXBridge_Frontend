@@ -1,16 +1,22 @@
 "use client";
 
 import { PieChartIcon } from "lucide-react";
-import {ConnectWalletButton} from "../ui/ConnectWalletButton";
+import { ConnectWalletButton } from "../ui/ConnectWalletButton";
+import { useTranslation } from "react-i18next";
+import "../../../i18n-client"; // Initialize i18n on client side
 
 export default function EmptyState() {
+  const { t } = useTranslation();
   return (
     <div className="w-full max-w-7xl mx-auto">
       {/* Page Header */}
       <div className="flex flex-col space-y-2 mb-8">
-        <h1 className="text-2xl font-semibold text-primary-text">Analytics</h1>
+        <h1 className="text-2xl font-semibold text-primary-text">
+          {t("navigation.analytics")}
+        </h1>
         <p className="text-sm text-muted-foreground">
-          Connect your wallet to view real-time statistics and market insights
+          {t("wallet.connect")} {t("common.amount")} {t("analytics.tvl")}{" "}
+          {t("analytics.totalValueLocked")}
         </p>
       </div>
 
@@ -20,13 +26,15 @@ export default function EmptyState() {
           <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center">
             <PieChartIcon className="w-8 h-8 text-muted-foreground" />
           </div>
-          
+
           <div className="space-y-2">
             <h3 className="text-xl font-semibold text-primary-text">
-              Connect Your Wallet
+              {t("wallet.connect")}
             </h3>
             <p className="text-sm text-muted-foreground max-w-md">
-              To view analytics, charts, and real-time statistics, please connect your wallet first.
+              {t("analytics.tvl")} {t("analytics.totalValueLocked")}{" "}
+              {t("analytics.lockedAssets")} {t("analytics.xzbBalance")}{" "}
+              {t("analytics.change24h")}
             </p>
           </div>
 
@@ -35,4 +43,4 @@ export default function EmptyState() {
       </div>
     </div>
   );
-} 
+}

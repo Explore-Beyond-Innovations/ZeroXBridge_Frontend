@@ -10,6 +10,8 @@ import { SuccessModal } from "@/app/dapp/components/success-modal";
 import type { Token, LockTransaction } from "@/types/token";
 import { ConnectWalletButton } from "./ui/ConnectWalletButton";
 import { useWallet } from "@/app/hooks";
+import { useTranslation } from "react-i18next";
+import "../../i18n-client"; // Initialize i18n on client side
 
 // Mock token data
 const mockTokens: Token[] = [
@@ -53,6 +55,7 @@ const TokenLockInterface = () => {
     useState<LockTransaction | null>(null);
 
   const { isConnected, openWalletModal } = useWallet();
+  const { t } = useTranslation();
 
   const handleTokenSelect = (token: Token) => {
     setSelectedToken(token);
@@ -134,7 +137,7 @@ const TokenLockInterface = () => {
                     inputMode="decimal"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
-                    placeholder="0.00"
+                    placeholder={t("deposit.enterAmount")}
                     className={`!text-4xl no-spinner font-light border-none outline-none shadow-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 p-0 h-12 !bg-transparent dark:text-[#FFF] dark:placeholder-gray-500 text-[#878787] placeholder-gray-400`}
                     disabled={!isConnected || !selectedToken}
                   />
@@ -145,7 +148,7 @@ const TokenLockInterface = () => {
                     disabled={!isConnected || !selectedToken}
                     className={`dark:bg-[#232323] text-[14px] sm:text-[16px] border-[1.11px] border-[#EEEEEE] dark:border-none px-[13.3px] rounded-full text-[#737373] hover:bg-gray-50 bg-[#F4F4F4]`}
                   >
-                    Max
+                    {t("common.max")}
                   </Button>
                 </div>
                 {isConnected && (
@@ -156,7 +159,9 @@ const TokenLockInterface = () => {
                     <div
                       className={`flex justify-between text-sm dark:text-gray-400 text-[#737373]`}
                     >
-                      <span className="text-[#737373]">Available Balance:</span>
+                      <span className="text-[#737373]">
+                        {t("deposit.balance")}:
+                      </span>
                       <span className="text-[#1E1E1E] dark:text-[#CBCBCB]">
                         {selectedToken
                           ? `${selectedToken.balance} ${selectedToken.symbol}`
@@ -171,7 +176,7 @@ const TokenLockInterface = () => {
             <div className="flex flex-col gap-1 sm:space-y-3 border-gray-200 dark:border-gray-700 px-5 sm:p-5">
               <div className="flex justify-between text-sm">
                 <span className={`dark:text-[#737373] text-[#909090]`}>
-                  Token Price:
+                  {t("lockSummary.amountToLock")}:
                 </span>
                 <span
                   className={`font-medium dark:text-[#AFAFAF] text-[#909090]`}
@@ -184,7 +189,7 @@ const TokenLockInterface = () => {
 
               <div className="flex justify-between text-sm">
                 <span className={`dark:text-[#737373] text-[#909090]`}>
-                  Current Liquidity
+                  {t("analytics.lockedAssets")}
                 </span>
                 <span
                   className={`font-medium dark:text-[#AFAFAF] text-[#909090]`}
@@ -197,7 +202,7 @@ const TokenLockInterface = () => {
 
               <div className="flex justify-between text-sm">
                 <span className={`dark:text-[#737373] text-[#909090]`}>
-                  xZB Token Rate:
+                  {t("analytics.xzbBalance")}:
                 </span>
                 <span
                   className={`font-medium dark:text-[#AFAFAF] text-[#909090]`}
@@ -209,7 +214,7 @@ const TokenLockInterface = () => {
               {selectedToken && amount && (
                 <div className="flex justify-between text-sm">
                   <span className={`dark:text-[#737373] text-[#909090]`}>
-                    {"You'll receive:"}
+                    {t("claimBurn.availableToClaim")}:
                   </span>
                   <span className={`font-bold dark:text-[#FFF] text-[#1D1D1D]`}>
                     {calculateXzbReceived()} xZB
@@ -227,8 +232,9 @@ const TokenLockInterface = () => {
                     className={`h-5 w-5 mt-0.5 flex-shrink-0 dark:text-[#B9B9B9] text-[#343434]`}
                   />
                   <p className={`text-sm dark:text-[#B9B9B9] text-[#343434]`}>
-                    When you lock {selectedToken.symbol} tokens, you receive xZB
-                    tokens which can be burnt to release your locked{" "}
+                    {t("lockSummary.title")} {selectedToken.symbol}{" "}
+                    {t("common.amount")}, {t("claimBurn.availableToClaim")} xZB
+                    {t("claimBurn.burnXZB")} {t("claimBurn.availableToClaim")}{" "}
                     {selectedToken.symbol}.
                   </p>
                 </div>
@@ -243,7 +249,7 @@ const TokenLockInterface = () => {
                     !selectedToken || !amount || Number.parseFloat(amount) <= 0
                   }
                 >
-                  Lock {selectedToken?.symbol || "Token"}
+                  {t("lockSummary.title")} {selectedToken?.symbol || "Token"}
                 </Button>
               ) : (
                 <ConnectWalletButton

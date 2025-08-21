@@ -6,6 +6,8 @@ import { SearchIcon, XIcon } from "lucide-react";
 import { useThemeContext } from "@/app/hooks/context";
 import { AssetsMenu } from "./components/asset-menu";
 import { ChartTabs } from "./components/chart-tab";
+import { useTranslation } from "react-i18next";
+import "../../i18n-client"; // Initialize i18n on client side
 
 const assets = [
   { name: "Bitcoin", symbol: "btc", icon: "/bitcoin.svg", id: "bitcoin" },
@@ -25,6 +27,7 @@ const assets = [
 
 export default function DashboardPage() {
   const { isDark } = useThemeContext();
+  const { t } = useTranslation();
   const [currentAsset, setCurrentAsset] = useState(assets[0]);
   const [showSearch, setShowSearch] = useState(false);
 
@@ -53,8 +56,8 @@ export default function DashboardPage() {
         <div className="bg-white border-[1.11px] border-[#efefef] dark:border-[#202020] dark:bg-[#1E1E1E] rounded-2xl p-3 col-span-1 lg:col-span-2">
           <ChartTabs
             tabs={[
-              { label: "Total Users", content: <DashboardChart /> },
-              { label: "Total Value Locked", content: <TVLChart /> },
+              { label: t("analytics.totalUsers"), content: <DashboardChart /> },
+              { label: t("analytics.totalValueLocked"), content: <TVLChart /> },
             ]}
           />
         </div>
@@ -76,7 +79,7 @@ export default function DashboardPage() {
                 />
                 <input
                   type="text"
-                  placeholder="Search token"
+                  placeholder={`${t("navigation.search")} ${t("common.token")}`}
                   className="rounded-xl py-2 px-4 pl-6 bg-[#F4F4F4] dark:bg-[#181818] text-sm text-[#9D9D9D] focus:outline-none"
                 />
               </div>
@@ -97,7 +100,9 @@ export default function DashboardPage() {
                   />
                   <input
                     type="text"
-                    placeholder="Search token"
+                    placeholder={`${t("navigation.search")} ${t(
+                      "common.token"
+                    )}`}
                     autoFocus
                     className="flex-1 bg-transparent text-sm text-[#9D9D9D] focus:outline-none"
                   />
