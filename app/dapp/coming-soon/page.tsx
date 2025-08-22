@@ -76,20 +76,20 @@ const ComingSoon = () => {
   ];
 
   return (
-    <main className="flex w-full justify-center max-w-7xl mx-auto md:pt-10 sm:pt-8 sm:px-[20px]">
-      <div className="grid grid-cols-1 mx-3 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-[20px]">
+    <main className="flex w-full justify-center max-w-7xl mx-auto md:pt-10 sm:pt-8 px-4 sm:px-6 lg:px-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 lg:gap-6 w-full">
         {data.map((item) => (
           <div
             key={item.title}
-            className="flex flex-col gap-[16px] border-[1.11px] border-[#EFEFEF] dark:border-[#202020] bg-[#FFFFFF] dark:bg-[#151515] rounded-[20px] p-[20px]"
+            className="flex flex-col gap-4 border-[1.11px] border-[#EFEFEF] dark:border-[#202020] bg-[#FFFFFF] dark:bg-[#151515] rounded-[20px] p-4 sm:p-5 lg:p-6 min-w-0"
           >
-            <div className="text-black dark:text-[#FDFBFF] text-[16px] sm:text-[18px] font-light leading-[120%] tracking-[-0.02em] font-inter">
+            <div className="text-black dark:text-[#FDFBFF] text-[14px] sm:text-[16px] lg:text-[18px] font-light leading-[120%] tracking-[-0.02em] font-inter break-words">
               {item.title}
             </div>
-            <div className="text-[#3A3A3A] dark:text-[#B2B2B2] text-[14px] sm:text-[16px] font-light leading-[130%] sm:leading-[120%] tracking-[-0.02em] font-inter">
+            <div className="text-[#3A3A3A] dark:text-[#B2B2B2] text-[12px] sm:text-[14px] lg:text-[16px] font-light leading-[130%] sm:leading-[120%] tracking-[-0.02em] font-inter break-words">
               {item.description}
             </div>
-            <div className="relative bg-[#EFEFEF] dark:bg-[#1D1D1D] rounded-[16px] overflow-hidden h-[120px]">
+            <div className="relative bg-[#EFEFEF] dark:bg-[#1D1D1D] rounded-[16px] overflow-hidden h-[120px] flex-shrink-0">
               {item.img}
             </div>
           </div>
