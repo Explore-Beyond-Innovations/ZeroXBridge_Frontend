@@ -1,5 +1,5 @@
-import { ArrowUpRight, BookOpen } from "@/public/icons/svg/general";
-import { ArrowRight } from "lucide-react";
+// import { ArrowUpRight, BookOpen } from "@/public/icons/svg/general";
+import { ArrowRight, BookOpen } from "lucide-react";
 import Link from "next/link";
 const resources = [
   {
@@ -92,7 +92,7 @@ export const OverviewCard = ({
             Learn more
           </p>
           <span className="rotate-45 text-[#1A202C]">
-            <ArrowUpRight />
+            <ArrowRight />
           </span>
         </div>
       </div>

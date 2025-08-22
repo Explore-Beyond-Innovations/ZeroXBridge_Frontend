@@ -33,7 +33,7 @@ export default function DashboardPage() {
   const [currentAsset, setCurrentAsset] = useState(assets[0]);
   const [showSearch, setShowSearch] = useState(false);
   const [loading, setLoading] = useState(true);
-  const { data, isLoading } = useCryptoData(currentAsset.id);
+  const { isLoading } = useCryptoData(currentAsset.id);
 
   const onAssetSelect = (id: string) => {
     const found = assets.find((asset) => asset.id === id);
