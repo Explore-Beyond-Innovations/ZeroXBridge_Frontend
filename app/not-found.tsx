@@ -3,7 +3,12 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "./dapp/components/ui/button";
+// Temporary simple button to avoid dependency issues
+const Button = ({ children, className, ...props }: any) => (
+  <button className={`inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium bg-primary text-primary-foreground shadow hover:bg-primary/90 h-10 px-8 ${className}`} {...props}>
+    {children}
+  </button>
+);
 
 export default function NotFound() {
   return (
