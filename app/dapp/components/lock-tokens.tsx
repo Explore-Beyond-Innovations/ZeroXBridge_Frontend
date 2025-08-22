@@ -166,10 +166,10 @@ const TokenLockInterface = () => {
 
   return (
     <div
-      className={`w-full sm:max-w-[440px] mx-auto border rounded-[17px]
+      className={`w-full sm:max-w-[440px] border rounded-[17px]
          dark:bg-[#161616cc] dark:border-[#202020] bg-[#F7F7F7] border-[#EAEAEA]`}
     >
-      <div className="flex justify-end pt-2 px-2 md:px-4 w-full max-w-md">
+      <div className="flex justify-end pt-2 px-2 md:px-4 w-full max-w-full md:max-w-md">
         <Button
           variant="ghost"
           size="icon"
