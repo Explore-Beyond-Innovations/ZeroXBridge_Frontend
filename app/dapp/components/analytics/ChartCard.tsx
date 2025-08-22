@@ -10,6 +10,8 @@ import {
   ResponsiveContainer,
   CartesianGrid,
 } from "recharts";
+import { useTranslation } from "react-i18next";
+import "../../../i18n-client"; // Initialize i18n on client side
 
 interface ChartCardProps {
   selectedChart: "tvl" | "volume" | "price";
@@ -88,24 +90,6 @@ const chartData = {
   ],
 };
 
-const chartConfig = {
-  tvl: {
-    label: "TVL",
-    color: "#8884d8",
-    format: (value: number) => `$${(value / 1000).toFixed(0)}K`,
-  },
-  volume: {
-    label: "Volume",
-    color: "#82ca9d",
-    format: (value: number) => `$${(value / 1000).toFixed(0)}K`,
-  },
-  price: {
-    label: "Price",
-    color: "#ffc658",
-    format: (value: number) => `$${(value / 1000).toFixed(0)}K`,
-  },
-};
-
 export default function ChartCard({
   selectedChart,
   onChartChange,
@@ -113,6 +97,26 @@ export default function ChartCard({
   currentPrice,
   priceChange,
 }: ChartCardProps) {
+  const { t } = useTranslation();
+
+  const chartConfig = {
+    tvl: {
+      label: t("analytics.tvl"),
+      color: "#8884d8",
+      format: (value: number) => `$${(value / 1000).toFixed(0)}K`,
+    },
+    volume: {
+      label: t("analytics.volume"),
+      color: "#82ca9d",
+      format: (value: number) => `$${(value / 1000).toFixed(0)}K`,
+    },
+    price: {
+      label: t("analytics.price"),
+      color: "#ffc658",
+      format: (value: number) => `$${(value / 1000).toFixed(0)}K`,
+    },
+  };
+
   const lineColor = theme === "dark" ? "#fff" : "#000";
   console.log("ChartCard theme:", theme, "lineColor:", lineColor);
   const axisAndGridColor = theme === "dark" ? "#444" : "#e5e5e5";
@@ -160,8 +164,8 @@ export default function ChartCard({
       </div>
       <div className="flex-1 min-h-0 h-64 sm:h-80">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart 
-            data={currentData} 
+          <LineChart
+            data={currentData}
             margin={{ top: 10, right: 10, left: -20, bottom: 10 }}
           >
             <CartesianGrid
@@ -196,17 +200,20 @@ export default function ChartCard({
                 if (value >= 1000) return `$${(value / 1000).toFixed(0)}K`;
                 return `$${value}`;
               }}
-              domain={['dataMin', 'dataMax']}
+              domain={["dataMin", "dataMax"]}
               tickCount={6}
             />
-            <Tooltip 
-              formatter={(value: number) => [config.format(value), config.label]}
+            <Tooltip
+              formatter={(value: number) => [
+                config.format(value),
+                config.label,
+              ]}
               labelStyle={{ color: theme === "dark" ? "#fff" : "#000" }}
               contentStyle={{
                 backgroundColor: theme === "dark" ? "#1a1a1a" : "#fff",
                 border: `1px solid ${theme === "dark" ? "#333" : "#e5e5e5"}`,
                 borderRadius: "8px",
-                fontSize: "12px"
+                fontSize: "12px",
               }}
             />
             <Line
@@ -220,7 +227,7 @@ export default function ChartCard({
                 r: 4,
                 stroke: lineColor,
                 strokeWidth: 2,
-                fill: theme === "dark" ? "#1a1a1a" : "#fff"
+                fill: theme === "dark" ? "#1a1a1a" : "#fff",
               }}
               connectNulls={false}
             />
