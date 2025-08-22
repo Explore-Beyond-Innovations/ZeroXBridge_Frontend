@@ -8,7 +8,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import type { Token } from "@/types/token";
-import { Skeleton } from "./ui/skeleton";
 // import { useTheme } from "@/app/hooks/useTheme";
 
 interface TokenSelectDropdownProps {
@@ -18,23 +17,12 @@ interface TokenSelectDropdownProps {
   loadingToken?: boolean;
 }
 
-const TokenSkeleton = () => {
-  return (
-    <div className="flex items-center gap-2">
-      <Skeleton className="h-8 w-10 rounded-full" />
-      <div className="flex flex-col gap-1 w-full">
-        <Skeleton className="h-4 w-full" />
-        <Skeleton className="h-2 w-full" />
-      </div>
-    </div>
-  );
-};
+
 
 export function TokenSelectDropdown({
   selectedToken,
   onTokenSelect,
   tokens,
-  loadingToken = true,
 }: TokenSelectDropdownProps) {
   return (
     <DropdownMenu>
@@ -105,14 +93,8 @@ export function TokenSelectDropdown({
       <DropdownMenuContent
         className={`w-64 dark:bg-gray-800 dark:border-gray-700 bg-white border-gray-200`}
       >
-        {loadingToken ? (
-          <div className="flex flex-col gap-2 p-2">
-            <TokenSkeleton />
-            <TokenSkeleton />
-            <TokenSkeleton />
-          </div>
-        ) : (
-          tokens.map((token) => (
+        {
+        tokens.map((token) => (
             <DropdownMenuItem
               key={token.symbol}
               onClick={() => onTokenSelect(token)}
@@ -144,7 +126,7 @@ export function TokenSelectDropdown({
               </div>
             </DropdownMenuItem>
           ))
-        )}
+        }
       </DropdownMenuContent>
     </DropdownMenu>
   );
