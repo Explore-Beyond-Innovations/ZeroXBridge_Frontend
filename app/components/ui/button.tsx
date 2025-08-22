@@ -39,12 +39,34 @@ export interface ButtonProps
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, children, ...props }, ref) => {
+    // Filter out Framer Motion props to prevent React warnings
+    const {
+      whileHover,
+      whileTap,
+      whileFocus,
+      whileInView,
+      initial,
+      animate,
+      exit,
+      transition,
+      variants,
+      drag,
+      dragConstraints,
+      dragElastic,
+      onDrag,
+      onDragStart,
+      onDragEnd,
+      layoutId,
+      layout,
+      ...buttonProps
+    } = props as any;
+
     if (variant === 'gradientPrimary') {
       return (
         <button 
           className={cn(buttonVariants({ variant, size, className }))} 
           ref={ref} 
-          {...props}
+          {...buttonProps}
         >
           <span className="relative z-[2] flex items-center justify-center px-10 py-2 h-full w-full">
             {children}
@@ -57,7 +79,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
-        {...props}
+        {...buttonProps}
       />
     )
   }
