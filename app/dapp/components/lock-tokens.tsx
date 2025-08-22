@@ -185,17 +185,21 @@ const TokenLockInterface = () => {
         >
           <CardContent className="space-y-6 p-0">
             {loadingToken ? (
+              <>
               <SwapFromInputSkeleton />
+              <SwapQuoteDetailsSkeleton />
+              </>
             ) : (
               <>
-              <div
+                <div
                   className={`p-4 rounded-[16px] border space-y-6 dark:shadow-none dark:bg-[#1D1D1D] shadow-[0_0_14px_0_rgba(0,0,0,0.08)] dark:border-[#202020] bg-[#FFF] border-[#EAEAEA]`}
                 >
                   <TokenSelectDropdown
                     selectedToken={selectedToken}
                     onTokenSelect={handleTokenSelect}
                     tokens={mockTokens}
-                    loadingToken={loadingToken} />
+                    loadingToken={loadingToken}
+                  />
 
                   <div className="space-y-4">
                     <div className="flex items-center justify-between gap-2">
@@ -206,7 +210,8 @@ const TokenLockInterface = () => {
                         onChange={(e) => setAmount(e.target.value)}
                         placeholder={t("deposit.enterAmount")}
                         className={`!text-4xl no-spinner font-light border-none outline-none shadow-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 p-0 h-12 !bg-transparent dark:text-[#FFF] dark:placeholder-gray-500 text-[#878787] placeholder-gray-400`}
-                        disabled={!isConnected || !selectedToken} />
+                        disabled={!isConnected || !selectedToken}
+                      />
                       <Button
                         variant="default"
                         size="sm"
@@ -220,7 +225,8 @@ const TokenLockInterface = () => {
                     {isConnected && (
                       <>
                         <div
-                          className={`w-full h-px dark:bg-[#232323] bg-[#F1F1F1]`} />
+                          className={`w-full h-px dark:bg-[#232323] bg-[#F1F1F1]`}
+                        />
                         <div
                           className={`flex justify-between text-sm dark:text-gray-400 text-[#737373]`}
                         >
@@ -236,57 +242,62 @@ const TokenLockInterface = () => {
                       </>
                     )}
                   </div>
-                </div><div className="flex flex-col gap-1 sm:space-y-3 border-gray-200 dark:border-gray-700 px-5 sm:p-5">
+                </div>
+
+                <div className="flex flex-col gap-1 sm:space-y-3 border-gray-200 dark:border-gray-700 px-5 sm:p-5">
+                  <div className="flex justify-between text-sm">
+                    <span className={`dark:text-[#737373] text-[#909090]`}>
+                      Token Price:
+                    </span>
+                    <span
+                      className={`font-medium dark:text-[#AFAFAF] text-[#909090]`}
+                    >
+                      {selectedToken
+                        ? `$${selectedToken.price.toLocaleString()}`
+                        : "$--"}
+                    </span>
+                  </div>
+
+                  <div className="flex justify-between text-sm">
+                    <span className={`dark:text-[#737373] text-[#909090]`}>
+                      Current Liquidity
+                    </span>
+                    <span
+                      className={`font-medium dark:text-[#AFAFAF] text-[#909090]`}
+                    >
+                      {selectedToken
+                        ? `$${selectedToken.liquidity.toLocaleString()}`
+                        : "$--"}
+                    </span>
+                  </div>
+
+                  <div className="flex justify-between text-sm">
+                    <span className={`dark:text-[#737373] text-[#909090]`}>
+                      xZB Token Rate:
+                    </span>
+                    <span
+                      className={`font-medium dark:text-[#AFAFAF] text-[#909090]`}
+                    >
+                      {selectedToken ? `$${selectedToken.xzbRate}` : "$--"}
+                    </span>
+                  </div>
+
+                  {selectedToken && amount && (
                     <div className="flex justify-between text-sm">
                       <span className={`dark:text-[#737373] text-[#909090]`}>
-                        Token Price:
+                        {"You'll receive:"}
                       </span>
                       <span
-                        className={`font-medium dark:text-[#AFAFAF] text-[#909090]`}
+                        className={`font-bold dark:text-[#FFF] text-[#1D1D1D]`}
                       >
-                        {selectedToken
-                          ? `$${selectedToken.price.toLocaleString()}`
-                          : "$--"}
+                        {calculateXzbReceived()} xZB
                       </span>
                     </div>
-
-                    <div className="flex justify-between text-sm">
-                      <span className={`dark:text-[#737373] text-[#909090]`}>
-                        Current Liquidity
-                      </span>
-                      <span
-                        className={`font-medium dark:text-[#AFAFAF] text-[#909090]`}
-                      >
-                        {selectedToken
-                          ? `$${selectedToken.liquidity.toLocaleString()}`
-                          : "$--"}
-                      </span>
-                    </div>
-
-                    <div className="flex justify-between text-sm">
-                      <span className={`dark:text-[#737373] text-[#909090]`}>
-                        xZB Token Rate:
-                      </span>
-                      <span
-                        className={`font-medium dark:text-[#AFAFAF] text-[#909090]`}
-                      >
-                        {selectedToken ? `$${selectedToken.xzbRate}` : "$--"}
-                      </span>
-                    </div>
-
-                    {selectedToken && amount && (
-                      <div className="flex justify-between text-sm">
-                        <span className={`dark:text-[#737373] text-[#909090]`}>
-                          {"You'll receive:"}
-                        </span>
-                        <span className={`font-bold dark:text-[#FFF] text-[#1D1D1D]`}>
-                          {calculateXzbReceived()} xZB
-                        </span>
-                      </div>
-                    )}
-                  </div></>
-
-            {isConnected && selectedToken  && (
+                  )}
+                </div>
+              </>
+            )}
+            {isConnected && selectedToken && (
               <div
                 className={`rounded-xl border mx-5 p-4 dark:bg-[#1D1D1D] dark:border-[#202020] bg-[#FFF] border-[#EAEAEA]`}
               >
@@ -304,26 +315,28 @@ const TokenLockInterface = () => {
               </div>
             )}
 
-           { !loadingToken && ( 
-            <div className="px-5">
-              {isConnected ? (
-                <Button
-                  className={`w-full py-3 h-10 font-bold rounded-full dark:bg-[#CDCDCD] dark:text-[#111111] dark:hover:bg-gray-600 bg-gray-800 text-[#FFF] hover:bg-gray-700`}
-                  onClick={handleLock}
-                  disabled={
-                    !selectedToken || !amount || Number.parseFloat(amount) <= 0
-                  }
-                >
-                  {t("lockSummary.title")} {selectedToken?.symbol || "Token"}
-                </Button>
-              ) : (
-                <ConnectWalletButton
-                  className="w-full rounded-[12px] font-light"
-                  action={openWalletModal}
-                />
-              )}
-            </div>
-          )}
+            {!loadingToken && (
+              <div className="px-5">
+                {isConnected ? (
+                  <Button
+                    className={`w-full py-3 h-10 font-bold rounded-full dark:bg-[#CDCDCD] dark:text-[#111111] dark:hover:bg-gray-600 bg-gray-800 text-[#FFF] hover:bg-gray-700`}
+                    onClick={handleLock}
+                    disabled={
+                      !selectedToken ||
+                      !amount ||
+                      Number.parseFloat(amount) <= 0
+                    }
+                  >
+                    {t("lockSummary.title")} {selectedToken?.symbol || "Token"}
+                  </Button>
+                ) : (
+                  <ConnectWalletButton
+                    className="w-full rounded-[12px] font-light"
+                    action={openWalletModal}
+                  />
+                )}
+              </div>
+            )}
           </CardContent>
         </Card>
       </div>
