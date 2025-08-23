@@ -10,8 +10,6 @@ const nextConfig: NextConfig = {
   },
   // Disable source maps in development if causing issues
   productionBrowserSourceMaps: false,
-  // Optimize for development
-  swcMinify: true,
 }
 
 export default nextConfig;
