@@ -1,4 +1,4 @@
-"use  client";
+"use client";
 import Image from "next/image";
 import React from "react";
 
@@ -20,8 +20,9 @@ export const SupportCard: React.FC<SupportCardProps> = ({
 }) => {
   return (
     <button
+      type="button"
       onClick={onClick}
-      className="group w-full h-full rounded-xl bg-neutral-900 text-left border border-neutral-800 hover:border-neutral-700 transition"
+      className="w-full h-full rounded-xl bg-neutral-900 text-left border border-neutral-800 hover:border-neutral-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-900 transition"
     >
       <div className="flex flex-col gap-2 h-full">
         <div className="flex flex-col p-4 space-y-3">
