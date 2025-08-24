@@ -32,6 +32,9 @@
   --color-card-border: var(--card-border);
   --shadow-sm-shadow: var(--sm-shadow);
   --shadow-sm-connect-shadow: var(--sm-connect-shadow);
+
+  --color-support-card-bg: var(--support-card-bg);
+  --color-support-card-text: var(--support-card-text);
 }
 
 :root {
@@ -71,6 +74,9 @@
 
   /* tokens on the dashboard ui */
   --card-text-disabled: #bdbdbd;
+
+  --support-card-bg: hsla(0, 0%, 9%, 1);
+  --support-card-text: hsla(0, 0%, 62%, 1);
 
   --card: oklch(1 0 0);
   --card-border: #eaeaea;

@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import { CommunityCard } from "./components";
 
 const page = () => {
   return (
-    <div>page</div>
-  )
-}
+    <div>
+      <CommunityCard />
+    </div>
+  );
+};
 
-export default page
+export default page;
