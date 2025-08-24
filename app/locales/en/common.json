@@ -1,0 +1,280 @@
+{
+  "navigation": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "about": "About",
+    "governance": "Governance",
+    "search": "Search",
+    "connectWallet": "Connect Wallet",
+    "disconnect": "Disconnect",
+    "disconnectEthereum": "Disconnect Ethereum",
+    "disconnectStarknet": "Disconnect Starknet",
+    "notConnected": "Not connected",
+    "notifications": "Notifications",
+    "settings": "Settings",
+    "pricing": "Pricing",
+    "features": "Features",
+    "contactUs": "Contact Us",
+    "swap": "Swap",
+    "claimBurn": "Claim/Burn xZB Tokens",
+    "lockTokens": "Lock Tokens",
+    "analytics": "Analytics"
+  },
+  "header": {
+    "title": "Secure Cross-Chain Liquidity with Zero-Knowledge Proofs",
+    "subtitle": "The Future of Cross-Chain Bridging",
+    "description": "Unlock liquidity on Starknet using Ethereum collateral—no asset transfers, no wrapping, no centralized bridges.",
+    "getStarted": "Launch App",
+    "learnMore": "Learn More",
+    "stats": {
+      "totalTransactions": "Total Transactions",
+      "activeUsers": "Active Users",
+      "totalEarned": "Total Earned",
+      "investments": "Investments"
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 ZeroX Bridge. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "contact": "Contact Us",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos.",
+    "product": "PRODUCT",
+    "company": "COMPANY",
+    "socials": "SOCIALS",
+    "aboutUs": "About Us",
+    "faqs": "FAQs",
+    "documentation": "Documentation",
+    "prices": "Prices",
+    "career": "Career",
+    "address": "Address",
+    "developers": "Developers",
+    "telegram": "Telegram",
+    "twitter": "Twitter",
+    "discord": "Discord",
+    "github": "Github"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "reset": "Reset",
+    "max": "MAX",
+    "amount": "Amount",
+    "balance": "Balance",
+    "enterAmount": "Enter Amount",
+    "enterTokenAmount": "Enter Token Amount",
+    "view": "View",
+    "on": "on",
+    "explorer": "Explorer",
+    "to": "to",
+    "select": "Select",
+    "token": "Token",
+    "enterEmail": "Enter e-mail address"
+  },
+  "wallet": {
+    "connect": "Connect Wallet",
+    "connecting": "Connecting...",
+    "connected": "Connected",
+    "disconnected": "Disconnected",
+    "address": "Address",
+    "balance": "Balance",
+    "network": "Network"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "toggleTheme": "Toggle theme"
+  },
+  "language": {
+    "en": "English",
+    "fr": "Français",
+    "switchLanguage": "Switch Language"
+  },
+  "lockSummary": {
+    "title": "Lock Summary",
+    "amountToLock": "Amount to Lock",
+    "enterTokenAmount": "Enter Token Amount"
+  },
+  "claimBurn": {
+    "burnXZB": "Burn xZB",
+    "claimXZB": "Claim xZB",
+    "claimYourXZB": "Claim Your xZB Tokens Now",
+    "burnYourXZB": "Burn Your xZB Tokens Now",
+    "burnFirstWarning": "Please burn your tokens first before claiming. This ensures proper token redemption.",
+    "availableToClaim": "Available to claim",
+    "xZBBalance": "xZB Balance",
+    "usdValue": "USD Value",
+    "enterAmountToBurn": "Enter amount to Burn",
+    "connectEthereumWallet": "Connect Ethereum Wallet"
+  },
+  "analytics": {
+    "tvl": "TVL",
+    "totalValueLocked": "Total Value Locked",
+    "lockedAssets": "Locked Assets",
+    "xzbBalance": "xZB Balance",
+    "change24h": "Change (24h)",
+    "volume": "Volume",
+    "price": "Price",
+    "totalUsers": "Total Users"
+  },
+  "about": {
+    "title": "ZeroXBridge is here to Redefine Cross-Chain Liquidity",
+    "subtitle": "With ZeroXBridge eliminating the vulnerabilities of traditional cross-chain solutions:",
+    "noAssetTransfers": "No Asset Transfers",
+    "noAssetTransfersDesc": "Assets stay securely locked on Ethereum while unlocking liquidity on Starknet",
+    "noWrapping": "No Wrapping",
+    "noWrappingDesc": "No need for wrapped tokens or synthetic assets",
+    "noCentralizedBridges": "No Centralized Bridges",
+    "noCentralizedBridgesDesc": "Trustless architecture using zero-knowledge proofs"
+  },
+  "aboutHeader": {
+    "title": "About ZeroXBridge",
+    "description": "ZeroXBridge is a revolutionary cross-chain liquidity protocol that enables users to unlock liquidity on Starknet using Ethereum collateral without moving assets between chains.",
+    "activities": {
+      "security": "Security",
+      "securityDesc": "Zero-knowledge proofs ensure asset security",
+      "efficiency": "Efficiency",
+      "efficiencyDesc": "Instant liquidity without asset transfers",
+      "trustless": "Trustless",
+      "trustlessDesc": "No centralized bridges or intermediaries"
+    }
+  },
+  "aboutCoreProblems": {
+    "problems": [
+      "Security vulnerabilities in centralized bridges leading to hacks and exploits",
+      "Inefficient capital allocation due to wrapped tokens and fragmented liquidity",
+      "Limited cross-chain utility of liquid staking tokens",
+      "High gas fees and delays in asset transfers"
+    ],
+    "solutions": {
+      "zeroKnowledgeProofs": {
+        "title": "Zero-Knowledge Proofs",
+        "description": "Instead of moving assets between chains, we use ZK-STARK proofs to verify asset ownership on Ethereum while unlocking liquidity on Starknet."
+      },
+      "trustlessArchitecture": {
+        "title": "Trustless Architecture",
+        "subItems": [
+          "Users deposit collateral on Ethereum L1.",
+          "ZK-STARK proof verifies the deposit without exposing sensitive data.",
+          "Starknet validates the proof and enables borrowing from liquidity vaults.",
+          "Users can immediately access trading, lending, and borrowing capabilities."
+        ]
+      },
+      "capitalEfficiency": {
+        "title": "Capital Efficiency",
+        "subItems": [
+          "No wrapped tokens required.",
+          "Assets remain secure on Ethereum while being utilized on Starknet.",
+          "Liquid staking tokens can be used cross-chain without unstaking.",
+          "Instant settlement through proof verification."
+        ]
+      }
+    }
+  },
+  "faq": {
+    "title": "You have a Question You're not clear about?",
+    "subtitle": "ZeroXBridge is here to answer all your questions and keep you updated.",
+    "questions": [
+      {
+        "question": "What is ZeroXBridge built on?",
+        "answer": "ZeroXBridge is built on Ethereum and Starknet using zero-knowledge proofs to enable secure cross-chain liquidity without moving assets between chains."
+      },
+      {
+        "question": "How does ZeroXBridge ensure security?",
+        "answer": "ZeroXBridge uses ZK-STARK proofs to verify asset ownership on Ethereum while unlocking liquidity on Starknet, eliminating the need for centralized bridges."
+      },
+      {
+        "question": "What are the benefits of using ZeroXBridge?",
+        "answer": "ZeroXBridge provides instant liquidity, eliminates security risks of traditional bridges, reduces gas fees, and enables efficient capital utilization."
+      },
+      {
+        "question": "How do I get started with ZeroXBridge?",
+        "answer": "Connect your wallet, deposit collateral on Ethereum, and immediately access liquidity on Starknet for trading, lending, and borrowing."
+      },
+      {
+        "question": "What tokens are supported?",
+        "answer": "ZeroXBridge supports major tokens including ETH, USDC, and liquid staking tokens, with more tokens being added regularly."
+      },
+      {
+        "question": "Is ZeroXBridge audited?",
+        "answer": "Yes, ZeroXBridge undergoes regular security audits by leading blockchain security firms to ensure the highest level of security."
+      },
+      {
+        "question": "How does the token economics work?",
+        "answer": "xZB tokens represent liquidity positions and can be staked for rewards, governance rights, and additional protocol benefits."
+      }
+    ]
+  },
+  "testimonial": {
+    "title": "Hear what people are saying about us",
+    "subtitle": "Don't be left out of this Revolution",
+    "content": "Traditional bridges require moving assets between chains, exposing them to security risks like hacks and exploits. ZeroXBridge eliminates this by keeping your collateral securely locked on Ethereum while unlocking liquidity on Starknet.",
+    "author": "Elon White"
+  },
+  "deposit": {
+    "amount": "Amount",
+    "balance": "Balance",
+    "max": "Max",
+    "connectWallet": "Connect Wallet",
+    "deposit": "Deposit",
+    "enterAmount": "0.00"
+  },
+  "howItWorks": {
+    "title": "How It Works",
+    "subtitle": "These easy 4 steps are all you need to Get Started",
+    "step1": {
+      "title": "Connect Wallet",
+      "description": "First, you'll have to connect your wallet and then deposit collateral (ETH, USDC, STRK etc) on Ethereum L1."
+    },
+    "step2": {
+      "title": "ZK-STARK Proof",
+      "description": "A ZK-STARK proof verifies the deposit without exposing sensitive data."
+    },
+    "step3": {
+      "title": "STARKNET VERIFIES PROOF",
+      "description": "Starknet verifies the proof and unlocks borrowing power from liquidity vaults."
+    },
+    "step4": {
+      "title": "BORROW, LEND OR TRADE",
+      "description": "And that's all, you can now borrow, lend, or trade using their collateralized funds."
+    }
+  },
+  "joinCommunity": {
+    "title": "Join Our Wonderful Community Today!",
+    "description": "Stay Connected with exciting updates, do not be left out of this revolution",
+    "button": "Join Community"
+  },
+  "comingSoon": {
+    "seamlessWallet": {
+      "title": "Seamless Wallet Integrations",
+      "description": "xZB will soon be natively accessible through popular Starknet wallets allowing users to instantly connect, hold, and deploy their xZB in DeFi — without extra setup or manual imports."
+    },
+    "governanceDAO": {
+      "title": "Governance DAO & Token Whitelist Voting",
+      "description": "ZeroXBridge will enable the community to vote on which assets get whitelisted and help shape key protocol decisions — ensuring decentralization and user-driven evolution."
+    },
+    "accountAbstraction": {
+      "title": "Account Abstraction Support",
+      "description": "xZB will soon be natively accessible through popular Starknet wallets allowing users to instantly connect, hold, and deploy their xZB in DeFi — without extra setup or manual imports."
+    },
+    "stakingAPY": {
+      "title": "Staking + APY for Liquidity Providers",
+      "description": "ZeroXBridge will enable users to earn passive yield by staking or locking assets, rewarding participation and driving deeper liquidity in the ecosystem."
+    },
+    "paymasterIntegration": {
+      "title": "Paymaster Integration",
+      "description": "ZeroXBridge will let users interact with the app without needing ETH for gas, removing friction and simplifying onboarding for new Starknet users."
+    }
+  }
+}

@@ -1,67 +1,62 @@
+"use client";
+
 import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
-import { cn } from "@/lib/utils"
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
 
-const buttonVariants = cva(
-  "relative inline-flex items-center rounded-full justify-center font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:pointer-events-none disabled:opacity-50",
-  {
-    variants: {
-      variant: {
-        default: "bg-[#4C327A] text-white hover:bg-opacity-90",
-        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        gradientPrimary: [
-          "relative p-[2px] text-white",
-          "before:absolute before:inset-0 before:rounded-full",
-          "before:bg-[linear-gradient(20deg,#A26DFF,#4C327A,#A26DFF,#A26DFF)]",
-          "before:bg-[length:400%_100%]",
-          "before:content-[''] before:z-[0]",
-          "before:animate-[rotate_6s_linear_infinite]", 
-          "after:absolute after:inset-[2px] after:rounded-full",
-          "after:bg-[#4C327A] after:z-[1]",
-        ].join(" "),
-      },
-      size: {
-        default: "h-12",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
+// Simple cn function without external dependencies
+function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+
+// Simple button variants without cva dependency
+const getButtonClasses = (variant: string = "default", size: string = "default") => {
+  const baseClasses = "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50"
+  
+  const variantClasses = {
+    default: "bg-[#a26dff] text-white shadow hover:bg-[#907DBD]",
+    destructive: "bg-red-600 text-white shadow hover:bg-red-700",
+    outline: "border border-[#a26dff] bg-transparent text-[#a26dff] hover:bg-[#a26dff] hover:text-white",
+    secondary: "bg-gray-600 text-white shadow hover:bg-gray-700",
+    ghost: "hover:bg-[#a26dff]/20 hover:text-[#a26dff]",
+    link: "text-[#a26dff] underline-offset-4 hover:underline",
   }
-)
+  
+  const sizeClasses = {
+    default: "h-9 px-4 py-2",
+    sm: "h-8 rounded-md gap-1.5 px-3",
+    lg: "h-10 rounded-md px-6",
+    icon: "size-9",
+  }
+  
+  return cn(
+    baseClasses,
+    variantClasses[variant as keyof typeof variantClasses] || variantClasses.default,
+    sizeClasses[size as keyof typeof sizeClasses] || sizeClasses.default
+  )
+}
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+interface ButtonProps extends React.ComponentProps<"button"> {
+  variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link"
+  size?: "default" | "sm" | "lg" | "icon"
   asChild?: boolean
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, children, ...props }, ref) => {
-    if (variant === 'gradientPrimary') {
-      return (
-        <button 
-          className={cn(buttonVariants({ variant, size, className }))} 
-          ref={ref} 
-          {...props}
-        >
-          <span className="relative z-[2] flex items-center justify-center px-10 py-2 h-full w-full">
-            {children}
-          </span>
-        </button>
-      )
-    }
+function Button({
+  className,
+  variant = "default",
+  size = "default",
+  asChild = false,
+  ...props
+}: ButtonProps) {
+  const Comp = asChild ? "span" : "button" // Simplified, no Slot dependency
 
-    return (
-      <button
-        className={cn(buttonVariants({ variant, size, className }))}
-        ref={ref}
-        {...props}
-      />
-    )
-  }
-)
-Button.displayName = "Button"
+  return (
+    <Comp
+      className={cn(getButtonClasses(variant, size), className)}
+      {...props}
+    />
+  )
+}
 
-export { Button, buttonVariants }
+export { Button, type ButtonProps }
