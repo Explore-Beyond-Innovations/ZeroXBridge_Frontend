@@ -73,7 +73,7 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
   const { 
     isConnected: isEthereumConnected, 
     // connect: connectEthereum,
-    // depositAsset,
+    depositAsset,
     // claimTokens,
     address: ethereumAddress,
     provider
@@ -214,13 +214,27 @@ const XZBInterface: React.FC<XZBInterfaceProps> = ({
       });
 
       // Call depositAsset function
-      // const txHash = await depositAsset(
-      //   assetType,
-      //   tokenAddress,
-      //   amount
-      // );
+      const result = await depositAsset(
+        assetType,
+        tokenAddress,
+        amount
+      );
       
-      // console.log("Transaction hash:", txHash);
+      if (!result.success) {
+        throw new Error(result.error || "Deposit failed");
+      }
+
+      console.log("Transaction successful:", {
+        transactionHash: result.transactionHash,
+        commitmentHash: result.commitmentHash
+      });
+
+      // Store commitment hash for L2 use
+      if (result.commitmentHash) {
+        localStorage.setItem('latestCommitmentHash', result.commitmentHash);
+        localStorage.setItem('latestDepositTx', result.transactionHash || '');
+      }
+      
       setHasBurned(true);
       onBurn(amount, assetId);
     } catch (error) {

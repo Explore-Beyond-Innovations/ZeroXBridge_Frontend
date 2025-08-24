@@ -8,6 +8,7 @@ import {
 //   useSendTransaction
 } from "@starknet-react/core";
 import { useTheme } from "../ThemeContext";
+import { useEthereum } from "./Ethereum-provider";
 // import { uint256 } from "starknet";
 
 interface DepositProps {
@@ -18,10 +19,14 @@ interface DepositProps {
 const Deposit: React.FC<DepositProps> = ({ token, onClose }) => {
   const [amount, setAmount] = useState("");
   const [error, setError] = useState("");
+  const [isProcessing, setIsProcessing] = useState(false);
   const { isDarkMode } = useTheme();
 
   // Starknet React Hooks
   const { account } = useAccount();
+  
+  // Ethereum hooks
+  const { isConnected: isEthereumConnected, depositAsset, address: ethereumAddress } = useEthereum();
 //   // Get contract instance
 //   const { contract } = useContract({
 //     address: `0x${contractAddress}`,
@@ -45,41 +50,77 @@ const Deposit: React.FC<DepositProps> = ({ token, onClose }) => {
 //     ],
 //   });
 
-//   const handleDeposit = async () => {
-//     if (!contract || !account) {
-//       setError("Please connect your wallet");
-//       return;
-//     }
+  const handleDeposit = async () => {
+    try {
+      setError("");
+      setIsProcessing(true);
 
-//     try {
-//       setError("");
+      if (!isEthereumConnected || !ethereumAddress) {
+        setError("Please connect your Ethereum wallet");
+        return;
+      }
+
+      if (!amount || parseFloat(amount) <= 0) {
+        setError("Please enter a valid amount");
+        return;
+      }
+
+      // Determine asset type and token address
+      const assetType = token === "ETH" ? 0 : 1;
+      let tokenAddress;
       
-//       // Convert amount to uint256
-//       const amountInWei = uint256.bnToUint256(
-//         BigInt(parseFloat(amount) * 10 ** 18)
-//       );
+      if (assetType === 0) {
+        tokenAddress = "0x0000000000000000000000000000000000000000";
+      } else {
+        // For ERC20 tokens, you'd need to map token symbols to addresses
+        // This is a placeholder - in production, you'd have a token registry
+        const tokenAddresses: Record<string, string> = {
+          USDC: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+          USDT: "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+        };
+        tokenAddress = tokenAddresses[token];
+        
+        if (!tokenAddress) {
+          setError(`Token ${token} not supported`);
+          return;
+        }
+      }
 
-//       // Update calldata with the correct values
-//       const tx = send([
-//         {
-//           contractAddress: contractAddress,
-//           entrypoint: "deposit",
-//           calldata: [
-//             account.address,
-//             amountInWei.low,
-//             amountInWei.high,
-//           ],
-//         },
-//       ]);
-//       console.log('transaction result', tx);
-//       // Clear input and close modal
-//       setAmount("");
-//       onClose();
+      console.log("Initiating deposit:", {
+        assetType,
+        tokenAddress,
+        amount,
+        userAddress: ethereumAddress
+      });
 
-//     } catch (err) {
-//       setError(err instanceof Error ? err.message : "Failed to deposit");
-//     }
-//   };
+      const result = await depositAsset(assetType, tokenAddress, amount);
+      
+      if (!result.success) {
+        throw new Error(result.error || "Deposit failed");
+      }
+
+      console.log("Deposit successful:", {
+        transactionHash: result.transactionHash,
+        commitmentHash: result.commitmentHash
+      });
+
+      // Store commitment hash for L2 use
+      if (result.commitmentHash) {
+        localStorage.setItem('latestCommitmentHash', result.commitmentHash);
+        localStorage.setItem('latestDepositTx', result.transactionHash || '');
+      }
+
+      // Clear input and close modal on success
+      setAmount("");
+      onClose();
+
+    } catch (err) {
+      console.error("Deposit error:", err);
+      setError(err instanceof Error ? err.message : "Failed to deposit");
+    } finally {
+      setIsProcessing(false);
+    }
+  };
 
    // Format balance for display
   const formattedBalance = balance 
@@ -153,13 +194,15 @@ const Deposit: React.FC<DepositProps> = ({ token, onClose }) => {
       )}
 
       <button
-        // onClick={handleDeposit}
-        disabled={!account || !amount || parseFloat(amount) <= 0}
+        onClick={handleDeposit}
+        disabled={!isEthereumConnected || !amount || parseFloat(amount) <= 0 || isProcessing}
         className="mt-6 w-full py-2 px-4 bg-[#1F1333] text-white
                  disabled:bg-[#3B2A65] rounded-lg transition-colors"
       >
-        {!account 
-          ? "Connect Wallet" 
+        {!isEthereumConnected 
+          ? "Connect Ethereum Wallet" 
+          : isProcessing
+          ? "Processing..."
           : "Deposit"
         }
       </button>
