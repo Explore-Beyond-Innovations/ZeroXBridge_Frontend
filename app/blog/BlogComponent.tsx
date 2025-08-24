@@ -17,7 +17,6 @@ const BlogComponent: React.FC<BlogComponentProps> = ({ post }) => {
     <div className="bg-[#1A1A1A] rounded-md border border-[#2A2A2A] overflow-hidden shadow flex flex-col">
       {post.image && (
         <div className="w-full h-28 bg-[#231B32] relative">
-
           <img
             src={post.image}
             alt={post.title}
@@ -33,7 +32,6 @@ const BlogComponent: React.FC<BlogComponentProps> = ({ post }) => {
           {post.excerpt}
         </p>
         <div className="flex items-center justify-between mt-auto">
-
           <span className="text-[10px] text-white font-mono font-[400]">
             {new Date(post.date).toLocaleDateString(undefined, {
               year: "numeric",
