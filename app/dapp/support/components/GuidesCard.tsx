@@ -58,7 +58,7 @@ export const GuidesCard = () => {
     <SupportCard
       title="Guides"
       subtitle="Read our setup guides and documentation"
-      iconSrc="/images/openBook.png" // replace with actual icon path
+      iconSrc="/community-image.png" // replace with actual icon path
       // icon={<span className="material-icons"></span>} // replace with SVG if available
       onClick={() => {
         console.log("Guides clicked!");

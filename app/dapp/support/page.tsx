@@ -1,12 +1,14 @@
+"use client";
 import React from "react";
-import { CommunityCard } from "./components";
+import { GuidesCard } from "./components";
 
-const page = () => {
+export default function SupportPage() {
   return (
-    <div>
-      <CommunityCard />
+    <div className="space-y-6 p-6">
+      <h1>Support</h1>
+      <div className="grid-cols-3 w-full gap-6 grid">
+        <GuidesCard />
+      </div>
     </div>
   );
-};
-
-export default page;
+}
