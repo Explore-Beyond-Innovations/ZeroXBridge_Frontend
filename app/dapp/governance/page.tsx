@@ -1,11 +1,7 @@
 import React from 'react';
-import GovernanceOverview from './components/learn-overview';
 
 const page = () => {
-  return (
-  <div>
-    <GovernanceOverview />
-  </div>)
+  return <div>page</div>;
 };
 
 export default page;

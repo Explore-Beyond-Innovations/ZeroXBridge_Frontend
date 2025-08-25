@@ -20,7 +20,7 @@ interface AppLayoutProps {
 function AppLayout({ children, layoutPadding = true }: AppLayoutProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const pathname = usePathname();
-  const isComingSoon = pathname === "/dapp/coming-soon"
+  const isComingSoon = pathname === "/dapp/coming-soon";
 
   return (
     <>
@@ -35,7 +35,9 @@ function AppLayout({ children, layoutPadding = true }: AppLayoutProps) {
             onClose={() => setIsSidebarOpen(false)}
           />
           <div
-            className={`flex-1 h-full relative overflow-y-auto ${layoutPadding ? "p-[22px] pt-10" : ""}  text-primary-text`}
+            className={`flex-1 h-full relative overflow-y-auto ${
+              layoutPadding ? "p-[22px] pt-10" : ""
+            }  text-primary-text`}
           >
             {children}
 
