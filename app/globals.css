@@ -261,6 +261,57 @@ select:disabled {
   }
 }
 
+/* Custom Scrollbar - Combined and Simplified */
+.custom-scrollbar::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 0 2px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background: #A26DFF;
+  opacity: 0.3;
+  transition: all 0.2s ease;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #A26DFF;
+  opacity: 0.6;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #3b2a65;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #5c4a85;
+}
+
+/* Hide scrollbar for mobile devices */
+@media (max-width: 768px) {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+  
+  .custom-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+}
+
+/* Ensure Smooth Rendering on Webkit Browsers */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  .footer-background-text {
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
 @layer components {
   .text-logo {
     color: var(--color-logo);
@@ -282,4 +333,111 @@ select:disabled {
       transform: translateY(0);
     }
   }
+}
+
+.shadow-glow {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(162, 109, 255, 0.6);
+}
+
+/* Add this to your global CSS file */
+
+@keyframes glow {
+  0%, 100% {
+    filter: brightness(1) drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
+  }
+  20% {
+    filter: brightness(0.8) drop-shadow(0 0 0px rgba(255, 255, 255, 0.2));
+  }
+  50% {
+    filter: brightness(1.2) drop-shadow(0 0 4px rgba(255, 255, 255, 0.3));
+  }
+  70% {
+    filter: brightness(1.4) drop-shadow(0 0 0px rgba(255, 255, 255, 0.7));
+  }
+}
+
+/* Wallet Connection Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes successPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+  }
+}
+
+@keyframes walletConnecting {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Utility Classes */
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slideIn {
+  animation: slideIn 0.4s ease-out;
+}
+
+.animate-successPulse {
+  animation: successPulse 2s infinite;
+}
+
+.animate-walletConnecting {
+  background: linear-gradient(45deg, #A26DFF, #291A43, #A26DFF, #291A43);
+  background-size: 300% 300%;
+  animation: walletConnecting 2s ease infinite;
+}
+
+.animate-glowSlow {
+  animation: glow 4s cubic-bezier(0.6, 0.8, 0.6, 1) infinite;
+}
+
+/* Remove default borders from all images */
+img {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.globe-grid-image {
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
 }
