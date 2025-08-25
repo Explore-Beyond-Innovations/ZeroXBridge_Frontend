@@ -6,6 +6,53 @@ import {
   starknetConnectorMeta,
   starknetConnectors,
 } from "@/lib/connectors";
+// import { SiweMessage } from "siwe";
+
+const generateNonce = () => {
+  return (
+    Math.random().toString(36).substring(2, 15) +
+    Math.random().toString(36).substring(2, 15)
+  );
+};
+
+const authenticateWithSignature = async (
+  address: string,
+  message: string,
+  signature: string
+) => {
+  try {
+    const csrfTokenResponse = await fetch("/api/auth/csrf");
+    const { csrfToken } = await csrfTokenResponse.json();
+
+    const nonce = message.split("Nonce: ")[1];
+
+    const response = await fetch("/api/auth/callback/credentials", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        address,
+        message,
+        signature,
+        nonce,
+        csrfToken,
+        callbackUrl: window.location.origin,
+        redirect: false,
+        provider: "ethereum",
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Authentication failed");
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Authentication error:", error);
+    throw error;
+  }
+};
 
 export const useWallet = () => {
   const {
@@ -20,7 +67,6 @@ export const useWallet = () => {
   const ethWallet = useEthereumWallet();
   const strkWallet = useStarknetWallet();
 
-  // we should sync wallet states when they change
   useEffect(() => {
     setEthWallet({
       address: ethWallet.address || null,
@@ -54,33 +100,58 @@ export const useWallet = () => {
           isMetaMask?: boolean;
           isCoinbaseWallet?: boolean;
         };
-        const provider = (window as unknown as { ethereum?: EthereumProvider }).ethereum;
+        const provider = (window as unknown as { ethereum?: EthereumProvider })
+          .ethereum;
         const platformName = provider?.isMetaMask
           ? "MetaMask"
           : provider?.isCoinbaseWallet
           ? "Coinbase Wallet"
           : "Ethereum Wallet";
 
-        // we can add support for more later
         const platformLogo =
           platformName === "MetaMask"
             ? "/wallet-logos/metamask.svg"
             : platformName === "Coinbase Wallet"
-              ? "/wallet-logos/coinbase.svg"
-              : "/wallet-logos/default-eth.svg";
+            ? "/wallet-logos/coinbase.svg"
+            : "/wallet-logos/default-eth.svg";
 
         setWalletPlatform({
           network: "ETH",
           platformName,
           platformLogo,
         });
+
+        if (ethWallet.address) {
+          try {
+            const nonce = generateNonce();
+            const message = `Sign this message to authenticate with ZeroXBridge.\nNonce: ${nonce}`;
+
+            const signer = await ethWallet.getSigner?.();
+            if (!signer) {
+              console.error("No signer available");
+              return;
+            }
+
+            const signature = await signer.signMessage(message);
+
+            await authenticateWithSignature(
+              ethWallet.address,
+              message,
+              signature
+            );
+
+            console.log("Successfully authenticated with Ethereum wallet");
+          } catch (signError) {
+            console.error("Signature error:", signError);
+          }
+        }
       } catch (error) {
         resetWallet("ETH");
         store.setError(String(error));
         throw error;
       }
     },
-    [ethWallet, clearError, resetWallet, setWalletPlatform, store],
+    [ethWallet, clearError, resetWallet, setWalletPlatform, store]
   );
 
   const disconnectEthWallet = useCallback(() => {
@@ -107,13 +178,48 @@ export const useWallet = () => {
           platformName: name,
           platformLogo: icon,
         });
+
+        setTimeout(async () => {
+          if (strkWallet.account?.address) {
+            try {
+              const nonce = generateNonce();
+              const message = `Sign this message to authenticate with ZeroXBridge.\nNonce: ${nonce}`;
+
+              const signature = await strkWallet.account.signMessage({
+                message: { message },
+                types: {},
+                primaryType: "",
+                domain: {
+                  name: "ZeroXBridge",
+                  version: "1",
+                },
+              });
+
+              const signatureStr = Array.isArray(signature)
+                ? signature.join(",")
+                : typeof signature === "object"
+                ? JSON.stringify(signature)
+                : signature;
+
+              await authenticateWithSignature(
+                strkWallet.account.address,
+                message,
+                signatureStr
+              );
+
+              console.log("Successfully authenticated with Starknet wallet");
+            } catch (signError) {
+              console.error("Starknet signature error:", signError);
+            }
+          }
+        }, 500);
       } catch (error) {
         resetWallet("STRK");
         store.setError(String(error));
         throw error;
       }
     },
-    [strkWallet, clearError, resetWallet, setWalletPlatform, store],
+    [strkWallet, clearError, resetWallet, setWalletPlatform, store]
   );
 
   const disconnectStrkWallet = useCallback(() => {
@@ -125,7 +231,7 @@ export const useWallet = () => {
     }
   }, [strkWallet, resetWallet, store]);
 
-  const isConnected = store.strkConnected || store.ethConnected
+  const isConnected = store.strkConnected || store.ethConnected;
 
   return {
     ethAddress: store.ethAddress,
