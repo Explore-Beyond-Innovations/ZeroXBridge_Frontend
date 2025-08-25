@@ -64,7 +64,7 @@ const WalletEmptyState: React.FC<WalletEmptyStateProps> = ({
       {availableWallets.length > 1 && (
         <div className="mb-6">
           <p className="text-sm text-gray-400 mb-3">Or choose an alternative:</p>
-          <div className="space-y-2">
+          <div className="flex flex-wrap gap-2 justify-center">
             {availableWallets.slice(1).map((wallet) => (
               <a
                 key={wallet.id}
@@ -76,7 +76,6 @@ const WalletEmptyState: React.FC<WalletEmptyStateProps> = ({
                   bg-[#291A43] hover:bg-[#342251] 
                   text-white text-sm rounded-lg 
                   transition-colors duration-200
-                  mr-2 mb-2
                 "
               >
                 <ExternalLink size={14} />

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState, useId } from 'react';
 import { Info, HelpCircle } from 'lucide-react';
 
 interface WalletTooltipProps {
@@ -17,6 +17,8 @@ const WalletTooltip: React.FC<WalletTooltipProps> = ({
   className = ''
 }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const tooltipId = useId();
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   const getPositionClasses = () => {
     const base = 'absolute z-50 px-3 py-2 text-xs text-white bg-gray-900 rounded-lg shadow-lg border border-gray-700 max-w-xs';
@@ -70,17 +72,47 @@ const WalletTooltip: React.FC<WalletTooltipProps> = ({
     }
   };
 
+  // Close on outside click for click-triggered tooltips
+  useEffect(() => {
+    if (trigger !== 'click' || !isVisible) return;
+    const onDocMouseDown = (e: MouseEvent) => {
+      if (!wrapperRef.current?.contains(e.target as Node)) {
+        setIsVisible(false);
+      }
+    };
+    document.addEventListener('mousedown', onDocMouseDown);
+    return () => document.removeEventListener('mousedown', onDocMouseDown);
+  }, [isVisible, trigger]);
+
+  // Keyboard support: Enter/Space toggles, Esc closes
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (trigger === 'click' && (e.key === 'Enter' || e.key === ' ')) {
+      e.preventDefault();
+      setIsVisible(v => !v);
+    }
+    if (e.key === 'Escape') {
+      setIsVisible(false);
+    }
+  };
+
   return (
     <div 
+      ref={wrapperRef}
       className={`relative inline-block ${className}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      tabIndex={trigger === 'click' ? 0 : -1}
+      aria-describedby={isVisible ? tooltipId : undefined}
     >
       {children}
       
       {isVisible && (
         <div
+          role="tooltip"
+          id={tooltipId}
+          aria-hidden={!isVisible}
           className={`
             ${getPositionClasses()}
             animate-in fade-in-0 zoom-in-95 duration-200

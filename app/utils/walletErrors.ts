@@ -59,25 +59,41 @@ export const parseWalletError = (error: any): WalletError => {
     return createWalletError(WalletErrorType.UNKNOWN_ERROR);
   }
 
-  const errorMessage = error.message?.toLowerCase() || error.toString().toLowerCase();
+  const code = (error as any)?.code;
+  const msg = (typeof error?.message === 'string' ? error.message : String(error || ''))
+    .toLowerCase();
+
+  // EIP-1193 / common codes
+  if (code === 4001) { // user rejected
+    return createWalletError(WalletErrorType.CONNECTION_REJECTED);
+  }
+  if (code === 4902) { // chain not added / unsupported
+    return createWalletError(WalletErrorType.UNSUPPORTED_NETWORK);
+  }
+  if (code === -32002) { // request already pending
+    return createWalletError(WalletErrorType.CONNECTION_FAILED);
+  }
 
   // Connection rejected by user
-  if (errorMessage.includes('rejected') || errorMessage.includes('denied') || errorMessage.includes('cancelled')) {
+  if (msg.includes('rejected') || msg.includes('denied') || msg.includes('canceled') || msg.includes('cancelled')) {
     return createWalletError(WalletErrorType.CONNECTION_REJECTED);
   }
 
   // Wallet not installed
-  if (errorMessage.includes('not installed') || errorMessage.includes('not found') || errorMessage.includes('undefined')) {
+  if (msg.includes('not installed') || msg.includes('provider not found') || msg.includes('no provider')) {
     return createWalletError(WalletErrorType.WALLET_NOT_INSTALLED);
   }
 
   // Network issues
-  if (errorMessage.includes('network') || errorMessage.includes('chain')) {
+  if (msg.includes('mismatch')) {
+    return createWalletError(WalletErrorType.NETWORK_MISMATCH);
+  }
+  if (msg.includes('unsupported network') || msg.includes('unsupported chain') || msg.includes('wrong chain')) {
     return createWalletError(WalletErrorType.UNSUPPORTED_NETWORK);
   }
 
   // Generic connection failure
-  if (errorMessage.includes('connection') || errorMessage.includes('connect')) {
+  if (msg.includes('connection') || msg.includes('connect')) {
     return createWalletError(WalletErrorType.CONNECTION_FAILED);
   }
 

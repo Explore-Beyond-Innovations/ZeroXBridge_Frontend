@@ -20,10 +20,21 @@ export const checkWalletInstallation = () => {
   }
 
   return {
-    metamask: !!(window as any).ethereum?.isMetaMask,
+    metamask: !!(
+      (window as any).ethereum?.isMetaMask ||
+      (window as any).ethereum?.providers?.some((p: any) => p?.isMetaMask)
+    ),
     walletconnect: true, // Always available
-    argentx: !!(window as any).starknet_argentX,
-    braavos: !!(window as any).starknet_braavos
+    argentx: !!(
+      (window as any).starknet_argentX ||
+      (window as any).starknet?.isArgentX ||
+      (window as any).starknet?.providers?.some((p: any) => p?.isArgentX)
+    ),
+    braavos: !!(
+      (window as any).starknet_braavos ||
+      (window as any).starknet?.isBraavos ||
+      (window as any).starknet?.providers?.some((p: any) => p?.isBraavos)
+    )
   };
 };
 

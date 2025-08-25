@@ -77,20 +77,10 @@ export const useWalletConnection = (walletType: WalletType) => {
         }, CONNECTION_TIMEOUT);
       });
 
-      // Connection promise
-      const connectionPromise = new Promise((resolve, reject) => {
-        if (walletType === 'starknet') {
-          starknetConnect.connect({ connector }, {
-            onSuccess: (data) => resolve(data),
-            onError: (error) => reject(error)
-          });
-        } else {
-          ethereumConnect.connect({ connector }, {
-            onSuccess: (data) => resolve(data),
-            onError: (error) => reject(error)
-          });
-        }
-      });
+      // Connection promise using connectAsync for proper promise-based flow
+      const connectionPromise = walletType === 'starknet' 
+        ? starknetConnect.connectAsync({ connector })
+        : ethereumConnect.connectAsync({ connector });
 
       // Race between connection and timeout
       const result = await Promise.race([connectionPromise, timeoutPromise]);

@@ -20,10 +20,14 @@ const WalletErrorComponent: React.FC<WalletErrorProps> = ({
   const installUrl = walletName ? getWalletInstallUrl(walletName) : null;
 
   return (
-    <div className={`
-      relative p-4 rounded-lg border border-red-500/20 bg-red-500/5 
-      backdrop-blur-sm transition-all duration-200 ${className}
-    `}>
+    <div 
+      role="alert" 
+      aria-live="polite"
+      className={`
+        relative p-4 rounded-lg border border-red-500/20 bg-red-500/5 
+        backdrop-blur-sm transition-all duration-200 ${className}
+      `}
+    >
       {/* Dismiss button */}
       {onDismiss && (
         <button
@@ -44,7 +48,16 @@ const WalletErrorComponent: React.FC<WalletErrorProps> = ({
         <div className="flex-1 min-w-0">
           {/* Error message */}
           <h4 className="text-white font-medium text-sm mb-1">
-            Connection Failed
+            {(() => {
+              switch (error.type) {
+                case 'CONNECTION_REJECTED': return 'Request Rejected';
+                case 'UNSUPPORTED_NETWORK': return 'Unsupported Network';
+                case 'NETWORK_MISMATCH': return 'Network Mismatch';
+                case 'WALLET_NOT_INSTALLED': return 'Wallet Not Installed';
+                case 'CONNECTION_FAILED': return 'Connection Failed';
+                default: return 'Something Went Wrong';
+              }
+            })()}
           </h4>
           <p className="text-gray-300 text-sm mb-2">
             {error.message}
@@ -76,8 +89,8 @@ const WalletErrorComponent: React.FC<WalletErrorProps> = ({
               </button>
             )}
 
-            {/* Install wallet button */}
-            {installUrl && installUrl !== '#' && (
+            {/* Install wallet button - only show for WALLET_NOT_INSTALLED error */}
+            {error.type === 'WALLET_NOT_INSTALLED' && installUrl && installUrl !== '#' && (
               <a
                 href={installUrl}
                 target="_blank"
