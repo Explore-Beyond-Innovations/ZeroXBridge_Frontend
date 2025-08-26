@@ -29,7 +29,7 @@ function SubmitTicketCard({ title, subtitle, icon, href, onClick }: Props) {
 
   return (
     <button
-      className="group bg-[#161616] relative rounded-xl w-full max-w-100 h-[481px] p-4 transition-all duration-200 hover:bg-[#1a1a1a] hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-black active:scale-[0.98] cursor-pointer"
+      className="group bg-[#161616] relative rounded-xl w-full max-w-100 h-[481px] p-4 transition-all duration-200 hover:bg-[#1a1a1a] hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-black active:scale-[0.98] cursor-pointer"
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       tabIndex={0}
