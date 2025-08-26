@@ -1,7 +1,16 @@
-import React from 'react';
+'use client';
 
-const page = () => {
-  return <div>page</div>;
+import React from 'react';
+import GovernanceOverview from './components/learn-overview';
+import Delegates from './components/delegates';
+
+const Page = () => {
+  return (
+    <div>
+      <GovernanceOverview />
+      <Delegates />
+    </div>
+  );
 };
 
-export default page;
+export default Page;
