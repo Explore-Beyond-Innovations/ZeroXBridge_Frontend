@@ -67,6 +67,21 @@ const handler = NextAuth({
               process.env.NEXTAUTH_URL ?? req.headers?.origin ?? ""
             ).host;
 
+            // Check message timing to prevent replay attacks
+            const now = new Date();
+            if (siwe.expirationTime && new Date(siwe.expirationTime) < now) {
+              console.error("SIWE message has expired");
+              return null;
+            }
+            if (siwe.issuedAt) {
+              const issuedAt = new Date(siwe.issuedAt);
+              const maxAge = 5 * 60 * 1000; // 5 minutes
+              if (now.getTime() - issuedAt.getTime() > maxAge) {
+                console.error("SIWE message is too old");
+                return null;
+              }
+            }
+
             // Validate the signature and message fields
             await siwe.verify({
               signature: credentials.signature,

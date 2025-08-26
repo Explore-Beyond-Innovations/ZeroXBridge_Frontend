@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useWalletStore } from "../store/wallet";
 import { useEthereumWallet, useStarknetWallet } from "./";
 import {
@@ -9,22 +9,29 @@ import {
 // import { SiweMessage } from "siwe";
 
 const generateNonce = () => {
-  return (
-    Math.random().toString(36).substring(2, 15) +
-    Math.random().toString(36).substring(2, 15)
-  );
+  return crypto.randomUUID
+    ? crypto.randomUUID()
+    : Array.from(crypto.getRandomValues(new Uint8Array(16)))
+        .map((b) => b.toString(16).padStart(2, "0"))
+        .join("");
 };
 
 const authenticateWithSignature = async (
   address: string,
   message: string,
-  signature: string
+  signature: string,
+  provider: "ethereum" | "starknet" = "ethereum"
 ) => {
   try {
     const csrfTokenResponse = await fetch("/api/auth/csrf");
     const { csrfToken } = await csrfTokenResponse.json();
 
-    const nonce = message.split("Nonce: ")[1];
+    const nonceMatch = message.match(/Nonce:\s*(.?)(?:\n|$)/);
+    const nonce = nonceMatch ? nonceMatch[1].trim() : null;
+
+    if (!nonce) {
+      throw new Error("Failed to extract nonce from message");
+    }
 
     const response = await fetch("/api/auth/callback/credentials", {
       method: "POST",
@@ -39,7 +46,7 @@ const authenticateWithSignature = async (
         csrfToken,
         callbackUrl: window.location.origin,
         redirect: false,
-        provider: "ethereum",
+        provider,
       }),
     });
 
@@ -67,6 +74,13 @@ export const useWallet = () => {
   const ethWallet = useEthereumWallet();
   const strkWallet = useStarknetWallet();
 
+  // Refs to track the last authenticated addresses to prevent duplicate authentication
+  const lastAuthenticatedEthAddress = useRef<string | null>(null);
+  const lastAuthenticatedStrkAddress = useRef<string | null>(null);
+  // Refs to track if authentication is in progress
+  const isEthAuthenticating = useRef(false);
+  const isStrkAuthenticating = useRef(false);
+
   useEffect(() => {
     setEthWallet({
       address: ethWallet.address || null,
@@ -82,6 +96,52 @@ export const useWallet = () => {
     setEthWallet,
   ]);
 
+  // Separate effect for authentication that runs when Ethereum address changes
+  useEffect(() => {
+    // Only authenticate if we have an address and it's not the same as the last authenticated address
+    const shouldAuthenticate =
+      ethWallet.address &&
+      ethWallet.address !== lastAuthenticatedEthAddress.current &&
+      !isEthAuthenticating.current;
+
+    if (shouldAuthenticate) {
+      const authenticateUser = async () => {
+        try {
+          isEthAuthenticating.current = true;
+
+          const nonce = generateNonce();
+          const message = `Sign this message to authenticate with ZeroXBridge.\nNonce: ${nonce}`;
+
+          const signer = await ethWallet.getSigner?.();
+          if (!signer) {
+            console.error("No signer available");
+            isEthAuthenticating.current = false;
+            return;
+          }
+
+          const signature = await signer.signMessage(message);
+
+          await authenticateWithSignature(
+            ethWallet.address!,
+            message,
+            signature,
+            "ethereum"
+          );
+
+          // Update the last authenticated address after successful authentication
+          lastAuthenticatedEthAddress.current = ethWallet.address || null;
+          console.log("Successfully authenticated with Ethereum wallet");
+        } catch (signError) {
+          console.error("Ethereum signature error:", signError);
+        } finally {
+          isEthAuthenticating.current = false;
+        }
+      };
+
+      authenticateUser();
+    }
+  }, [ethWallet.address, ethWallet.getSigner]);
+
   useEffect(() => {
     setStrkWallet({
       address: strkWallet.account?.address || null,
@@ -89,6 +149,76 @@ export const useWallet = () => {
       connecting: strkWallet.status === "connecting",
     });
   }, [strkWallet.account?.address, strkWallet.status, setStrkWallet]);
+
+  // Separate effect for Starknet authentication that runs when Starknet address changes
+  useEffect(() => {
+    const strkAddress = strkWallet.account?.address;
+
+    // Only authenticate if we have an address, it's connected, and it's not the same as the last authenticated address
+    const shouldAuthenticate =
+      strkAddress &&
+      strkWallet.status === "connected" &&
+      strkAddress !== lastAuthenticatedStrkAddress.current &&
+      !isStrkAuthenticating.current;
+
+    if (shouldAuthenticate && strkWallet.account) {
+      const authenticateStarknetUser = async () => {
+        try {
+          isStrkAuthenticating.current = true;
+
+          const nonce = generateNonce();
+          const message = `Sign this message to authenticate with ZeroXBridge.\nNonce: ${nonce}`;
+
+          const signature = await strkWallet.account?.signMessage({
+            message: { message },
+            types: {},
+            primaryType: "",
+            domain: {
+              name: "ZeroXBridge",
+              version: "1",
+            },
+          });
+
+          // Properly serialize the signature based on its type
+          // Starknet signatures can come in different formats depending on the wallet implementation
+          let serializedSignature: string;
+
+          if (Array.isArray(signature)) {
+            // If it's an array of hex strings (like [r, s] format), stringify it as JSON
+            serializedSignature = JSON.stringify(signature);
+          } else if (typeof signature === "object" && signature !== null) {
+            // If it's an object (like { r, s } or other format), stringify it as JSON
+            serializedSignature = JSON.stringify(signature);
+          } else if (typeof signature === "string") {
+            // If it's already a string, use it directly
+            serializedSignature = signature;
+          } else if (signature === undefined || signature === null) {
+            throw new Error("Signature is null or undefined");
+          } else {
+            // Fallback: convert to string representation
+            serializedSignature = String(signature);
+          }
+
+          await authenticateWithSignature(
+            strkAddress,
+            message,
+            serializedSignature,
+            "starknet"
+          );
+
+          // Update the last authenticated address after successful authentication
+          lastAuthenticatedStrkAddress.current = strkAddress;
+          console.log("Successfully authenticated with Starknet wallet");
+        } catch (signError) {
+          console.error("Starknet signature error:", signError);
+        } finally {
+          isStrkAuthenticating.current = false;
+        }
+      };
+
+      authenticateStarknetUser();
+    }
+  }, [strkWallet.account, strkWallet.status]);
 
   const connectEthWallet = useCallback(
     async (connectorId: string) => {
@@ -121,30 +251,7 @@ export const useWallet = () => {
           platformLogo,
         });
 
-        if (ethWallet.address) {
-          try {
-            const nonce = generateNonce();
-            const message = `Sign this message to authenticate with ZeroXBridge.\nNonce: ${nonce}`;
-
-            const signer = await ethWallet.getSigner?.();
-            if (!signer) {
-              console.error("No signer available");
-              return;
-            }
-
-            const signature = await signer.signMessage(message);
-
-            await authenticateWithSignature(
-              ethWallet.address,
-              message,
-              signature
-            );
-
-            console.log("Successfully authenticated with Ethereum wallet");
-          } catch (signError) {
-            console.error("Signature error:", signError);
-          }
-        }
+        // Authentication is now handled by the separate effect that watches ethWallet.address
       } catch (error) {
         resetWallet("ETH");
         store.setError(String(error));
@@ -158,6 +265,8 @@ export const useWallet = () => {
     try {
       ethWallet.disconnectEthereumWallet();
       resetWallet("ETH");
+      // Reset the last authenticated address on disconnect
+      lastAuthenticatedEthAddress.current = null;
     } catch (error) {
       store.setError(String(error));
     }
@@ -179,40 +288,7 @@ export const useWallet = () => {
           platformLogo: icon,
         });
 
-        setTimeout(async () => {
-          if (strkWallet.account?.address) {
-            try {
-              const nonce = generateNonce();
-              const message = `Sign this message to authenticate with ZeroXBridge.\nNonce: ${nonce}`;
-
-              const signature = await strkWallet.account.signMessage({
-                message: { message },
-                types: {},
-                primaryType: "",
-                domain: {
-                  name: "ZeroXBridge",
-                  version: "1",
-                },
-              });
-
-              const signatureStr = Array.isArray(signature)
-                ? signature.join(",")
-                : typeof signature === "object"
-                ? JSON.stringify(signature)
-                : signature;
-
-              await authenticateWithSignature(
-                strkWallet.account.address,
-                message,
-                signatureStr
-              );
-
-              console.log("Successfully authenticated with Starknet wallet");
-            } catch (signError) {
-              console.error("Starknet signature error:", signError);
-            }
-          }
-        }, 500);
+        // Authentication is now handled by the separate effect that watches strkWallet.account?.address
       } catch (error) {
         resetWallet("STRK");
         store.setError(String(error));
@@ -226,6 +302,8 @@ export const useWallet = () => {
     try {
       strkWallet.disconnectStarknetWallet();
       resetWallet("STRK");
+      // Reset the last authenticated address on disconnect
+      lastAuthenticatedStrkAddress.current = null;
     } catch (error) {
       store.setError(String(error));
     }
