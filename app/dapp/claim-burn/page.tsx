@@ -2,6 +2,9 @@
 
 import { useWallet } from '@/app/hooks/useWallet';
 import { useEffect, useMemo, useState } from 'react';
+import { ethers } from 'ethers';
+import bridgeAbi from '@/lib/bridgeAbi.json';
+import { useTranslation } from 'react-i18next';
 import { SuccessModal } from './components/success';
 import { ConnectWalletButton } from '../components/ui/ConnectWalletButton';
 import Image from 'next/image';
@@ -30,12 +33,16 @@ type BurnClaimData = {
 
 export default function ClaimBurnPage() {
   const { isDark } = useThemeContext();
-  const { isConnected, openWalletModal } = useWallet();
+  const wallet = useWallet();
+  const { t } = useTranslation ? useTranslation() : { t: (x: string) => x };
   const [activeTab, setActiveTab] = useState('claim');
   const [amount, setAmount] = useState('');
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [registering, setRegistering] = useState(false);
+  const [registerStatus, setRegisterStatus] = useState<string | null>(null);
 
+  const isConnected = wallet?.isConnected;
   const CLAIM_BURN_DATA: Record<string, BurnClaimData> = useMemo(
     () => ({
       claim: {
@@ -55,6 +62,54 @@ export default function ClaimBurnPage() {
     }),
     [isConnected]
   );
+
+  // Register Starknet Key logic
+  const handleRegisterStarknetKey = async () => {
+    setRegisterStatus(null);
+    setRegistering(true);
+    try {
+      let ethAddress = wallet.ethAddress;
+      let strkAddress = wallet.strkAddress;
+      if (!ethAddress || !strkAddress) throw new Error("Connect both wallets first.");
+      ethAddress = ethers.getAddress(ethAddress);
+      let starknetPubKey = BigInt(strkAddress);
+      const provider = new ethers.BrowserProvider(window.ethereum);
+      const signer = await provider.getSigner();
+      const encoded = ethers.solidityPacked([
+        "string",
+        "address",
+        "uint256"
+      ], [
+        "UserRegistration",
+        ethAddress,
+        starknetPubKey
+      ]);
+      const messageHash = ethers.keccak256(encoded);
+
+      let rawSignature;
+      try {
+        rawSignature = await window.ethereum.request({
+          method: 'eth_sign',
+          params: [ethAddress, messageHash],
+        });
+      } catch (err) {
+        setRegisterStatus(
+          'Registration is not possible with your current wallet (e.g., MetaMask) until the contract is updated to support standard Ethereum signatures. Please contact support or try again later.'
+        );
+        setRegistering(false);
+        return;
+      }
+
+      const contract = new ethers.Contract("0x8F25bFe32269632dfd8D223D51FF145414d8107b", bridgeAbi, signer);
+      const tx = await contract.registerUser(rawSignature, starknetPubKey);
+      await tx.wait();
+      setRegisterStatus("Registration successful!");
+    } catch (err: any) {
+      setRegisterStatus(err.message || "Registration failed");
+    } finally {
+      setRegistering(false);
+    }
+  };
 
   const currentData = CLAIM_BURN_DATA[activeTab];
 
@@ -235,17 +290,31 @@ export default function ClaimBurnPage() {
 
                 {!isConnected ? (
                   <ConnectWalletButton
-                    action={openWalletModal}
+                    action={wallet.openWalletModal}
                     className="w-full rounded-[12px] font-light"
                   />
                 ) : (
-                  <button
-                    onClick={handleAction}
-                    disabled={!isActionable}
-                    className={`w-full py-4 rounded-4xl font-bold text-sm transition-colors ${claimBurnBtnClasses} ${inter.className}`}
-                  >
-                    {activeTab === 'claim' ? 'Claim xZB' : 'Burn xZB'}
-                  </button>
+                  <>
+                    <button
+                      onClick={handleAction}
+                      disabled={!isActionable}
+                      className={`w-full py-4 rounded-4xl font-bold text-sm transition-colors ${claimBurnBtnClasses} ${inter.className}`}
+                    >
+                      {activeTab === 'claim' ? 'Claim xZB' : 'Burn xZB'}
+                    </button>
+                    <button
+                      onClick={handleRegisterStarknetKey}
+                      disabled={registering || !wallet.ethAddress || !wallet.strkAddress}
+                      className={`w-full mt-4 py-3 rounded-4xl font-bold text-sm transition-colors bg-blue-600 text-white hover:bg-blue-700 ${inter.className}`}
+                    >
+                      {registering ? "Registering..." : "Register Starknet Key"}
+                    </button>
+                    {registerStatus && (
+                      <div className="mt-2 text-center text-sm">
+                        {registerStatus}
+                      </div>
+                    )}
+                  </>
                 )}
               </div>
             </div>
