@@ -1,15 +1,7 @@
-import React from 'react'
-
-const page = () => {
-  return (
-    <div>page</div>
-  )
-}
-
-export default page
 "use client";
 import React from "react";
 import { GuidesCard } from "./components";
+import StatusCard from "./components/StatusCard";
 
 export default function SupportPage() {
   return (
@@ -17,6 +9,7 @@ export default function SupportPage() {
       <h1>Support</h1>
       <div className="grid-cols-3 w-full gap-6 grid">
         <GuidesCard />
+        <StatusCard />
       </div>
     </div>
   );
