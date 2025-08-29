@@ -2,6 +2,7 @@
 import React from "react";
 import { GuidesCard } from "./components";
 import StatusCard from "./components/StatusCard";
+import FAQsCard from "./components/FAQsCard";
 
 export default function SupportPage() {
   return (
@@ -10,6 +11,7 @@ export default function SupportPage() {
       <div className="grid-cols-3 w-full gap-6 grid">
         <GuidesCard />
         <StatusCard />
+        <FAQsCard />
       </div>
     </div>
   );
