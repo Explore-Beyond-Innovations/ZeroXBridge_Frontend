@@ -92,7 +92,9 @@ export default function DashboardPage() {
           </div>
         )}
 
-        <div className="hidden md:flex relative bg-[#F4F4F4] dark:bg-[#181818] rounded-[8px] px-2 h-[37px]">
+        <div
+          className={`hidden relative bg-[#F4F4F4] dark:bg-[#181818] rounded-[8px] px-2 h-[37px]`}
+        >
           <SearchIcon
             color={isDark ? "#696969" : "#B9B9B9"}
             size="18"
@@ -105,7 +107,7 @@ export default function DashboardPage() {
           />
         </div>
         {/* This one is for mobiles which slides from the top when the search icon is clicked */}
-        <button onClick={() => setShowSearch(true)} className="md:hidden p-2">
+        <button onClick={() => setShowSearch(true)} className={`hidden  p-2`}>
           <SearchIcon color={isDark ? "#696969" : "#B9B9B9"} size="18" />
         </button>
 

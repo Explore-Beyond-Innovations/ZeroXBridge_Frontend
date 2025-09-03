@@ -52,7 +52,7 @@ function Sidebar({
   return (
     <div
       className={`bg-background z-50 absolute top-0 left-0 font-light h-full transition-transform duration-300
-         w-full sm:w-[280px] lg:relative lg:translate-x-0 lg:w-fit
+         w-full sm:w-[280px] lg:relative lg:translate-x-0 lg:w-fit border-0 md:border-1 border-primary-border
          ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
     >
       <div className="p-[24px] lg:p-[42px_30px_45px_40px] flex flex-col gap-y-[6px] items-stretch">
