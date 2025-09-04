@@ -24,20 +24,21 @@ export default function ContactPage() {
         }}
       >
         <div 
-          className="flex flex-col items-start gap-[10px]"
+          className="flex flex-col items-start gap-[10px] px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20"
           style={{
-            padding: '100px',
+            paddingTop: '60px',
+            paddingBottom: '60px',
             width: '100%',
           }}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-end w-full">
             {/* Contact Form */}
             <div className="w-full" style={{ position: 'relative', zIndex: 10 }}>
               <ContactForm />
             </div>
 
-            {/* ZeroXBridge Logo */}
-            <div className="flex justify-end items-end w-full"> 
+            {/* ZeroXBridge Logo - Hidden on mobile, visible on desktop */}
+            <div className="hidden lg:flex justify-end items-end w-full"> 
               <div 
                 className="flex items-end justify-end ml-10 w-[400px] h-[400px] lg:w-[500px] lg:h-[600px]"
                 style={{

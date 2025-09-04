@@ -186,12 +186,12 @@ export default function ContactForm() {
           )}
         </div>
 
-        {/* Privacy Policy */}
-        <div className="w-[610px] h-[38px] font-normal text-base leading-[120%] tracking-[-0.02em] text-[#9E9E9E] flex-none self-stretch0">
+         {/* Privacy Policy */}
+         <div className="w-full font-normal text-xs sm:text-sm lg:text-base leading-[120%] tracking-[-0.02em] text-[#9E9E9E] break-words">
           We value your privacy. Any information you provide will be used in accordance with our{' '}
           <a 
             href="/privacy-policy" 
-            className="text-[#9E9E9E] hover:text-blue-300 underline transition-colors duration-200"
+            className="text-[#9E9E9E] hover:text-blue-300 underline transition-colors duration-200 break-all"
           >
             Privacy Policy
           </a>
