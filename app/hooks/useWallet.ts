@@ -93,7 +93,6 @@ export const useWallet = () => {
     ethWallet.isConnected,
     ethWallet.isConnecting,
     ethWallet.chainId,
-    setEthWallet,
   ]);
 
   // Separate effect for authentication that runs when Ethereum address changes
@@ -148,7 +147,7 @@ export const useWallet = () => {
       connected: strkWallet.status === "connected",
       connecting: strkWallet.status === "connecting",
     });
-  }, [strkWallet.account?.address, strkWallet.status, setStrkWallet]);
+  }, [strkWallet.account?.address, strkWallet.status]);
 
   // Separate effect for Starknet authentication that runs when Starknet address changes
   useEffect(() => {
